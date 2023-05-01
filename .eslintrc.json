@@ -12,10 +12,6 @@
         "eslint:recommended",
         "prettier"
     ],
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
     "plugins": ["react", "prettier"],
     "rules": {
         "prettier/prettier": [
@@ -55,7 +51,6 @@
         "no-unsafe-optional-chaining": ["error"],
         "no-unused-vars": ["error"],
         "use-isnan": ["error"],
-        "valid-typeof": ["error"],
         "array-bracket-spacing": ["error"],
         "quotes": ["error", "single"],
         "semi": ["error"],
