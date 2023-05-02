@@ -1,13 +1,7 @@
-import Navbar from '@/components/layout/navbar';
-import Sidebar from '@/components/layout/sidebar';
+import LayoutProvider from '@/components/layout';
 
 const Index = () => {
-    return (
-        <div>
-            <Navbar />
-            <Sidebar />
-        </div>
-    );
+    return <LayoutProvider>index</LayoutProvider>;
 };
 
 export default Index;

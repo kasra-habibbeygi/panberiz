@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as Styles from './navbar.style';
 import user from '../../assets/icons/user.svg';
 import heart from '../../assets/icons/heart.svg';
@@ -6,11 +7,14 @@ import AddIcon from '@mui/icons-material/Add';
 import logo from '../../assets/images/logo.png';
 import MenuIcon from '@mui/icons-material/Menu';
 
-function Navbar() {
+function Navbar({ setAsideStatus, asideStatus }) {
+    const openAside = () => {
+        setAsideStatus(!asideStatus);
+    };
     return (
         <Styles.Navbar>
             <div className='right'>
-                <MenuIcon />
+                <MenuIcon onClick={openAside} />
                 <Image style={{ marginRight: 20 }} src={logo} alt='logo' />
             </div>
             <div className='middle'>

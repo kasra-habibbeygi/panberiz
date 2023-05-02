@@ -1,4 +1,5 @@
-import * as Style from './sidebar.style';
+/* eslint-disable react/prop-types */
+import * as Style from './aside.style';
 import home from '../../assets/icons/sidebar/home.svg';
 import video from '../../assets/icons/sidebar/video.svg';
 import tag from '../../assets/icons/sidebar/tag.svg';
@@ -7,10 +8,11 @@ import mode from '../../assets/icons/sidebar/mode.svg';
 import information from '../../assets/icons/sidebar/information.svg';
 import phone from '../../assets/icons/sidebar/phone.svg';
 import Image from 'next/image';
+import { Switch } from '@mui/material';
 
-function Sidebar() {
+function Aside({ asideStatus }) {
     return (
-        <Style.SideBar>
+        <Style.AsideField asideStatus={asideStatus}>
             <div className='items'>
                 <ol>
                     <li>
@@ -34,9 +36,12 @@ function Sidebar() {
             <hr />
             <div className='items'>
                 <ol>
-                    <li>
-                        <Image src={mode} alt='mode' />
-                        <p>حالت شب</p>
+                    <li className='night-mode'>
+                        <div>
+                            <Image src={mode} alt='mode' />
+                            <p>حالت شب</p>
+                        </div>
+                        <Switch />
                     </li>
                     <li>
                         <Image src={information} alt='information' />
@@ -49,8 +54,8 @@ function Sidebar() {
                     </li>
                 </ol>
             </div>
-        </Style.SideBar>
+        </Style.AsideField>
     );
 }
 
-export default Sidebar;
+export default Aside;
