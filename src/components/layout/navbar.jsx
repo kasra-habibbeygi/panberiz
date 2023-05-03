@@ -11,6 +11,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
     const openAside = () => {
         setAsideStatus(!asideStatus);
     };
+
     return (
         <Styles.Navbar>
             <div className='right'>

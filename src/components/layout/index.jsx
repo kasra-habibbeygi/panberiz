@@ -5,11 +5,11 @@ import Navbar from './navbar';
 import * as Fields from './index.style';
 
 function LayoutProvider({ children }) {
-    const [asideStatus, setAsideStatus] = useState(false);
+    const [asideStatus, setAsideStatus] = useState(true);
     return (
-        <Fields.LayoutProviderField>
+        <Fields.LayoutProviderField asideStatus={asideStatus}>
             <Navbar setAsideStatus={setAsideStatus} asideStatus={asideStatus} />
-            <div>
+            <div className='main_field'>
                 <Aside asideStatus={asideStatus} />
                 <div className='children-field'>{children}</div>
             </div>

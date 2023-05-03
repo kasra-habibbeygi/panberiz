@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const AsideField = styled.aside(props => ({
-    right: props.asideStatus ? '0' : '-250px',
+    right: props.asideStatus ? '0' : '-300px',
     display: 'flex',
     transition: 'all cubic-bezier(0, 1, 1, 1) 0.8s',
     borderLeft: '1px solid #d9d9d9 !important',
@@ -9,6 +9,10 @@ export const AsideField = styled.aside(props => ({
     height: 'calc(100vh - 70px)',
     padding: '25px 0',
     flexDirection: 'column',
+    position: 'fixed',
+    background: 'white',
+    zIndex: '10',
+
     '& .items': {
         ol: {
             listStyle: 'none',

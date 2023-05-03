@@ -5,6 +5,12 @@ export const Navbar = styled.nav(() => ({
     height: '70px',
     justifyContent: 'space-between',
     border: '1px solid #d9d9d9 !important',
+    position: 'fixed',
+    top: '0',
+    width: '100%',
+    background: 'white',
+    zIndex: '10',
+
     '& .left': {
         flex: 1,
         alignItems: 'center',

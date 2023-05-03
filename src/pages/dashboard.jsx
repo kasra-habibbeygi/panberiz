@@ -19,7 +19,7 @@ function Dashboard() {
                                 <ShowChartIcon sx={{ color: '#6ED097' }} />
                             </div>
                             <div className='period'>
-                                <select defaultValue={'هفتگی'}>
+                                <select defaultValue='هفتگی'>
                                     <option>هفتگی</option>
                                 </select>
                             </div>
@@ -30,7 +30,7 @@ function Dashboard() {
                     </div>
                     <div className='circle-chart'>
                         <div className='select-rank'>
-                            <select defaultValue={'هفتگی'}>
+                            <select defaultValue='هفتگی'>
                                 <option>انتخاب رنک</option>
                             </select>
                         </div>

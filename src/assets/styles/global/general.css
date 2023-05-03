@@ -1,8 +1,4 @@
-/* @font-face {
-    font-family: "main";
-    src: url(../../font/IRANYekanThin.ttf) format("truetype");
-    font-weight: 100;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
     box-sizing: border-box;
@@ -17,7 +13,7 @@ table {
 
 body,
 html {
-    font-family: 'main';
+    font-family: 'Vazirmatn';
 }
 
 body {
@@ -78,7 +74,7 @@ a {
 button {
     cursor: pointer;
     border: none;
-    font-family: 'main' !important;
+    font-family: 'Vazirmatn' !important;
 }
 
 h1,
@@ -99,5 +95,5 @@ p {
 input {
     font-size: 0.9rem;
     font-weight: 400;
-    font-family: 'main' !important;
+    font-family: 'Vazirmatn' !important;
 }
