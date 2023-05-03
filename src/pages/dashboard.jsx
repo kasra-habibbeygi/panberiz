@@ -4,6 +4,7 @@ import ShowChartIcon from '@mui/icons-material/ShowChart';
 import CircleIcon from '@mui/icons-material/Circle';
 import ChartPie from '@/components/dashboard/pie.chart';
 import ChartArea from '@/components/dashboard/area.chart';
+import ReportItem from '@/components/dashboard/reportItem';
 
 function Dashboard() {
     return (
@@ -71,14 +72,7 @@ function Dashboard() {
                             <div>میزان ساعت بازدید</div>
                             <div>جزئیات</div>
                         </div>
-                        <div className='rows'>
-                            <div>ردیف</div>
-                            <div>1</div>
-                            <div>25</div>
-                            <div>450</div>
-                            <div>450</div>
-                            <div>لورم ایپسوم</div>
-                        </div>
+                        <ReportItem />
                     </div>
                 </div>
             </Style.DashboardField>

@@ -1,4 +1,4 @@
-import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+import { AreaChart, Area, ResponsiveContainer, CartesianGrid } from 'recharts';
 
 const data = [
     {
@@ -22,7 +22,6 @@ const data = [
         income: 120
     }
 ];
-
 
 function ChartArea() {
     return (
