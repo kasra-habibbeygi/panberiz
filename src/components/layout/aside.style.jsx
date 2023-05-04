@@ -17,20 +17,45 @@ export const AsideField = styled.aside(props => ({
         ol: {
             listStyle: 'none',
             width: '100%',
+
             '& .night-mode': {
                 justifyContent: 'space-between',
-                display: 'flex'
+                display: 'flex',
+                padding: '2px 25px',
+                alignItems: 'center',
+                color: 'black',
+
+                div: {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '19px'
+                }
             },
-            li: {
+
+            a: {
                 display: 'flex',
                 padding: '10px 25px',
                 alignItems: 'center',
+                color: 'black',
+                gap: '10px',
+                borderRight: '6px solid transparent',
+
                 p: {
                     marginRight: 10
                 }
             }
         }
     },
+
+    '& .active': {
+        background: '#FAF6FA',
+        borderRight: '6px solid #751B74 !important',
+
+        img: {
+            filter: 'invert(285%) sepia(374%) saturate(23498%) hue-rotate(1383deg) brightness(61%)'
+        }
+    },
+
     hr: {
         width: '70%',
         alignSelf: 'center',

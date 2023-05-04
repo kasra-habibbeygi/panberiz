@@ -9,27 +9,38 @@ import information from '../../assets/icons/sidebar/information.svg';
 import phone from '../../assets/icons/sidebar/phone.svg';
 import Image from 'next/image';
 import { Switch } from '@mui/material';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 function Aside({ asideStatus }) {
+    const router = useRouter();
     return (
         <Style.AsideField asideStatus={asideStatus}>
             <div className='items'>
                 <ol>
                     <li>
-                        <Image src={home} alt='home' />
-                        <p>داشبورد</p>
+                        <Link href='/dashboard' className={`${router.pathname === '/dashboard' ? 'active' : ''}`}>
+                            <Image src={home} alt='home' />
+                            <p>داشبورد</p>
+                        </Link>
                     </li>
                     <li>
-                        <Image src={video} alt='video' />
-                        <p>ویدئو</p>
+                        <Link href='/video' className={`${router.pathname === '/video' ? 'active' : ''}`}>
+                            <Image src={video} alt='video' />
+                            <p>ویدئو</p>
+                        </Link>
                     </li>
                     <li>
-                        <Image src={tag} alt='tag' />
-                        <p>تگ ها</p>
+                        <Link href='/'>
+                            <Image src={tag} alt='tag' />
+                            <p>تگ ها</p>
+                        </Link>
                     </li>
                     <li>
-                        <Image src={category} alt='category' />
-                        <p>دسته بندی</p>
+                        <Link href='/'>
+                            <Image src={category} alt='category' />
+                            <p>دسته بندی</p>
+                        </Link>
                     </li>
                 </ol>
             </div>
@@ -44,13 +55,17 @@ function Aside({ asideStatus }) {
                         <Switch />
                     </li>
                     <li>
-                        <Image src={information} alt='information' />
-                        <p>درباره ما</p>
+                        <Link href='/'>
+                            <Image src={information} alt='information' />
+                            <p>درباره ما</p>
+                        </Link>
                     </li>
 
                     <li>
-                        <Image src={phone} alt='phone' />
-                        <p>تماس با ما</p>
+                        <Link href='/'>
+                            <Image src={phone} alt='phone' />
+                            <p>تماس با ما</p>
+                        </Link>
                     </li>
                 </ol>
             </div>
