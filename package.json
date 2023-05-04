@@ -14,11 +14,14 @@
   "prepare": "husky install"
  },
  "dependencies": {
+  "@ant-design/icons": "^5.0.1",
+  "@ant-design/pro-components": "^2.4.6",
   "@emotion/react": "^11.10.8",
   "@emotion/styled": "^11.10.8",
   "@mui/icons-material": "^5.11.16",
   "@mui/material": "^5.12.2",
   "@reduxjs/toolkit": "^1.9.5",
+  "antd": "^5.4.6",
   "axios": "^1.4.0",
   "eslint": "^8.39.0",
   "eslint-config-next": "^13.3.2",

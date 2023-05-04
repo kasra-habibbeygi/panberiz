@@ -1,61 +1,49 @@
 import styled from '@emotion/styled';
 
 export const InsertMediaField = styled.div(() => ({
-    flexDirection: 'column',
     flex: 1,
     '& .contentContainer': {
-        flexDirection: 'column',
         backgroundColor: 'white',
         borderRadius: '25px',
         padding: '30px',
         margin: '30px 0',
         '& .type': {
+            display: 'flex',
             alignItems: 'center'
         },
-        '& .form': {
-            flexDirection: 'column',
-            padding: '30px 0',
-            '& .flex-1': {
-                flex: 1
+        '& .section': {
+            padding: '20px 0',
+            borderBottom: 'dotted 0.5px',
+            borderColor: 'rgba(228, 228, 228, 0.59)',
+            h1: {
+                margin: '5px'
             },
-            '& .flex-2': {
-                flex: 2
-            },
-            '& .input': {
-                flex: 1,
-                justifyContent: 'space-between',
+            '& .quiz-header': {
+                display: 'flex',
+                padding: '20px',
                 alignItems: 'center',
-                backgroundColor: 'rgba(241, 241, 241, 1)',
-                borderRadius: '15px',
-                padding: '15px',
-                marginTop: '8px',
-                border: '0'
+                justifyContent: 'space-between',
+                button: {
+                    backgroundColor: 'transparent'
+                },
+                '& .left': {
+                    display: 'flex',
+                    color: 'rgba(117, 27, 116, 1)',
+                    alignItems: 'center',
+                    h3: {
+                        margin: '0 15px'
+                    }
+                }
             },
-            '& .input-container': {
+            '& .quiz-container': {
+                flex: 1,
+                display: 'flex',
                 flexDirection: 'column',
-                margin: '10px'
-            },
-
-            '& .select': {
-                flex: 1,
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                backgroundColor: 'rgba(241, 241, 241, 1)',
+                height: '350px',
                 borderRadius: '15px',
-                padding: '10px',
-                margin: '10px'
-            },
-            '& .select2': {
-                flex: 2,
-                justifyContent: 'space-between',
+                justifyContent: 'space-evenly',
                 alignItems: 'center',
-                backgroundColor: 'rgba(241, 241, 241, 1)',
-                borderRadius: '15px',
-                padding: '10px',
-                margin: '10px'
-            },
-            '& .section1': {
-                flex: 1
+                border: '1px solid rgba(239, 239, 239, 1)'
             }
         }
     }

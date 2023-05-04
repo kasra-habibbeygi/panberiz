@@ -37,12 +37,14 @@ function Video() {
             <Style.VideoField>
                 <h1>ویدئو</h1>
                 <div className='switch-buttons'>
-                    <button onClick={() => selectButton(true)} className={selectedButton && 'selected-button'}>
-                        ویدئو های آپلود شده
-                    </button>
-                    <button onClick={() => selectButton(false)} className={!selectedButton && 'selected-button'}>
-                        ویدئو های در انتظار تایید
-                    </button>
+                    <div className='buttons'>
+                        <button onClick={() => selectButton(true)} className={selectedButton && 'selected-button'}>
+                            ویدئو های آپلود شده
+                        </button>
+                        <button onClick={() => selectButton(false)} className={!selectedButton && 'selected-button'}>
+                            ویدئو های در انتظار تایید
+                        </button>
+                    </div>
                 </div>
                 {/* <Empty /> */}
                 <div className='content-container'>

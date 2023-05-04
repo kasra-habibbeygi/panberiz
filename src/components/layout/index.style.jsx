@@ -2,8 +2,6 @@ import styled from '@emotion/styled';
 
 export const LayoutProviderField = styled.div(props => ({
     div: {
-        display: 'flex',
-
         '& .children-field': {
             backgroundColor: '#FCFCFC',
             width: props.asideStatus ? 'calc(100% - 300px)' : '100%',

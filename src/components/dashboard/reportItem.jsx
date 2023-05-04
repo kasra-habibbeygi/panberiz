@@ -1,13 +1,13 @@
 function ReportItem() {
     return (
-        <div className='rows'>
-            <div>ردیف</div>
-            <div>1</div>
-            <div>25</div>
-            <div>450</div>
-            <div>450</div>
-            <div>لورم ایپسوم</div>
-        </div>
+        <tr>
+            <td>ردیف</td>
+            <td>1</td>
+            <td>25</td>
+            <td>450</td>
+            <td>450</td>
+            <td>لورم ایپسوم</td>
+        </tr>
     );
 }
 

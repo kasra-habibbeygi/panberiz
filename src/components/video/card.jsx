@@ -10,7 +10,6 @@ function Card({ data, accepted }) {
     const { title, des, image, star } = data;
     return (
         <Style.CardField>
-            <Image className='image' src={image} alt='video-banner' />
             <div className='flout'>
                 {accepted ? (
                     <Image className='icon' src={play} alt='play' />
@@ -21,6 +20,7 @@ function Card({ data, accepted }) {
                     </>
                 )}
             </div>
+            <Image className='image' src={image} alt='video-banner' />
             <div className='card-des'>
                 <div>
                     <h3>{title}</h3>

@@ -1,15 +1,14 @@
 import styled from '@emotion/styled';
 
 export const DashboardField = styled.div(() => ({
-    flexDirection: 'column',
     width: '100%',
     '& .income': {
-        // flex: 1,
+        display: 'flex',
         height: '450px',
         '& .line-chart': {
             flex: 1,
-            flexDirection: 'column',
             '& .header': {
+                display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 p: {
@@ -17,6 +16,7 @@ export const DashboardField = styled.div(() => ({
                     color: '#6ED097'
                 },
                 '& .title': {
+                    display: 'flex',
                     alignItems: 'center',
                     ShowChartIcon: {
                         color: '#6ed097'
@@ -38,7 +38,6 @@ export const DashboardField = styled.div(() => ({
             }
         },
         '& .circle-chart': {
-            flexDirection: 'column',
             flex: 0.7,
             marginRight: '25px',
             borderRadius: '30px',
@@ -59,10 +58,11 @@ export const DashboardField = styled.div(() => ({
             },
             '& .flags': {
                 flex: 1.5,
-                flexDirection: 'column',
+                display: 'flex',
                 '& .section': {
                     flex: 1,
                     div: {
+                        display: 'flex',
                         flex: 1,
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -75,33 +75,22 @@ export const DashboardField = styled.div(() => ({
         }
     },
     '& .report': {
-        flexDirection: 'column',
         margin: '100px 0',
-        '& .table': {
+        table: {
             margin: '25px 0',
-            flexDirection: 'column',
             width: '100%',
-            '& .header': {
-                div: {
-                    flex: 1,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '25px 0'
-                }
-            },
-            '& .rows': {
-                padding: '25px 0',
-                borderRadius: '20px',
-                backgroundColor: 'white',
-                boxShadow: '0px 4px 20px 0px rgba(0,0,0,0.100)',
-                '&:hover': {
-                    backgroundColor: 'rgba(23, 1, 40, 1)',
-                    color: 'white'
-                },
-                div: {
-                    flex: 1,
-                    alignItems: 'center',
-                    justifyContent: 'center'
+            tbody: {
+                tr: {
+                    margin: '30px',
+                    padding: '25px 0',
+                    borderRadius: '20px',
+                    justifyContent: 'space-between',
+                    // backgroundColor: 'white',
+                    boxShadow: '0px 4px 20px 0px rgba(0,0,0,0.100)',
+                    '&:hover': {
+                        backgroundColor: 'rgba(23, 1, 40, 1)',
+                        color: 'white'
+                    }
                 }
             }
         }

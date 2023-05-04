@@ -6,19 +6,15 @@ export const CardField = styled.div(() => ({
     overflow: 'hidden',
     margin: '10px',
     position: 'relative',
-    flexDirection: 'column',
     '& .image': {
-        width: '300px',
+        width: '100%',
         height: '300px',
-        borderRadius: '25px',
+        borderRadius: '20px',
         objectFit: 'cover',
-        display: 'flex',
-        position: 'relative',
         justifyContent: 'center',
         alignItems: 'center'
     },
     '& .play': {
-        position: 'absolute',
         alignSelf: 'center',
         top: '32%',
         left: '43%'
@@ -26,6 +22,7 @@ export const CardField = styled.div(() => ({
     '& .flout': {
         position: 'absolute',
         alignSelf: 'center',
+        display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
@@ -35,9 +32,10 @@ export const CardField = styled.div(() => ({
         }
     },
     '& .card-des': {
-        flexDirection: 'column',
-        padding: '15px 0',
+        padding: '10px 0',
         div: {
+            display: 'flex',
+            alignItems: 'center',
             justifyContent: 'space-between'
         }
     }

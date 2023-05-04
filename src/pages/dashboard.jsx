@@ -63,17 +63,21 @@ function Dashboard() {
                 </div>
                 <div className='report'>
                     <h1>گزارش بازدید رنک‌ها</h1>
-                    <div className='table'>
-                        <div className='header'>
-                            <div>ردیف</div>
-                            <div>رنک</div>
-                            <div>تعداد محتوا</div>
-                            <div>تعداد بازدید</div>
-                            <div>میزان ساعت بازدید</div>
-                            <div>جزئیات</div>
-                        </div>
-                        <ReportItem />
-                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ردیف</th>
+                                <th>رنک</th>
+                                <th>تعداد محتوا</th>
+                                <th>تعداد بازدید</th>
+                                <th>میزان ساعت بازدید</th>
+                                <th>جزئیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ReportItem />
+                        </tbody>
+                    </table>
                 </div>
             </Style.DashboardField>
         </LayoutProvider>
