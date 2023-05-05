@@ -21,7 +21,7 @@ export const AsideField = styled.aside(props => ({
             '& .night-mode': {
                 justifyContent: 'space-between',
                 display: 'flex',
-                padding: '2px 25px',
+                padding: '2px 32px',
                 alignItems: 'center',
                 color: 'black',
 
@@ -56,10 +56,10 @@ export const AsideField = styled.aside(props => ({
         }
     },
 
-    hr: {
-        width: '70%',
-        alignSelf: 'center',
-        margin: '15px 0',
-        backgroundColor: '#9D9D9E'
+    '& .seprator': {
+        height: '1px',
+        width: '80%',
+        background: '#e5e5e5',
+        margin: '20px auto'
     }
 }));

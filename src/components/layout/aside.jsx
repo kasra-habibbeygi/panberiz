@@ -37,14 +37,14 @@ function Aside({ asideStatus }) {
                         </Link>
                     </li>
                     <li>
-                        <Link href='/'>
+                        <Link href='/category'>
                             <Image src={category} alt='category' />
                             <p>دسته بندی</p>
                         </Link>
                     </li>
                 </ol>
             </div>
-            <hr />
+            <span className='seprator' />
             <div className='items'>
                 <ol>
                     <li className='night-mode'>

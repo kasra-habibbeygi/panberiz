@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const MainField = styled.div(props => ({
+export const MainField = styled.div({
     h3: {
         fontSize: '1.5rem',
         marginBottom: '50px'
@@ -52,4 +52,4 @@ export const MainField = styled.div(props => ({
             }
         }
     }
-}));
+});
