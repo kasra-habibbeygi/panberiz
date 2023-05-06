@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const MainField = styled.div({
+export const MainField = styled.div(props => ({
     display: 'flex',
     flexDirection: 'column',
     gap: '10px',
@@ -8,14 +8,14 @@ export const MainField = styled.div({
 
     label: {
         fontWeight: 'bold',
-        Color: '#170128',
+        color: props.theme.palette.colors.text.blackAndWhite,
         fontSize: '1rem'
     },
 
     input: {
         width: '100%',
         borderRadius: '12px',
-        background: '#F1F1F1',
+        background: props.theme.palette.colors.input.primary,
         border: 'none',
         height: '43px',
         padding: '15px',
@@ -25,4 +25,4 @@ export const MainField = styled.div({
             color: '#8C8C8C'
         }
     }
-});
+}));

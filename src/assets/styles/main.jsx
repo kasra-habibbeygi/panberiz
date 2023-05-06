@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 
-export const TagsmainField = styled.div({
+export const TagsmainField = styled.div(props => ({
     width: '100%',
     padding: '35px',
     borderRadius: '12px',
     border: '1px solid #EFEFEF',
-    backgroundColor: 'white'
-});
+    backgroundColor: props.theme.palette.colors.background.card
+}));

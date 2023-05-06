@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 export const theme = mode => ({
+    mode,
     palette: {
-        mode,
         ...(mode === 'light'
             ? {
                 colors: {
@@ -22,6 +22,9 @@ export const theme = mode => ({
                     border : {
                         primary :'#E1E1E1',
                         secondary : '#EFEFEF'
+                    },
+                    background :{
+                        card : 'white'
                     }
                 }
             }
@@ -35,7 +38,7 @@ export const theme = mode => ({
                     error : '#BF0000',
                     lightError : '#FFE3E3',
                     text : {
-                        blackAndWhite : '#EFE1F5',
+                        blackAndWhite : '#FFFFFF',
                         light : '#AAAAAA'
                     },
                     input : {
@@ -44,6 +47,9 @@ export const theme = mode => ({
                     border : {
                         primary :'#E1E1E1',
                         secondary : '#EFEFEF'
+                    },                    
+                    background :{
+                        card : '#3B2D51'
                     }
                 }
             })
