@@ -6,15 +6,14 @@ import { createTheme } from '@mui/material/styles';
 import NProgress from 'nprogress';
 import Router from 'next/router';
 import 'nprogress/nprogress.css';
-import { Provider } from 'react-redux';
-import Store from '../state-manager/store';
+import { useSelector } from 'react-redux';
+import { wrapper } from '../state-manager/store';
 
 //Config
 import { theme } from '../config/theme';
 
 //Assets
 import '../assets/styles/global/general.css';
-import { useEffect } from 'react';
 
 NProgress.configure({
     minimum: 0.3,
@@ -27,21 +26,15 @@ Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-export default function App({ Component, pageProps }) {
-    const themeStatus = typeof window !== 'undefined' && localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light';
+const App = ({ Component, pageProps }) => {
+    const themeStatus = useSelector(state => state.UserInfo.theme);
     const darkModeTheme = createTheme(theme(themeStatus));
 
-    useEffect(() => {
-        if (!themeStatus) {
-            localStorage.setItem('theme', 'light');
-        }
-    }, []);
-
     return (
-        <Provider store={Store}>
-            <ThemeProvider theme={darkModeTheme}>
-                <Component {...pageProps} />
-            </ThemeProvider>
-        </Provider>
+        <ThemeProvider theme={darkModeTheme}>
+            <Component {...pageProps} />
+        </ThemeProvider>
     );
-}
+};
+
+export default wrapper.withRedux(App);

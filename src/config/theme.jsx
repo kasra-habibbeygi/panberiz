@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-export const theme = (mode: 'light' | 'dark') => ({
+export const theme = mode => ({
     palette: {
         mode,
         ...(mode === 'light'
