@@ -4,10 +4,13 @@ import CrossIcon from '../../../assets/images/category/cross.svg';
 import TickIcon from '../../../assets/images/category/tick.svg';
 import Image from 'next/image';
 
+// Component
+import HeaderField from '@/components/template/header';
+
 const CategoryList = () => {
     return (
         <MainField>
-            <h3>لیست دسته بندی</h3>
+            <HeaderField title='لیست دسته بندی' />
             <div className='cards_field'>
                 <div className='header_field'>
                     <span>عنوان</span>

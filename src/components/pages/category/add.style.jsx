@@ -1,11 +1,6 @@
 import styled from '@emotion/styled';
 
 export const MainField = styled.div({
-    h3: {
-        fontSize: '1.5rem',
-        marginBottom: '50px'
-    },
-
     '& .form_field': {
         borderRadius: '10px',
         border: '1px solid #F3F3F3',

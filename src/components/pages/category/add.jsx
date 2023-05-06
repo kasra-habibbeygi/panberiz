@@ -8,6 +8,7 @@ import CategoryIcon from '../../../assets/icons/sidebar/category.svg';
 // Component
 import AutoComplete from '@/components/form-group/auto-complete';
 import Input from '@/components/form-group/input';
+import HeaderField from '@/components/template/header';
 
 // MUI
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
@@ -51,7 +52,7 @@ const AddCategory = () => {
 
     return (
         <MainField>
-            <h3>لیست دسته بندی</h3>
+            <HeaderField title='دسته بندی' />
             <div className='form_field'>
                 <div className='header'>
                     <div className='title'>

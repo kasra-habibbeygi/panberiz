@@ -26,12 +26,6 @@ export const VideoField = styled.div(() => ({
             }
         }
     },
-    '& .empty-container': {
-        margin: '50px 0',
-        justifyContent: 'center',
-        display: 'flex',
-        flexDirection: 'row'
-    },
     '& .content-container': {
         display: 'flex',
         marginTop: '50px',

@@ -2,8 +2,6 @@ import LayoutProvider from '@/components/layout';
 import * as Style from '../../assets/styles/video/video.style';
 import { useState } from 'react';
 import video from '../../assets/images/video/video-1.jpeg';
-// import Image from 'next/image';
-// import Empty from '@/components/video/empty';
 import Card from '@/components/video/card';
 
 const data = [
@@ -46,7 +44,6 @@ function Video() {
                         </button>
                     </div>
                 </div>
-                {/* <Empty /> */}
                 <div className='content-container'>
                     {selectedButton
                         ? data.map((value, index) => <Card key={index} data={value} />)

@@ -1,4 +1,11 @@
 /* eslint-disable react/prop-types */
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useSelector, useDispatch } from 'react-redux';
+import { themeStateHandler } from '../../state-manager/reducer/user';
+
+// Assets
 import * as Style from './aside.style';
 import home from '../../assets/icons/sidebar/home.svg';
 import video from '../../assets/icons/sidebar/video.svg';
@@ -7,13 +14,19 @@ import category from '../../assets/icons/sidebar/category.svg';
 import mode from '../../assets/icons/sidebar/mode.svg';
 import information from '../../assets/icons/sidebar/information.svg';
 import phone from '../../assets/icons/sidebar/phone.svg';
-import Image from 'next/image';
+
+// MUI
 import { Switch } from '@mui/material';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 function Aside({ asideStatus }) {
+    const dispatch = useDispatch();
     const router = useRouter();
+    const themeState = useSelector(state => state.UserInfo.theme);
+    const themeHandler = e => {
+        dispatch(themeStateHandler(e.target.checked ? 'dark' : 'light'));
+        localStorage.setItem('theme', e.target.checked ? 'dark' : 'light');
+    };
+
     return (
         <Style.AsideField asideStatus={asideStatus}>
             <div className='items'>
@@ -52,7 +65,7 @@ function Aside({ asideStatus }) {
                             <Image src={mode} alt='mode' />
                             <p>حالت شب</p>
                         </div>
-                        <Switch />
+                        <Switch checked={themeState === 'dark'} onChange={themeHandler} />
                     </li>
                     <li>
                         <Link href='/'>
