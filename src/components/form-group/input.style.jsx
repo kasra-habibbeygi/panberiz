@@ -19,10 +19,10 @@ export const MainField = styled.div(props => ({
         border: 'none',
         height: '43px',
         padding: '15px',
-        color: '#262626',
+        color: props.theme.palette.colors.text.blackAndWhite,
 
         '&::placeholder': {
-            color: '#8C8C8C'
+            color: props.theme.mode === 'light' ? '#8C8C8C' : 'white'
         }
     }
 }));

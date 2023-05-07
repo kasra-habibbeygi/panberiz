@@ -4,13 +4,13 @@ export const AsideField = styled.aside(props => ({
     right: props.asideStatus ? '0' : '-300px',
     display: 'flex',
     transition: 'all cubic-bezier(0, 1, 1, 1) 0.8s',
-    borderLeft: '1px solid #d9d9d9 !important',
+    borderLeft: props.theme.mode === 'light' ? '1px solid #d9d9d9' : '1px solid #342342',
     width: '300px',
     height: 'calc(100vh - 70px)',
     padding: '25px 0',
     flexDirection: 'column',
     position: 'fixed',
-    background: 'white',
+    background: props.theme.palette.colors.background.layout,
     zIndex: '10',
 
     '& .items': {
@@ -23,7 +23,7 @@ export const AsideField = styled.aside(props => ({
                 display: 'flex',
                 padding: '2px 32px',
                 alignItems: 'center',
-                color: 'black',
+                color: props.theme.palette.colors.text.blackAndWhite,
 
                 div: {
                     display: 'flex',
@@ -36,7 +36,7 @@ export const AsideField = styled.aside(props => ({
                 display: 'flex',
                 padding: '10px 25px',
                 alignItems: 'center',
-                color: 'black',
+                color: props.theme.palette.colors.text.blackAndWhite,
                 gap: '10px',
                 borderRight: '6px solid transparent',
 
@@ -48,18 +48,21 @@ export const AsideField = styled.aside(props => ({
     },
 
     '& .active': {
-        background: '#FAF6FA',
+        background: props.theme.mode === 'light' ? '#FAF6FA' : '#28073C',
         borderRight: '6px solid #751B74 !important',
 
         img: {
-            filter: 'invert(285%) sepia(374%) saturate(23498%) hue-rotate(1383deg) brightness(61%)'
+            filter:
+                props.theme.mode === 'light'
+                    ? 'invert(285%) sepia(374%) saturate(23498%) hue-rotate(1383deg) brightness(61%)'
+                    : 'invert(21%) sepia(93%) saturate(2352%) hue-rotate(270deg) brightness(85%) contrast(91%)'
         }
     },
 
     '& .seprator': {
         height: '1px',
         width: '80%',
-        background: '#e5e5e5',
+        background: props.theme.mode === 'light' ? '#e5e5e5' : '#271436',
         margin: '20px auto'
     }
 }));

@@ -7,7 +7,7 @@ export const LayoutProviderField = styled.div(props => ({
     },
     div: {
         '& .children-field': {
-            backgroundColor: '#FCFCFC',
+            backgroundColor: props.theme.mode === 'light' ? '#FCFCFC' : '#11011E',
             width: props.asideStatus ? 'calc(100% - 300px)' : '100%',
             padding: '50px',
             margin: '0 auto 0 0',

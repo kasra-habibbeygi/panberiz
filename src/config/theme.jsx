@@ -24,7 +24,8 @@ export const theme = mode => ({
                         secondary : '#EFEFEF'
                     },
                     background :{
-                        card : 'white'
+                        card : 'white',
+                        layout : '#FFFFFF'
                     }
                 }
             }
@@ -49,7 +50,8 @@ export const theme = mode => ({
                         secondary : '#EFEFEF'
                     },                    
                     background :{
-                        card : '#3B2D51'
+                        card : '#3B2D51',
+                        layout : '#170128'
                     }
                 }
             })
