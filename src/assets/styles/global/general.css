@@ -13,8 +13,8 @@ table {
 }
 
 body {
-    direction: rtl;
     font-size: 1rem;
+    direction: rtl;
     font-weight: 400;
     line-height: 1.5;
     position: relative;
