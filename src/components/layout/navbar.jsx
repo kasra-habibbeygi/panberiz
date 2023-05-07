@@ -49,7 +49,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
                 <SearchIcon className='search_icon' />
             </div>
             <div className='left'>
-                <Link href='/video/insert-media' className='button_link'>
+                <Link href='/video/add' className='button_link'>
                     <AddIcon />
                     <p>افزودن مدیا</p>
                 </Link>

@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import * as Style from './quiz-form.style';
-import CustomInput from '../common/input';
 import AnswerInput from './answer-input';
 
 export const QuizForm = ({ open, setOpen }) => {
@@ -18,7 +17,7 @@ export const QuizForm = ({ open, setOpen }) => {
             <div className='form'>
                 <div className='section-question'>
                     <h3>صورت سوال</h3>
-                    <CustomInput placeholder='صورت سوال را وارد کنید ..' />
+                    {/* <CustomInput placeholder='صورت سوال را وارد کنید ..' /> */}
                 </div>
                 <div className='section-answer'>
                     <AnswerInput title='پاسخ اول' index={1} />

@@ -2,9 +2,9 @@
 import Image from 'next/image';
 import * as Style from './card.style';
 import StarIcon from '@mui/icons-material/Star';
-import play from '../../assets/icons/play.svg';
-import accept from '../../assets/icons/accept.svg';
-import reject from '../../assets/icons/reject.svg';
+import play from '@/assets/icons/play.svg';
+import accept from '@/assets/icons/accept.svg';
+import reject from '@/assets/icons/reject.svg';
 
 function Card({ data, accepted }) {
     const { title, des, image, star } = data;

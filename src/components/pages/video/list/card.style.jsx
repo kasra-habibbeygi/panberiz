@@ -3,16 +3,13 @@ import styled from '@emotion/styled';
 export const CardField = styled.div(() => ({
     width: '30%',
     borderRadius: '20px',
-    overflow: 'hidden',
     margin: '10px',
     position: 'relative',
     '& .image': {
         width: '100%',
-        height: '300px',
+        height: '250px',
         borderRadius: '20px',
-        objectFit: 'cover',
-        justifyContent: 'center',
-        alignItems: 'center'
+        objectFit: 'cover'
     },
     '& .play': {
         alignSelf: 'center',
@@ -26,13 +23,12 @@ export const CardField = styled.div(() => ({
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
-        height: '300px',
+        height: '250px',
         '& .icon': {
             margin: '5px'
         }
     },
     '& .card-des': {
-        padding: '10px 0',
         div: {
             display: 'flex',
             alignItems: 'center',

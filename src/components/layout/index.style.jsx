@@ -1,6 +1,10 @@
 import styled from '@emotion/styled';
 
 export const LayoutProviderField = styled.div(props => ({
+    h1: {
+        fontSize: '1.5rem',
+        marginBottom: '50px'
+    },
     div: {
         '& .children-field': {
             backgroundColor: '#FCFCFC',

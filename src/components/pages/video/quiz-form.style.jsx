@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Modal } from 'antd';
+import { Modal } from '@mui/material';
 
 export const QuizFormField = styled(Modal)(() => ({
     '& .form': {
