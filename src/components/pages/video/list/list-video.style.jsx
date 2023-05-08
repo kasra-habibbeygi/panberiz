@@ -10,5 +10,17 @@ export const ListVideoField = styled.div(() => ({
     '& .card_field': {
         width: '33.33%',
         padding: '10px'
+    },
+
+    '@media(max-width : 900px)': {
+        '& .card_field': {
+            width: '50%'
+        }
+    },
+
+    '@media(max-width : 600px)': {
+        '& .card_field': {
+            width: '100%'
+        }
     }
 }));

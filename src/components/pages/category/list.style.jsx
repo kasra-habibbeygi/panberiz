@@ -11,6 +11,16 @@ export const MainField = styled.div({
         overflow: 'auto'
     },
 
+    '& .card_parent_field': {
+        width: '100%',
+        overflow: 'auto'
+    },
+
+    '& .cards_field': {
+        minWidth: '800px',
+        width: '100%'
+    },
+
     '& .item': {
         width: '100%',
         display: 'flex',

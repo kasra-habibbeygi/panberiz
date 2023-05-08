@@ -58,13 +58,33 @@ export const TitleField = styled.div(props => ({
         p: {
             minWidth: 'max-content'
         }
+    },
+    
+    '@media(max-width : 700px)': {
+        '& .title': {
+    
+            h3: {
+                fontSize: '1.1rem'
+            },
+    
+            p: {
+                fontWeight: 'bold',
+                fontSize: '0.9rem'
+            }
+        }
     }
 }));
 
 export const QuestionsField = styled.div(props => ({
     '& .four_choice': {
+        display : 'flex',
+        flexDirection : 'column',
+        gap : '30px',
+        marginTop : '30px',
+
         span: {
-            fontFamily: 'Vazirmatn'
+            fontFamily: 'Vazirmatn',
+            lineHeight : '30px'
         }
     },
 
@@ -76,18 +96,37 @@ export const QuestionsField = styled.div(props => ({
 
         small: {
             color: props.theme.palette.colors.text.light,
-            fontSize: '0.9rem'
+            fontSize: '1rem'
         },
 
         h4: {
             color: props.theme.palette.colors.text.blackAndWhite,
             fontSize: '1rem',
-            marginBottom: '20px'
+            marginBottom: '20px',
+            marginTop: '20px',
+            lineHeight : '30px'
         }
     },
 
     '& .submit_btn': {
         margin: '20px auto 0 0 ',
         width: '180px'
+    },
+        
+    '@media(max-width : 700px)': {
+        '& .four_choice': {    
+            span: {
+                fontSize : '0.9rem'
+            }
+        },
+
+        
+        '& .question_card': {
+
+            h4: {
+                fontSize: '0.9rem'
+            }
+        }
+    
     }
 }));

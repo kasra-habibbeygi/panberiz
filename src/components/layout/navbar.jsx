@@ -15,6 +15,7 @@ import SettingIcon from '../../assets/images/layout/setting.svg';
 
 // Component
 import AutoComplete from '../form-group/auto-complete';
+import Button from '../form-group/button';
 
 // MUI
 import AddIcon from '@mui/icons-material/Add';
@@ -34,8 +35,6 @@ const top100Films = [
 function Navbar({ setAsideStatus, asideStatus }) {
     const themeStatus = useSelector(state => state.UserInfo.theme);
     const [langValue, setLangValue] = useState({ label: 'فارسی', value: 'فارسی' });
-
-    console.log(langValue);
 
     const openAside = () => {
         setAsideStatus(!asideStatus);
@@ -66,14 +65,21 @@ function Navbar({ setAsideStatus, asideStatus }) {
                 <SearchIcon className='search_icon' />
             </div>
             <div className='left'>
+                <div className='mobile_search_field'>
+                    <SearchIcon className='search_icon' />
+                </div>
                 <div className='lang_select'>
                     <AutoComplete placeholder='زبان' value={langValue} valueHandler={setLangValue} options={top100Films} name='lang' />
                 </div>
-                <Link href='/video/add' className='button_link'>
-                    <AddIcon />
-                    <p>افزودن مدیا</p>
+                <Button color='primary' type='outline' extraClass='button_link'>
+                    <Link href='/video/add'>
+                        <AddIcon />
+                        <p>افزودن مدیا</p>
+                    </Link>
+                </Button>
+                <Link href='/favorits' className='favorit_link'>
+                    <Image src={heart} className='hearth_icon' alt='heart' />
                 </Link>
-                <Image src={heart} className='hearth_icon' alt='heart' />
                 <div className='profile_dropdown_field' ref={ref}>
                     <Image
                         src={themeStatus === 'light' ? user : UserWhite}

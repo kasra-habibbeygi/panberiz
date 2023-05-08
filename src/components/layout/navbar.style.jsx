@@ -20,13 +20,9 @@ export const Navbar = styled.nav(props => ({
         width: '100%',
 
         '& .button_link': {
-            display: 'flex',
-            alignItems: 'center',
-            padding: '10px 25px',
-            backgroundColor: 'transparent',
-            border: `1px solid ${props.theme.palette.colors.primary}`,
-            borderRadius: '15px',
-            color: props.theme.mode === 'light' ? '#751B74' : 'white'
+            a: {
+                color: props.theme.mode === 'light' ? '#751B74' : 'white'
+            }
         }
     },
 
@@ -159,8 +155,54 @@ export const Navbar = styled.nav(props => ({
         }
     },
 
+    '& .mobile_search_field': {
+        display: 'none'
+    },
+
     '& .hearth_icon': {
         filter:
             props.theme.mode === 'light' ? '' : 'invert(21%) sepia(93%) saturate(2352%) hue-rotate(270deg) brightness(85%) contrast(91%)'
+    },
+
+    '@media(max-width : 1500px)': {
+        '& .middle': {
+            minWidth: '200px'
+        }
+    },
+
+    '@media(max-width : 1200px)': {
+        '& .right': {
+            width: 'max-content',
+            marginLeft: '20px'
+        }
+    },
+
+    '@media(max-width : 800px)': {
+        '& .favorit_link': {
+            display: 'none'
+        },
+        '& .button_link': {
+            display: 'none'
+        },
+
+        '& .middle': {
+            display: 'none'
+        },
+
+        '& .mobile_search_field': {
+            display: 'flex',
+            cursor: 'pointer',
+            alignItems: 'center',
+
+            svg: {
+                fontSize: '2.2rem'
+            }
+        }
+    },
+
+    '@media(max-width : 500px)': {
+        '& .lang_select': {
+            display: 'none'
+        }
     }
 }));

@@ -1,11 +1,26 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+// Component
 import Aside from './aside';
 import Navbar from './navbar';
+import MobileNavbar from './mobile-navbar';
+
+// Assets
 import * as Fields from './index.style';
 
+// Hooks
+import useWindowDimensions from '@/hooks/use-windows-dimensions';
+
 function LayoutProvider({ children }) {
-    const [asideStatus, setAsideStatus] = useState(true);
+    const { width } = useWindowDimensions();
+    const [asideStatus, setAsideStatus] = useState();
+
+    useEffect(() => {
+        setAsideStatus(width < 1300 ? false : true);
+    }, [width]);
+
     return (
         <Fields.LayoutProviderField asideStatus={asideStatus}>
             <Navbar setAsideStatus={setAsideStatus} asideStatus={asideStatus} />
@@ -13,6 +28,7 @@ function LayoutProvider({ children }) {
                 <Aside asideStatus={asideStatus} />
                 <div className='children-field'>{children}</div>
             </div>
+            <MobileNavbar />
         </Fields.LayoutProviderField>
     );
 }

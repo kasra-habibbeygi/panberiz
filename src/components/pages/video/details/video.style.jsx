@@ -58,6 +58,7 @@ export const MainField = styled.div(props => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        position: 'relative',
 
         '& .video_banner': {
             width: '100%',
@@ -78,6 +79,61 @@ export const MainField = styled.div(props => ({
             '& .icon': {
                 margin: '5px',
                 cursor: 'pointer'
+            }
+        }
+    },
+
+    '@media(max-width : 800px)': {
+        '& .video_image': {
+            width: '100%',
+            height: '300px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+        }
+    },
+
+    '@media(max-width : 500px)': {
+        '& .card_details': {
+            display: 'flex',
+            alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            marginTop: '20px',
+            flexDirection: 'column-reverse',
+            gap: '20px',
+
+            '& .right_field': {
+                width: '100%'
+            },
+
+            '& .left_field': {
+                display: 'flex',
+                gap: '20px',
+                alignItems: 'center',
+                width: '100%',
+                justifyContent: 'space-between',
+
+                '& .like': {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+
+                    img: {
+                        filter: 'invert(55%) sepia(0%) saturate(1107%) hue-rotate(144deg) brightness(90%) contrast(82%)'
+                    }
+                },
+
+                '& .rate': {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px'
+                },
+
+                p: {
+                    position: 'relative',
+                    top: '3px',
+                    fontWeight: 'bold'
+                }
             }
         }
     }
