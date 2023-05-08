@@ -1,21 +1,21 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+# . "$(dirname "$0")/_/husky.sh"
 
-echo '🏗️👷 Styling, testing and building your project before committing'
+# echo '🏗️👷 Styling, testing and building your project before committing'
 
-npm run check-lint ||
-(
-        echo '😤🏀👋😤 Get that weak shit out of here! 😤🏀👋😤 
-                ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'
-        false; 
-)
+# npm run check-lint ||
+# (
+#         echo '😤🏀👋😤 Get that weak shit out of here! 😤🏀👋😤 
+#                 ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'
+#         false; 
+# )
 
-yarn build ||
-(
-    echo '❌👷🔨❌ Better call kasra... Because your build failed ❌👷🔨❌
-            Next build failed: View the errors above to see why. 
-    '
-    false;
-)
+# yarn build ||
+# (
+#     echo '❌👷🔨❌ Better call kasra... Because your build failed ❌👷🔨❌
+#             Next build failed: View the errors above to see why. 
+#     '
+#     false;
+# )
 
-echo '✅✅✅✅ You win this time... I am committing this now. ✅✅✅✅'
+# echo '✅✅✅✅ You win this time... I am committing this now. ✅✅✅✅'

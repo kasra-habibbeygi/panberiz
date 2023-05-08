@@ -5,7 +5,7 @@ import { QuizFormField } from './quiz-form.style';
 
 export const QuizForm = ({ open, setOpen }) => {
     return (
-        <QuizFormField open={open} onClose={() => setOpen(!open)}>
+        <QuizFormField scroll='body' TransitionComponent={'fade'} maxWidth='md' open={open} onClose={() => setOpen(!open)}>
             <div className='form'>
                 <div className='border'>
                     <h3>طرح سوال</h3>

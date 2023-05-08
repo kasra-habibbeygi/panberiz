@@ -30,15 +30,16 @@ export const TitleField = styled.div(props => ({
         '& .progress': {
             width: '100%',
 
-            span : {
-                
+            span: {
+                borderRadius: '100%',
+                position : ''
             }
         },
 
         p: {
-            width: 'max-content'
+            minWidth: 'max-content'
         }
     }
 }));
 
-export const QuestionsField = styled.div(props => ({}));
+export const QuestionsField = styled.div({});
