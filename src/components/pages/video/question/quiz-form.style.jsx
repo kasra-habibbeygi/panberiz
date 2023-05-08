@@ -3,18 +3,30 @@ import { Modal } from '@mui/material';
 
 export const QuizFormField = styled(Modal)(() => ({
     '& .form': {
-        padding: '20px 0',
-        '& .section-question': {
-            padding: '20px 0',
-            borderTop: '1px solid rgba(228, 228, 228, 0.9)',
+        position: 'absolute',
+        overflowY: 'scroll',
+        borderRadius: '20px',
+        backgroundColor: 'white',
+        width: '70%',
+        height: '85%',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        padding: '30px',
+        h3: {
+            paddingBottom: '15px'
+        },
+        '& .border': {
             borderBottom: '1px solid rgba(228, 228, 228, 0.9)'
         },
-        '& .section-answer': {
-            padding: '20px 0',
-            '& .row': {
-                alignItems: 'center',
-                color: 'rgba(117, 27, 116, 1)'
-            }
+        '& .flex_field': {
+            display: 'flex',
+            alignItems: 'center',
+            flexWrap: 'wrap'
+        },
+        '& .w-100': {
+            width: '100%',
+            padding: '20px 0'
         },
         '& .buttons': {
             display: 'flex',
