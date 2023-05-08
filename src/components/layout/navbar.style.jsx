@@ -20,13 +20,9 @@ export const Navbar = styled.nav(props => ({
         width: '100%',
 
         '& .button_link': {
-            display: 'flex',
-            alignItems: 'center',
-            padding: '10px 25px',
-            backgroundColor: 'transparent',
-            border: `1px solid ${props.theme.palette.colors.primary}`,
-            borderRadius: '15px',
-            color: props.theme.mode === 'light' ? '#751B74' : 'white'
+            a: {
+                color: props.theme.mode === 'light' ? '#751B74' : 'white'
+            }
         }
     },
 

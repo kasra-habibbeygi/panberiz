@@ -15,6 +15,7 @@ import SettingIcon from '../../assets/images/layout/setting.svg';
 
 // Component
 import AutoComplete from '../form-group/auto-complete';
+import Button from '../form-group/button';
 
 // MUI
 import AddIcon from '@mui/icons-material/Add';
@@ -69,11 +70,15 @@ function Navbar({ setAsideStatus, asideStatus }) {
                 <div className='lang_select'>
                     <AutoComplete placeholder='زبان' value={langValue} valueHandler={setLangValue} options={top100Films} name='lang' />
                 </div>
-                <Link href='/video/add' className='button_link'>
-                    <AddIcon />
-                    <p>افزودن مدیا</p>
+                <Button color='primary' type='outline' extraClass='button_link'>
+                    <Link href='/video/add'>
+                        <AddIcon />
+                        <p>افزودن مدیا</p>
+                    </Link>
+                </Button>
+                <Link href='/favorits'>
+                    <Image src={heart} className='hearth_icon' alt='heart' />
                 </Link>
-                <Image src={heart} className='hearth_icon' alt='heart' />
                 <div className='profile_dropdown_field' ref={ref}>
                     <Image
                         src={themeStatus === 'light' ? user : UserWhite}
