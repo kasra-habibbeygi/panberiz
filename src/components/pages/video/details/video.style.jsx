@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const CardField = styled.div(props => ({
+export const MainField = styled.div(props => ({
     width: '100%',
     borderRadius: '20px',
     margin: '10px',
@@ -10,18 +10,39 @@ export const CardField = styled.div(props => ({
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'space-between',
-        marginTop: '10px',
+        marginTop: '20px',
 
         '& .right_field': {
+            display: 'flex',
+            gap: '10px',
+            alignItems: 'center',
+
             p: {
-                color: props.theme.palette.colors.text.light
+                color: props.theme.palette.colors.text.light,
+                fontSize: '0.9rem'
             }
         },
 
         '& .left_field': {
             display: 'flex',
-            gap: '10px',
+            gap: '20px',
             alignItems: 'center',
+
+            '& .like': {
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+
+                img: {
+                    filter: 'invert(55%) sepia(0%) saturate(1107%) hue-rotate(144deg) brightness(90%) contrast(82%)'
+                }
+            },
+
+            '& .rate': {
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px'
+            },
 
             p: {
                 position: 'relative',
@@ -33,7 +54,7 @@ export const CardField = styled.div(props => ({
 
     '& .video_image': {
         width: '100%',
-        height: '250px',
+        height: '600px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -43,12 +64,6 @@ export const CardField = styled.div(props => ({
             height: '100%',
             borderRadius: '20px',
             objectFit: 'cover'
-        },
-
-        '& .play': {
-            alignSelf: 'center',
-            top: '32%',
-            left: '43%'
         },
 
         '& .float': {
@@ -61,7 +76,8 @@ export const CardField = styled.div(props => ({
             height: '100%',
 
             '& .icon': {
-                margin: '5px'
+                margin: '5px',
+                cursor: 'pointer'
             }
         }
     }

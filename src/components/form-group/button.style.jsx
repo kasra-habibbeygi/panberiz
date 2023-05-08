@@ -16,7 +16,9 @@ export const ButtonField = styled(Button)(props => ({
 
     a: {
         color: 'inherit',
-        fontSize: 'inherit'
+        fontSize: 'inherit',
+        display: 'flex',
+        alignItems: 'center'
     },
 
     img: {

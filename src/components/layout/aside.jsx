@@ -12,8 +12,6 @@ import video from '../../assets/icons/sidebar/video.svg';
 import tag from '../../assets/icons/sidebar/tag.svg';
 import category from '../../assets/icons/sidebar/category.svg';
 import mode from '../../assets/icons/sidebar/mode.svg';
-import information from '../../assets/icons/sidebar/information.svg';
-import phone from '../../assets/icons/sidebar/phone.svg';
 
 // MUI
 import { Switch } from '@mui/material';
@@ -66,19 +64,6 @@ function Aside({ asideStatus }) {
                             <p>حالت شب</p>
                         </div>
                         <Switch checked={themeState === 'dark'} onChange={themeHandler} />
-                    </li>
-                    <li>
-                        <Link href='/'>
-                            <Image src={information} alt='information' />
-                            <p>درباره ما</p>
-                        </Link>
-                    </li>
-
-                    <li>
-                        <Link href='/'>
-                            <Image src={phone} alt='phone' />
-                            <p>تماس با ما</p>
-                        </Link>
                     </li>
                 </ol>
             </div>

@@ -13,7 +13,7 @@ export const theme = mode => ({
                     error : '#BF0000',
                     lightError : '#FFE3E3',
                     text : {
-                        blackAndWhite : '#1B022B',
+                        blackAndWhite : '#000000',
                         light : '#A6A6A7'
                     },
                     input : {
