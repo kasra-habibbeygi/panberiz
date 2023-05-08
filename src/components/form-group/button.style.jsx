@@ -24,7 +24,7 @@ export const ButtonField = styled(Button)(props => ({
         height: 'auto'
     },
 
-    '&[disabled]': {
+    '& [disabled]': {
         opacity: '0.4'
     },
 
@@ -32,7 +32,7 @@ export const ButtonField = styled(Button)(props => ({
         background: 'transparent',
         border: 'none',
 
-        '&.primary': {
+        '& .primary': {
             color: props.theme.palette.colors.primary
         },
 
