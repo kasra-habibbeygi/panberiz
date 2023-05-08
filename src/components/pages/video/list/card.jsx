@@ -7,6 +7,7 @@ import StarIcon from '@mui/icons-material/Star';
 import play from '@/assets/icons/play.svg';
 import accept from '@/assets/icons/accept.svg';
 import reject from '@/assets/icons/reject.svg';
+import Link from 'next/link';
 
 function Card({ data, accepted }) {
     return (
@@ -14,7 +15,9 @@ function Card({ data, accepted }) {
             <div className='video_image'>
                 <div className='float'>
                     {accepted ? (
-                        <Image className='icon' src={play} alt='play' />
+                        <Link href='/video/1'>
+                            <Image className='icon' src={play} alt='play' />
+                        </Link>
                     ) : (
                         <>
                             <Image className='icon' src={accept} alt='accept' />

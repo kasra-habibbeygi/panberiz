@@ -7,11 +7,12 @@ import GridsIcon from '@/assets/icons/grids.svg';
 // MUI
 import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const DetailsField = () => {
     return (
         <MainField>
-            <p>
+            <p className='text'>
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و
                 مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی
                 می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت
@@ -32,8 +33,10 @@ const DetailsField = () => {
                     <span># لورم ایپسوم</span>
                 </div>
                 <Button color='primary' type='outline'>
-                    شروع کوییز
-                    <KeyboardBackspaceRoundedIcon />
+                    <Link href='/exam/1'>
+                        شروع کوییز
+                        <KeyboardBackspaceRoundedIcon />
+                    </Link>
                 </Button>
             </div>
         </MainField>

@@ -66,12 +66,6 @@ export const MainField = styled.div(props => ({
             objectFit: 'cover'
         },
 
-        '& .play': {
-            alignSelf: 'center',
-            top: '32%',
-            left: '43%'
-        },
-
         '& .float': {
             position: 'absolute',
             alignSelf: 'center',
@@ -82,7 +76,8 @@ export const MainField = styled.div(props => ({
             height: '100%',
 
             '& .icon': {
-                margin: '5px'
+                margin: '5px',
+                cursor: 'pointer'
             }
         }
     }

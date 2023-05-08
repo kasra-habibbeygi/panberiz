@@ -5,6 +5,10 @@ export const MainField = styled.div(props => ({
     marginTop: '20px',
     paddingTop: '20px',
 
+    '& .text': {
+        lineHeight: '34px'
+    },
+
     p: {
         color: props.theme.palette.colors.text.blackAndWhite
     },

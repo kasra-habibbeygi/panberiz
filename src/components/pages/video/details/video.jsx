@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useState } from 'react';
 
 // Assets
 import { MainField } from './video.style';
@@ -10,12 +11,17 @@ import Banner from '@/assets/images/video/video-1.jpeg';
 // MUI
 import StarIcon from '@mui/icons-material/Star';
 
+// Component
+import VideoModal from './video-modal';
+
 const VideoField = () => {
+    const [videoModalStatus, setVideoModalStatus] = useState(false);
+
     return (
         <MainField>
             <div className='video_image'>
                 <div className='float'>
-                    <Image className='icon' src={play} alt='play' />
+                    <Image className='icon' src={play} alt='play' onClick={() => setVideoModalStatus(true)} />
                 </div>
                 <Image className='video_banner' src={Banner} alt='video-banner' />
             </div>
@@ -38,6 +44,7 @@ const VideoField = () => {
                     </div>
                 </div>
             </div>
+            <VideoModal status={videoModalStatus} setStatus={setVideoModalStatus} />
         </MainField>
     );
 };

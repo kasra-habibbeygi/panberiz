@@ -4,7 +4,6 @@ import { Modal } from '@mui/material';
 export const QuizFormField = styled(Modal)(() => ({
     '& .form': {
         position: 'absolute',
-        overflowY: 'scroll',
         borderRadius: '20px',
         backgroundColor: 'white',
         width: '70%',

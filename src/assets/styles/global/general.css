@@ -48,15 +48,15 @@ article {
 }
 
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #ebebeb;
+    background: #c8c8c8;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgb(197, 197, 197);
+    background: #39164F;
 }
 
 ::-webkit-scrollbar-thumb:hover {
