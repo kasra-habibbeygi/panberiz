@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import styled from '@emotion/styled';
 
 export const TitleField = styled.div(props => ({
@@ -26,13 +27,31 @@ export const TitleField = styled.div(props => ({
         display: 'flex',
         alignItems: 'center',
         gap: '20px',
+        marginTop: '20px',
 
         '& .progress': {
             width: '100%',
+            borderRadius: '50px',
+            background: '#f4f4f4',
+            height: '15px',
+            position: 'relative',
 
             span: {
-                borderRadius: '100%',
-                position : ''
+                borderRadius: '50px',
+                position: 'absolute',
+                right: '0',
+                height: '100%',
+                width: `${props.progressPercent}%`,
+                background:
+                    props.progressPercent <= 40
+                        ? '#63C7AA'
+                        : props.progressPercent >= 40 && props.progressPercent <= 80
+                            ? '#E29B00'
+                            : props.progressPercent >= 80
+                                ? '#BF0000'
+                                : '',
+                display: 'block',
+                transition: 'all linear 0.2s'
             }
         },
 
@@ -42,4 +61,33 @@ export const TitleField = styled.div(props => ({
     }
 }));
 
-export const QuestionsField = styled.div({});
+export const QuestionsField = styled.div(props => ({
+    '& .four_choice': {
+        span: {
+            fontFamily: 'Vazirmatn'
+        }
+    },
+
+    '& .question_card': {
+        border: '1px solid #e2e2e2',
+        borderRadius: '12px',
+        padding: '15px',
+        marginTop: '20px',
+
+        small: {
+            color: props.theme.palette.colors.text.light,
+            fontSize: '0.9rem'
+        },
+
+        h4: {
+            color: props.theme.palette.colors.text.blackAndWhite,
+            fontSize: '1rem',
+            marginBottom: '20px'
+        }
+    },
+
+    '& .submit_btn': {
+        margin: '20px auto 0 0 ',
+        width: '180px'
+    }
+}));
