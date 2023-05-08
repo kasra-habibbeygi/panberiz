@@ -16,6 +16,8 @@ function Report() {
                     <span>جزئیات</span>
                 </div>
                 <ReportItem />
+                <ReportItem />
+                <ReportItem />
             </div>
         </ReportField>
     );
