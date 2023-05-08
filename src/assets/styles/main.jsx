@@ -5,5 +5,9 @@ export const TagsmainField = styled.div(props => ({
     padding: '35px',
     borderRadius: '12px',
     border: `1px solid ${props.theme.mode === 'light' ? '#EFEFEF' : '#554A67'}`,
-    backgroundColor: props.theme.palette.colors.background.card
+    backgroundColor: props.theme.palette.colors.background.card,
+
+    '@media(max-width : 650px)': {
+        padding: '15px'
+    }
 }));

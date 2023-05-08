@@ -95,5 +95,42 @@ export const MainField = styled.div({
         p: {
             fontSize: '0.9rem'
         }
+    },
+
+    '@media(max-width : 700px)': {
+        '& .w-33': {
+            width: '50%',
+            padding: '15px 0'
+        },
+
+        '& .w-50': {
+            width: '100%',
+            padding: '15px 0'
+        },
+
+        '& .upload_field': {
+            flexDirection: 'column',
+            gap: '20px',
+
+            '& .left_field': {
+                width: '100%'
+            }
+        },
+
+        '& .right_field': {
+            width: '100%'
+        }
+    },
+
+    '@media(max-width : 600px)': {
+        '& .w-33': {
+            width: '100%'
+        },
+        '& .upload_field': {
+            '& .left_field': {
+                flexDirection: 'column',
+                alignItems: 'flex-start'
+            }
+        }
     }
 });

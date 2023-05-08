@@ -36,8 +36,6 @@ function Navbar({ setAsideStatus, asideStatus }) {
     const themeStatus = useSelector(state => state.UserInfo.theme);
     const [langValue, setLangValue] = useState({ label: 'فارسی', value: 'فارسی' });
 
-    console.log(langValue);
-
     const openAside = () => {
         setAsideStatus(!asideStatus);
     };
@@ -67,6 +65,9 @@ function Navbar({ setAsideStatus, asideStatus }) {
                 <SearchIcon className='search_icon' />
             </div>
             <div className='left'>
+                <div className='mobile_search_field'>
+                    <SearchIcon className='search_icon' />
+                </div>
                 <div className='lang_select'>
                     <AutoComplete placeholder='زبان' value={langValue} valueHandler={setLangValue} options={top100Films} name='lang' />
                 </div>
@@ -76,7 +77,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
                         <p>افزودن مدیا</p>
                     </Link>
                 </Button>
-                <Link href='/favorits'>
+                <Link href='/favorits' className='favorit_link'>
                     <Image src={heart} className='hearth_icon' alt='heart' />
                 </Link>
                 <div className='profile_dropdown_field' ref={ref}>

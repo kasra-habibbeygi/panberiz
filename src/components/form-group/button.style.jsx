@@ -13,6 +13,7 @@ export const ButtonField = styled(Button)(props => ({
     gap: '7px',
     fontSize: '1rem',
     transition: 'all linear 0.2s',
+    minWidth: 'max-content',
 
     a: {
         color: 'inherit',

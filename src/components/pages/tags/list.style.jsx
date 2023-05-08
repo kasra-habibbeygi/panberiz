@@ -33,5 +33,16 @@ export const MainField = styled.div(props => ({
             border: `1px dashed ${props.theme.mode === 'light' ? props.theme.palette.colors.primary : '#90899B'}`,
             background: props.theme.palette.colors.background.card
         }
+    },
+
+    '@media(max-width : 600px)': {
+        '& .pill_field': {
+            gap: '5px',
+
+            span: {
+                fontSize: '0.9rem',
+                padding: '5px 7px'
+            }
+        }
     }
 }));

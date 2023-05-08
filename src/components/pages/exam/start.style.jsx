@@ -34,5 +34,11 @@ export const MainField = styled.div({
     button: {
         marginTop: '50px',
         width: '150px'
+    },
+
+    '@media(max-width : 600px)': {
+        img: {
+            width: '60%'
+        }
     }
 });
