@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
 
-export const Navbar = styled.nav(() => ({
+export const Navbar = styled.nav(props => ({
     display: 'flex',
     height: '70px',
     justifyContent: 'space-between',
-    border: '1px solid #d9d9d9',
+    borderBottom: props.theme.mode === 'light' ? '1px solid #d9d9d9' : '1px solid #342342',
     position: 'fixed',
     top: '0',
     width: '100%',
-    background: 'white',
+    background: props.theme.palette.colors.background.layout,
     zIndex: '10',
     padding: '0 30px',
 
@@ -24,10 +24,17 @@ export const Navbar = styled.nav(() => ({
             alignItems: 'center',
             padding: '10px 25px',
             backgroundColor: 'transparent',
-            border: '1px solid !important',
-            borderRadius: 15,
-            borderColor: '#751B74',
-            color: '#751B74'
+            border: `1px solid ${props.theme.palette.colors.primary}`,
+            borderRadius: '15px',
+            color: props.theme.mode === 'light' ? '#751B74' : 'white'
+        }
+    },
+
+    '& .lang_select': {
+        width: '100px',
+
+        '& .MuiAutocomplete-clearIndicator': {
+            display: 'none'
         }
     },
 
@@ -39,18 +46,23 @@ export const Navbar = styled.nav(() => ({
 
         input: {
             width: '100%',
-            backgroundColor: '#F1F1F1',
+            backgroundColor: props.theme.mode === 'light' ? '#F1F1F1' : '#2E1F45',
             borderRadius: '8px',
             border: 'none',
             height: '40px',
             padding: '20px',
-            paddingRight: '50px'
+            paddingRight: '50px',
+            color: props.theme.palette.colors.text.blackAndWhite,
+
+            '&::placeholder': {
+                color: props.theme.mode === 'light' ? '#8C8C8C' : 'white'
+            }
         },
 
         '& .search_icon': {
             position: 'absolute',
             right: '10px',
-            color: '#b8b8b8',
+            color: props.theme.mode === 'light' ? '#b8b8b8' : 'white',
             width: '30px',
             height: 'auto'
         }
@@ -68,12 +80,15 @@ export const Navbar = styled.nav(() => ({
         },
 
         svg: {
-            cursor: 'pointer'
+            cursor: 'pointer',
+            color: props.theme.palette.colors.text.blackAndWhite
         }
     },
 
     '& .profile_dropdown_field': {
         position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
 
         '& >img': {
             cursor: 'pointer'
@@ -142,5 +157,10 @@ export const Navbar = styled.nav(() => ({
                 }
             }
         }
+    },
+
+    '& .hearth_icon': {
+        filter:
+            props.theme.mode === 'light' ? '' : 'invert(21%) sepia(93%) saturate(2352%) hue-rotate(270deg) brightness(85%) contrast(91%)'
     }
 }));

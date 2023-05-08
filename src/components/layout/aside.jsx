@@ -44,7 +44,7 @@ function Aside({ asideStatus }) {
                         </Link>
                     </li>
                     <li>
-                        <Link href='/'>
+                        <Link href='/tags'>
                             <Image src={tag} alt='tag' />
                             <p>تگ ها</p>
                         </Link>

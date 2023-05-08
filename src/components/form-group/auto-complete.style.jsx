@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
-export const MainField = styled.div({
+export const MainField = styled.div(props => ({
     '& .MuiInputBase-root': {
-        background: '#F1F1F1',
+        background: props.theme.palette.colors.input.primary,
         padding: '0 !important',
         paddingRight: '10px !important',
         paddingLeft: '39px',
@@ -21,11 +21,16 @@ export const MainField = styled.div({
     input: {
         fontSize: '0.9rem',
         height: '25px',
+        color: props.theme.palette.colors.text.blackAndWhite,
 
         '&::placeholder': {
             color: 'black',
             fontWeight: 'bold'
         }
+    },
+
+    svg: {
+        color: `${props.theme.palette.colors.text.blackAndWhite} !important`
     },
 
     '& .MuiPaper-root': {
@@ -35,4 +40,4 @@ export const MainField = styled.div({
             fontSize: '0.9rem'
         }
     }
-});
+}));
