@@ -1,18 +1,19 @@
 import styled from '@emotion/styled';
-import { Modal } from '@mui/material';
+import { Dialog } from '@mui/material';
 
-export const QuizFormField = styled(Modal)(() => ({
+export const QuizFormField = styled(Dialog)(() => ({
+    directin: 'rtl',
+    textAlign: 'right',
     '& .form': {
-        position: 'absolute',
-        overflowY: 'scroll',
-        borderRadius: '20px',
-        backgroundColor: 'white',
-        width: '70%',
-        height: '85%',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        padding: '30px',
+        // overflowY: 'scroll',
+        // borderRadius: '20px',
+        // backgroundColor: 'white',
+        // width: '70%',
+        // height: '85%',
+        // top: '50%',
+        // left: '50%',
+        // transform: 'translate(-50%, -50%)',
+        // padding: '30px',
         h3: {
             paddingBottom: '15px'
         },
