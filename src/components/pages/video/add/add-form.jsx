@@ -6,7 +6,8 @@ import { useState } from 'react';
 import gallery from '@/assets/icons/gallery.svg';
 import Input from '@/components/form-group/input';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import quizEmpty from '../../../../assets/images/video/quiz-empty.png';
+import quizEmpty from '@/assets/images/video/quiz-empty.png';
+import { QuizForm } from '../question/quiz-form';
 
 const top100Films = [
     { label: 'The Shawshank Redemption', year: 1994 },
@@ -147,6 +148,7 @@ function AddForm() {
                     </div>
                 </div>
             </div>
+            <QuizForm open={open} setOpen={setOpen} />
         </AddFormField>
     );
 }
