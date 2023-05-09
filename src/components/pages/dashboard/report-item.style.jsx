@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import styled from '@emotion/styled';
 
 export const ReportItemField = styled.button(props => ({
@@ -10,13 +11,27 @@ export const ReportItemField = styled.button(props => ({
     '& .item': {
         height: '80px',
         display: 'flex',
-        alignItems: 'center',
-        backgroundColor: props.open ? '#170128' : 'white',
+        // alignItems: 'center',
+        backgroundColor:
+            props.theme.mode === 'light'
+                ? props.open
+                    ? '#170128'
+                    : 'white'
+                : props.open
+                    ? 'white'
+                    : props.theme.palette.colors.background.card,
         justifyContent: 'space-between',
         boxShadow: '0 4px 14px 0 rgb(0 0 0 / 7%)',
         borderRadius: '15px',
         p: {
-            color: props.open && 'white',
+            color:
+                props.theme.mode === 'light'
+                    ? props.open
+                        ? 'white'
+                        : '#170128'
+                    : props.open
+                        ? props.theme.palette.colors.background.card
+                        : 'white',
             flex: 1,
             display: 'flex',
             justifyContent: 'center',
@@ -27,13 +42,19 @@ export const ReportItemField = styled.button(props => ({
             }
         },
         '& .MuiSvgIcon-root': {
-            color: props.open ? 'white' : 'black'
+            color:   props.theme.mode === 'light'
+                ? props.open
+                    ? 'white'
+                    : '#170128'
+                : props.open
+                    ? props.theme.palette.colors.background.card
+                    : 'white'
         }
     },
     '& .collapse': {
         width: '97%',
         display: 'flex',
-        // justifyContent: 'center',
+        justifyContent: 'center',
         alignItems: 'center',
         '& .collapse-item': {
             width: '100%',
@@ -41,12 +62,12 @@ export const ReportItemField = styled.button(props => ({
             display: 'flex',
             alignSelf: 'center',
             alignItems: 'center',
-            backgroundColor: 'white',
+            backgroundColor: props.theme.palette.colors.background.layout,
             border: '1px dashed rgba(157, 157, 158, 1)',
             justifyContent: 'space-between',
             borderRadius: '15px',
             p: {
-                color: 'black',
+                color: props.theme.palette.colors.text.blackAndWhite,
                 flex: 1,
                 display: 'flex',
                 justifyContent: 'center',

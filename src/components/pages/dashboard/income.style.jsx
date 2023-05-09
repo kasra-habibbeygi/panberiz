@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 
 export const IncomeField = styled.div(props => ({
+    width: '100%',
     display: 'flex',
     gap: '30px',
     '& .line-chart': {
-        padding: '15px',
-        flex: 1,
+        width: '60%',
+        padding: '15px 0',
         '& .header': {
             display: 'flex',
             alignItems: 'center',
@@ -18,6 +19,7 @@ export const IncomeField = styled.div(props => ({
                 alignItems: 'center',
                 gap: '15px',
                 h1: {
+                    color: props.theme.palette.colors.text.blackAndWhite,
                     textAlign: 'center'
                 },
                 ShowChartIcon: {
@@ -25,9 +27,9 @@ export const IncomeField = styled.div(props => ({
                 }
             },
             '& .period': {
-                width: '15%',
+                width: '25%',
                 '& .MuiInputBase-root': {
-                    background: 'white',
+                    background: props.theme.palette.colors.background.layout,
                     border: '1px solid rgba(226, 226, 226, 1)',
                     borderRadius: '30px'
                 }
@@ -38,12 +40,12 @@ export const IncomeField = styled.div(props => ({
         }
     },
     '& .circle-chart': {
-        flex: 0.7,
         borderRadius: '30px',
-        backgroundColor: 'white',
+        backgroundColor: props.theme.palette.colors.background.card,
+        width: '40%',
         padding: '15px',
         '& .select-rank': {
-            width: '25%',
+            width: '40%',
             '& .MuiInputBase-root': {
                 borderRadius: '30px',
                 color: props.theme.palette.colors.primary
