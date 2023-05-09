@@ -46,5 +46,14 @@ export const QuizFormField = styled(Dialog)(props => ({
                 width: '20%'
             }
         }
+    },
+
+    '@media(max-width : 600px)': {
+        '& .buttons': {
+            button: {
+                width: '20%',
+                flex: 1
+            }
+        }
     }
 }));

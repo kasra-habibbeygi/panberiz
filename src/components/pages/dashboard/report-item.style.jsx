@@ -11,7 +11,6 @@ export const ReportItemField = styled.button(props => ({
         height: '80px',
         display: 'flex',
         alignItems: 'center',
-        // zIndex: 99999,
         backgroundColor: props.open ? '#170128' : 'white',
         justifyContent: 'space-between',
         boxShadow: '0 4px 14px 0 rgb(0 0 0 / 7%)',
@@ -26,6 +25,9 @@ export const ReportItemField = styled.button(props => ({
                 flex: 2,
                 justifyContent: 'center'
             }
+        },
+        '& .MuiSvgIcon-root': {
+            color: props.open ? 'white' : 'black'
         }
     },
     '& .collapse': {

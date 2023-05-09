@@ -89,11 +89,11 @@ export const QuestionsField = styled.div(props => ({
     },
 
     '& .question_card': {
-        border: '1px solid #e2e2e2',
+        border: `1px solid ${props.theme.palette.colors.border.primary}`,
         borderRadius: '12px',
         padding: '15px',
+        color:props.theme.palette.colors.text.blackAndWhite,
         marginTop: '20px',
-
         small: {
             color: props.theme.palette.colors.text.light,
             fontSize: '1rem'

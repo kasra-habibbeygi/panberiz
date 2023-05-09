@@ -24,7 +24,7 @@ export const MainField = styled.div(props => ({
         color: props.theme.palette.colors.text.blackAndWhite,
 
         '&::placeholder': {
-            color: 'black',
+            color: props.theme.palette.colors.text.blackAndWhite,
             fontWeight: 'bold'
         }
     },

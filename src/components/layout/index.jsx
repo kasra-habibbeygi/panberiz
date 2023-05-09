@@ -15,7 +15,7 @@ import useWindowDimensions from '@/hooks/use-windows-dimensions';
 
 function LayoutProvider({ children }) {
     const { width } = useWindowDimensions();
-    const [asideStatus, setAsideStatus] = useState();
+    const [asideStatus, setAsideStatus] = useState(true);
 
     useEffect(() => {
         setAsideStatus(width < 1300 ? false : true);

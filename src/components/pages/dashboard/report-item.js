@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ReportItemField } from './report-item.style';
 import Collapse from '@mui/material/Collapse';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 function ReportItem() {
     const [open, setOpen] = useState(false);
@@ -16,6 +17,7 @@ function ReportItem() {
                 <p>450</p>
                 <p>450</p>
                 <p>لورم ایپسوم</p>
+                {open ? <ExpandLess /> : <ExpandMore />}
             </div>
             <Collapse className='collapse' in={open}>
                 <div className='collapse-item'>

@@ -11,8 +11,8 @@ export const Navbar = styled.nav(props => ({
     background: props.theme.palette.colors.background.layout,
     zIndex: '10',
     padding: '0 30px',
-
     '& .left': {
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'flex-end',
         gap: '20px',
@@ -35,11 +35,12 @@ export const Navbar = styled.nav(props => ({
     },
 
     '& .middle': {
+        flex: 3,
         display: 'flex',
+        padding: '0 15px',
         alignItems: 'center',
         minWidth: '600px',
         position: 'relative',
-
         input: {
             width: '100%',
             backgroundColor: props.theme.mode === 'light' ? '#F1F1F1' : '#2E1F45',
@@ -49,7 +50,6 @@ export const Navbar = styled.nav(props => ({
             padding: '20px',
             paddingRight: '50px',
             color: props.theme.palette.colors.text.blackAndWhite,
-
             '&::placeholder': {
                 color: props.theme.mode === 'light' ? '#8C8C8C' : 'white'
             }
@@ -57,7 +57,7 @@ export const Navbar = styled.nav(props => ({
 
         '& .search_icon': {
             position: 'absolute',
-            right: '10px',
+            right: '20px',
             color: props.theme.mode === 'light' ? '#b8b8b8' : 'white',
             width: '30px',
             height: 'auto'
@@ -65,6 +65,7 @@ export const Navbar = styled.nav(props => ({
     },
 
     '& .right': {
+        flex: 1,
         display: 'flex',
         alignItems: 'center',
         gap: '10px',

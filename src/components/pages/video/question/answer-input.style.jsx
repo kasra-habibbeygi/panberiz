@@ -36,5 +36,17 @@ export const MainField = styled.div(props => ({
         '&::placeholder': {
             color: props.theme.mode === 'light' ? '#8C8C8C' : 'white'
         }
+    },
+    '@media(max-width : 600px)': {
+        '& .row-content': {
+            position: 'relative',
+            '& .icon': {
+                left: '0px',
+                top: '-45px',
+                img: {
+                    width: '35px'
+                }
+            }
+        }
     }
 }));

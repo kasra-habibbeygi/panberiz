@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const MainField = styled.div({
+export const MainField = styled.div(props => ({
     h3: {
         fontSize: '1.5rem',
         marginBottom: '50px'
@@ -31,13 +31,13 @@ export const MainField = styled.div({
         padding: '0 30px',
         borderRadius: '10px',
         marginBottom: '25px',
-
+        backgroundColor: props.theme.palette.colors.background.card,
         p: {
             width: '100%',
             textAlign: 'right',
             display: 'flex',
             alignItems: 'center',
-
+            color: props.theme.palette.colors.text.blackAndWhite,
             '&:last-child': {
                 justifyContent: 'flex-end'
             }
@@ -62,4 +62,4 @@ export const MainField = styled.div({
             }
         }
     }
-});
+}));

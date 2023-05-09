@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 
-export const AddFormField = styled.div(() => ({
+export const AddFormField = styled.div(props => ({
     '& .form_field': {
         borderRadius: '10px',
-        border: '1px solid #F3F3F3',
+        border: `1px solid ${props.theme.palette.colors.border.primary}`,
         padding: '20px',
-        background: 'white',
-        marginBottom: '50px'
+        backgroundColor: props.theme.palette.colors.background.card,
+        margin: '50px 0'
     },
 
     '& .flex_field': {
@@ -17,7 +17,7 @@ export const AddFormField = styled.div(() => ({
 
     '& .w-33': {
         width: '33.33%',
-        padding: '15px'
+        padding: '15px 0'
     },
 
     '& .w-50': {
@@ -32,12 +32,11 @@ export const AddFormField = styled.div(() => ({
     '& .header': {
         display: 'flex',
         alignItems: 'center',
-        color: '#170128',
+        color: props.theme.palette.colors.text.blackAndWhite,
         fontWeight: 'bold',
-        borderBottom: '1px dashed #EFEFEF',
+        borderBottom: `1px dashed ${props.theme.palette.colors.border.primary}`,
         paddingBottom: '20px',
         marginBottom: '20px',
-
         '& .title': {
             display: 'flex',
             alignItems: 'center',
@@ -59,13 +58,15 @@ export const AddFormField = styled.div(() => ({
         width: '100%',
         height: '150px',
         borderRadius: '20px',
-        backgroundColor: '#F1F1F1',
+        backgroundColor: props.theme.palette.colors.input.primary,
         display: 'flex',
+        color: props.theme.palette.colors.text.blackAndWhite,
         justifyContent: 'center',
         alignItems: 'center'
     },
     '& .quiz-header': {
         display: 'flex',
+        color: props.theme.palette.colors.text.blackAndWhite,
         padding: '20px',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -74,7 +75,7 @@ export const AddFormField = styled.div(() => ({
         },
         '& .left': {
             display: 'flex',
-            color: 'rgba(117, 27, 116, 1)',
+            color: props.theme.mode === 'light' ? 'rgba(117, 27, 116, 1)' : 'white',
             alignItems: 'center',
             h3: {
                 margin: '0 15px'
@@ -85,10 +86,68 @@ export const AddFormField = styled.div(() => ({
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        height: '350px',
+        // height: '350px',
+        backgroundColor: props.theme.mode === 'light' ? 'white' : props.theme.palette.colors.input.primary,
+        padding: '0 20px 20px 20px',
         borderRadius: '15px',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        border: '1px solid rgba(239, 239, 239, 1)'
+        border: `1px solid ${props.theme.palette.colors.border.primary}`
+    },
+    '@media(max-width : 700px)': {
+        '& .form_field': {
+            '& .header': {
+                display: 'flex',
+                justifyContent: 'space-around',
+                alignItems: 'center'
+            }
+        },
+        '& .w-33': {
+            width: '50%',
+            padding: '15px 0'
+        },
+
+        '& .w-50': {
+            width: '100%',
+            padding: '15px'
+        },
+
+        '& .upload_field': {
+            flexDirection: 'column',
+            gap: '20px',
+
+            '& .left_field': {
+                width: '100%'
+            }
+        },
+
+        '& .right_field': {
+            width: '100%'
+        }
+    },
+
+    '@media(max-width : 600px)': {
+        '& .w-33': {
+            width: '100%'
+        },
+        '& .upload_field': {
+            '& .left_field': {
+                flexDirection: 'column',
+                alignItems: 'flex-start'
+            }
+        }
     }
+}));
+
+export const IndexField = styled.div(({ currect }) => ({
+    marginLeft: '10px',
+    backgroundColor: currect && 'rgba(99, 199, 170, 1)',
+    padding: '10px',
+    width: '35px',
+    borderLeft: !currect && '1px solid rgba(172, 172, 172, 0.3)',
+    display: 'flex',
+    height: '35px',
+    borderRadius: '5px',
+    justifyContent: 'center',
+    alignItems: 'center'
 }));

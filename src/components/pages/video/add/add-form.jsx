@@ -1,13 +1,14 @@
+/* eslint-disable react/prop-types */
 import Image from 'next/image';
-import { AddFormField } from './add-form.style';
+import { AddFormField, IndexField } from './add-form.style';
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import AutoComplete from '@/components/form-group/auto-complete';
 import { useState } from 'react';
 import gallery from '@/assets/icons/gallery.svg';
 import Input from '@/components/form-group/input';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import quizEmpty from '@/assets/images/video/quiz-empty.png';
 import { QuizForm } from '../question/quiz-form';
+import { QuestionsField } from '../../exam/questions/content.style';
 
 const top100Films = [
     { label: 'The Shawshank Redemption', year: 1994 },
@@ -48,9 +49,14 @@ function AddForm() {
         });
     };
 
+    const Index = ({ currect = false }) => (
+        <IndexField currect={currect}>
+            <p>1</p>
+        </IndexField>
+    );
+
     return (
         <AddFormField>
-            <h1>افزودن مدیا</h1>
             <div className='form_field'>
                 <div className='header'>
                     <div className='title'>
@@ -142,8 +148,39 @@ function AddForm() {
                             </button>
                         </div>
                         <div className='quiz-container'>
-                            <Image src={quizEmpty} alt='quiz-empty' />
-                            <h3>سوالی طرح نشده است</h3>
+                            <QuestionsField>
+                                <div className='question_card'>
+                                    <small>سوال 1</small>
+                                    <h4>
+                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها
+                                        و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است
+                                    </h4>
+                                    <RadioGroup className='four_choice'>
+                                        <FormControlLabel
+                                            value='1'
+                                            control={<Index currect={true} />}
+                                            label='لورم اییپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده'
+                                        />
+                                        <FormControlLabel
+                                            value='2'
+                                            control={<Index />}
+                                            label='لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده'
+                                        />
+                                        <FormControlLabel
+                                            value='3'
+                                            control={<Index />}
+                                            label='لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده  طراحان است'
+                                        />
+                                        <FormControlLabel
+                                            value='4'
+                                            control={<Index />}
+                                            label='لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده'
+                                        />
+                                    </RadioGroup>
+                                </div>
+                            </QuestionsField>
+                            {/* <Image src={quizEmpty} alt='quiz-empty' />
+                            <h3>سوالی طرح نشده است</h3> */}
                         </div>
                     </div>
                 </div>

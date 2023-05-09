@@ -25,7 +25,8 @@ export const theme = mode => ({
                     },
                     background :{
                         card : 'white',
-                        layout : '#FFFFFF'
+                        layout : '#FFFFFF',
+                        content:'#fff'
                     }
                 }
             }
@@ -46,12 +47,13 @@ export const theme = mode => ({
                         primary : '#2D2140'
                     },
                     border : {
-                        primary :'#E1E1E1',
+                        primary :'rgba(85, 74, 103, 1)',
                         secondary : '#EFEFEF'
                     },                    
                     background :{
                         card : '#3B2D51',
-                        layout : '#170128'
+                        layout : '#11011E',
+                        content:'#3B2D51'
                     }
                 }
             })

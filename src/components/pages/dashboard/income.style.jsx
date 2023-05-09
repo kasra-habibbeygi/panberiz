@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const IncomeField = styled.div(() => ({
+export const IncomeField = styled.div(props => ({
     display: 'flex',
     gap: '30px',
     '& .line-chart': {
@@ -25,13 +25,11 @@ export const IncomeField = styled.div(() => ({
                 }
             },
             '& .period': {
-                select: {
-                    border: '2px solid',
-                    padding: '10px 20px',
-                    borderRadius: '30px',
-                    borderColor: '#E2E2E2',
-                    backgroundColor: 'transparent',
-                    fontWeight: 'bold'
+                width: '15%',
+                '& .MuiInputBase-root': {
+                    background: 'white',
+                    border: '1px solid rgba(226, 226, 226, 1)',
+                    borderRadius: '30px'
                 }
             }
         },
@@ -45,13 +43,10 @@ export const IncomeField = styled.div(() => ({
         backgroundColor: 'white',
         padding: '15px',
         '& .select-rank': {
-            select: {
-                border: '0',
-                padding: '10px 20px',
+            width: '25%',
+            '& .MuiInputBase-root': {
                 borderRadius: '30px',
-                backgroundColor: '#F5EFF5',
-                color: '#751B74',
-                fontWeight: 'bold'
+                color: props.theme.palette.colors.primary
             }
         },
         '& .chart': {

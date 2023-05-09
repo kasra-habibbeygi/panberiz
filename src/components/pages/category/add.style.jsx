@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 
-export const MainField = styled.div({
+export const MainField = styled.div(props => ({
     '& .form_field': {
         borderRadius: '10px',
-        border: '1px solid #F3F3F3',
+        border: `1px solid ${props.theme.palette.colors.border.primary}`,
         padding: '20px',
-        background: 'white',
+        backgroundColor: props.theme.palette.colors.background.card,
         marginBottom: '50px'
     },
 
@@ -28,9 +28,9 @@ export const MainField = styled.div({
     '& .header': {
         display: 'flex',
         alignItems: 'center',
-        color: '#170128',
+        color: props.theme.palette.colors.text.blackAndWhite,
         fontWeight: 'bold',
-        borderBottom: '1px dashed #EFEFEF',
+        borderBottom: `1px dashed ${props.theme.palette.colors.border.primary}`,
         paddingBottom: '20px',
         marginBottom: '20px',
 
@@ -61,7 +61,7 @@ export const MainField = styled.div({
         display: 'flex',
         alignItems: 'flex-end',
         justifyContent: 'space-between',
-        borderTop: '1px dashed #EFEFEF',
+        borderTop: `1px dashed ${props.theme.palette.colors.border.primary}`,
         paddingTop: '20px',
         marginTop: '20px',
 
@@ -133,4 +133,4 @@ export const MainField = styled.div({
             }
         }
     }
-});
+}));

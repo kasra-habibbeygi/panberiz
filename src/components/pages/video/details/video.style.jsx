@@ -16,7 +16,7 @@ export const MainField = styled.div(props => ({
             display: 'flex',
             gap: '10px',
             alignItems: 'center',
-
+            color: props.theme.palette.colors.text.blackAndWhite,
             p: {
                 color: props.theme.palette.colors.text.light,
                 fontSize: '0.9rem'

@@ -13,7 +13,6 @@ export const MainField = styled.div(props => ({
         display: 'flex',
         alignItems: 'center',
         gap: '20px',
-
         p: {
             color: props.theme.palette.colors.text.light
         }
@@ -62,7 +61,8 @@ export const MainField = styled.div(props => ({
             },
 
             '& .content': {
-                width: '100%'
+                width: '100%',
+                color: props.theme.palette.colors.text.blackAndWhite
             },
 
             '& .info': {
