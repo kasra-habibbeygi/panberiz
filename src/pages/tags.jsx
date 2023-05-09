@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 // Component
 import AddTag from '@/components/pages/tags/add';
 import TagsList from '@/components/pages/tags/list';
@@ -7,7 +9,14 @@ import HeaderField from '@/components/template/header';
 // Assets
 import { TagsmainField } from '@/assets/styles/main';
 
+// APIs
+import { AddTags } from '@/api-request/tags';
+
 const Tags = () => {
+    useEffect(() => {
+        AddTags();
+    }, []);
+
     return (
         <LayoutProvider>
             <main>
