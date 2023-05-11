@@ -14,6 +14,7 @@ import { theme } from '../config/theme';
 
 //Assets
 import '../assets/styles/global/general.css';
+import { Toaster } from 'react-hot-toast';
 
 NProgress.configure({
     minimum: 0.3,
@@ -32,6 +33,14 @@ const App = ({ Component, pageProps }) => {
 
     return (
         <ThemeProvider theme={darkModeTheme}>
+            <Toaster
+                position='bottom-left'
+                containerStyle={{
+                    zIndex: 9999,
+                    textAlign: 'right',
+                    direction: 'rtl'
+                }}
+            />
             <Component {...pageProps} />
         </ThemeProvider>
     );

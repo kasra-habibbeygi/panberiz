@@ -5,7 +5,11 @@ import { useRouter } from 'next/router';
 const Index = () => {
     const router = useRouter();
     useEffect(() => {
-        router.push('/dashboard');
+        if (typeof window !== 'undefined' && localStorage.getItem('pmlmToken') !== null) {
+            router.push('/dashboard');
+        } else {
+            router.push('/login');
+        }
     }, []);
 };
 

@@ -1,11 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { userInfohandler } from '@/state-manager/reducer/user';
 
 // Component
 import Aside from './aside';
 import Navbar from './navbar';
 import MobileNavbar from './mobile-navbar';
+
+// APIs
+import { GetUserInformation } from '@/api-request/user-info';
 
 // Assets
 import * as Fields from './index.style';
@@ -14,11 +19,16 @@ import * as Fields from './index.style';
 import useWindowDimensions from '@/hooks/use-windows-dimensions';
 
 function LayoutProvider({ children }) {
+    const dispatch = useDispatch();
     const { width } = useWindowDimensions();
     const [asideStatus, setAsideStatus] = useState(true);
 
     useEffect(() => {
         setAsideStatus(width < 1300 ? false : true);
+
+        GetUserInformation().then(res => {
+            dispatch(userInfohandler(res));
+        });
     }, [width]);
 
     return (

@@ -2,6 +2,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginStatushandler } from '@/state-manager/reducer/user';
+import { useRouter } from 'next/router';
 
 // Assets
 import * as Styles from './navbar.style';
@@ -24,7 +27,6 @@ import SearchIcon from '@mui/icons-material/Search';
 
 // Hooks
 import useOutsideClick from '@/hooks/use-outside-click';
-import { useSelector } from 'react-redux';
 
 const top100Films = [
     { label: 'english', value: 'english' },
@@ -33,6 +35,8 @@ const top100Films = [
 ];
 
 function Navbar({ setAsideStatus, asideStatus }) {
+    const dispatch = useDispatch();
+    const router = useRouter();
     const themeStatus = useSelector(state => state.UserInfo.theme);
     const [langValue, setLangValue] = useState({ label: 'فارسی', value: 'فارسی' });
 
@@ -52,6 +56,12 @@ function Navbar({ setAsideStatus, asideStatus }) {
         if (name === DropDownStatus) {
             setDropDownStatus('');
         }
+    };
+
+    const logouthandler = () => {
+        localStorage.removeItem('pmlmToken');
+        dispatch(loginStatushandler(true));
+        router.push('/login');
     };
 
     return (
@@ -103,10 +113,10 @@ function Navbar({ setAsideStatus, asideStatus }) {
                                 </Link>
                             </li>
                             <li>
-                                <Link href=''>
+                                <div onClick={logouthandler}>
                                     <Image src={LogoutIcon} alt='' />
                                     خروج از حساب کاربری
-                                </Link>
+                                </div>
                             </li>
                         </ol>
                     </div>

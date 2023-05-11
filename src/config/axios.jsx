@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 class RequestHandler extends EventTarget {
-    accessTokenKeyName = 'accessToken';
+    accessTokenKeyName = 'pmlmToken';
 
     #baseUrl = '';
     #authorizationHeader = '';
@@ -34,7 +34,7 @@ class RequestHandler extends EventTarget {
     #initiateAuthorizationHeader() {
         if (typeof window !== 'undefined') {
             this.#authorizationHeader = localStorage.getItem(this.accessTokenKeyName)
-                ? `Bearer ${JSON.parse(localStorage.getItem(this.accessTokenKeyName)).token}`
+                ? `Bearer ${JSON.parse(localStorage.getItem(this.accessTokenKeyName)).access}`
                 : '';
         }
     }
@@ -42,25 +42,27 @@ class RequestHandler extends EventTarget {
     async #authorizationHandler() {
         if (localStorage.getItem(this.accessTokenKeyName)) {
             const accessToken = JSON.parse(localStorage.getItem(this.accessTokenKeyName));
-
-            const accessTokenMaxExpiredTimestamp = accessToken ? new Date(accessToken.expiredAt).getTime() - 10000 : Date.now() - 10000;
+            const accessTokenMaxExpiredTimestamp = accessToken
+                ? new Date(accessToken.accessTokenExpireAt).getTime() - 10000
+                : Date.now() - 10000;
 
             if (accessTokenMaxExpiredTimestamp <= Date.now()) {
-                const { data } = await axios.put(`${this.#baseUrl}/users/token/refresh/`, { token: accessToken.token });
+                const { data } = await axios.put(`${this.#baseUrl}/users/token/refresh/`, { refresh: accessToken.refresh });
 
                 localStorage.setItem(
                     this.accessTokenKeyName,
                     JSON.stringify({
-                        token: data.result.token,
-                        expiredAt: data.result.expiredAt
+                        access: data.results.access,
+                        refresh: data.results.refresh,
+                        accessTokenExpireAt: Date.now() + 1200000
                     })
                 );
             }
 
             const newAccessToken = JSON.parse(localStorage.getItem(this.accessTokenKeyName));
 
-            if (new Date(newAccessToken.expiredAt).getTime() > Date.now()) {
-                this.#authorizationHeader = `Bearer ${newAccessToken.token}`;
+            if (new Date(newAccessToken.accessTokenExpireAt).getTime() > Date.now()) {
+                this.#authorizationHeader = `Bearer ${newAccessToken.access}`;
             }
         }
     }
@@ -73,7 +75,6 @@ class RequestHandler extends EventTarget {
                 await this.#authorizationHandler();
             } catch (error) {
                 localStorage.removeItem(this.accessTokenKeyName);
-                localStorage.removeItem(this.refreshTokenKeyName);
                 window.location.href = '/login';
             }
 
@@ -123,6 +124,12 @@ class RequestHandler extends EventTarget {
                         const result = await event.detail;
                         resolve(result);
                     } catch (error) {
+                        console.log(error);
+                        if (error.response.status === 401) {
+                            localStorage.removeItem(this.accessTokenKeyName);
+                            window.location.href = '/login';
+                        }
+
                         reject(error);
                     }
                 },

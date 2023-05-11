@@ -142,11 +142,12 @@ export const Navbar = styled.nav(props => ({
             flexDirection: 'column',
             gap: '20px',
 
-            a: {
+            '& a,div': {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '10px',
                 color: 'black',
+                cursor: 'pointer',
 
                 img: {
                     height: 'auto',
