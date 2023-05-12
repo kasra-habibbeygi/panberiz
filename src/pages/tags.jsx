@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // Component
 import AddTag from '@/components/pages/tags/add';
@@ -10,20 +10,27 @@ import HeaderField from '@/components/template/header';
 import { TagsmainField } from '@/assets/styles/main';
 
 // APIs
-import { AddTags } from '@/api-request/tags';
+import { GetTagsList } from '@/api-request/tags';
 
 const Tags = () => {
+    const [tagsList, setTagsList] = useState([]);
+    const [reload, setReaload] = useState(false);
+
     useEffect(() => {
-        AddTags();
-    }, []);
+        GetTagsList()
+            .then(res => {
+                setTagsList(res.results);
+            })
+            .catch(() => {});
+    }, [reload]);
 
     return (
         <LayoutProvider>
             <main>
                 <HeaderField title='تگ ها' />
                 <TagsmainField>
-                    <AddTag />
-                    <TagsList />
+                    <AddTag setReaload={setReaload} reload={reload} />
+                    <TagsList tagsList={tagsList} />
                 </TagsmainField>
             </main>
         </LayoutProvider>

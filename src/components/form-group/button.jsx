@@ -31,8 +31,7 @@ const Button = ({
             className={`${type} ${color} ${extraClass}`}
             disabled={disabled}
         >
-            <PulseLoader loading={loader} color={loaderColor} size={10} />
-            {children}
+            {loader ? <PulseLoader loading={loader} color={loaderColor} size={10} /> : children}
         </S.ButtonField>
     );
 };

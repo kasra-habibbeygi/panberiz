@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // Assets
 import { useState } from 'react';
 import { MainField } from './add.styles';
@@ -6,21 +7,32 @@ import { MainField } from './add.styles';
 import Input from '@/components/form-group/input';
 import Button from '@/components/form-group/button';
 
-const AddTag = () => {
-    const [tagsName, setTagsName] = useState('');
+// APIs
+import { Createtag } from '@/api-request/tags';
 
-    const submitHandler = () => {};
+const AddTag = ({ setReaload, reload }) => {
+    const [tagsName, setTagsName] = useState('');
+    const [loader, setLoader] = useState(false);
+
+    const submitHandler = () => {
+        setLoader(true);
+        Createtag({ title: tagsName })
+            .then(() => {
+                setReaload(!reload);
+                setLoader(false);
+            })
+            .catch(() => {});
+    };
 
     return (
         <MainField>
             <Input
                 label='عنوان تگ'
-                name='tag_name'
                 placeholder='عنوان تگ را وارد کنید ...'
                 value={tagsName}
                 valueHandler={e => setTagsName(e.target.value)}
             />
-            <Button color='primary' disabled={tagsName === ''} handler={() => submitHandler()}>
+            <Button color='primary' disabled={tagsName === ''} handler={() => submitHandler()} loader={loader}>
                 افزودن تگ
             </Button>
         </MainField>

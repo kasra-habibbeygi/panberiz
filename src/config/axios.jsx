@@ -45,22 +45,18 @@ class RequestHandler extends EventTarget {
             const accessTokenMaxExpiredTimestamp = accessToken
                 ? new Date(accessToken.accessTokenExpireAt).getTime() - 10000
                 : Date.now() - 10000;
-
             if (accessTokenMaxExpiredTimestamp <= Date.now()) {
-                const { data } = await axios.put(`${this.#baseUrl}/users/token/refresh/`, { refresh: accessToken.refresh });
-
+                const { data } = await axios.post(`${this.#baseUrl}users/token/refresh/`, { refresh: accessToken.refresh });
                 localStorage.setItem(
                     this.accessTokenKeyName,
                     JSON.stringify({
-                        access: data.results.access,
-                        refresh: data.results.refresh,
+                        access: data.access,
+                        refresh: accessToken.refresh,
                         accessTokenExpireAt: Date.now() + 1200000
                     })
                 );
             }
-
             const newAccessToken = JSON.parse(localStorage.getItem(this.accessTokenKeyName));
-
             if (new Date(newAccessToken.accessTokenExpireAt).getTime() > Date.now()) {
                 this.#authorizationHeader = `Bearer ${newAccessToken.access}`;
             }
@@ -124,12 +120,10 @@ class RequestHandler extends EventTarget {
                         const result = await event.detail;
                         resolve(result);
                     } catch (error) {
-                        console.log(error);
-                        if (error.response.status === 401) {
+                        if (error?.response?.status === 401) {
                             localStorage.removeItem(this.accessTokenKeyName);
                             window.location.href = '/login';
                         }
-
                         reject(error);
                     }
                 },
