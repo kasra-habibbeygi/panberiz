@@ -14,7 +14,7 @@ import heart from '../../assets/icons/heart.svg';
 import logo from '../../assets/images/logo.png';
 import logoWhite from '../../assets/images/logo-white.svg';
 import LogoutIcon from '../../assets/images/layout/logout.svg';
-import SettingIcon from '../../assets/images/layout/setting.svg';
+// import SettingIcon from '../../assets/images/layout/setting.svg';
 
 // Component
 import AutoComplete from '../form-group/auto-complete';
@@ -37,7 +37,7 @@ const top100Films = [
 function Navbar({ setAsideStatus, asideStatus }) {
     const dispatch = useDispatch();
     const router = useRouter();
-    const themeStatus = useSelector(state => state.UserInfo.theme);
+    const userInfo = useSelector(state => state.UserInfo);
     const [langValue, setLangValue] = useState({ label: 'فارسی', value: 'فارسی' });
 
     const openAside = () => {
@@ -68,7 +68,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
         <Styles.Navbar>
             <div className='right'>
                 <MenuIcon onClick={openAside} />
-                <Image src={themeStatus === 'light' ? logo : logoWhite} alt='logo' />
+                <Image src={userInfo.theme === 'light' ? logo : logoWhite} alt='logo' />
             </div>
             <div className='middle'>
                 <input placeholder='جستجو ...' />
@@ -92,7 +92,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
                 </Link>
                 <div className='profile_dropdown_field' ref={ref}>
                     <Image
-                        src={themeStatus === 'light' ? user : UserWhite}
+                        src={userInfo.theme === 'light' ? user : UserWhite}
                         alt='user'
                         onClick={() => FilterDropDownStatusHandler('profile_dropdown')}
                     />
@@ -100,18 +100,17 @@ function Navbar({ setAsideStatus, asideStatus }) {
                         <div className='header'>
                             <Image src={user} alt='user' />
                             <div className='content'>
-                                <h5>کسری حبیب بیگی</h5>
-                                <small>kasra habibbeygi</small>
-                                <p>SuperAdminAgency</p>
+                                <h5>{userInfo.fullname}</h5>
+                                <small>{userInfo.username}</small>
                             </div>
                         </div>
                         <ol>
-                            <li>
+                            {/* <li>
                                 <Link href=''>
                                     <Image src={SettingIcon} alt='' />
                                     تنظیمات
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <div onClick={logouthandler}>
                                     <Image src={LogoutIcon} alt='' />

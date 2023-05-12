@@ -97,6 +97,10 @@ export const MainField = styled.div(props => ({
         }
     },
 
+    '& .submit_button': {
+        margin: '20px auto 0 0 '
+    },
+
     '@media(max-width : 700px)': {
         '& .w-33': {
             width: '50%',

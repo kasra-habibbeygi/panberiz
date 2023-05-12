@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
-import { loginStatushandler } from '@/state-manager/reducer/user';
+import { loginStatushandler, roleHandler } from '@/state-manager/reducer/user';
 import { useDispatch } from 'react-redux';
 
 // Assets
@@ -49,10 +49,12 @@ const Login = () => {
                     JSON.stringify({
                         access: res.access,
                         refresh: res.refresh,
+                        role: res.user_role,
                         accessTokenExpireAt: Date.now() + 1200000
                     })
                 );
                 dispatch(loginStatushandler(true));
+                dispatch(roleHandler(res.user_role));
                 router.push('/dashboard');
             })
             .catch(() => {

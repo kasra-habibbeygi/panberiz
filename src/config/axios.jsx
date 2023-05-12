@@ -52,6 +52,7 @@ class RequestHandler extends EventTarget {
                     JSON.stringify({
                         access: data.access,
                         refresh: accessToken.refresh,
+                        role: accessToken.user_role,
                         accessTokenExpireAt: Date.now() + 1200000
                     })
                 );

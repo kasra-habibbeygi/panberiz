@@ -1,40 +1,34 @@
+/* eslint-disable react/prop-types */
 import Image from 'next/image';
+import { toast } from 'react-hot-toast';
 
 // Assets
 import { useState } from 'react';
 import { MainField } from './add.style';
-import CategoryIcon from '../../../assets/icons/sidebar/category.svg';
+import CategoryIcon from '@/assets/icons/sidebar/category.svg';
 
 // Component
-import AutoComplete from '@/components/form-group/auto-complete';
 import Input from '@/components/form-group/input';
 import HeaderField from '@/components/template/header';
+import Button from '@/components/form-group/button';
 
 // MUI
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
 
-const top100Films = [
-    { label: 'The Shawshank Redemption', year: 1994 },
-    { label: 'The Godfather', year: 1972 },
-    { label: 'The Godfather: Part II', year: 1974 }
-];
+// APIs
+import { CreateCategory } from '@/api-request/category';
 
-const AddCategory = () => {
+const AddCategory = ({ setReaload, reload }) => {
+    const formData = new FormData();
+    const [loader, setLoader] = useState(false);
     const [inputValues, setInputValued] = useState({
-        category: null,
-        position: null,
+        place: null,
         rank: null,
         title: '',
         description: '',
-        file: ''
+        file: '',
+        is_public: false
     });
-
-    const autoCompleteHandler = (e, name) => {
-        setInputValued({
-            ...inputValues,
-            [name]: e
-        });
-    };
 
     const inputValueHandler = e => {
         setInputValued({
@@ -50,6 +44,24 @@ const AddCategory = () => {
         });
     };
 
+    const submitHandler = () => {
+        setLoader(true);
+        Object.keys(inputValues).forEach(item => {
+            formData.append(item, inputValues[item]);
+        });
+
+        CreateCategory(formData)
+            .then(() => {
+                setLoader(false);
+                Object.keys(inputValues).forEach(item => formData.delete(item, inputValues[item]));
+                toast.success('دسته بندی با موفقیت اضافه شد !');
+                setReaload(!reload);
+            })
+            .catch(() => {
+                toast.error('لطفا تمام ورودی ها را وارد کنید !');
+            });
+    };
+
     return (
         <MainField>
             <HeaderField title='دسته بندی' />
@@ -60,37 +72,29 @@ const AddCategory = () => {
                         نوع دسته بندی :
                     </div>
                     <div className='checkbox_field'>
-                        <RadioGroup row aria-labelledby='demo-row-radio-buttons-group-label' name='row-radio-buttons-group'>
-                            <FormControlLabel value='general' control={<Radio />} label='عمومی' />
+                        <RadioGroup row name='is_public' onChange={inputValueHandler}>
+                            <FormControlLabel value='true' control={<Radio />} label='عمومی' />
+                            <FormControlLabel value='false' control={<Radio />} label='غیر عمومی' />
                         </RadioGroup>
                     </div>
                 </div>
                 <div className='flex_field'>
-                    <div className='w-33'>
-                        <AutoComplete
-                            placeholder='انتخاب دسته بندی'
-                            value={inputValues.category}
-                            valueHandler={autoCompleteHandler}
-                            options={top100Films}
-                            name='category'
-                        />
-                    </div>
-                    <div className='w-33'>
-                        <AutoComplete
-                            placeholder='جایگاه'
-                            value={inputValues.position}
-                            valueHandler={autoCompleteHandler}
-                            options={top100Films}
-                            name='position'
-                        />
-                    </div>
-                    <div className='w-33'>
-                        <AutoComplete
-                            placeholder='رنک'
+                    <div className='w-50'>
+                        <Input
+                            valueHandler={inputValueHandler}
                             value={inputValues.rank}
-                            valueHandler={autoCompleteHandler}
-                            options={top100Films}
                             name='rank'
+                            placeholder='رنک دسته بندی را وارد کنید ...'
+                            label='رنک'
+                        />
+                    </div>
+                    <div className='w-50'>
+                        <Input
+                            valueHandler={inputValueHandler}
+                            value={inputValues.place}
+                            name='place'
+                            placeholder='جایگاه دسته بندی را وارد کنید ...'
+                            label='جایگاه'
                         />
                     </div>
                     <div className='w-50'>
@@ -106,7 +110,7 @@ const AddCategory = () => {
                         <Input
                             valueHandler={inputValueHandler}
                             value={inputValues.description}
-                            name='title'
+                            name='description'
                             placeholder='توضیحات دسته بندی را وارد کنید ...'
                             label='توضیحات'
                         />
@@ -123,6 +127,9 @@ const AddCategory = () => {
                         <input type='file' name='file' id='chose_file' hidden onChange={e => fileValueHandler(e)} />
                     </div>
                 </div>
+                <Button color='primary' type='filled' extraClass='submit_button' handler={submitHandler} loader={loader}>
+                    افزودن دسته
+                </Button>
             </div>
         </MainField>
     );

@@ -6,13 +6,13 @@ export const UserInfo = createSlice({
     initialState: {
         theme: typeof window !== 'undefined' && localStorage.getItem('theme') !== null ? localStorage.getItem('theme') : 'light',
         isLogin: typeof window !== 'undefined' && localStorage.getItem('pmlmToken') !== null ? true : false,
-        role: '',
+        role:
+            typeof window !== 'undefined' && localStorage.getItem('pmlmToken') !== null
+                ? JSON.parse(localStorage.getItem('pmlmToken')).role
+                : '',
         username: '',
         fullname: '',
-        rank: 1,
-        rank_image: '',
-        description: '',
-        jdate: ''
+        rank: 1
     },
     reducers: {
         themeStateHandler: (state, action) => {
@@ -25,10 +25,13 @@ export const UserInfo = createSlice({
         },
         loginStatushandler: (state, action) => {
             state.isLogin = action.payload;
+        },
+        roleHandler: (state, action) => {
+            state.role = action.payload;
         }
     }
 });
 
-export const { themeStateHandler, userInfohandler, loginStatushandler } = UserInfo.actions;
+export const { themeStateHandler, userInfohandler, loginStatushandler, roleHandler } = UserInfo.actions;
 
 export default UserInfo.reducer;
