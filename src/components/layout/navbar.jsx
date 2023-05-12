@@ -87,9 +87,10 @@ function Navbar({ setAsideStatus, asideStatus }) {
                         <p>افزودن مدیا</p>
                     </Link>
                 </Button>
-                <Link href='/favorits' className='favorit_link'>
+                <Link href='/favorits' className={`favorit_link ${userInfo.role === 'User' ? 'show' : ''}`}>
                     <Image src={heart} className='hearth_icon' alt='heart' />
                 </Link>
+
                 <div className='profile_dropdown_field' ref={ref}>
                     <Image
                         src={userInfo.theme === 'light' ? user : UserWhite}

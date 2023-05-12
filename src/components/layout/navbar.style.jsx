@@ -157,6 +157,14 @@ export const Navbar = styled.nav(props => ({
         }
     },
 
+    '& .favorit_link': {
+        display: 'none'
+    },
+
+    '& .show': {
+        display: 'block'
+    },
+
     '& .mobile_search_field': {
         display: 'none'
     },

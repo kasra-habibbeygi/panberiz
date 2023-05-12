@@ -11,10 +11,10 @@ export const GetTagsList = async () => {
 
 // User
 export const GetUserTagsList = async () => {
-    return RequestHandler.call({ url: '/managers/tags/', method: 'get' }).then(res => res.data);
+    return RequestHandler.call({ url: '/users/tags/', method: 'get' }).then(res => res.data);
 };
 
 // Admin
 export const GetAdminTagsList = async () => {
-    return RequestHandler.call({ url: '/users/tags', method: 'get' }).then(res => res.data);
+    return RequestHandler.call({ url: 'admins/media/tags/', method: 'get' }).then(res => res.data);
 };
