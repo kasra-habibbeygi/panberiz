@@ -1,15 +1,17 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/prop-types */
 import Image from 'next/image';
 
 // Assets
 import * as Style from './card.style';
-import StarIcon from '@mui/icons-material/Star';
+// import StarIcon from '@mui/icons-material/Star';
 import play from '@/assets/icons/play.svg';
 import accept from '@/assets/icons/accept.svg';
 import reject from '@/assets/icons/reject.svg';
 import Link from 'next/link';
 
 function Card({ data, accepted }) {
+    console.log(data);
     return (
         <Style.CardField>
             <div className='video_image'>
@@ -25,16 +27,16 @@ function Card({ data, accepted }) {
                         </>
                     )}
                 </div>
-                <Image className='video_banner' src={data.image} alt='video-banner' />
+                <img className='video_banner' src={data.media_info.cover} alt='video-banner' />
             </div>
             <div className='card_details'>
                 <div className='right_field'>
-                    <h3>{data.title}</h3>
+                    <h3>{data.media_info.title}</h3>
                     <p>{data.des}</p>
                 </div>
                 <div className='left_field'>
                     <p>{data.star}</p>
-                    <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
+                    {/* <StarIcon htmlColor='rgba(248, 170, 0, 1)' /> */}
                 </div>
             </div>
         </Style.CardField>
