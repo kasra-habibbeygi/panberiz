@@ -5,6 +5,8 @@ import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { loginStatushandler, roleHandler } from '@/state-manager/reducer/user';
 import { useDispatch } from 'react-redux';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 // Assets
 import { NationalCodeField, VerifyCodeField } from '@/assets/styles/login';
@@ -21,6 +23,7 @@ import useTimer from '@/hooks/use-timer';
 import { GetVerifyCode, GetToken } from '@/api-request/auth';
 
 const Login = () => {
+    const { t } = useTranslation('common');
     const dispatch = useDispatch();
     const [days, hours, minutes, seconds, countDown, setNewCountDown] = useTimer(200000);
     const [loginState, setLoginState] = useState(0);
@@ -34,10 +37,10 @@ const Login = () => {
         GetVerifyCode(inputValues.codemeli)
             .then(() => {
                 setLoginState(1);
-                toast.success('کد با موفقیت ارسال شد !');
+                toast.success(t('The code has been sent successfully'));
             })
             .catch(() => {
-                toast.error('کد ملی وارد شده صحیح نمیباشد !');
+                toast.error(t('The entered national code is not correct!'));
             });
     };
 
@@ -58,7 +61,7 @@ const Login = () => {
                 router.push('/dashboard');
             })
             .catch(() => {
-                toast.error('کد وارد شده اشتباه است !');
+                toast.error(t('The entered code is wrong!'));
             });
     };
 
@@ -76,18 +79,18 @@ const Login = () => {
     }, []);
 
     return (
-        <LoginLayout title={loginState === 0 ? 'ورود' : 'کد تایید را وارد کنید'}>
+        <LoginLayout title={loginState === 0 ? t('login') : t('enter verify code')}>
             {loginState === 0 ? (
                 <NationalCodeField>
                     <Input
                         valueHandler={inputValueHandler}
                         value={inputValues.codemeli}
                         name='codemeli'
-                        placeholder='کدملی خود را وارد کنید'
-                        label='کد ملی'
+                        placeholder={t('enter national code')}
+                        label={t('natinal code')}
                     />
                     <Button type='filled' color='primary' handler={getCodeHandler}>
-                        ورود
+                        {t('login')}
                     </Button>
                 </NationalCodeField>
             ) : (
@@ -96,22 +99,22 @@ const Login = () => {
                         valueHandler={inputValueHandler}
                         value={inputValues.code}
                         name='code'
-                        placeholder='کد تایید را وارد کنید'
-                        label='کد تایید'
+                        placeholder={t('enter verify code')}
+                        label={t('verify code')}
                     />
                     <p className='timer'>
                         {minutes !== 0 && seconds !== 0 ? (
                             <>
-                                {seconds} : {minutes} مانده تا ارسال مجدد
+                                {seconds} : {minutes} {t('Remaining until resend')}
                             </>
                         ) : (
                             <p onClick={getCodeHandler} className='get_code'>
-                                دریافت مجدد کد تایید
+                                {t('Get the verify code again')}
                             </p>
                         )}
                     </p>
                     <Button type='filled' color='primary' handler={getTokenhandler}>
-                        تایید
+                        {t('verify')}
                     </Button>
                 </VerifyCodeField>
             )}
@@ -120,3 +123,11 @@ const Login = () => {
 };
 
 export default Login;
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale))
+        }
+    };
+}

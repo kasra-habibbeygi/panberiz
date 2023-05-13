@@ -17,7 +17,6 @@ const VideoDetails = () => {
         GetMediaDetails(3)
             .then(res => {
                 setMediaDetails(res.results);
-                console.log(mediaDetails);
             })
             .catch(() => {});
     }, []);

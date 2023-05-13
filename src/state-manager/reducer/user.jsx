@@ -3,20 +3,20 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const dirProvider = () => {
     if (typeof window !== 'undefined') {
-        if (localStorage.getItem('pmlmLang') === 'en') {
-            return 'ltr';
+        if (localStorage.getItem('pmlmLang') !== null) {
+            return localStorage.getItem('pmlmLang');
         }
-        return 'rtl';
+        return 'fa';
     }
 
-    return 'rtl';
+    return 'fa';
 };
 
 export const UserInfo = createSlice({
     name: 'userInfo',
     initialState: {
         theme: typeof window !== 'undefined' && localStorage.getItem('theme') !== null ? localStorage.getItem('theme') : 'light',
-        dir: dirProvider(),
+        lang: dirProvider(),
         isLogin: typeof window !== 'undefined' && localStorage.getItem('pmlmToken') !== null ? true : false,
         role:
             typeof window !== 'undefined' && localStorage.getItem('pmlmToken') !== null

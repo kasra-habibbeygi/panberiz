@@ -1,3 +1,53 @@
 {
-    "Test": "aasdasdas"
+    "tags": "Tags",
+    "The tag is not registered" : "The tag is not registered !",
+    "lang" : "lang",
+    "add tag" : "Add tag",
+    "tags list" : "Tags list",
+    "Tag title" : "Tag title",
+
+    "natinal code" : "natinal code",
+    "enter national code" : "Enter national code",
+    "login" : "login",
+    "enter verify code" : "Enter verify code",
+    "verify code" : "Verify code",
+    "Remaining until resend" : "Remaining until resend",
+    "Get the verify code again" : "Get the verify code again",
+    "verify" : "Verify",
+
+    "Category type" : "Category type", 
+    "Category" : "Category", 
+    "Public" : "Public", 
+    "Not public" : "Not public", 
+    "Enter category rank" : "Enter category rank", 
+    "Rank" : "Rank", 
+    "Enter the category position" : "Enter the category position", 
+    "position" : "Position", 
+    "Enter category title" : "Enter category title", 
+    "Title" : "Title", 
+    "Enter category description" : "Enter category description", 
+    "Description" : "Description", 
+    "File upload" : "File upload",     
+    "Select the file you want." : "Select the file you want.", 
+    "Chose file" : "Chose file", 
+    "Add category" : "Add category",
+
+    "Favorites list" : "Favorites list",
+
+    "Start exam" : "Start exam",
+    
+    "Seach" : "Seach",
+    "Add media" : "Add media",
+    "Logout" : "Logout",
+    "Options" : "Options",
+    "Dashboard" : "Dashboard",
+    "Video" : "Video",
+    "Dark mode" : "Dark mode",
+
+    "The code has been sent successfully" : "The code has been sent successfully !",
+    "The entered national code is not correct!" : "The entered national code is not correct !",
+    "The entered code is wrong!" : "The entered code is wrong !",
+    "no file selected" : "No file selected",
+    "Please enter all entries!" : "Please enter all entries !",
+    "Category added successfully!" : "Category added successfully !"
 }

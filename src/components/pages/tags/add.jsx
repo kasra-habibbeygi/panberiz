@@ -2,6 +2,7 @@
 // Assets
 import { useState } from 'react';
 import { MainField } from './add.styles';
+import { useTranslation } from 'next-i18next';
 
 // Component
 import Input from '@/components/form-group/input';
@@ -27,6 +28,7 @@ const langList = [
 ];
 
 const AddTag = ({ setReaload, reload }) => {
+    const { t } = useTranslation('common');
     const [tagsName, setTagsName] = useState({
         title: '',
         lang: ''
@@ -60,17 +62,23 @@ const AddTag = ({ setReaload, reload }) => {
     return (
         <MainField>
             <Input
-                label='عنوان تگ'
-                placeholder='عنوان تگ را وارد کنید ...'
+                label={t('Tag title')}
+                placeholder={t('Tag Title')}
                 value={tagsName.title}
                 name='title'
                 valueHandler={e => InputValueHandler(e)}
             />
             <div className='lang_select'>
-                <AutoComplete placeholder='زبان' value={tagsName.lang} valueHandler={selectValueHandler} options={langList} name='lang' />
+                <AutoComplete
+                    placeholder={t('lang')}
+                    value={tagsName.lang}
+                    valueHandler={selectValueHandler}
+                    options={langList}
+                    name='lang'
+                />
             </div>
             <Button color='primary' disabled={tagsName === ''} handler={() => submitHandler()} loader={loader} extraClass='sub_btn'>
-                افزودن تگ
+                {t('add tag')}
             </Button>
         </MainField>
     );

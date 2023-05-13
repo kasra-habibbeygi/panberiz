@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 import { themeStateHandler } from '../../state-manager/reducer/user';
+import { useTranslation } from 'next-i18next';
 
 // Assets
 import * as Style from './aside.style';
@@ -17,6 +18,7 @@ import mode from '../../assets/icons/sidebar/mode.svg';
 import { Switch } from '@mui/material';
 
 function Aside({ asideStatus }) {
+    const { t } = useTranslation();
     const userInfo = useSelector(state => state.UserInfo);
     const dispatch = useDispatch();
     const router = useRouter();
@@ -25,7 +27,6 @@ function Aside({ asideStatus }) {
         dispatch(themeStateHandler(e.target.checked ? 'dark' : 'light'));
         localStorage.setItem('theme', e.target.checked ? 'dark' : 'light');
     };
-    console.log(userInfo.role);
     return (
         <Style.AsideField asideStatus={asideStatus}>
             <div className='items'>
@@ -33,13 +34,13 @@ function Aside({ asideStatus }) {
                     <li>
                         <Link href='/dashboard' className={`${router.pathname === '/dashboard' ? 'active' : ''}`}>
                             <Image src={home} alt='home' />
-                            <p>داشبورد</p>
+                            <p>{t('Dashboard')}</p>
                         </Link>
                     </li>
                     <li>
                         <Link href='/video' className={`${router.pathname === '/video' ? 'active' : ''}`}>
                             <Image src={video} alt='video' />
-                            <p>ویدئو</p>
+                            <p>{t('Video')}</p>
                         </Link>
                     </li>
                     {userInfo.role === 'AgentAcademy' ? (
@@ -47,13 +48,13 @@ function Aside({ asideStatus }) {
                             <li>
                                 <Link href='/tags'>
                                     <Image src={tag} alt='tag' />
-                                    <p>تگ ها</p>
+                                    <p>{t('tags')}</p>
                                 </Link>
                             </li>
                             <li>
                                 <Link href='/category'>
                                     <Image src={category} alt='category' />
-                                    <p>دسته بندی</p>
+                                    <p>{t('Category')}</p>
                                 </Link>
                             </li>
                         </>
@@ -68,7 +69,7 @@ function Aside({ asideStatus }) {
                     <li className='night-mode'>
                         <div>
                             <Image src={mode} alt='mode' />
-                            <p>حالت شب</p>
+                            <p>{t('Dark mode')}</p>
                         </div>
                         <Switch checked={themeState === 'dark'} onChange={themeHandler} />
                     </li>

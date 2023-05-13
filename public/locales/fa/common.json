@@ -1,3 +1,55 @@
 {
-    "Test": "هتل های پیشنهادی"
+    "tags": "تگ ها",
+    "The tag is not registered" : "تگی ثبت نشده است !",
+    "lang" : "زبان",
+    "tag Title" : "عنوان تگ را وارد کنید ...",
+    "add tag" : "افزودن تگ",
+    "tags list" : "لیست تگ ها",
+    "Tag title" : "عنوان تگ",
+
+    "natinal code" : "کد ملی",
+    "enter national code" : "کدملی خود را وارد کنید",
+    "login" : "ورود",
+    "enter verify code" : "کد تایید را وارد کنید",
+    "verify code" : "کد تایید",
+    "Remaining until resend" : "مانده تا ارسال کد",
+    "Get the verify code again" : "دریافت مجدد کد",
+    "verify" : "تایید",
+
+    "Category type" : "نوع دسته بندی", 
+    "Category" : "دسته بندی", 
+    "Public" : "عمومی", 
+    "Not public" : "غیر عمومی", 
+    "Enter category rank" : "رنک دسته بندی را وارد کنید ...", 
+    "Rank" : "رنک", 
+    "Enter the category position" : "جایگاه دسته بندی را وارد کنید ...", 
+    "position" : "جایگاه", 
+    "Enter category title" : "عنوان دسته بندی را وارد کنید ...", 
+    "Title" : "عنوان", 
+    "Enter category description" : "توضیحات دسته بندی را وارد کنید ...", 
+    "Description" : "توضیحات", 
+    "File upload" : "آپلود فایل",     
+    "Select the file you want." : "فایل مورد نظر خود را انتخاب کنید.", 
+    "Chose file" : "انتخاب فایل", 
+    "Add category" : "افزودن دسته",
+
+    "Favorites list" : "لیست علاقه مندی ها",
+
+    "Start exam" : "شروع کوییز",
+
+    "Seach" : "جستجو ...",
+    "Add media" : "افزودن مدیا",
+    "Logout" : "خروج از حساب کاربری",
+    "Options" : "تنظیمات",
+    "Dashboard" : "داشبورد",
+    "Video" : "ویدئو",
+    "Dark mode" : "حالت شب",
+
+
+    "The code has been sent successfully" : "کد با موفقیت ارسال شد !",
+    "The entered national code is not correct!" : "کد ملی وارد شده صحیح نمیباشد !",
+    "The entered code is wrong!" : "کد وارد شده اشتباه است !",
+    "no file selected" : "هیچ فایلی انتخاب نشده است",
+    "Please enter all entries!" : "لطفا تمام ورودی ها را وارد کنید !",
+    "Category added successfully!" : "دسته بندی با موفقیت اضافه شد !"
 }

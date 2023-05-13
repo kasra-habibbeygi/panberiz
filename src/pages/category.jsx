@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 // Component
 import CategoryList from '@/components/pages/category/list';
 import LayoutProvider from '@/components/layout';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 const AddCategory = dynamic(() => import('@/components/pages/category/add'), {
     ssr: false
 });
@@ -42,3 +43,11 @@ const Category = () => {
 };
 
 export default Category;
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale))
+        }
+    };
+}

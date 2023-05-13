@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import Image from 'next/image';
 import { toast } from 'react-hot-toast';
+import { useTranslation } from 'next-i18next';
 
 // Assets
 import { useState } from 'react';
@@ -35,6 +36,7 @@ const langList = [
 ];
 
 const AddCategory = ({ setReaload, reload }) => {
+    const { t } = useTranslation('common');
     const formData = new FormData();
     const [loader, setLoader] = useState(false);
     const [inputValues, setInputValued] = useState({
@@ -78,27 +80,27 @@ const AddCategory = ({ setReaload, reload }) => {
             .then(() => {
                 setLoader(false);
                 Object.keys(inputValues).forEach(item => formData.delete(item, inputValues[item]));
-                toast.success('دسته بندی با موفقیت اضافه شد !');
+                toast.success(t('Category added successfully!'));
                 setReaload(!reload);
             })
             .catch(() => {
-                toast.error('لطفا تمام ورودی ها را وارد کنید !');
+                toast.error(t('Please enter all entries!'));
             });
     };
 
     return (
         <MainField>
-            <HeaderField title='دسته بندی' />
+            <HeaderField title={t('Category')} />
             <div className='form_field'>
                 <div className='header'>
                     <div className='title'>
                         <Image src={CategoryIcon} alt='' />
-                        نوع دسته بندی :
+                        {t('Category type')}
                     </div>
                     <div className='checkbox_field'>
                         <RadioGroup row name='is_public' onChange={inputValueHandler}>
-                            <FormControlLabel value='true' control={<Radio />} label='عمومی' />
-                            <FormControlLabel value='false' control={<Radio />} label='غیر عمومی' />
+                            <FormControlLabel value='true' control={<Radio />} label={t('Public')} />
+                            <FormControlLabel value='false' control={<Radio />} label={t('Not public')} />
                         </RadioGroup>
                     </div>
                 </div>
@@ -108,8 +110,8 @@ const AddCategory = ({ setReaload, reload }) => {
                             valueHandler={inputValueHandler}
                             value={inputValues.rank}
                             name='rank'
-                            placeholder='رنک دسته بندی را وارد کنید ...'
-                            label='رنک'
+                            placeholder={t('Enter category rank')}
+                            label={t('Rank')}
                         />
                     </div>
                     <div className='w-50'>
@@ -117,8 +119,8 @@ const AddCategory = ({ setReaload, reload }) => {
                             valueHandler={inputValueHandler}
                             value={inputValues.place}
                             name='place'
-                            placeholder='جایگاه دسته بندی را وارد کنید ...'
-                            label='جایگاه'
+                            placeholder={t('Enter the category position')}
+                            label={t('position')}
                         />
                     </div>
                     <div className='w-50'>
@@ -126,8 +128,8 @@ const AddCategory = ({ setReaload, reload }) => {
                             valueHandler={inputValueHandler}
                             value={inputValues.title}
                             name='title'
-                            placeholder='عنوان دسته بندی را وارد کنید ...'
-                            label='عنوان'
+                            placeholder={t('Enter category title')}
+                            label={t('Title')}
                         />
                     </div>
                     <div className='w-50'>
@@ -135,14 +137,14 @@ const AddCategory = ({ setReaload, reload }) => {
                             valueHandler={inputValueHandler}
                             value={inputValues.description}
                             name='description'
-                            placeholder='توضیحات دسته بندی را وارد کنید ...'
-                            label='توضیحات'
+                            placeholder={t('Enter category description')}
+                            label={t('Description')}
                         />
                     </div>
                     <div className='w-50'>
                         <div className='lang_select'>
                             <AutoComplete
-                                placeholder='زبان'
+                                placeholder={t('lang')}
                                 value={inputValues.lang}
                                 valueHandler={selectValueHandler}
                                 options={langList}
@@ -153,17 +155,17 @@ const AddCategory = ({ setReaload, reload }) => {
                 </div>
                 <div className='upload_field'>
                     <div className='right_field'>
-                        <h3>آپلود فایل</h3>
-                        <small>فایل مورد نظر خود را انتخاب کنید.</small>
+                        <h3>{t('File upload')}</h3>
+                        <small>{t('Select the file you want.')}</small>
                     </div>
                     <div className='left_field'>
-                        <p>{inputValues?.image?.name ? inputValues?.image?.name : 'هیچ فایلی انتخاب نشده است'}</p>
-                        <label htmlFor='chose_file'>انتخاب فایل</label>
+                        <p>{inputValues?.image?.name ? inputValues?.image?.name : t('no file selected')}</p>
+                        <label htmlFor='chose_file'>{t('Chose file')}</label>
                         <input type='file' name='file' id='chose_file' hidden onChange={e => fileValueHandler(e)} />
                     </div>
                 </div>
                 <Button color='primary' type='filled' extraClass='submit_button' handler={submitHandler} loader={loader}>
-                    افزودن دسته
+                    {t('Add category')}
                 </Button>
             </div>
         </MainField>

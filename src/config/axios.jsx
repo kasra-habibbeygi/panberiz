@@ -72,7 +72,7 @@ class RequestHandler extends EventTarget {
                 await this.#authorizationHandler();
             } catch (error) {
                 localStorage.removeItem(this.accessTokenKeyName);
-                window.location.href = '/login';
+                // window.location.href = '/login';
             }
 
             const currentIndex = this.#queue.length - 1;
@@ -123,7 +123,7 @@ class RequestHandler extends EventTarget {
                     } catch (error) {
                         if (error?.response?.status === 401) {
                             localStorage.removeItem(this.accessTokenKeyName);
-                            window.location.href = '/login';
+                            // window.location.href = '/login';
                         }
                         reject(error);
                     }

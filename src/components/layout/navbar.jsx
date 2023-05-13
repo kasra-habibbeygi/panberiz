@@ -14,6 +14,7 @@ import heart from '../../assets/icons/heart.svg';
 import logo from '../../assets/images/logo.png';
 import logoWhite from '../../assets/images/logo-white.svg';
 import LogoutIcon from '../../assets/images/layout/logout.svg';
+import { useTranslation } from 'next-i18next';
 // import SettingIcon from '../../assets/images/layout/setting.svg';
 
 // Component
@@ -28,17 +29,19 @@ import SearchIcon from '@mui/icons-material/Search';
 // Hooks
 import useOutsideClick from '@/hooks/use-outside-click';
 
-const top100Films = [
-    { label: 'english', value: 'english' },
-    { label: 'فارسی', value: 'فارسی' },
-    { label: 'عربی', value: 'عربی' }
+const LangList = [
+    { label: 'english', value: 'en' },
+    { label: 'فارسی', value: 'fa' },
+    { label: 'عربی', value: 'ar' }
 ];
 
 function Navbar({ setAsideStatus, asideStatus }) {
+    const { t } = useTranslation();
+
     const dispatch = useDispatch();
     const router = useRouter();
     const userInfo = useSelector(state => state.UserInfo);
-    const [langValue, setLangValue] = useState({ label: 'فارسی', value: 'فارسی' });
+    const [langValue, setLangValue] = useState({ label: 'فارسی', value: 'fa' });
 
     const openAside = () => {
         setAsideStatus(!asideStatus);
@@ -64,6 +67,11 @@ function Navbar({ setAsideStatus, asideStatus }) {
         router.push('/login');
     };
 
+    const handleChangeLanguage = value => {
+        router.replace(router.pathname, router.pathname, { locale: value.value });
+        setLangValue(value);
+    };
+
     return (
         <Styles.Navbar>
             <div className='right'>
@@ -71,7 +79,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
                 <Image src={userInfo.theme === 'light' ? logo : logoWhite} alt='logo' />
             </div>
             <div className='middle'>
-                <input placeholder='جستجو ...' />
+                <input placeholder={t('Seach')} />
                 <SearchIcon className='search_icon' />
             </div>
             <div className='left'>
@@ -79,12 +87,17 @@ function Navbar({ setAsideStatus, asideStatus }) {
                     <SearchIcon className='search_icon' />
                 </div>
                 <div className='lang_select'>
-                    <AutoComplete placeholder='زبان' value={langValue} valueHandler={setLangValue} options={top100Films} name='lang' />
+                    <AutoComplete
+                        placeholder={t('lang')}
+                        value={langValue}
+                        valueHandler={e => handleChangeLanguage(e)}
+                        options={LangList}
+                    />
                 </div>
                 <Button color='primary' type='outline' extraClass='button_link'>
                     <Link href='/video/add'>
                         <AddIcon />
-                        <p>افزودن مدیا</p>
+                        <p>{t('Add media')}</p>
                     </Link>
                 </Button>
                 <Link href='/favorits' className={`favorit_link ${userInfo.role === 'User' ? 'show' : ''}`}>
@@ -109,13 +122,13 @@ function Navbar({ setAsideStatus, asideStatus }) {
                             {/* <li>
                                 <Link href=''>
                                     <Image src={SettingIcon} alt='' />
-                                    تنظیمات
+                                    {t('Options')}
                                 </Link>
                             </li> */}
                             <li>
                                 <div onClick={logouthandler}>
                                     <Image src={LogoutIcon} alt='' />
-                                    خروج از حساب کاربری
+                                    {t('Logout')}
                                 </div>
                             </li>
                         </ol>

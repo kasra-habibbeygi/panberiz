@@ -20,6 +20,7 @@ export const Navbar = styled.nav(props => ({
         width: '100%',
 
         '& .button_link': {
+            textTransform: 'capitalize',
             a: {
                 color: props.theme.mode === 'light' ? '#751B74' : 'white'
             }

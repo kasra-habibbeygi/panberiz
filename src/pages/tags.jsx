@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import dynamic from 'next/dynamic';
 import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // Component
 const AddTag = dynamic(() => import('@/components/pages/tags/add'), {
@@ -18,12 +19,10 @@ import { TagsmainField } from '@/assets/styles/main';
 import { GetTagsList, GetUserTagsList, GetAdminTagsList } from '@/api-request/tags';
 
 const Tags = () => {
-    const { t } = useTranslation('navbar');
+    const { t } = useTranslation('common');
     const userInfo = useSelector(state => state.UserInfo);
     const [tagsList, setTagsList] = useState([]);
     const [reload, setReaload] = useState(false);
-
-    console.log(t('For Businesses'));
 
     useEffect(() => {
         var APITemp = '';
@@ -44,7 +43,7 @@ const Tags = () => {
     return (
         <LayoutProvider>
             <main>
-                <HeaderField title='تگ ها' />
+                <HeaderField title={t('tags')} />
                 <TagsmainField>
                     {userInfo.role === 'AgentAcademy' && <AddTag setReaload={setReaload} reload={reload} />}
                     <TagsList tagsList={tagsList} />
@@ -55,3 +54,11 @@ const Tags = () => {
 };
 
 export default Tags;
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale))
+        }
+    };
+}

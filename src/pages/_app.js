@@ -32,17 +32,16 @@ Router.events.on('routeChangeError', () => NProgress.done());
 const App = ({ Component, pageProps }) => {
     const { locale } = useRouter();
     const themeStatus = useSelector(state => state.UserInfo.theme);
-    const directionStatus = useSelector(state => state.UserInfo.dir);
-    const darkModeTheme = createTheme(theme(themeStatus, directionStatus));
+    const lang = useSelector(state => state.UserInfo.lang);
+    const darkModeTheme = createTheme(theme(themeStatus, lang === 'en' ? 'ltr' : 'rtl'));
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            if (localStorage.getItem('pmlmLang') === null) {
-                localStorage.setItem('pmlmLang', locale);
-            }
+            localStorage.setItem('pmlmLang', locale);
+
+            document.dir = lang === 'en' ? 'ltr' : 'rtl';
         }
-        document.dir = directionStatus;
-    }, [directionStatus]);
+    }, [lang]);
 
     return (
         <ThemeProvider theme={darkModeTheme}>
@@ -51,7 +50,7 @@ const App = ({ Component, pageProps }) => {
                 containerStyle={{
                     zIndex: 9999,
                     textAlign: 'right',
-                    direction: directionStatus
+                    direction: lang
                 }}
             />
             <Component {...pageProps} />
