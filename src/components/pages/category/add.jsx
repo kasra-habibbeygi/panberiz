@@ -11,12 +11,28 @@ import CategoryIcon from '@/assets/icons/sidebar/category.svg';
 import Input from '@/components/form-group/input';
 import HeaderField from '@/components/template/header';
 import Button from '@/components/form-group/button';
+import AutoComplete from '@/components/form-group/auto-complete';
 
 // MUI
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
 
 // APIs
 import { CreateCategory } from '@/api-request/category';
+
+const langList = [
+    {
+        label: 'English',
+        value: 'en'
+    },
+    {
+        label: 'فارسی',
+        value: 'pr'
+    },
+    {
+        label: 'العربية',
+        value: 'ar'
+    }
+];
 
 const AddCategory = ({ setReaload, reload }) => {
     const formData = new FormData();
@@ -26,8 +42,9 @@ const AddCategory = ({ setReaload, reload }) => {
         rank: null,
         title: '',
         description: '',
-        file: '',
-        is_public: false
+        image: '',
+        is_public: false,
+        lang: ''
     });
 
     const inputValueHandler = e => {
@@ -40,7 +57,14 @@ const AddCategory = ({ setReaload, reload }) => {
     const fileValueHandler = e => {
         setInputValued({
             ...inputValues,
-            file: e.target.files[0]
+            image: e.target.files[0]
+        });
+    };
+
+    const selectValueHandler = (value, name) => {
+        setInputValued({
+            ...inputValues,
+            [name]: value.value
         });
     };
 
@@ -115,6 +139,17 @@ const AddCategory = ({ setReaload, reload }) => {
                             label='توضیحات'
                         />
                     </div>
+                    <div className='w-50'>
+                        <div className='lang_select'>
+                            <AutoComplete
+                                placeholder='زبان'
+                                value={inputValues.lang}
+                                valueHandler={selectValueHandler}
+                                options={langList}
+                                name='lang'
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div className='upload_field'>
                     <div className='right_field'>
@@ -122,7 +157,7 @@ const AddCategory = ({ setReaload, reload }) => {
                         <small>فایل مورد نظر خود را انتخاب کنید.</small>
                     </div>
                     <div className='left_field'>
-                        <p>{inputValues?.file?.name ? inputValues?.file?.name : 'هیچ فایلی انتخاب نشده است'}</p>
+                        <p>{inputValues?.image?.name ? inputValues?.image?.name : 'هیچ فایلی انتخاب نشده است'}</p>
                         <label htmlFor='chose_file'>انتخاب فایل</label>
                         <input type='file' name='file' id='chose_file' hidden onChange={e => fileValueHandler(e)} />
                     </div>

@@ -4,10 +4,11 @@
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material/styles';
 import NProgress from 'nprogress';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import 'nprogress/nprogress.css';
 import { useSelector } from 'react-redux';
 import { wrapper } from '../state-manager/store';
+import { appWithTranslation } from 'next-i18next';
 
 //Config
 import { theme } from '../config/theme';
@@ -15,6 +16,7 @@ import { theme } from '../config/theme';
 //Assets
 import '../assets/styles/global/general.css';
 import { Toaster } from 'react-hot-toast';
+import { useEffect } from 'react';
 
 NProgress.configure({
     minimum: 0.3,
@@ -28,8 +30,19 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 const App = ({ Component, pageProps }) => {
+    const { locale } = useRouter();
     const themeStatus = useSelector(state => state.UserInfo.theme);
-    const darkModeTheme = createTheme(theme(themeStatus));
+    const directionStatus = useSelector(state => state.UserInfo.dir);
+    const darkModeTheme = createTheme(theme(themeStatus, directionStatus));
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            if (localStorage.getItem('pmlmLang') === null) {
+                localStorage.setItem('pmlmLang', locale);
+            }
+        }
+        document.dir = directionStatus;
+    }, [directionStatus]);
 
     return (
         <ThemeProvider theme={darkModeTheme}>
@@ -38,7 +51,7 @@ const App = ({ Component, pageProps }) => {
                 containerStyle={{
                     zIndex: 9999,
                     textAlign: 'right',
-                    direction: 'rtl'
+                    direction: directionStatus
                 }}
             />
             <Component {...pageProps} />
@@ -46,4 +59,4 @@ const App = ({ Component, pageProps }) => {
     );
 };
 
-export default wrapper.withRedux(App);
+export default wrapper.withRedux(appWithTranslation(App));

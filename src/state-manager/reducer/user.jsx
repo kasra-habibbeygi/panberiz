@@ -1,10 +1,22 @@
 /* eslint-disable camelcase */
 import { createSlice } from '@reduxjs/toolkit';
 
+const dirProvider = () => {
+    if (typeof window !== 'undefined') {
+        if (localStorage.getItem('pmlmLang') === 'en') {
+            return 'ltr';
+        }
+        return 'rtl';
+    }
+
+    return 'rtl';
+};
+
 export const UserInfo = createSlice({
     name: 'userInfo',
     initialState: {
         theme: typeof window !== 'undefined' && localStorage.getItem('theme') !== null ? localStorage.getItem('theme') : 'light',
+        dir: dirProvider(),
         isLogin: typeof window !== 'undefined' && localStorage.getItem('pmlmToken') !== null ? true : false,
         role:
             typeof window !== 'undefined' && localStorage.getItem('pmlmToken') !== null

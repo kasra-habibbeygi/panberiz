@@ -5,7 +5,12 @@ export const MainField = styled.div(props => ({
     paddingBottom: '30px',
     borderBottom: `1px dashed ${props.theme.mode === 'light' ? '#EFEFEF' : '#554A67'}`,
 
-    button: {
+    '& .sub_btn': {
         margin: '30px auto 0 0 '
+    },
+
+    '& .lang_select': {
+        position: 'relative',
+        marginTop: '20px'
     }
 }));

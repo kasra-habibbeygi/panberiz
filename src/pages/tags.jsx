@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import dynamic from 'next/dynamic';
+import { useTranslation } from 'next-i18next';
 
 // Component
 const AddTag = dynamic(() => import('@/components/pages/tags/add'), {
@@ -17,9 +18,12 @@ import { TagsmainField } from '@/assets/styles/main';
 import { GetTagsList, GetUserTagsList, GetAdminTagsList } from '@/api-request/tags';
 
 const Tags = () => {
+    const { t } = useTranslation('navbar');
     const userInfo = useSelector(state => state.UserInfo);
     const [tagsList, setTagsList] = useState([]);
     const [reload, setReaload] = useState(false);
+
+    console.log(t('For Businesses'));
 
     useEffect(() => {
         var APITemp = '';
