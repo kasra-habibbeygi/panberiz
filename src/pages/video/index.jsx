@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Tab from '@/components/pages/video/list/tab';
 import ListVideo from '@/components/pages/video/list/list-video';
 import HeaderField from '@/components/template/header';
-import video from '@/assets/images/video/video-1.jpeg';
 
 function Video() {
     const [selectedButton, setSelectedButton] = useState('uploaded');

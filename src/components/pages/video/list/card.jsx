@@ -11,7 +11,6 @@ import reject from '@/assets/icons/reject.svg';
 import Link from 'next/link';
 
 function Card({ data, accepted }) {
-    console.log(data);
     return (
         <Style.CardField>
             <div className='video_image'>
@@ -27,15 +26,15 @@ function Card({ data, accepted }) {
                         </>
                     )}
                 </div>
-                <img className='video_banner' src={data.media_info.cover} alt='video-banner' />
+                <img className='video_banner' src={data?.media_info?.cover} alt='video-banner' />
             </div>
             <div className='card_details'>
                 <div className='right_field'>
-                    <h3>{data.media_info.title}</h3>
-                    <p>{data.des}</p>
+                    <h3>{data?.media_info?.title}</h3>
+                    <p>{data?.des}</p>
                 </div>
                 <div className='left_field'>
-                    <p>{data.star}</p>
+                    <p>{data?.star}</p>
                     {/* <StarIcon htmlColor='rgba(248, 170, 0, 1)' /> */}
                 </div>
             </div>

@@ -38,7 +38,6 @@ const SuggestVideo = () => {
     return (
         <MainField>
             <HeaderField title='ویدیو های پیشنیاز' />
-
             <div className='main_field'>
                 {data.map((value, index) => (
                     <div key={index} className='card_field'>
