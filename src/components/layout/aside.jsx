@@ -17,6 +17,7 @@ import mode from '../../assets/icons/sidebar/mode.svg';
 import { Switch } from '@mui/material';
 
 function Aside({ asideStatus }) {
+    const userInfo = useSelector(state => state.UserInfo);
     const dispatch = useDispatch();
     const router = useRouter();
     const themeState = useSelector(state => state.UserInfo.theme);
@@ -24,7 +25,7 @@ function Aside({ asideStatus }) {
         dispatch(themeStateHandler(e.target.checked ? 'dark' : 'light'));
         localStorage.setItem('theme', e.target.checked ? 'dark' : 'light');
     };
-
+    console.log(userInfo.role);
     return (
         <Style.AsideField asideStatus={asideStatus}>
             <div className='items'>
@@ -41,18 +42,24 @@ function Aside({ asideStatus }) {
                             <p>ویدئو</p>
                         </Link>
                     </li>
-                    <li>
-                        <Link href='/tags'>
-                            <Image src={tag} alt='tag' />
-                            <p>تگ ها</p>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href='/category'>
-                            <Image src={category} alt='category' />
-                            <p>دسته بندی</p>
-                        </Link>
-                    </li>
+                    {userInfo.role === 'AgentAcademy' ? (
+                        <>
+                            <li>
+                                <Link href='/tags'>
+                                    <Image src={tag} alt='tag' />
+                                    <p>تگ ها</p>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href='/category'>
+                                    <Image src={category} alt='category' />
+                                    <p>دسته بندی</p>
+                                </Link>
+                            </li>
+                        </>
+                    ) : (
+                        ''
+                    )}
                 </ol>
             </div>
             <span className='seprator' />
