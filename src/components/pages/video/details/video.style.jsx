@@ -6,6 +6,19 @@ export const MainField = styled.div(props => ({
     margin: '10px',
     position: 'relative',
 
+    '& .download_field': {
+        textAlign: 'center',
+        width: '100%',
+        height: '50px',
+        background: '#751B74',
+        borderRadius: '10px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'white',
+        fontSize: '1.2rem'
+    },
+
     '& .card_details': {
         display: 'flex',
         alignItems: 'flex-start',

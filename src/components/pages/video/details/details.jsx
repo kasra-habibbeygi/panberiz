@@ -28,12 +28,14 @@ const DetailsField = ({ mediaDetails }) => {
                         <span key={index}># {item}</span>
                     ))}
                 </div>
-                <Button color='primary' type='outline'>
-                    <Link href={`/exam/${mediaDetails?.id}`}>
-                        شروع کوییز
-                        <KeyboardBackspaceRoundedIcon />
-                    </Link>
-                </Button>
+                {!mediaDetails?.media_quiezes[0]?.user_answer && (
+                    <Button color='primary' type='outline'>
+                        <Link href={`/exam/${mediaDetails?.id}`}>
+                            شروع کوییز
+                            <KeyboardBackspaceRoundedIcon />
+                        </Link>
+                    </Button>
+                )}
             </div>
         </MainField>
     );

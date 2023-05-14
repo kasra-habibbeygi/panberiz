@@ -20,19 +20,34 @@ const VideoField = ({ mediaDetails }) => {
 
     return (
         <MainField>
-            <div className='video_image'>
-                <div className='float'>
-                    <Image className='icon' src={play} alt='play' onClick={() => setVideoModalStatus(true)} />
+            {mediaDetails?.media_type === 'video' ? (
+                <div className='video_image'>
+                    <div className='float'>
+                        <Image className='icon' src={play} alt='play' onClick={() => setVideoModalStatus(true)} />
+                    </div>
+                    <img
+                        className='video_banner'
+                        src={mediaDetails?.cover?.replace(
+                            'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
+                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm'
+                        )}
+                        alt='video-banner'
+                    />
                 </div>
-                <img
-                    className='video_banner'
-                    src={mediaDetails?.cover?.replace(
+            ) : (
+                <a
+                    href={mediaDetails?.file?.replace(
                         'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
                         'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm/'
                     )}
-                    alt='video-banner'
-                />
-            </div>
+                    target='_blank'
+                    className='download_field'
+                    rel='noreferrer'
+                >
+                    دانلود فایل
+                </a>
+            )}
+
             <div className='card_details'>
                 <div className='right_field'>
                     <Image className='icon' src={UserIcon} alt='play' />
@@ -52,7 +67,7 @@ const VideoField = ({ mediaDetails }) => {
                     </div>
                 </div>
             </div>
-            <VideoModal status={videoModalStatus} setStatus={setVideoModalStatus} />
+            <VideoModal status={videoModalStatus} setStatus={setVideoModalStatus} mediaDetails={mediaDetails} />
         </MainField>
     );
 };
