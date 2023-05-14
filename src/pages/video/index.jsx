@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Tab from '@/components/pages/video/list/tab';
 import ListVideo from '@/components/pages/video/list/list-video';
 import HeaderField from '@/components/template/header';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 function Video() {
     const [selectedButton, setSelectedButton] = useState('uploaded');
@@ -33,3 +34,11 @@ function Video() {
 }
 
 export default Video;
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale))
+        }
+    };
+}

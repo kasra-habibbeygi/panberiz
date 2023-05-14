@@ -23,7 +23,8 @@ export const MainField = styled.div(props => ({
 
         '& .icon': {
             position: 'absolute',
-            left: '40px',
+            left: props.theme.direction === 'rtl' ? '40px' : 'unset',
+            right: props.theme.direction === 'ltr' ? '40px' : 'unset',
             alignItems: 'center',
             display: 'flex',
             gap: '5px',

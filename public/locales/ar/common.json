@@ -70,6 +70,17 @@
     "Cancel": "إلغاء",
     "Submit question": "تسجيل السؤال",
 
+    "Income": "دخل",
+    "Weekly": "أسبوعي",
+    "Rank selection": "اختيار الرتبة",
+    "Repeat visit": "زيارة مكررة",
+    "Row": "صف",
+    "Number of content": "عدد المحتويات",
+    "Number of visits": "عدد الزيارات",
+    "Hours of visit": "ساعات الزيارة",
+    "Details": "تفاصيل",
+    "Rank visit report" : "تقرير زيارة الترتيب",
+
     "The code has been sent successfully": "تم إرسال الرمز بنجاح!",
     "The entered national code is not correct!": "الكود الوطني الذي تم إدخاله غير صحيح!",
     "The entered code is wrong!": "الكود الذي تم إدخاله خاطئ!",

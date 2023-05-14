@@ -10,6 +10,7 @@ import SuggestVideo from '@/components/pages/video/details/suggest';
 
 // APIs
 import { GetMediaDetails } from '@/api-request/media/details';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const VideoDetails = () => {
     const [mediaDetails, setMediaDetails] = useState([]);
@@ -32,3 +33,11 @@ const VideoDetails = () => {
 };
 
 export default VideoDetails;
+
+export async function getServerSideProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale))
+        }
+    };
+}

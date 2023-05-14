@@ -8,6 +8,7 @@ import ShowChartIcon from '@mui/icons-material/ShowChart';
 import CircleIcon from '@mui/icons-material/Circle';
 import AutoComplete from '@/components/form-group/auto-complete';
 import { useState } from 'react';
+import { useTranslation } from 'next-i18next';
 
 const top100Films = [
     { label: 'The Shawshank Redemption', year: 1994 },
@@ -16,6 +17,7 @@ const top100Films = [
 ];
 
 function Income() {
+    const { t } = useTranslation('common');
     const [values, setValues] = useState({
         period: '',
         rank: ''
@@ -33,13 +35,13 @@ function Income() {
             <div className='line-chart'>
                 <div className='header'>
                     <div className='title'>
-                        <h1>درآمد</h1>
+                        <h1>{t('Income')}</h1>
                         <p>1.90% +</p>
                         <ShowChartIcon sx={{ color: '#6ED097' }} />
                     </div>
                     <div className='period'>
                         <AutoComplete
-                            placeholder='هفتگی'
+                            placeholder={t('Weekly')}
                             value={values.period}
                             valueHandler={autoCompleteHandler}
                             options={top100Films}
@@ -54,7 +56,7 @@ function Income() {
             <div className='circle-chart'>
                 <div className='select-rank'>
                     <AutoComplete
-                        placeholder='انتخاب رنگ'
+                        placeholder={t('Rank selection')}
                         value={values.rank}
                         valueHandler={autoCompleteHandler}
                         options={top100Films}
@@ -68,21 +70,21 @@ function Income() {
                     <div className='section'>
                         <div>
                             <CircleIcon fontSize='small' htmlColor='#39164F' />
-                            <p>بازدید مجدد</p>
+                            <p>{t('Repeat visit')}</p>
                         </div>
                         <div>
                             <CircleIcon fontSize='small' htmlColor='#751B74' />
-                            <p>بازدید مجدد</p>
+                            <p>{t('Repeat visit')}</p>
                         </div>
                     </div>
                     <div className='section'>
                         <div>
                             <CircleIcon fontSize='small' htmlColor='#D6A0F9' />
-                            <p>بازدید مجدد</p>
+                            <p>{t('Repeat visit')}</p>
                         </div>
                         <div>
                             <CircleIcon fontSize='small' htmlColor='#EACFFC' />
-                            <p>بازدید مجدد</p>
+                            <p>{t('Repeat visit')}</p>
                         </div>
                     </div>
                 </div>
