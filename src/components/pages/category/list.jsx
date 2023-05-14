@@ -29,7 +29,7 @@ const CategoryList = ({ categoriesList }) => {
                     {categoriesList?.map(item => {
                         if (userRank >= item.rank) {
                             return (
-                                <Link href='/' className='item' key={item.id}>
+                                <Link className='item' key={item.id}>
                                     <p>{item.title}</p>
                                     <p>{item.rank}</p>
                                     <p>{item.place}</p>

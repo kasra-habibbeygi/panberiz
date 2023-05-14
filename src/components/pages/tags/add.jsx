@@ -19,7 +19,7 @@ const langList = [
     },
     {
         label: 'فارسی',
-        value: 'pr'
+        value: 'fa'
     },
     {
         label: 'العربية',

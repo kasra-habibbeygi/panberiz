@@ -26,7 +26,7 @@ import { AddNewmedia } from '@/api-request/media/add';
 
 const LangList = [
     { label: 'english', value: 'en' },
-    { label: 'فارسی', value: 'pr' },
+    { label: 'فارسی', value: 'fa' },
     { label: 'عربی', value: 'ar' }
 ];
 
