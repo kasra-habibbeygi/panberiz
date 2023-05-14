@@ -1,8 +1,13 @@
 /* eslint-disable react/prop-types */
+import { useSelector } from 'react-redux';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Autocomplete, FormControlLabel, Radio, RadioGroup, TextField } from '@mui/material';
 import { useTranslation } from 'next-i18next';
+import { CacheProvider } from '@emotion/react';
+import { prefixer } from 'stylis';
+import rtlPlugin from 'stylis-plugin-rtl';
+import createCache from '@emotion/cache';
 
 // MUI
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
@@ -23,6 +28,7 @@ import Button from '@/components/form-group/button';
 import { GetCategoriesList } from '@/api-request/category';
 import { GetTagsList } from '@/api-request/tags';
 import { AddNewmedia } from '@/api-request/media/add';
+import { GetMyMediaList } from '@/api-request/media/list';
 
 const LangList = [
     { label: 'english', value: 'en' },
@@ -30,11 +36,17 @@ const LangList = [
     { label: 'عربی', value: 'ar' }
 ];
 
+const cacheRtl = createCache({
+    key: 'muirtl',
+    stylisPlugins: [prefixer, rtlPlugin]
+});
+
 function AddForm() {
     const { t } = useTranslation('common');
     const formData = new FormData();
     const [open, setOpen] = useState(false);
     const [loader, setLoader] = useState(false);
+    const lang = useSelector(state => state.UserInfo.lang);
 
     const [selectLists, setSelectLists] = useState({
         category: [],
@@ -52,7 +64,7 @@ function AddForm() {
         category: '',
         period_of_time: '',
         tags: [],
-        prerequisites: [1, 2],
+        prerequisites: [],
         quize_and_answer: []
     });
 
@@ -97,8 +109,10 @@ function AddForm() {
         let newVal = {
             ...inputValues,
             category: inputValues.category.value,
-            tags: inputValues.tags.map(item => item.value),
-            lang: inputValues.lang.value
+            tags: JSON.stringify(inputValues.tags.map(item => item.value)),
+            lang: inputValues.lang.value,
+            quize_and_answer: JSON.stringify(inputValues.quize_and_answer),
+            prerequisites: JSON.stringify(inputValues.prerequisites.map(item => item.value))
         };
 
         setLoader(true);
@@ -115,18 +129,24 @@ function AddForm() {
     };
 
     useEffect(() => {
-        GetCategoriesList()
+        GetCategoriesList(lang)
             .then(res => {
                 selectListProvider(res.results, 'title', 'category');
             })
             .catch(() => {});
 
-        GetTagsList()
+        GetTagsList(lang)
             .then(res => {
                 selectListProvider(res.results, 'title', 'tags');
             })
             .catch(() => {});
-    }, []);
+
+        GetMyMediaList()
+            .then(res => {
+                selectListProvider(res.results, 'title', 'prerequisites');
+            })
+            .catch(() => {});
+    }, [lang]);
 
     const questionListProvider = inputValues.quize_and_answer.map((item, index) => (
         <div className='question_card' key={`question_lists_${index}`}>
@@ -214,13 +234,27 @@ function AddForm() {
                         />
                     </div>
                     <div className='w-50'>
-                        <AutoComplete
-                            placeholder={t('Prerequisites')}
-                            value={inputValues.prerequisites}
-                            valueHandler={autoCompleteHandler}
-                            options={LangList}
-                            name='prerequisites'
-                        />
+                        <div className='multi_select'>
+                            {lang !== 'en' ? (
+                                <CacheProvider value={cacheRtl}>
+                                    <Autocomplete
+                                        multiple
+                                        options={selectLists?.prerequisites}
+                                        getOptionLabel={option => option?.label}
+                                        renderInput={params => <TextField {...params} placeholder={t('Prerequisites')} />}
+                                        onChange={(e, newValue) => autoCompleteHandler(newValue, 'prerequisites')}
+                                    />
+                                </CacheProvider>
+                            ) : (
+                                <Autocomplete
+                                    multiple
+                                    options={selectLists?.prerequisites}
+                                    getOptionLabel={option => option?.label}
+                                    renderInput={params => <TextField {...params} placeholder={t('Prerequisites')} />}
+                                    onChange={(e, newValue) => autoCompleteHandler(newValue, 'prerequisites')}
+                                />
+                            )}
+                        </div>
                     </div>
                     <div className='w-50'>
                         <AutoComplete
@@ -242,13 +276,25 @@ function AddForm() {
                     </div>
                     <div className='w-50'>
                         <div className='multi_select'>
-                            <Autocomplete
-                                multiple
-                                options={selectLists?.tags}
-                                getOptionLabel={option => option?.label}
-                                renderInput={params => <TextField {...params} placeholder={t('tags')} />}
-                                onChange={(e, newValue) => autoCompleteHandler(newValue, 'tags')}
-                            />
+                            {lang !== 'en' ? (
+                                <CacheProvider value={cacheRtl}>
+                                    <Autocomplete
+                                        multiple
+                                        options={selectLists?.tags}
+                                        getOptionLabel={option => option?.label}
+                                        renderInput={params => <TextField {...params} placeholder={t('tags')} />}
+                                        onChange={(e, newValue) => autoCompleteHandler(newValue, 'tags')}
+                                    />
+                                </CacheProvider>
+                            ) : (
+                                <Autocomplete
+                                    multiple
+                                    options={selectLists?.tags}
+                                    getOptionLabel={option => option?.label}
+                                    renderInput={params => <TextField {...params} placeholder={t('tags')} />}
+                                    onChange={(e, newValue) => autoCompleteHandler(newValue, 'tags')}
+                                />
+                            )}
                         </div>
                     </div>
                     <div className='w-50'>
@@ -271,13 +317,16 @@ function AddForm() {
                                 <KeyboardBackspaceIcon size='small' />
                             </Button>
                         </div>
-                        {!inputValues.quize_and_answer.length && (
-                            <div className='quiz-container'>
+                        <div className='quiz-container'>
+                            {inputValues.quize_and_answer.length > 0 ? (
                                 <QuestionsField>{questionListProvider}</QuestionsField>
-                                <Image src={QuestionEmptyIcon} alt='quiz-empty' />
-                                <h3>{t('No question has been asked!')}</h3>
-                            </div>
-                        )}
+                            ) : (
+                                <>
+                                    <Image src={QuestionEmptyIcon} alt='quiz-empty' />
+                                    <h3>{t('No question has been asked!')}</h3>
+                                </>
+                            )}
+                        </div>
                     </div>
                 </div>
                 <Button type='filled' color='primary' handler={addNewMediaHandler} loader={loader}>

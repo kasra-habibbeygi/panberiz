@@ -10,7 +10,6 @@ export const MainField = styled.div(() => ({
     '& .main_field': {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
         flexWrap: 'wrap',
         paddingTop: '0'
     },

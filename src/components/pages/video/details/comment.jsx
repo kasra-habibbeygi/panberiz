@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
 // Assets
 import Image from 'next/image';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 // Assets
 import { MainField } from './comment.style';
@@ -14,7 +16,10 @@ import StarIcon from '@mui/icons-material/Star';
 // Component
 import Input from '@/components/form-group/input';
 
-const Comment = () => {
+// APIs
+import { AddnewComment, AddCommentScore } from '@/api-request/comment';
+
+const Comment = ({ mediaDetails }) => {
     const [inputValues, setInputValued] = useState({
         rate: 0,
         comment: ''
@@ -26,6 +31,31 @@ const Comment = () => {
             [e.target.name]: e.target.value
         });
     };
+
+    const sendCommentHandler = () => {
+        const CommentData = {
+            comment: inputValues.comment,
+            media: mediaDetails?.id
+        };
+
+        const RateComment = {
+            score: inputValues.rate,
+            media: mediaDetails?.id
+        };
+
+        AddnewComment(CommentData)
+            .then(() => {
+                toast.success('پیام شما با موفقیت ثبت شد !');
+            })
+            .catch(err => {
+                toast.error(err.response.data.message);
+            });
+
+        AddCommentScore(RateComment)
+            .then(() => {})
+            .catch(() => {});
+    };
+
     return (
         <MainField>
             <div className='rate'>
@@ -49,74 +79,28 @@ const Comment = () => {
                         name='comment'
                         placeholder='دیدگاه خود را وارد کنید ...'
                     />
-                    <SendRoundedIcon />
+                    <SendRoundedIcon onClick={sendCommentHandler} />
                 </div>
             </div>
             <ul>
-                <li>
-                    <Image src={UserIcon} alt='' />
-                    <div className='content'>
-                        <div className='info'>
-                            <div className='title'>
-                                <b>نیما عبدی</b>
-                                <small>۱ ساعت پیش</small>
+                {mediaDetails?.comments.map(item => (
+                    <li key={`comment_${item.id}`}>
+                        <Image src={UserIcon} alt='' />
+                        <div className='content'>
+                            <div className='info'>
+                                <div className='title'>
+                                    <b>{item.user_fullname}</b>
+                                    <small>چند دقیقه پیش</small>
+                                </div>
+                                <div className='rate'>
+                                    <p>۴.۵/۵</p>
+                                    <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
+                                </div>
                             </div>
-                            <div className='rate'>
-                                <p>۴.۵/۵</p>
-                                <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
-                            </div>
+                            <p className='comment_text'>{item.comment}</p>
                         </div>
-                        <p className='comment_text'>خیلی عالی بود. ممنون</p>
-                    </div>
-                </li>
-                <li>
-                    <Image src={UserIcon} alt='' />
-                    <div className='content'>
-                        <div className='info'>
-                            <div className='title'>
-                                <b>نیما عبدی</b>
-                                <small>۱ ساعت پیش</small>
-                            </div>
-                            <div className='rate'>
-                                <p>۴.۵/۵</p>
-                                <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
-                            </div>
-                        </div>
-                        <p className='comment_text'>خیلی عالی بود. ممنون</p>
-                    </div>
-                </li>
-                <li>
-                    <Image src={UserIcon} alt='' />
-                    <div className='content'>
-                        <div className='info'>
-                            <div className='title'>
-                                <b>نیما عبدی</b>
-                                <small>۱ ساعت پیش</small>
-                            </div>
-                            <div className='rate'>
-                                <p>۴.۵/۵</p>
-                                <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
-                            </div>
-                        </div>
-                        <p className='comment_text'>خیلی عالی بود. ممنون</p>
-                    </div>
-                </li>
-                <li>
-                    <Image src={UserIcon} alt='' />
-                    <div className='content'>
-                        <div className='info'>
-                            <div className='title'>
-                                <b>نیما عبدی</b>
-                                <small>۱ ساعت پیش</small>
-                            </div>
-                            <div className='rate'>
-                                <p>۴.۵/۵</p>
-                                <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
-                            </div>
-                        </div>
-                        <p className='comment_text'>خیلی عالی بود. ممنون</p>
-                    </div>
-                </li>
+                    </li>
+                ))}
             </ul>
         </MainField>
     );

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
-import { themeStateHandler } from '../../state-manager/reducer/user';
+import { UserInfo, themeStateHandler } from '../../state-manager/reducer/user';
 import { useTranslation } from 'next-i18next';
 
 // Assets
@@ -14,8 +14,12 @@ import tag from '../../assets/icons/sidebar/tag.svg';
 import category from '../../assets/icons/sidebar/category.svg';
 import mode from '../../assets/icons/sidebar/mode.svg';
 
+// APIs
+import { GetUserCategoriesList } from '../../api-request/category';
+
 // MUI
 import { Switch } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 function Aside({ asideStatus }) {
     const { t } = useTranslation();
@@ -23,12 +27,28 @@ function Aside({ asideStatus }) {
     const dispatch = useDispatch();
     const router = useRouter();
     const themeState = useSelector(state => state.UserInfo.theme);
+    const [collapseStatus, setCollapseStatus] = useState(false);
+    const [categoriesList, setCategoriesList] = useState([]);
+
     const themeHandler = e => {
         dispatch(themeStateHandler(e.target.checked ? 'dark' : 'light'));
         localStorage.setItem('theme', e.target.checked ? 'dark' : 'light');
     };
+
+    const collapseStatusHandler = () => {
+        setCollapseStatus(!collapseStatus);
+    };
+
+    useEffect(() => {
+        GetUserCategoriesList(userInfo.lang)
+            .then(res => {
+                setCategoriesList(res.results);
+            })
+            .catch(() => {});
+    }, [userInfo.lang]);
+
     return (
-        <Style.AsideField asideStatus={asideStatus}>
+        <Style.AsideField asideStatus={asideStatus} categoriesListLength={categoriesList.length}>
             <div className='items'>
                 <ol>
                     <li>
@@ -37,12 +57,29 @@ function Aside({ asideStatus }) {
                             <p>{t('Dashboard')}</p>
                         </Link>
                     </li>
-                    <li>
-                        <Link href='/video' className={`${router.pathname === '/video' ? 'active' : ''}`}>
-                            <Image src={video} alt='video' />
-                            <p>{t('Video')}</p>
-                        </Link>
-                    </li>
+                    {(userInfo.role === 'SuperAdminAcademy' || UserInfo.role === 'AgentAcademy') && (
+                        <li>
+                            <Link href='/video' className={`${router.pathname === '/video' ? 'active' : ''}`}>
+                                <Image src={video} alt='video' />
+                                <p>{t('Video')}</p>
+                            </Link>
+                        </li>
+                    )}
+                    {userInfo.role === 'User' && (
+                        <li>
+                            <div className='collapse_field'>
+                                <p onClick={collapseStatusHandler}>{t('Category')}</p>
+                                <div className={`collapse_menu ${collapseStatus ? 'open' : ''}`}>
+                                    {categoriesList?.map(item => (
+                                        <Link href={`/video/${item.id}`} key={item.id}>
+                                            {item.title}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                        </li>
+                    )}
+
                     {userInfo.role === 'SuperAdminAcademy' ? (
                         <>
                             <li>

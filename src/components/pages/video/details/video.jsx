@@ -1,12 +1,13 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react/prop-types */
 import Image from 'next/image';
 import { useState } from 'react';
 
 // Assets
 import { MainField } from './video.style';
 import UserIcon from '@/assets/icons/user.svg';
-import HeartIcon from '@/assets/icons/heart.svg';
+// import HeartIcon from '@/assets/icons/heart.svg';
 import play from '@/assets/icons/play.svg';
-import Banner from '@/assets/images/video/video-1.jpeg';
 
 // MUI
 import StarIcon from '@mui/icons-material/Star';
@@ -14,7 +15,7 @@ import StarIcon from '@mui/icons-material/Star';
 // Component
 import VideoModal from './video-modal';
 
-const VideoField = () => {
+const VideoField = ({ mediaDetails }) => {
     const [videoModalStatus, setVideoModalStatus] = useState(false);
 
     return (
@@ -23,23 +24,30 @@ const VideoField = () => {
                 <div className='float'>
                     <Image className='icon' src={play} alt='play' onClick={() => setVideoModalStatus(true)} />
                 </div>
-                <Image className='video_banner' src={Banner} alt='video-banner' />
+                <img
+                    className='video_banner'
+                    src={mediaDetails?.cover?.replace(
+                        'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
+                        'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm/'
+                    )}
+                    alt='video-banner'
+                />
             </div>
             <div className='card_details'>
                 <div className='right_field'>
                     <Image className='icon' src={UserIcon} alt='play' />
                     <div>
-                        <h3>نام ویدیو آپلود شده</h3>
-                        <p>توسط عاطفه حبیبی</p>
+                        <h3>{mediaDetails?.title}</h3>
+                        <p>{mediaDetails?.publisher_fullname}</p>
                     </div>
                 </div>
                 <div className='left_field'>
-                    <div className='like'>
-                        <p>21</p>
+                    {/* <div className='like'>
+                        <p>0</p>
                         <Image className='icon' src={HeartIcon} alt='play' />
-                    </div>
+                    </div> */}
                     <div className='rate'>
-                        <p>4.6 / 5</p>
+                        <p>5 / {mediaDetails?.score} </p>
                         <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
                     </div>
                 </div>

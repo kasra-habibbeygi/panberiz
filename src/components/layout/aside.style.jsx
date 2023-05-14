@@ -66,5 +66,34 @@ export const AsideField = styled.aside(props => ({
         width: '80%',
         background: props.theme.mode === 'light' ? '#e5e5e5' : '#271436',
         margin: '20px auto'
+    },
+
+    '& .collapse_field': {
+        display: 'flex',
+        padding: '10px 25px',
+        color: props.theme.palette.colors.text.blackAndWhite,
+        gap: '10px',
+        borderRight: '6px solid transparent',
+        flexDirection: 'column',
+        borderTop: `1px solid ${props.theme.mode === 'light' ? '#e5e5e5' : '#271436'}`,
+        marginTop: '20px',
+        paddingTop: '20px',
+
+        '& .collapse_menu': {
+            maxHeight: `calc(${props.categoriesListLength} * 44px)`,
+            overflow: 'hidden',
+
+            p: {
+                cursor: 'pointer'
+            },
+
+            '&.open': {
+                maxHeight: '0'
+            }
+        },
+
+        p: {
+            marginRight: 10
+        }
     }
 }));

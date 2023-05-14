@@ -6,7 +6,12 @@ import { userInfohandler } from '@/state-manager/reducer/user';
 import dynamic from 'next/dynamic';
 
 // Component
-import Navbar from './navbar';
+const Aside = dynamic(() => import('./aside'), {
+    ssr: false
+});
+const Navbar = dynamic(() => import('./navbar'), {
+    ssr: false
+});
 import MobileNavbar from './mobile-navbar';
 
 // APIs
@@ -17,10 +22,6 @@ import * as Fields from './index.style';
 
 // Hooks
 import useWindowDimensions from '@/hooks/use-windows-dimensions';
-
-const Aside = dynamic(() => import('./aside'), {
-    ssr: false
-});
 
 function LayoutProvider({ children }) {
     const dispatch = useDispatch();

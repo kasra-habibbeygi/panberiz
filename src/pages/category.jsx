@@ -11,7 +11,7 @@ const AddCategory = dynamic(() => import('@/components/pages/category/add'), {
 });
 
 // APIs
-import { GetCategoriesList, GetUserCategoriesList, GetAdminCategoriesList } from '@/api-request/category';
+import { GetCategoriesList } from '@/api-request/category';
 
 const Category = () => {
     const userInfo = useSelector(state => state.UserInfo);
@@ -19,20 +19,12 @@ const Category = () => {
     const [reload, setReaload] = useState(false);
 
     useEffect(() => {
-        var APITemp = '';
-
-        if (userInfo.role === 'User') {
-            APITemp = GetUserCategoriesList();
-        } else if (userInfo.role === 'AgentAcademy') {
-            APITemp = GetCategoriesList();
-        } else {
-            APITemp = GetAdminCategoriesList();
-        }
-
-        APITemp.then(res => {
-            setCategoriesList(res.results);
-        }).catch(() => {});
-    }, [reload, userInfo.role]);
+        GetCategoriesList(userInfo.lang)
+            .then(res => {
+                setCategoriesList(res.results);
+            })
+            .catch(() => {});
+    }, [reload, userInfo]);
 
     return (
         <LayoutProvider>

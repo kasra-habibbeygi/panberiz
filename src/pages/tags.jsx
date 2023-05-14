@@ -16,7 +16,7 @@ import HeaderField from '@/components/template/header';
 import { TagsmainField } from '@/assets/styles/main';
 
 // APIs
-import { GetTagsList, GetUserTagsList, GetAdminTagsList } from '@/api-request/tags';
+import { GetTagsList } from '@/api-request/tags';
 
 const Tags = () => {
     const { t } = useTranslation('common');
@@ -25,27 +25,19 @@ const Tags = () => {
     const [reload, setReaload] = useState(false);
 
     useEffect(() => {
-        var APITemp = '';
-
-        if (userInfo.role === 'User') {
-            APITemp = GetUserTagsList();
-        } else if (userInfo.role === 'AgentAcademy') {
-            APITemp = GetTagsList();
-        } else {
-            APITemp = GetAdminTagsList();
-        }
-
-        APITemp.then(res => {
-            setTagsList(res.results);
-        }).catch(() => {});
-    }, [reload, userInfo.role]);
+        GetTagsList(userInfo.lang)
+            .then(res => {
+                setTagsList(res.results);
+            })
+            .catch(() => {});
+    }, [reload, userInfo]);
 
     return (
         <LayoutProvider>
             <main>
                 <HeaderField title={t('tags')} />
                 <TagsmainField>
-                    {userInfo.role === 'AgentAcademy' && <AddTag setReaload={setReaload} reload={reload} />}
+                    {userInfo.role === 'SuperAdminAcademy' && <AddTag setReaload={setReaload} reload={reload} />}
                     <TagsList tagsList={tagsList} />
                 </TagsmainField>
             </main>

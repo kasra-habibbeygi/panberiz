@@ -32,6 +32,11 @@ export const CardField = styled.div(props => ({
         }
     },
 
+    small: {
+        color: props.theme.palette.colors.text.light,
+        fontSize: '0.9rem'
+    },
+
     '& .video_image': {
         width: '100%',
         height: '250px',

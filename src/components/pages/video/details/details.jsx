@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // Assets
 import Button from '@/components/form-group/button';
 import { MainField } from './details.style';
@@ -9,31 +10,26 @@ import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceR
 import Image from 'next/image';
 import Link from 'next/link';
 
-const DetailsField = () => {
+const DetailsField = ({ mediaDetails }) => {
     return (
         <MainField>
-            <p className='text'>
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و
-                مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی
-                می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت
-                بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید
-                داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی،
-                و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-            </p>
+            <p className='text'>{mediaDetails?.description}</p>
             <div className='footer_field'>
                 <div className='info'>
                     <span>
-                        <Image src={CLockIcon} alt='' />7 ساعت پیش
+                        <Image src={CLockIcon} alt='' />
+                        {mediaDetails?.jdate}
                     </span>
                     <span>
                         <Image src={GridsIcon} alt='' />
-                        همایش
+                        {mediaDetails?.category_info.title}
                     </span>
-                    <span># لورم ایپسوم</span>
-                    <span># لورم ایپسوم</span>
+                    {mediaDetails?.tags_name?.map((item, index) => (
+                        <span key={index}># {item}</span>
+                    ))}
                 </div>
                 <Button color='primary' type='outline'>
-                    <Link href='/exam/1'>
+                    <Link href={`/exam/${mediaDetails?.id}`}>
                         شروع کوییز
                         <KeyboardBackspaceRoundedIcon />
                     </Link>

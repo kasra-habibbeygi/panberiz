@@ -5,16 +5,16 @@ export const CreateCategory = async data => {
     return RequestHandler.call({ url: '/managers/categories/add-category/', method: 'post', data }).then(res => res.data);
 };
 
-export const GetCategoriesList = async () => {
-    return RequestHandler.call({ url: '/managers/categories/', method: 'get' }).then(res => res.data);
+export const GetCategoriesList = async lang => {
+    return RequestHandler.call({ url: `/managers/categories/?lang=${lang}`, method: 'get' }).then(res => res.data);
 };
 
 // User
-export const GetUserCategoriesList = async () => {
-    return RequestHandler.call({ url: '/users/categories/', method: 'get' }).then(res => res.data);
+export const GetUserCategoriesList = async lang => {
+    return RequestHandler.call({ url: `/users/categories/?lang=${lang}`, method: 'get' }).then(res => res.data);
 };
 
 // Admin
-export const GetAdminCategoriesList = async () => {
-    return RequestHandler.call({ url: 'managers/categories/', method: 'get' }).then(res => res.data);
+export const GetAdminCategoriesList = async lang => {
+    return RequestHandler.call({ url: `managers/categories/?lang=${lang}`, method: 'get' }).then(res => res.data);
 };

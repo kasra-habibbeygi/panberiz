@@ -6,13 +6,14 @@ export const MainField = styled.div(props => ({
     marginTop: '20px',
 
     '& .MuiRating-root': {
-        direction: 'ltr'
+        direction: props.theme.direction
     },
 
     '& .rate': {
         display: 'flex',
         alignItems: 'center',
         gap: '20px',
+
         p: {
             color: props.theme.palette.colors.text.light
         }
