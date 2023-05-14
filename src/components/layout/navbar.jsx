@@ -5,6 +5,7 @@ import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginStatushandler } from '@/state-manager/reducer/user';
 import { useRouter } from 'next/router';
+import { langHandler } from '../../state-manager/reducer/user';
 
 // Assets
 import * as Styles from './navbar.style';
@@ -37,7 +38,6 @@ const LangList = [
 
 function Navbar({ setAsideStatus, asideStatus }) {
     const { t } = useTranslation();
-
     const dispatch = useDispatch();
     const router = useRouter();
     const userInfo = useSelector(state => state.UserInfo);
@@ -69,7 +69,9 @@ function Navbar({ setAsideStatus, asideStatus }) {
 
     const handleChangeLanguage = value => {
         router.replace(router.pathname, router.pathname, { locale: value.value });
+        localStorage.setItem('pmlmLang', value.value);
         setLangValue(value);
+        dispatch(langHandler(value.value));
     };
 
     return (

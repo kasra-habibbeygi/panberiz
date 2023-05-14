@@ -978,6 +978,11 @@ css-unit-converter@^1.1.1:
   resolved "https://registry.npmjs.org/css-unit-converter/-/css-unit-converter-1.1.2.tgz"
   integrity sha512-IiJwMC8rdZE0+xiEZHeru6YoONC4rfPMqGm2W85jMIbkFvv5nFTwJVFHam2eFrN6txmoUYFAFXiv8ICVeTO0MA==
 
+cssjanus@^2.0.1:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/cssjanus/-/cssjanus-2.1.0.tgz#6f99070e0b7cc79f826ea48c63c03cb250713af1"
+  integrity sha512-kAijbny3GmdOi9k+QT6DGIXqFvL96aksNlGr4Rhk9qXDZYWUojU4bRc3IHWxdaLNOqgEZHuXoe5Wl2l7dxLW5g==
+
 csstype@^3.0.2, csstype@^3.1.2:
   version "3.1.2"
   resolved "https://registry.npmjs.org/csstype/-/csstype-3.1.2.tgz"
@@ -3086,6 +3091,13 @@ styled-jsx@5.1.1:
   integrity sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==
   dependencies:
     client-only "0.0.1"
+
+stylis-plugin-rtl@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/stylis-plugin-rtl/-/stylis-plugin-rtl-2.1.1.tgz#16707809c878494835f77e5d4aadaae3db639b5e"
+  integrity sha512-q6xIkri6fBufIO/sV55md2CbgS5c6gg9EhSVATtHHCdOnbN/jcI0u3lYhNVeuI65c4lQPo67g8xmq5jrREvzlg==
+  dependencies:
+    cssjanus "^2.0.1"
 
 stylis@4.1.4:
   version "4.1.4"

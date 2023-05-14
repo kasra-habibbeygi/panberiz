@@ -1,41 +1,98 @@
 /* eslint-disable react/prop-types */
+import { useState } from 'react';
+import { useTranslation } from 'next-i18next';
 
 //Components
 import Button from '@/components/form-group/button';
 
-//Style
+//Assets
 import { QuizFormField } from './quiz-form.style';
-import AnswerInput from './answer-input';
-import Input from '@/components/form-group/input';
 
 //mui
 import AddIcon from '@mui/icons-material/Add';
 
-//assets
+// Component
+import Input from '@/components/form-group/input';
+import AnswerInput from './answer-input';
 
-export const QuizForm = ({ open, setOpen }) => {
+export const QuizForm = ({ open, setOpen, setInputValued, inputValues }) => {
+    const { t } = useTranslation('common');
+    const [question, setQuestion] = useState({
+        title: '',
+        answers: [
+            {
+                value: '',
+                is_correct: true
+            }
+        ]
+    });
+
+    const titleValueHandler = e => {
+        setQuestion({
+            ...question,
+            title: e.target.value
+        });
+    };
+
+    const handleAddNewInput = () => {
+        setQuestion({
+            ...question,
+            answers: [
+                ...question.answers,
+                {
+                    value: '',
+                    is_correct: false
+                }
+            ]
+        });
+    };
+
+    const handleSubmitNewQuestion = () => {
+        setOpen(false);
+        setInputValued({
+            ...inputValues,
+            quize_and_answer: [...inputValues.quize_and_answer, question]
+        });
+    };
+
     return (
-        <QuizFormField scroll='body' maxWidth='80%' disablePortal open={open} onClose={() => setOpen(!open)}>
+        <QuizFormField scroll='body' maxWidth='80%' disablePortal open={open} onClose={() => setOpen(false)}>
             <div className='border'>
-                <h3>طرح سوال</h3>
+                <h3>{t('Add new question')}</h3>
             </div>
             <div className='border flex_field'>
                 <div className='border w-100'>
-                    <Input label='صورت سوال' placeholder='صورت سوال را وارد کنید ...' index={1} />
+                    <Input
+                        label={t('Please provide the question')}
+                        placeholder={t('Enter the question statement...')}
+                        value={question.title}
+                        valueHandler={e => titleValueHandler(e)}
+                    />
                 </div>
-                <div className='w-100'>
-                    <AnswerInput label='پاسخ اول' placeholder='پاسخ اول را وارد کنید ...' index={1} />
-                </div>
-                <div className='w-100 add-answer'>
+                {question.answers.map((item, index) => (
+                    <div className='w-100' key={`question_input_${index}`}>
+                        <AnswerInput
+                            label={`پاسخ ${index + 1}`}
+                            placeholder={`پاسخ ${index + 1} را وارد کنید ...`}
+                            index={index + 1}
+                            setQuestion={setQuestion}
+                            question={question}
+                            item={item}
+                        />
+                    </div>
+                ))}
+                <div className='add-answer' onClick={handleAddNewInput}>
                     <AddIcon />
-                    <p>افزودن پاسخ جدید</p>
+                    <p>{t('Add new answer')}</p>
                 </div>
             </div>
             <div className='buttons'>
-                <Button type='outline' color='primary'>
-                    لغو
+                <Button type='outline' color='primary' handler={() => setOpen(false)}>
+                    {t('Cancel')}
                 </Button>
-                <Button color='primary'>ثبت سوال</Button>
+                <Button color='primary' handler={handleSubmitNewQuestion}>
+                    {t('Submit question')}
+                </Button>
             </div>
         </QuizFormField>
     );

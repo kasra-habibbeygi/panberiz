@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'next-i18next';
 
 // Assets
 import { MainField } from './list.style';
@@ -12,17 +13,18 @@ import Image from 'next/image';
 import HeaderField from '@/components/template/header';
 
 const CategoryList = ({ categoriesList }) => {
+    const { t } = useTranslation('common');
     const userRank = useSelector(state => state.UserInfo.rank);
     return (
         <MainField>
-            <HeaderField title='لیست دسته بندی' />
+            <HeaderField title={t('Category list')} />
             <div className='card_parent_field'>
                 <div className='cards_field'>
                     <div className='header_field'>
-                        <span>عنوان</span>
-                        <span>رنک</span>
-                        <span>جایگاه</span>
-                        <span>وضعیت عمومی</span>
+                        <span>{t('Title')}</span>
+                        <span>{t('Rank')}</span>
+                        <span>{t('position')}</span>
+                        <span>{t('General condition')}</span>
                     </div>
                     {categoriesList?.map(item => {
                         if (userRank >= item.rank) {

@@ -14,7 +14,7 @@ const Exam = () => {
 
 export default Exam;
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps({ locale }) {
     return {
         props: {
             ...(await serverSideTranslations(locale))

@@ -13,7 +13,6 @@ import { appWithTranslation } from 'next-i18next';
 //Config
 import { theme } from '../config/theme';
 
-//Assets
 import '../assets/styles/global/general.css';
 import { Toaster } from 'react-hot-toast';
 import { useEffect } from 'react';
@@ -24,7 +23,6 @@ NProgress.configure({
     speed: 800,
     showSpinner: false
 });
-
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
@@ -38,7 +36,6 @@ const App = ({ Component, pageProps }) => {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             localStorage.setItem('pmlmLang', locale);
-
             document.dir = lang === 'en' ? 'ltr' : 'rtl';
         }
     }, [lang]);

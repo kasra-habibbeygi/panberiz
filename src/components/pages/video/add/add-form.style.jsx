@@ -54,6 +54,7 @@ export const AddFormField = styled.div(props => ({
             fontFamily: 'Vazirmatn'
         }
     },
+
     '& .upload-file': {
         width: '100%',
         height: '150px',
@@ -64,6 +65,7 @@ export const AddFormField = styled.div(props => ({
         justifyContent: 'center',
         alignItems: 'center'
     },
+
     '& .quiz-header': {
         display: 'flex',
         color: props.theme.palette.colors.text.blackAndWhite,
@@ -72,28 +74,69 @@ export const AddFormField = styled.div(props => ({
         justifyContent: 'space-between',
         button: {
             backgroundColor: 'transparent'
-        },
-        '& .left': {
-            display: 'flex',
-            color: props.theme.mode === 'light' ? 'rgba(117, 27, 116, 1)' : 'white',
-            alignItems: 'center',
-            h3: {
-                margin: '0 15px'
-            }
         }
     },
+
     '& .quiz-container': {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        // height: '350px',
         backgroundColor: props.theme.mode === 'light' ? 'white' : props.theme.palette.colors.input.primary,
-        padding: '0 20px 20px 20px',
+        padding: '20px',
         borderRadius: '15px',
         justifyContent: 'space-evenly',
         alignItems: 'center',
         border: `1px solid ${props.theme.palette.colors.border.primary}`
     },
+
+    '& .multi_select': {
+        '& .MuiInputBase-root': {
+            background: props.theme.palette.colors.input.primary,
+            padding: '0 10px !important',
+            borderRadius: '12px'
+        },
+
+        fieldset: {
+            border: 'none'
+        },
+
+        input: {
+            fontSize: '0.9rem',
+            height: '25px',
+            color: props.theme.palette.colors.text.blackAndWhite,
+
+            '&::placeholder': {
+                color: props.theme.palette.colors.text.blackAndWhite,
+                fontWeight: 'bold'
+            }
+        },
+
+        svg: {
+            color: `${props.theme.palette.colors.text.blackAndWhite} !important`
+        },
+
+        '& .MuiPaper-root': {
+            borderRadius: '10px',
+
+            li: {
+                fontSize: '0.9rem'
+            }
+        },
+
+        '& .MuiChip-deleteIcon': {
+            margin: '0'
+        }
+    },
+
+    '& .add_question_btn': {
+        background: 'transparent !important',
+        color: `${props.theme.palette.colors.text.blackAndWhite} !important`,
+
+        p: {
+            fontSize: '1rem'
+        }
+    },
+
     '@media(max-width : 700px)': {
         '& .form_field': {
             '& .header': {
@@ -139,15 +182,16 @@ export const AddFormField = styled.div(props => ({
     }
 }));
 
-export const IndexField = styled.div(({ currect }) => ({
+export const IndexField = styled.div(props => ({
     marginLeft: '10px',
-    backgroundColor: currect && 'rgba(99, 199, 170, 1)',
+    backgroundColor: props.currect && 'rgba(99, 199, 170, 1)',
     padding: '10px',
     width: '35px',
-    borderLeft: !currect && '1px solid rgba(172, 172, 172, 0.3)',
+    borderLeft: !props.currect && '1px solid rgba(172, 172, 172, 0.3)',
+    borderRadius: props.currect ? '5px' : '0',
+    color: props.currect ? 'white' : props.theme.palette.colors.text.blackAndWhite,
     display: 'flex',
     height: '35px',
-    borderRadius: '5px',
     justifyContent: 'center',
     alignItems: 'center'
 }));

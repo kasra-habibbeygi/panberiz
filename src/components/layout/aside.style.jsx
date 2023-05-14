@@ -1,10 +1,12 @@
 import styled from '@emotion/styled';
 
 export const AsideField = styled.aside(props => ({
-    right: props.asideStatus ? '0' : '-300px',
+    right: props.asideStatus ? (props.theme.direction === 'rtl' ? '0' : 'unset') : '-300px',
+    left: props.asideStatus ? (props.theme.direction === 'ltr' ? '0' : 'unset') : '-300px',
     display: 'flex',
     transition: 'all cubic-bezier(0, 1, 1, 1) 0.8s',
-    borderLeft: props.theme.mode === 'light' ? '1px solid #d9d9d9' : '1px solid #342342',
+    borderLeft: props.theme.direction === 'rtl' ? (props.theme.mode === 'light' ? '1px solid #d9d9d9' : '1px solid #342342') : 'unset',
+    borderRight: props.theme.direction === 'ltr' ? (props.theme.mode === 'light' ? '1px solid #d9d9d9' : '1px solid #342342') : 'unset',
     width: '300px',
     height: 'calc(100vh - 70px)',
     padding: '25px 0',

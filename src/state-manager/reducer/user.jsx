@@ -40,10 +40,13 @@ export const UserInfo = createSlice({
         },
         roleHandler: (state, action) => {
             state.role = action.payload;
+        },
+        langHandler: (state, action) => {
+            state.lang = action.payload;
         }
     }
 });
 
-export const { themeStateHandler, userInfohandler, loginStatushandler, roleHandler } = UserInfo.actions;
+export const { themeStateHandler, userInfohandler, loginStatushandler, roleHandler, langHandler } = UserInfo.actions;
 
 export default UserInfo.reducer;

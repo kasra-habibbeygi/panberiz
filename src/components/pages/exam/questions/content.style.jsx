@@ -76,6 +76,8 @@ export const TitleField = styled.div(props => ({
 }));
 
 export const QuestionsField = styled.div(props => ({
+    width : '100%',
+
     '& .four_choice': {
         display : 'flex',
         flexDirection : 'column',

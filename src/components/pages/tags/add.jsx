@@ -63,7 +63,7 @@ const AddTag = ({ setReaload, reload }) => {
         <MainField>
             <Input
                 label={t('Tag title')}
-                placeholder={t('Tag Title')}
+                placeholder={t('Tag title')}
                 value={tagsName.title}
                 name='title'
                 valueHandler={e => InputValueHandler(e)}
