@@ -36,7 +36,7 @@ const Category = () => {
 
     return (
         <LayoutProvider>
-            {userInfo.role === 'AgentAcademy' && <AddCategory setReaload={setReaload} reload={reload} />}
+            {userInfo.role === 'SuperAdminAcademy' && <AddCategory setReaload={setReaload} reload={reload} />}
             <CategoryList categoriesList={categoriesList} />
         </LayoutProvider>
     );

@@ -43,7 +43,7 @@ function Aside({ asideStatus }) {
                             <p>{t('Video')}</p>
                         </Link>
                     </li>
-                    {userInfo.role === 'AgentAcademy' ? (
+                    {userInfo.role === 'SuperAdminAcademy' ? (
                         <>
                             <li>
                                 <Link href='/tags'>

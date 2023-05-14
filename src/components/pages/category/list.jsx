@@ -29,12 +29,12 @@ const CategoryList = ({ categoriesList }) => {
                     {categoriesList?.map(item => {
                         if (userRank >= item.rank) {
                             return (
-                                <Link className='item' key={item.id}>
+                                <div className='item' key={item.id}>
                                     <p>{item.title}</p>
                                     <p>{item.rank}</p>
                                     <p>{item.place}</p>
                                     <p>{item.is_public ? <Image src={TickIcon} alt='' /> : <Image src={CrossIcon} alt='' />}</p>
-                                </Link>
+                                </div>
                             );
                         }
                         return (

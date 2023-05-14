@@ -96,12 +96,16 @@ function Navbar({ setAsideStatus, asideStatus }) {
                         options={LangList}
                     />
                 </div>
-                <Button color='primary' type='outline' extraClass='button_link'>
-                    <Link href='/video/add'>
-                        <AddIcon />
-                        <p>{t('Add media')}</p>
-                    </Link>
-                </Button>
+                {userInfo.role !== 'User' ? (
+                    <Button color='primary' type='outline' extraClass='button_link'>
+                        <Link href='/video/add'>
+                            <AddIcon />
+                            <p>{t('Add media')}</p>
+                        </Link>
+                    </Button>
+                ) : (
+                    ''
+                )}
                 <Link href='/favorits' className={`favorit_link ${userInfo.role === 'User' ? 'show' : ''}`}>
                     <Image src={heart} className='hearth_icon' alt='heart' />
                 </Link>
