@@ -16,6 +16,7 @@ import { theme } from '../config/theme';
 import '../assets/styles/global/general.css';
 import { Toaster } from 'react-hot-toast';
 import { useEffect } from 'react';
+import Head from 'next/head';
 
 NProgress.configure({
     minimum: 0.3,
@@ -42,6 +43,9 @@ const App = ({ Component, pageProps }) => {
 
     return (
         <ThemeProvider theme={darkModeTheme}>
+            <Head>
+                <title>اکادمی پنبه ریز</title>
+            </Head>
             <Toaster
                 position='bottom-left'
                 containerStyle={{

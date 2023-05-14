@@ -31,7 +31,11 @@ export const MainField = styled.div(props => ({
             color: props.theme.mode === 'light' ? props.theme.palette.colors.primary : 'white',
             borderRadius: '12px',
             border: `1px dashed ${props.theme.mode === 'light' ? props.theme.palette.colors.primary : '#90899B'}`,
-            background: props.theme.palette.colors.background.card
+            background: props.theme.palette.colors.background.card,
+
+            '& .icon_delete': {
+                cursor: 'pointer'
+            }
         }
     },
 

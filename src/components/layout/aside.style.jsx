@@ -87,6 +87,16 @@ export const AsideField = styled.aside(props => ({
                 cursor: 'pointer'
             },
 
+            '& .disabled': {
+                opacity: '0.5',
+                pointerEvents: 'none',
+
+                span: {
+                    color: 'red',
+                    fontSize: '0.9rem'
+                }
+            },
+
             '&.open': {
                 maxHeight: '0'
             }

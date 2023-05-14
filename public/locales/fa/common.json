@@ -79,7 +79,7 @@
     "Number of visits": "تعداد بازدید",
     "Hours of visit": "میزان ساعت بازدید",
     "Details": "جزئیات",
-    "Rank visit report" : "گزارش بازدید رنک ها",
+    "Rank visit report": "گزارش بازدید رنک ها",
 
     "The code has been sent successfully": "کد با موفقیت ارسال شد !",
     "The entered national code is not correct!": "کد ملی وارد شده صحیح نمیباشد !",
@@ -87,5 +87,7 @@
     "no file selected": "هیچ فایلی انتخاب نشده است",
     "Please enter all entries!": "لطفا تمام ورودی ها را وارد کنید !",
     "Category added successfully!": "دسته بندی با موفقیت اضافه شد !",
-    "No question has been asked!": "سوالی طرح نشده است !"
+    "No question has been asked!": "سوالی طرح نشده است !",
+    "Successfully updated!": "با موفقیت اپدیت شد !",
+    "An error occurred, please try again!": "خطایی پیش آمده لطفا مجدد تلاش کنید !"
 }

@@ -13,8 +13,11 @@ import useTimer from '@/hooks/use-timer';
 import Button from '@/components/form-group/button';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { GetMediaDetails } from '@/api-request/media/details';
 import { useRouter } from 'next/router';
+
+// APIs
+import { GetMediaDetails } from '@/api-request/media/details';
+import { SubmitNewExam } from '@/api-request/exam';
 
 const QuestionsContent = () => {
     const router = useRouter();
@@ -33,7 +36,37 @@ const QuestionsContent = () => {
             })
             .catch(() => {});
     }, [router.query.id, userInfo.lang]);
-    console.log(mediaDetails);
+
+    const radioValuehandler = (e, id) => {
+        setRadioValues(prev => {
+            const idExists = prev.some(item => item.question_id === id);
+
+            if (idExists) {
+                const updatedValues = prev.map(item => {
+                    if (item.question_id === id) {
+                        return {
+                            ...item,
+                            answer_id: e.target.value
+                        };
+                    }
+                    return item;
+                });
+
+                return updatedValues;
+            }
+            return [
+                ...prev,
+                {
+                    question_id: id,
+                    answer_id: e.target.value
+                }
+            ];
+        });
+    };
+
+    const sumbitExamhandler = () => {
+        SubmitNewExam({ answers: JSON.stringify(radiosValues) });
+    };
 
     return (
         <>
@@ -58,15 +91,15 @@ const QuestionsContent = () => {
                     <div className='question_card' key={`questions_${index}`}>
                         <small>سوال {index + 1}</small>
                         <h4>{item.title}</h4>
-                        <RadioGroup name='radio-buttons-group' className='four_choice'>
-                            {item.quiz_answers.map(item => (
-                                <FormControlLabel value={item.id} control={<Radio />} label={item.value} key={`checkbox_${item.id}`} />
+                        <RadioGroup name='radio-buttons-group' className='four_choice' onChange={e => radioValuehandler(e, item.id)}>
+                            {item.quiz_answers.map(data => (
+                                <FormControlLabel value={data.id} control={<Radio />} label={data.value} key={`checkbox_${data.id}`} />
                             ))}
                         </RadioGroup>
                     </div>
                 ))}
 
-                <Button color='primary' type='filled' extraClass='submit_btn'>
+                <Button color='primary' type='filled' extraClass='submit_btn' handler={sumbitExamhandler}>
                     ثبت آزمون
                 </Button>
             </QuestionsField>

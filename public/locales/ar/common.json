@@ -79,7 +79,7 @@
     "Number of visits": "عدد الزيارات",
     "Hours of visit": "ساعات الزيارة",
     "Details": "تفاصيل",
-    "Rank visit report" : "تقرير زيارة الترتيب",
+    "Rank visit report": "تقرير زيارة الترتيب",
 
     "The code has been sent successfully": "تم إرسال الرمز بنجاح!",
     "The entered national code is not correct!": "الكود الوطني الذي تم إدخاله غير صحيح!",
@@ -87,5 +87,7 @@
     "no file selected": "لم يتم اختيار اي ملف",
     "Please enter all entries!": "الرجاء إدخال كافة الإدخالات!",
     "Category added successfully!": "تمت إضافة الفئة بنجاح!",
-    "No question has been asked!": "لم يتم طرح أي سؤال!"
+    "No question has been asked!": "لم يتم طرح أي سؤال!",
+    "Successfully updated!": "تم التحديث بنجاح!",
+    "An error occurred, please try again!": "حدث خطأ ، يرجى المحاولة مرة أخرى!"
 }

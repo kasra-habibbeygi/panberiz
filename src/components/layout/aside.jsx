@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
-import { UserInfo, themeStateHandler } from '../../state-manager/reducer/user';
+import { themeStateHandler } from '../../state-manager/reducer/user';
 import { useTranslation } from 'next-i18next';
 
 // Assets
@@ -57,7 +57,7 @@ function Aside({ asideStatus }) {
                             <p>{t('Dashboard')}</p>
                         </Link>
                     </li>
-                    {(userInfo.role === 'SuperAdminAcademy' || UserInfo.role === 'AgentAcademy') && (
+                    {(userInfo.role === 'SuperAdminAcademy' || userInfo.role === 'AgentAcademy') && (
                         <li>
                             <Link href='/video' className={`${router.pathname === '/video' ? 'active' : ''}`}>
                                 <Image src={video} alt='video' />
@@ -71,8 +71,12 @@ function Aside({ asideStatus }) {
                                 <p onClick={collapseStatusHandler}>{t('Category')}</p>
                                 <div className={`collapse_menu ${collapseStatus ? 'open' : ''}`}>
                                     {categoriesList?.map(item => (
-                                        <Link href={`/video/${item.id}`} key={item.id}>
-                                            {item.title}
+                                        <Link
+                                            href={`/video/${item.id}`}
+                                            key={item.id}
+                                            className={`${userInfo.rank < item?.rank ? 'disabled' : ''}`}
+                                        >
+                                            {item.title} <span>{userInfo.rank < item?.rank ? `${t('Rank')} ${item?.rank}` : ''}</span>
                                         </Link>
                                     ))}
                                 </div>

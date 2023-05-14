@@ -15,7 +15,7 @@ import play from '@/assets/icons/play.svg';
 import { useTranslation } from 'next-i18next';
 import StarIcon from '@mui/icons-material/Star';
 
-function Video() {
+function UserVideo() {
     const { t } = useTranslation();
     const router = useRouter();
     const [selectedButton, setSelectedButton] = useState('uploaded');
@@ -75,7 +75,7 @@ function Video() {
     );
 }
 
-export default Video;
+export default UserVideo;
 
 export async function getServerSideProps({ locale }) {
     return {

@@ -67,7 +67,8 @@ export const CardField = styled.div(props => ({
             height: '100%',
 
             '& .icon': {
-                margin: '5px'
+                margin: '5px',
+                cursor: 'pointer'
             }
         }
     }
