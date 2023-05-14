@@ -45,7 +45,7 @@ const Tags = () => {
             <main>
                 <HeaderField title={t('tags')} />
                 <TagsmainField>
-                    {userInfo.role === 'AgentAcademy' && <AddTag setReaload={setReaload} reload={reload} />}
+                    {userInfo.role === 'SuperAdminAcademy' && <AddTag setReaload={setReaload} reload={reload} />}
                     <TagsList tagsList={tagsList} />
                 </TagsmainField>
             </main>

@@ -18,3 +18,8 @@ export const GetUserTagsList = async () => {
 export const GetAdminTagsList = async () => {
     return RequestHandler.call({ url: 'admins/media/tags/', method: 'get' }).then(res => res.data);
 };
+
+// Delete
+export const DeleteTag = async (id) => {
+    return RequestHandler.call({ url: `admins/media/tags/delete-tag/${id}`, method: 'delete' }).then(res => res.data);
+};

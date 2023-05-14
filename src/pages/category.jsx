@@ -37,7 +37,7 @@ const Category = () => {
     return (
         <LayoutProvider>
             {userInfo.role === 'SuperAdminAcademy' && <AddCategory setReaload={setReaload} reload={reload} />}
-            <CategoryList categoriesList={categoriesList} />
+            <CategoryList categoriesList={categoriesList} setReaload={setReaload} reload={reload} />
         </LayoutProvider>
     );
 };

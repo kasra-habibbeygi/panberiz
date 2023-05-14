@@ -41,6 +41,10 @@ export const MainField = styled.div(props => ({
             '&:last-child': {
                 justifyContent: 'flex-end'
             }
+        },
+
+        '& .icon_delete':{
+            cursor: 'pointer'
         }
     },
 
