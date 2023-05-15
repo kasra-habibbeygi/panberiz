@@ -77,9 +77,7 @@ const Login = () => {
             router.push('/dashboard');
         }
 
-        if (router.query.token !== 'undefined') {
-            console.log(router.query.token);
-
+        if (router.query.token) {
             LoginWithQuery({ token: router.query.token })
                 .then(res => {
                     localStorage.setItem(

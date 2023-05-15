@@ -1,7 +1,6 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { PieChart, Pie, Sector, ResponsiveContainer, Cell } from 'recharts';
-
-const COLORS = ['rgba(117, 27, 116, 1)', 'rgba(57, 22, 79, 1)', 'rgba(214, 160, 249, 1)'];
 
 const renderActiveShape = props => {
     const { cx, cy, innerRadius, outerRadius, startAngle, endAngle, fill, payload } = props;
@@ -33,12 +32,22 @@ const renderActiveShape = props => {
     );
 };
 
-const data = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 }
-];
+function ChartPie({ data, selectedValue }) {
+    const test = data.filter(item => item.rank === selectedValue && { name: 'Group A', value: 400 });
 
-function ChartPie() {
+    const dataData = test.map(item => ({
+        name: `${(item.views / item.total) * 100} درصد`,
+        value: (item.views / item.total) * 100
+    }));
+
+    const finalData = [
+        ...dataData,
+        {
+            name: 'کل',
+            value: 100
+        }
+    ];
+
     const [activeIndex, setActiveIndex] = useState(0);
     const onPieEnter = (_, index) => {
         setActiveIndex(index);
@@ -50,7 +59,7 @@ function ChartPie() {
                     activeIndex={activeIndex}
                     activeShape={renderActiveShape}
                     onMouseEnter={onPieEnter}
-                    data={data}
+                    data={finalData}
                     cx='50%'
                     cy='50%'
                     innerRadius={60}
@@ -58,9 +67,8 @@ function ChartPie() {
                     fill='#8884d8'
                     dataKey='value'
                 >
-                    {data.map((entry, index) => (
-                        <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                    ))}
+                    <Cell fill='#39164F' />
+                    <Cell fill='#751B74' />
                 </Pie>
             </PieChart>
         </ResponsiveContainer>

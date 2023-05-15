@@ -4,42 +4,45 @@ import ChartArea from './area.chart';
 import ChartPie from './pie.chart';
 
 //mui
-import CircleIcon from '@mui/icons-material/Circle';
+// import CircleIcon from '@mui/icons-material/Circle';
 import AutoComplete from '@/components/form-group/auto-complete';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'next-i18next';
-import { GetManagerChart1Info, GetAdminChart1Info } from '@/api-request/chart';
+import { GetManagerChart1Info, GetAdminChart1Info, GetAdminChart2Info } from '@/api-request/chart';
 import { useSelector } from 'react-redux';
 
-const top100Films = [
-    { label: 'The Shawshank Redemption', year: 1994 },
-    { label: 'The Godfather', year: 1972 },
-    { label: 'The Godfather: Part II', year: 1974 }
-];
-
 function Income() {
+    const { t } = useTranslation('common');
     const userInfo = useSelector(state => state.UserInfo);
     const [chart1Data, setChart1Data] = useState([]);
-    const { t } = useTranslation('common');
-    const [values, setValues] = useState({
-        period: '',
-        rank: ''
-    });
+    const [chart2Data, setChart2Data] = useState([]);
+    const [selectValue, setSelectValue] = useState([]);
+    const [values, setValues] = useState();
 
-    const autoCompleteHandler = (e, name) => {
-        setValues({
-            ...values,
-            [name]: e
-        });
+    console.log(values);
+
+    const autoCompleteHandler = e => {
+        setValues(e);
     };
-
-    console.log(chart1Data);
 
     useEffect(() => {
         if (userInfo.role === 'SuperAdminAcademy' || userInfo.role === 'AgentAcademy') {
             GetManagerChart1Info()
                 .then(res => {
                     setChart1Data(res.result);
+                })
+                .catch(() => {});
+
+            GetAdminChart2Info()
+                .then(res => {
+                    setChart2Data(res.result);
+
+                    const newData = res.result.map(item => ({
+                        label: item.rank
+                    }));
+
+                    setSelectValue(newData);
+                    setValues(newData[0]);
                 })
                 .catch(() => {});
         }
@@ -68,16 +71,16 @@ function Income() {
                 <div className='select-rank'>
                     <AutoComplete
                         placeholder={t('Rank selection')}
-                        value={values.rank}
+                        value={values}
                         valueHandler={autoCompleteHandler}
-                        options={top100Films}
+                        options={selectValue}
                         name='rank'
                     />
                 </div>
                 <div className='chart'>
-                    <ChartPie />
+                    <ChartPie data={chart2Data} selectedValue={values?.label} />
                 </div>
-                <div className='flags'>
+                {/* <div className='flags'>
                     <div className='section'>
                         <div>
                             <CircleIcon fontSize='small' htmlColor='#39164F' />
@@ -98,7 +101,7 @@ function Income() {
                             <p>{t('Repeat visit')}</p>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </IncomeField>
     );

@@ -27,8 +27,6 @@ const StartExam = () => {
             .catch(() => {});
     }, [router.query.id, userInfo.lang]);
 
-    console.log(mediaDetails);
-
     return (
         <MainField>
             <div className='title'>
