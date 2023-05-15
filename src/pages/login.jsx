@@ -20,7 +20,7 @@ import Input from '@/components/form-group/input';
 import useTimer from '@/hooks/use-timer';
 
 // APIs
-import { GetVerifyCode, GetToken } from '@/api-request/auth';
+import { GetVerifyCode, GetToken, LoginWithQuery } from '@/api-request/auth';
 
 const Login = () => {
     const { t } = useTranslation('common');
@@ -75,6 +75,29 @@ const Login = () => {
     useEffect(() => {
         if (typeof window !== 'undefined' && localStorage.getItem('pmlmToken') !== null) {
             router.push('/dashboard');
+        }
+
+        if (router.query.token !== 'undefined') {
+            console.log(router.query.token);
+
+            LoginWithQuery({ token: router.query.token })
+                .then(res => {
+                    localStorage.setItem(
+                        'pmlmToken',
+                        JSON.stringify({
+                            access: res.access,
+                            refresh: res.refresh,
+                            role: res.user_role,
+                            accessTokenExpireAt: Date.now() + 1200000
+                        })
+                    );
+                    dispatch(loginStatushandler(true));
+                    dispatch(roleHandler(res.user_role));
+                    router.push('/dashboard');
+                })
+                .catch(() => {
+                    toast.error(t('The entered code is wrong!'));
+                });
         }
     }, []);
 

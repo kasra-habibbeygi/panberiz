@@ -6,7 +6,7 @@ import { useState } from 'react';
 // Assets
 import { MainField } from './video.style';
 import UserIcon from '@/assets/icons/user.svg';
-// import HeartIcon from '@/assets/icons/heart.svg';
+import HeartIcon from '@/assets/icons/heart.svg';
 import play from '@/assets/icons/play.svg';
 
 // MUI
@@ -15,8 +15,27 @@ import StarIcon from '@mui/icons-material/Star';
 // Component
 import VideoModal from './video-modal';
 
+// APIs
+import { AddNewFavorits } from '@/api-request/favorit';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-hot-toast';
+
 const VideoField = ({ mediaDetails }) => {
     const [videoModalStatus, setVideoModalStatus] = useState(false);
+    const userInfo = useSelector(state => state.UserInfo);
+
+    const addFavoritHandler = id => {
+        AddNewFavorits({
+            media: id,
+            user: userInfo.id
+        })
+            .then(() => {
+                toast.success('به لیست علاقه مندی ها اضافه شد !');
+            })
+            .catch(() => {
+                toast.error('لطفا مجدد تلاش کنید !');
+            });
+    };
 
     return (
         <MainField>
@@ -57,10 +76,9 @@ const VideoField = ({ mediaDetails }) => {
                     </div>
                 </div>
                 <div className='left_field'>
-                    {/* <div className='like'>
-                        <p>0</p>
-                        <Image className='icon' src={HeartIcon} alt='play' />
-                    </div> */}
+                    <div className='like'>
+                        <Image className='icon' src={HeartIcon} alt='play' onClick={() => addFavoritHandler(mediaDetails?.id)} />
+                    </div>
                     <div className='rate'>
                         <p>5 / {mediaDetails?.score} </p>
                         <StarIcon htmlColor='rgba(248, 170, 0, 1)' />

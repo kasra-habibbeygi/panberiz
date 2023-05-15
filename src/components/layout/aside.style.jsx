@@ -75,9 +75,7 @@ export const AsideField = styled.aside(props => ({
         gap: '10px',
         borderRight: '6px solid transparent',
         flexDirection: 'column',
-        borderTop: `1px solid ${props.theme.mode === 'light' ? '#e5e5e5' : '#271436'}`,
-        marginTop: '20px',
-        paddingTop: '20px',
+        cursor: 'pointer',
 
         '& .collapse_menu': {
             maxHeight: `calc(${props.categoriesListLength} * 44px)`,

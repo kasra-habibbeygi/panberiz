@@ -34,11 +34,12 @@ export const ReportField = styled.div(() => ({
         alignItems: 'center',
         color: '#9D9D9E',
         marginBottom: '20px',
+
         span: {
-            flex: 1,
             textAlign: 'center',
+            width: '100%',
+
             '&:last-child': {
-                flex: 2,
                 textAlign: 'center'
             }
         }

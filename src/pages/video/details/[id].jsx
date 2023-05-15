@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // Component
 import LayoutProvider from '@/components/layout';
@@ -12,7 +13,6 @@ import SuggestVideo from '@/components/pages/video/details/suggest';
 
 // APIs
 import { GetMediaDetails } from '@/api-request/media/details';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const VideoDetails = () => {
     const [mediaDetails, setMediaDetails] = useState([]);

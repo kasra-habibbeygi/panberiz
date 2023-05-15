@@ -7,11 +7,26 @@ export const ReportItemField = styled.button(props => ({
     display: 'flex',
     flexDirection: 'column',
     marginBottom: '25px',
-    alignItems: 'center',
+    alignItems: 'flex-end',
+
+    '& .colapse_field':{
+        position : 'absolute',
+        left : '10px'
+    },
+
+    '& .sec_colapse_field':{
+        width: '100%',
+        backgroundColor: 'transparent',
+        display: 'flex',
+        flexDirection: 'column',
+        marginBottom: '25px',
+        alignItems: 'flex-end'
+    },
+
     '& .item': {
         height: '80px',
         display: 'flex',
-        // alignItems: 'center',
+        position : 'relative',
         backgroundColor:
             props.theme.mode === 'light'
                 ? props.open
@@ -23,6 +38,7 @@ export const ReportItemField = styled.button(props => ({
         justifyContent: 'space-between',
         boxShadow: '0 4px 14px 0 rgb(0 0 0 / 7%)',
         borderRadius: '15px',
+
         p: {
             color:
                 props.theme.mode === 'light'
@@ -36,11 +52,13 @@ export const ReportItemField = styled.button(props => ({
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+
             '&:last-child': {
                 flex: 2,
                 justifyContent: 'center'
             }
         },
+
         '& .MuiSvgIcon-root': {
             color:   props.theme.mode === 'light'
                 ? props.open
@@ -51,11 +69,13 @@ export const ReportItemField = styled.button(props => ({
                     : 'white'
         }
     },
+
     '& .collapse': {
-        width: '97%',
+        width: '95%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+
         '& .collapse-item': {
             width: '100%',
             height: '80px',
@@ -66,12 +86,15 @@ export const ReportItemField = styled.button(props => ({
             border: '1px dashed rgba(157, 157, 158, 1)',
             justifyContent: 'space-between',
             borderRadius: '15px',
+            marginTop : '20px',
+
             p: {
                 color: props.theme.palette.colors.text.blackAndWhite,
                 flex: 1,
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+
                 '&:last-child': {
                     flex: 2,
                     justifyContent: 'center'

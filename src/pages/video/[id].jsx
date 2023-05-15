@@ -14,6 +14,8 @@ import Image from 'next/image';
 import play from '@/assets/icons/play.svg';
 import { useTranslation } from 'next-i18next';
 import StarIcon from '@mui/icons-material/Star';
+import EmptyFieldImg from '../../assets/images/empty/empty-media-list.png';
+import EmptyField from '@/components/template/empty-field';
 
 function UserVideo() {
     const { t } = useTranslation();
@@ -38,38 +40,42 @@ function UserVideo() {
             <HeaderField title={t('Video')} />
             {userInfo === 'SuperAdminAcademy' && <Tab selectButton={selectButton} selectedButton={selectedButton} />}
             <ListVideoField>
-                {mediaList?.map(item => (
-                    <div key={item.id} className='card_field'>
-                        <CardField>
-                            <div className='video_image'>
-                                <div className='float'>
-                                    <Link href={`/video/details/${item.id}`}>
-                                        <Image className='icon' src={play} alt='play' />
-                                    </Link>
+                {mediaList.length === 0 ? (
+                    <EmptyField img={EmptyFieldImg} title='هیچ ویدیو وجود ندارد !' />
+                ) : (
+                    mediaList?.map(item => (
+                        <div key={item.id} className='card_field'>
+                            <CardField>
+                                <div className='video_image'>
+                                    <div className='float'>
+                                        <Link href={`/video/details/${item.id}`}>
+                                            <Image className='icon' src={play} alt='play' />
+                                        </Link>
+                                    </div>
+                                    <img
+                                        className='video_banner'
+                                        src={item?.cover.replace(
+                                            'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
+                                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm/'
+                                        )}
+                                        alt='video-banner'
+                                    />
                                 </div>
-                                <img
-                                    className='video_banner'
-                                    src={item?.cover.replace(
-                                        'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
-                                        'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm/'
-                                    )}
-                                    alt='video-banner'
-                                />
-                            </div>
-                            <div className='card_details'>
-                                <div className='right_field'>
-                                    <h3>{item?.title}</h3>
-                                    <p>{item?.des}</p>
+                                <div className='card_details'>
+                                    <div className='right_field'>
+                                        <h3>{item?.title}</h3>
+                                        <p>{item?.des}</p>
+                                    </div>
+                                    <div className='left_field'>
+                                        <p>{item?.score}</p>
+                                        <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
+                                    </div>
                                 </div>
-                                <div className='left_field'>
-                                    <p>{item?.score}</p>
-                                    <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
-                                </div>
-                            </div>
-                            <small>{item?.publisher_fullname}</small>
-                        </CardField>
-                    </div>
-                ))}
+                                <small>{item?.publisher_fullname}</small>
+                            </CardField>
+                        </div>
+                    ))
+                )}
             </ListVideoField>
         </LayoutProvider>
     );

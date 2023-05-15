@@ -51,12 +51,14 @@ function Aside({ asideStatus }) {
         <Style.AsideField asideStatus={asideStatus} categoriesListLength={categoriesList.length}>
             <div className='items'>
                 <ol>
-                    <li>
-                        <Link href='/dashboard' className={`${router.pathname === '/dashboard' ? 'active' : ''}`}>
-                            <Image src={home} alt='home' />
-                            <p>{t('Dashboard')}</p>
-                        </Link>
-                    </li>
+                    {(userInfo.role === 'SuperAdminAcademy' || userInfo.role === 'AgentAcademy') && (
+                        <li>
+                            <Link href='/dashboard' className={`${router.pathname === '/dashboard' ? 'active' : ''}`}>
+                                <Image src={home} alt='home' />
+                                <p>{t('Dashboard')}</p>
+                            </Link>
+                        </li>
+                    )}
                     {(userInfo.role === 'SuperAdminAcademy' || userInfo.role === 'AgentAcademy') && (
                         <li>
                             <Link href='/video' className={`${router.pathname === '/video' ? 'active' : ''}`}>
@@ -66,22 +68,30 @@ function Aside({ asideStatus }) {
                         </li>
                     )}
                     {userInfo.role === 'User' && (
-                        <li>
-                            <div className='collapse_field'>
-                                <p onClick={collapseStatusHandler}>{t('Category')}</p>
-                                <div className={`collapse_menu ${collapseStatus ? 'open' : ''}`}>
-                                    {categoriesList?.map(item => (
-                                        <Link
-                                            href={`/video/${item.id}`}
-                                            key={item.id}
-                                            className={`${userInfo.rank < item?.rank ? 'disabled' : ''}`}
-                                        >
-                                            {item.title} <span>{userInfo.rank < item?.rank ? `${t('Rank')} ${item?.rank}` : ''}</span>
-                                        </Link>
-                                    ))}
+                        <>
+                            <li>
+                                <div className='collapse_field'>
+                                    <p onClick={collapseStatusHandler}>{t('Category')}</p>
+                                    <div className={`collapse_menu ${collapseStatus ? 'open' : ''}`}>
+                                        {categoriesList?.map(item => (
+                                            <Link
+                                                href={`/video/${item.id}`}
+                                                key={item.id}
+                                                className={`${userInfo.rank < item?.rank ? 'disabled' : ''}`}
+                                            >
+                                                {item.title} <span>{userInfo.rank < item?.rank ? `${t('Rank')} ${item?.rank}` : ''}</span>
+                                            </Link>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                            <li>
+                                <Link href='/certification' className={`${router.pathname === '/video' ? 'active' : ''}`}>
+                                    <Image src={video} alt='video' />
+                                    <p>{t('Certification')}</p>
+                                </Link>
+                            </li>
+                        </>
                     )}
 
                     {userInfo.role === 'SuperAdminAcademy' ? (

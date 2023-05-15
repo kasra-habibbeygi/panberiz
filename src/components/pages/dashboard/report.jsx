@@ -2,9 +2,34 @@ import HeaderField from '@/components/template/header';
 import { ReportField } from './report.style';
 import ReportItem from './report-item';
 import { useTranslation } from 'next-i18next';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
+// APIs
+import { GetAdminChart3Info, GetManagerChart3Info } from '@/api-request/chart';
 
 function Report() {
     const { t } = useTranslation('common');
+    const userInfo = useSelector(state => state.UserInfo);
+    const [chart3Data, setChart3Data] = useState([]);
+
+    useEffect(() => {
+        if (userInfo.role === 'SuperAdminAcademy' || userInfo.role === 'AgentAcademy') {
+            GetManagerChart3Info()
+                .then(res => {
+                    setChart3Data(res.result);
+                })
+                .catch(() => {});
+        }
+        if (userInfo.role === 'AdminAcademy') {
+            GetAdminChart3Info()
+                .then(res => {
+                    setChart3Data(res.result);
+                })
+                .catch(() => {});
+        }
+    }, []);
+
     return (
         <ReportField>
             <HeaderField title={t('Rank visit report')} />
@@ -14,12 +39,10 @@ function Report() {
                     <span>{t('Rank')}</span>
                     <span>{t('Number of content')}</span>
                     <span>{t('Number of visits')}</span>
-                    <span>{t('Hours of visit')}</span>
-                    <span>{t('Details')}</span>
                 </div>
-                <ReportItem />
-                <ReportItem />
-                <ReportItem />
+                {chart3Data?.map((item, index) => (
+                    <ReportItem key={index} data={item} index={index} />
+                ))}
             </div>
         </ReportField>
     );

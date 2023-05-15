@@ -19,6 +19,8 @@ import StarIcon from '@mui/icons-material/Star';
 import accept from '@/assets/icons/accept.svg';
 import reject from '@/assets/icons/reject.svg';
 import { toast } from 'react-hot-toast';
+import EmptyFieldImg from '../../assets/images/empty/empty-media-list.png';
+import EmptyField from '@/components/template/empty-field';
 
 function Video() {
     const { t } = useTranslation();
@@ -78,85 +80,87 @@ function Video() {
             });
     };
 
+    const mediaListProvider = mediaList?.map(item => (
+        <div key={item.id} className='card_field'>
+            <CardField>
+                <div className='video_image'>
+                    <div className='float'>
+                        <Link href={`/video/details/${item.id}`}>
+                            <Image className='icon' src={play} alt='play' />
+                        </Link>
+                    </div>
+                    <img
+                        className='video_banner'
+                        src={item?.cover.replace(
+                            'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
+                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm/'
+                        )}
+                        alt='video-banner'
+                    />
+                </div>
+                <div className='card_details'>
+                    <div className='right_field'>
+                        <h3>{item?.title}</h3>
+                        <p>{item?.des}</p>
+                    </div>
+                    <div className='left_field'>
+                        <p>{item?.score}</p>
+                        <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
+                    </div>
+                </div>
+                <small>{item?.publisher_fullname}</small>
+            </CardField>
+        </div>
+    ));
+
+    const deactiveListProvider = deactiveMediaList?.map(item => (
+        <div key={item.id} className='card_field'>
+            <CardField>
+                <div className='video_image'>
+                    <div className='float'>
+                        <Image className='icon' src={accept} alt='accept' onClick={() => changeMediahandler(true, item.id)} />
+                        <Image className='icon' src={reject} alt='reject' onClick={() => changeMediahandler(false, item.id)} />
+                    </div>
+                    <img
+                        className='video_banner'
+                        src={item?.cover.replace(
+                            'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
+                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm/'
+                        )}
+                        alt='video-banner'
+                    />
+                </div>
+                <div className='card_details'>
+                    <div className='right_field'>
+                        <h3>{item?.title}</h3>
+                        <p>{item?.des}</p>
+                    </div>
+                    <div className='left_field'>
+                        <p>{item?.score}</p>
+                        <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
+                    </div>
+                </div>
+                <small>{item?.publisher_fullname}</small>
+            </CardField>
+        </div>
+    ));
+
     return (
         <LayoutProvider>
             <HeaderField title={t('Video')} />
             {tabsStatus && <Tab selectButton={name => setSelectedButton(name)} selectedButton={selectedButton} />}
             <ListVideoField>
-                {selectedButton === 'uploaded'
-                    ? mediaList?.map(item => (
-                          <div key={item.id} className='card_field'>
-                              <CardField>
-                                  <div className='video_image'>
-                                      <div className='float'>
-                                          <Link href={`/video/details/${item.id}`}>
-                                              <Image className='icon' src={play} alt='play' />
-                                          </Link>
-                                      </div>
-                                      <img
-                                          className='video_banner'
-                                          src={item?.cover.replace(
-                                              'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
-                                              'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm/'
-                                          )}
-                                          alt='video-banner'
-                                      />
-                                  </div>
-                                  <div className='card_details'>
-                                      <div className='right_field'>
-                                          <h3>{item?.title}</h3>
-                                          <p>{item?.des}</p>
-                                      </div>
-                                      <div className='left_field'>
-                                          <p>{item?.score}</p>
-                                          <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
-                                      </div>
-                                  </div>
-                                  <small>{item?.publisher_fullname}</small>
-                              </CardField>
-                          </div>
-                      ))
-                    : deactiveMediaList?.map(item => (
-                          <div key={item.id} className='card_field'>
-                              <CardField>
-                                  <div className='video_image'>
-                                      <div className='float'>
-                                          <Image
-                                              className='icon'
-                                              src={accept}
-                                              alt='accept'
-                                              onClick={() => changeMediahandler(true, item.id)}
-                                          />
-                                          <Image
-                                              className='icon'
-                                              src={reject}
-                                              alt='reject'
-                                              onClick={() => changeMediahandler(false, item.id)}
-                                          />
-                                      </div>
-                                      <img
-                                          className='video_banner'
-                                          src={item?.cover.replace(
-                                              'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
-                                              'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm/'
-                                          )}
-                                          alt='video-banner'
-                                      />
-                                  </div>
-                                  <div className='card_details'>
-                                      <div className='right_field'>
-                                          <h3>{item?.title}</h3>
-                                          <p>{item?.des}</p>
-                                      </div>
-                                      <div className='left_field'>
-                                          <p>{item?.score}</p>
-                                          <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
-                                      </div>
-                                  </div>
-                                  <small>{item?.publisher_fullname}</small>
-                              </CardField>
-                          </div>
-                      ))}
+                {selectedButton === 'uploaded' ? (
+                    mediaList?.length ? (
+                        mediaListProvider
+                    ) : (
+                        <EmptyField img={EmptyFieldImg} title='هیچ ویدیو وجود ندارد !' />
+                    )
+                ) : deactiveMediaList?.length ? (
+                    deactiveListProvider
+                ) : (
+                    <EmptyField img={EmptyFieldImg} title='هیچ ویدیو وجود ندارد !' />
+                )}
             </ListVideoField>
         </LayoutProvider>
     );

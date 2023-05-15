@@ -25,7 +25,7 @@ const Favorits = () => {
     return (
         <LayoutProvider>
             <HeaderField title={t('Favorites list')} />
-            <ListVideo selectedButton='' data={favoritsList} />
+            <ListVideo data={favoritsList} />
         </LayoutProvider>
     );
 };

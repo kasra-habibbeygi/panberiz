@@ -5,17 +5,14 @@ import { ListVideoField } from './list-video.style';
 
 // Component
 import Card from './card';
+import EmptyFieldImg from '../../../../assets/images/empty/empty-media-list.png';
+import EmptyField from '@/components/template/empty-field';
 
-function ListVideo({ selectedButton, data }) {
+function ListVideo({ data }) {
     return (
         <ListVideoField>
-            {selectedButton === 'waiting'
-                ? data?.map((value, index) => (
-                    <div key={index} className='card_field'>
-                        <Card data={value} />
-                    </div>
-                ))
-                : data?.map((value, index) => (
+            {data.length === 0 ? 
+                <EmptyField img={EmptyFieldImg} title='هیچ ویدیو وجود ندارد !' /> : data?.map((value, index) => (
                     <div key={index} className='card_field'>
                         <Card data={value} accepted />
                     </div>
