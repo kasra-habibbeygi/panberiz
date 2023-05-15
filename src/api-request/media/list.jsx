@@ -19,3 +19,7 @@ export const GetAllDeactiveMedia = async lang => {
 export const UpdateMedia = async (id, data) => {
     return RequestHandler.call({ url: `/managers/media/update-media/${id}/`, method: 'put', data }).then(res => res.data);
 };
+
+export const DeleteMedia = async id => {
+    return RequestHandler.call({ url: `/managers/media/delete-media/${id}/`, method: 'delete' }).then(res => res.data);
+};

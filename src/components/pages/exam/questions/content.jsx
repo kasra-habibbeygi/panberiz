@@ -1,7 +1,9 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 // Assets
-import { TitleField, QuestionsField } from './content.style';
+import { TitleField, QuestionsField, AfterExam } from './content.style';
+import Rafiki from '../../../../assets/images/empty/rafiki.png';
 
 // MUI
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
@@ -18,12 +20,15 @@ import { useRouter } from 'next/router';
 // APIs
 import { GetMediaDetails } from '@/api-request/media/details';
 import { SubmitNewExam } from '@/api-request/exam';
+import Image from 'next/image';
 
 const QuestionsContent = () => {
     const router = useRouter();
     const userInfo = useSelector(state => state.UserInfo);
     const [radiosValues, setRadioValues] = useState([]);
     const [mediaDetails, setMediaDetails] = useState([]);
+    const [score, setScore] = useState(0);
+    const [examStatus, setExamStatus] = useState(false);
     const [days, hours, minutes, seconds, countDown, setNewCountDown] = useTimer(0);
     const totalMiliSec = mediaDetails?.period_of_time * 60 * 1000;
     const progressPercent = ((countDown - totalMiliSec) / totalMiliSec) * 100;
@@ -65,7 +70,27 @@ const QuestionsContent = () => {
     };
 
     const sumbitExamhandler = () => {
-        SubmitNewExam({ answers: JSON.stringify(radiosValues) });
+        var score = '';
+
+        radiosValues.map(checkbox => {
+            mediaDetails.media_quiezes.map(mainData => {
+                if (checkbox.question_id === mainData.id) {
+                    mainData.quiz_answers.map(answer => {
+                        if (parseInt(checkbox.answer_id) === parseInt(answer.id) && answer.is_correct) {
+                            score++;
+                        }
+                    });
+                }
+            });
+        });
+
+        SubmitNewExam({
+            answers: JSON.stringify(radiosValues),
+            score: JSON.stringify(parseInt((score / mediaDetails?.media_quiezes?.length) * 100))
+        }).then(() => {
+            setExamStatus(true);
+            setScore(parseInt((score / mediaDetails?.media_quiezes?.length) * 100));
+        });
     };
 
     return (
@@ -87,21 +112,40 @@ const QuestionsContent = () => {
                 </div>
             </TitleField>
             <QuestionsField>
-                {mediaDetails?.media_quiezes?.map((item, index) => (
-                    <div className='question_card' key={`questions_${index}`}>
-                        <small>سوال {index + 1}</small>
-                        <h4>{item.title}</h4>
-                        <RadioGroup name='radio-buttons-group' className='four_choice' onChange={e => radioValuehandler(e, item.id)}>
-                            {item.quiz_answers.map(data => (
-                                <FormControlLabel value={data.id} control={<Radio />} label={data.value} key={`checkbox_${data.id}`} />
-                            ))}
-                        </RadioGroup>
-                    </div>
-                ))}
+                {!examStatus ? (
+                    <>
+                        {mediaDetails?.media_quiezes?.map((item, index) => (
+                            <div className='question_card' key={`questions_${index}`}>
+                                <small>سوال {index + 1}</small>
+                                <h4>{item.title}</h4>
+                                <RadioGroup
+                                    name='radio-buttons-group'
+                                    className='four_choice'
+                                    onChange={e => radioValuehandler(e, item.id)}
+                                >
+                                    {item.quiz_answers.map(data => (
+                                        <FormControlLabel
+                                            value={data.id}
+                                            control={<Radio />}
+                                            label={data.value}
+                                            key={`checkbox_${data.id}`}
+                                        />
+                                    ))}
+                                </RadioGroup>
+                            </div>
+                        ))}
 
-                <Button color='primary' type='filled' extraClass='submit_btn' handler={sumbitExamhandler}>
-                    ثبت آزمون
-                </Button>
+                        <Button color='primary' type='filled' extraClass='submit_btn' handler={sumbitExamhandler}>
+                            ثبت آزمون
+                        </Button>
+                    </>
+                ) : (
+                    <AfterExam>
+                        <Image src={Rafiki} alt='' />
+                        <p>آزمون شما به پایان رسید.</p>
+                        <p>امتیاز شما : {score} از ۱۰۰</p>
+                    </AfterExam>
+                )}
             </QuestionsField>
         </>
     );

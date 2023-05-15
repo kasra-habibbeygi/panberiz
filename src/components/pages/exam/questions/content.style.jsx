@@ -132,3 +132,11 @@ export const QuestionsField = styled.div(props => ({
     
     }
 }));
+
+export const AfterExam = styled.div({
+    display : 'flex',
+    alignItems : 'center',
+    justifyContent : 'center',
+    flexDirection : 'column',
+    gap : '20px'
+});

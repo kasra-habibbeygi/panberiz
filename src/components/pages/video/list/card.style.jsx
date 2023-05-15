@@ -21,13 +21,25 @@ export const CardField = styled.div(props => ({
 
         '& .left_field': {
             display: 'flex',
-            gap: '10px',
-            alignItems: 'center',
+            justifyContent: 'flex-end',
+            flexDirection: 'column',
+            alignItems: 'flex-end',
+
+            div: {
+                display: 'flex',
+                gap: '10px',
+                alignItems: 'center'
+            },
 
             p: {
                 position: 'relative',
                 top: '3px',
                 fontWeight: 'bold'
+            },
+
+            '& .deletemedia': {
+                color: '#c2c2c2',
+                cursor: 'pointer'
             }
         }
     },

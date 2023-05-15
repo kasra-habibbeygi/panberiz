@@ -7,7 +7,7 @@ import Tab from '@/components/pages/video/list/tab';
 import HeaderField from '@/components/template/header';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
-import { GetMyMediaList, GetAllMedia, GetAllDeactiveMedia, UpdateMedia } from '@/api-request/media/list';
+import { GetMyMediaList, GetAllMedia, GetAllDeactiveMedia, UpdateMedia, DeleteMedia } from '@/api-request/media/list';
 import { useSelector } from 'react-redux';
 import { ListVideoField } from '@/components/pages/video/list/list-video.style';
 import { CardField } from '@/components/pages/video/list/card.style';
@@ -21,6 +21,7 @@ import reject from '@/assets/icons/reject.svg';
 import { toast } from 'react-hot-toast';
 import EmptyFieldImg from '../../assets/images/empty/empty-media-list.png';
 import EmptyField from '@/components/template/empty-field';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function Video() {
     const { t } = useTranslation();
@@ -80,6 +81,14 @@ function Video() {
             });
     };
 
+    const deletespecificMedia = id => {
+        DeleteMedia(id)
+            .then(() => {
+                setReload(!reload);
+            })
+            .catch(() => {});
+    };
+
     const mediaListProvider = mediaList?.map(item => (
         <div key={item.id} className='card_field'>
             <CardField>
@@ -104,8 +113,11 @@ function Video() {
                         <p>{item?.des}</p>
                     </div>
                     <div className='left_field'>
-                        <p>{item?.score}</p>
-                        <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
+                        <div>
+                            <p>{item?.score}</p>
+                            <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
+                        </div>
+                        <DeleteIcon className='deletemedia' onClick={() => deletespecificMedia(item.id)} />
                     </div>
                 </div>
                 <small>{item?.publisher_fullname}</small>

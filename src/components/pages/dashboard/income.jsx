@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Component
 import { IncomeField } from './income.style';
 import ChartArea from './area.chart';

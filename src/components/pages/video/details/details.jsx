@@ -10,9 +10,15 @@ import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceR
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 const DetailsField = ({ mediaDetails }) => {
     const userInfo = useSelector(state => state.UserInfo);
+    const [examBtnStatus, setExamBtnStatus] = useState(false);
+
+    useEffect(() => {
+        setExamBtnStatus(!mediaDetails?.media_quiezes[0]?.user_answer && userInfo.role === 'User' ? true : false);
+    }, []);
 
     return (
         <MainField>
@@ -31,7 +37,7 @@ const DetailsField = ({ mediaDetails }) => {
                         <span key={index}># {item}</span>
                     ))}
                 </div>
-                {!mediaDetails?.media_quiezes[0]?.user_answer && userInfo.role === 'User' && (
+                {examBtnStatus && (
                     <Button color='primary' type='outline'>
                         <Link href={`/exam/${mediaDetails?.id}`}>
                             شروع کوییز
