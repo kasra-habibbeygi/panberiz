@@ -17,5 +17,12 @@ export const MainField = styled.div(props => ({
         fontWeight: 'bold',
         fontSize: '1.1rem',
         color: props.theme.palette.colors.text.blackAndWhite
+    },
+
+    '@media(max-width : 600px)': {
+        img: {
+            width: '100%',
+            height: 'auto'
+        }
     }
 }));

@@ -102,14 +102,16 @@ const QuestionsContent = () => {
                         {mediaDetails?.media_quiezes?.length} سوال - {mediaDetails?.period_of_time} دقیقه
                     </p>
                 </div>
-                <div className='progress_field'>
-                    <div className='progress'>
-                        <span></span>
+                {!examStatus && (
+                    <div className='progress_field'>
+                        <div className='progress'>
+                            <span></span>
+                        </div>
+                        <p>
+                            {seconds} : {minutes}
+                        </p>
                     </div>
-                    <p>
-                        {seconds} : {minutes}
-                    </p>
-                </div>
+                )}
             </TitleField>
             <QuestionsField>
                 {!examStatus ? (

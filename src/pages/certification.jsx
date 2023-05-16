@@ -1,25 +1,40 @@
-/* eslint-disable indent */
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
-import LayoutProvider from '@/components/layout';
-import { useEffect, useState } from 'react';
-import HeaderField from '@/components/template/header';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { GetCertificationList } from '@/api-request/certification';
 import { useSelector } from 'react-redux';
-import { ListVideoField } from '@/components/pages/video/list/list-video.style';
-import { CardField } from '@/components/pages/video/list/card.style';
 import { useTranslation } from 'next-i18next';
-import StarIcon from '@mui/icons-material/Star';
+import * as htmlToImage from 'html-to-image';
+import download from 'downloadjs';
+
+// Assets
+import CertificateImg from '../assets/images/video/certificate.jpg';
+import MainCertificateImg from '../assets/images/video/main-certificate.jpg';
 import EmptyFieldImg from '../assets/images/empty/empty-media-list.png';
+import { CardField } from '@/components/pages/video/list/card.style';
+import { ListVideoField } from '@/components/pages/video/list/list-video.style';
+import { CertificateField, GapField } from '@/assets/styles/certificate';
+
+// Component
+import LayoutProvider from '@/components/layout';
 import EmptyField from '@/components/template/empty-field';
+import HeaderField from '@/components/template/header';
+
+// APIs
+import { GetCertificationList } from '@/api-request/certification';
+import Image from 'next/image';
 
 function Video() {
     const { t } = useTranslation();
     const router = useRouter();
-    const [certificateList, setCertificateList] = useState([]);
     const userInfo = useSelector(state => state.UserInfo);
+    const [certificateList, setCertificateList] = useState([]);
+    const [certificateData, setCertificateData] = useState();
+
+    const ModalOpenHandler = data => {
+        setCertificateData(data);
+        handleDownload();
+    };
 
     useEffect(() => {
         GetCertificationList(userInfo.lang)
@@ -29,35 +44,37 @@ function Video() {
             .catch(() => {});
     }, [router.query.id, userInfo.lang, userInfo.role]);
 
+    const handleDownload = () => {
+        document.getElementById('my-node').style.display = 'flex';
+        document.getElementById('gap_field').style.display = 'flex';
+        htmlToImage
+            .toPng(document.getElementById('my-node'), {
+                backgroundColor: 'white'
+            })
+            .then(function (dataUrl) {
+                download(dataUrl, 'referral-share-card.jpg');
+                document.getElementById('my-node').style.display = 'none';
+                document.getElementById('gap_field').style.display = 'none';
+            });
+    };
+
     const mediaListProvider = certificateList?.map(item => (
         <div key={item.id} className='card_field'>
-            <CardField>
+            <CardField pointer={true} onClick={() => ModalOpenHandler(item)}>
                 <div className='video_image'>
-                    {/* <div className='float'>
-                        <Link href={`/video/details/${item.id}`}>
-                            <Image className='icon' src={play} alt='play' />
-                        </Link>
-                    </div> */}
-                    <img
-                        className='video_banner'
-                        src={item?.cover.replace(
-                            'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
-                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm/'
-                        )}
-                        alt='video-banner'
-                    />
+                    <Image className='video_banner' src={CertificateImg} alt='video-banner' />
                 </div>
                 <div className='card_details'>
                     <div className='right_field'>
-                        <h3>{item?.title}</h3>
-                        <p>{item?.des}</p>
+                        <h3>{item?.media_name}</h3>
+                        <p>{item?.jdate}</p>
                     </div>
                     <div className='left_field'>
-                        <p>{item?.score}</p>
-                        <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
+                        <p> امتیاز : {item?.score}</p>
+                        <p> رنک : {item?.media_rank}</p>
                     </div>
                 </div>
-                <small>{item?.publisher_fullname}</small>
+                {/* <small>{item?.publisher_fullname}</small> */}
             </CardField>
         </div>
     ));
@@ -68,6 +85,29 @@ function Video() {
             <ListVideoField>
                 {certificateList?.length ? mediaListProvider : <EmptyField img={EmptyFieldImg} title='هیچ ویدیو وجود ندارد !' />}
             </ListVideoField>
+            <GapField id='gap_field'>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+            </GapField>
+            <CertificateField id='my-node'>
+                <Image src={MainCertificateImg} alt='' />
+                <h3>{certificateData?.user_full_name}</h3>
+                <p className='code_field'>{certificateData?.user_code_meli}</p>
+                <p className='rank'>{certificateData?.media_rank}</p>
+                <p className='time'>{certificateData?.media_time}</p>
+                <p className='date'>{certificateData?.jdate.replaceAll(',', '/')}</p>
+            </CertificateField>
         </LayoutProvider>
     );
 }

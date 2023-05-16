@@ -5,6 +5,7 @@ export const CardField = styled.div(props => ({
     borderRadius: '20px',
     margin: '10px',
     position: 'relative',
+    cursor: props.pointer ? 'pointer' : 'normalize',
 
     '& .card_details': {
         display: 'flex',

@@ -25,7 +25,7 @@ import Button from '../form-group/button';
 // MUI
 import AddIcon from '@mui/icons-material/Add';
 import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
+// import SearchIcon from '@mui/icons-material/Search';
 
 // Hooks
 import useOutsideClick from '@/hooks/use-outside-click';
@@ -80,14 +80,14 @@ function Navbar({ setAsideStatus, asideStatus }) {
                 <MenuIcon onClick={openAside} />
                 <Image src={userInfo.theme === 'light' ? logo : logoWhite} alt='logo' />
             </div>
-            <div className='middle'>
+            {/* <div className='middle'>
                 <input placeholder={t('Seach')} />
                 <SearchIcon className='search_icon' />
-            </div>
+            </div> */}
             <div className='left'>
-                <div className='mobile_search_field'>
+                {/* <div className='mobile_search_field'>
                     <SearchIcon className='search_icon' />
-                </div>
+                </div> */}
                 <div className='lang_select'>
                     <AutoComplete
                         placeholder={t('lang')}

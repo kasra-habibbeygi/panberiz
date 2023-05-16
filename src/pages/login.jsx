@@ -25,15 +25,17 @@ import { GetVerifyCode, GetToken, LoginWithQuery } from '@/api-request/auth';
 const Login = () => {
     const { t } = useTranslation('common');
     const dispatch = useDispatch();
-    const [days, hours, minutes, seconds, countDown, setNewCountDown] = useTimer(200000);
-    const [loginState, setLoginState] = useState(0);
     const router = useRouter();
+    const [days, hours, minutes, seconds, countDown, setNewCountDown] = useTimer(200000);
+    const [loader, setLoader] = useState(false);
+    const [loginState, setLoginState] = useState(0);
     const [inputValues, setInputValued] = useState({
         codemeli: '',
         code: ''
     });
 
     const getCodeHandler = () => {
+        setLoader(true);
         GetVerifyCode(inputValues.codemeli)
             .then(() => {
                 setLoginState(1);
@@ -41,10 +43,14 @@ const Login = () => {
             })
             .catch(() => {
                 toast.error(t('The entered national code is not correct!'));
+            })
+            .finally(() => {
+                setLoader(false);
             });
     };
 
     const getTokenhandler = () => {
+        setLoader(true);
         GetToken(inputValues)
             .then(res => {
                 localStorage.setItem(
@@ -62,6 +68,9 @@ const Login = () => {
             })
             .catch(() => {
                 toast.error(t('The entered code is wrong!'));
+            })
+            .finally(() => {
+                setLoader(false);
             });
     };
 
@@ -110,7 +119,7 @@ const Login = () => {
                         placeholder={t('enter national code')}
                         label={t('natinal code')}
                     />
-                    <Button type='filled' color='primary' handler={getCodeHandler}>
+                    <Button type='filled' color='primary' handler={getCodeHandler} loader={loader}>
                         {t('login')}
                     </Button>
                 </NationalCodeField>
@@ -134,7 +143,7 @@ const Login = () => {
                             </p>
                         )}
                     </p>
-                    <Button type='filled' color='primary' handler={getTokenhandler}>
+                    <Button type='filled' color='primary' handler={getTokenhandler} loader={loader}>
                         {t('verify')}
                     </Button>
                 </VerifyCodeField>
