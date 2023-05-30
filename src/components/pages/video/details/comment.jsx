@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import { useTranslation } from 'next-i18next';
+
 // Assets
 import Image from 'next/image';
 import { useState } from 'react';
@@ -20,6 +22,7 @@ import Input from '@/components/form-group/input';
 import { AddnewComment, AddCommentScore } from '@/api-request/comment';
 
 const Comment = ({ mediaDetails }) => {
+    const { t } = useTranslation();
     const [inputValues, setInputValued] = useState({
         rate: 0,
         comment: ''
@@ -45,7 +48,7 @@ const Comment = ({ mediaDetails }) => {
 
         AddnewComment(CommentData)
             .then(() => {
-                toast.success('پیام شما با موفقیت ثبت شد !');
+                toast.success(t('Your message was successfully registered!'));
             })
             .catch(err => {
                 toast.error(err.response.data.message);
@@ -59,7 +62,7 @@ const Comment = ({ mediaDetails }) => {
     return (
         <MainField>
             <div className='rate'>
-                <p>امتیاز شما </p>
+                <p>{t('Your score')}</p>
                 <Rating
                     value={inputValues.rate}
                     onChange={(_, newValue) => {
@@ -77,7 +80,7 @@ const Comment = ({ mediaDetails }) => {
                         valueHandler={inputValueHandler}
                         value={inputValues.comment}
                         name='comment'
-                        placeholder='دیدگاه خود را وارد کنید ...'
+                        placeholder={t('Enter your opinion...')}
                     />
                     <SendRoundedIcon onClick={sendCommentHandler} />
                 </div>
@@ -90,7 +93,7 @@ const Comment = ({ mediaDetails }) => {
                             <div className='info'>
                                 <div className='title'>
                                     <b>{item.user_fullname}</b>
-                                    <small>چند دقیقه پیش</small>
+                                    {/* <small>چند دقیقه پیش</small> */}
                                 </div>
                                 <div className='rate'>
                                     <p>۴.۵/۵</p>

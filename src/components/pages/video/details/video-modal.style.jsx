@@ -6,7 +6,7 @@ export const MainField = styled.div({
         boxShadow: 'none'
     },
 
-    iframe: {
+    video: {
         width: '100%',
         height: '500px',
         border: 'none'
@@ -15,5 +15,11 @@ export const MainField = styled.div({
     button: {
         margin: '20px auto',
         width: '300px'
+    },
+
+    '@media(max-width : 700px)': {
+        video: {
+            height: '200px'
+        }
     }
 });

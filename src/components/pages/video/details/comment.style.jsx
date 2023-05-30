@@ -32,6 +32,10 @@ export const MainField = styled.div(props => ({
             position: 'relative',
             width: '100%',
 
+            input: {
+                paddingLeft: props.theme.direction === 'ltr' ? '50px' : '0'
+            },
+
             svg: {
                 position: 'absolute',
                 left: '10px',

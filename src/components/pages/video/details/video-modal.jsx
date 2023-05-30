@@ -23,16 +23,24 @@ const VideoModal = ({ status, setStatus, mediaDetails }) => {
         }
     }, [status]);
 
+    const modalClosehandler = () => {
+        setStatus(false);
+        document.getElementById('slider_video_player').pause();
+    };
+
     return (
         <MainField>
-            <Dialog onClose={() => setStatus(false)} open={status} disablePortal keepMounted fullWidth={true} scroll='body' maxWidth='md'>
-                <iframe
-                    src={mediaDetails?.file?.replace(
-                        'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
-                        'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm'
-                    )}
-                ></iframe>
-                <Button type='filled' color='primary' handler={() => setStatus(false)}>
+            <Dialog onClose={modalClosehandler} open={status} disablePortal keepMounted fullWidth={true} scroll='body' maxWidth='md'>
+                <video controls id='slider_video_player'>
+                    <source
+                        src={mediaDetails?.file?.replace(
+                            'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
+                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm'
+                        )}
+                        type='video/mp4'
+                    />
+                </video>
+                <Button type='filled' color='primary' handler={modalClosehandler}>
                     بستن پنجره
                 </Button>
             </Dialog>

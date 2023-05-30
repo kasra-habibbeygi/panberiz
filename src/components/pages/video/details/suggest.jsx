@@ -2,6 +2,8 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
+import { useTranslation } from 'next-i18next';
+
 // Assets
 import { MainField } from './suggest.style';
 
@@ -13,11 +15,11 @@ import Image from 'next/image';
 import play from '@/assets/icons/play.svg';
 // import StarIcon from '@mui/icons-material/Star';
 
-
 const SuggestVideo = ({mediaDetails}) => {
+    const { t } = useTranslation();
     return (
         <MainField>
-            <HeaderField title='ویدیو های پیشنیاز' />
+            <HeaderField title={t('Prerequisite videos')} />
             <div className='main_field'>
                 {mediaDetails?.prerequisites_info.map(item => (
                     <div key={item.id} className='card_field'>

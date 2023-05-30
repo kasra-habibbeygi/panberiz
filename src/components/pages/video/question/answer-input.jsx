@@ -10,8 +10,6 @@ import dot from '@/assets/icons/dot-four.svg';
 import tick from '../../../../assets/images/category/tick.svg';
 import close from '@/assets/icons/close.svg';
 import tickDisable from '../../../../assets/images/video/tick-disable.svg';
-// import cross from '../../../../assets/images/category/cross.svg';
-// import crossDisable from '../../../../assets/images/video/cross-disable.svg';
 
 // Component
 import Input from '@/components/form-group/input';
@@ -53,8 +51,6 @@ function AnswerInput({ placeholder, label, index, setQuestion, question, item })
                     {!item.is_correct && item.value !== '' && (
                         <Image src={tickDisable} alt='tickDisable' className='tick' onClick={handleCheckCurrent} />
                     )}
-                    {/* {item.is_correct && item.value !== '' && <Image src={crossDisable} alt='crossDisable' />} */}
-                    {/* {!item.is_correct && item.value !== '' && <Image src={cross} alt='cross' />} */}
                 </div>
             </div>
         </MainField>

@@ -70,8 +70,12 @@ function Video() {
                         <p>{item?.jdate}</p>
                     </div>
                     <div className='left_field'>
-                        <p> امتیاز : {item?.score}</p>
-                        <p> رنک : {item?.media_rank}</p>
+                        <p>
+                            {t('score')} : {item?.score}
+                        </p>
+                        <p>
+                            {t('Rank')} : {item?.media_rank}
+                        </p>
                     </div>
                 </div>
                 {/* <small>{item?.publisher_fullname}</small> */}
@@ -83,7 +87,11 @@ function Video() {
         <LayoutProvider>
             <HeaderField title={t('Certification')} />
             <ListVideoField>
-                {certificateList?.length ? mediaListProvider : <EmptyField img={EmptyFieldImg} title='هیچ ویدیو وجود ندارد !' />}
+                {certificateList?.length ? (
+                    mediaListProvider
+                ) : (
+                    <EmptyField img={EmptyFieldImg} title={t('There are no items to display!')} />
+                )}
             </ListVideoField>
             <GapField id='gap_field'>
                 <br />

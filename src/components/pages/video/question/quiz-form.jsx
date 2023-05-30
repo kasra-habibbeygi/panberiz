@@ -53,6 +53,15 @@ export const QuizForm = ({ open, setOpen, setInputValued, inputValues }) => {
             ...inputValues,
             quize_and_answer: [...inputValues.quize_and_answer, question]
         });
+        setQuestion({
+            title: '',
+            answers: [
+                {
+                    value: '',
+                    is_correct: true
+                }
+            ]
+        });
     };
 
     return (
@@ -72,8 +81,8 @@ export const QuizForm = ({ open, setOpen, setInputValued, inputValues }) => {
                 {question.answers.map((item, index) => (
                     <div className='w-100' key={`question_input_${index}`}>
                         <AnswerInput
-                            label={`پاسخ ${index + 1}`}
-                            placeholder={`پاسخ ${index + 1} را وارد کنید ...`}
+                            label={`${t('Answer')} ${index + 1}`}
+                            placeholder={t('Enter the answer')}
                             index={index + 1}
                             setQuestion={setQuestion}
                             question={question}

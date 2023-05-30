@@ -41,7 +41,7 @@ function UserVideo() {
             {userInfo === 'SuperAdminAcademy' && <Tab selectButton={selectButton} selectedButton={selectedButton} />}
             <ListVideoField>
                 {mediaList.length === 0 ? (
-                    <EmptyField img={EmptyFieldImg} title='هیچ ویدیو وجود ندارد !' />
+                    <EmptyField img={EmptyFieldImg} title={t('There are no items to display!')} />
                 ) : (
                     mediaList?.map(item => (
                         <div key={item.id} className='card_field'>

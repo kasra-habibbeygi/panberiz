@@ -69,6 +69,10 @@
     "Add new answer": "Add new answer",
     "Cancel": "Cancel",
     "Submit question": "Submit question",
+    "Answer" : "Answer",
+    "Enter the answer" : "Enter the answer",
+    "Uploaded videos" : "Uploaded videos",
+    "Videos pending approval" : "Videos pending approval",
 
 
     "Income": "Income",
@@ -81,12 +85,29 @@
     "Hours of visit": "Hours of visit",
     "Details": "Details",
     "Rank visit report" : "Rank visit report",
-
+    
+    "viewers statistics" : "viewers statistics",
+    "Total" : "Total",
+    
+    "Prerequisite videos" : "Prerequisite videos",
+    "Enter your opinion..." : "Enter your opinion...",
+    "Your score" : "Your score",
+    "score" : "score",
+    "Start the quiz" : "Start the quiz",
+    
+    "Minutes" : "Minutes",
+    "Question" : "Question",
+    "Test registration" : "Test registration",
+    "Your test is over." : "Your test is over.",
+    "from" : "from",
+    
+    "Your message was successfully registered!" : "Your message was successfully registered!",
     "The code has been sent successfully": "The code has been sent successfully !",
     "The entered national code is not correct!": "The entered national code is not correct !",
     "The entered code is wrong!": "The entered code is wrong !",
     "no file selected": "No file selected",
     "Please enter all entries!": "Please enter all entries !",
     "Category added successfully!": "Category added successfully !",
-    "No question has been asked!": "No question has been asked!"
+    "No question has been asked!": "No question has been asked!",
+    "There are no items to display!": "There are no items to display!"
 }

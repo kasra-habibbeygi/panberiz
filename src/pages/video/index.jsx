@@ -166,12 +166,12 @@ function Video() {
                     mediaList?.length ? (
                         mediaListProvider
                     ) : (
-                        <EmptyField img={EmptyFieldImg} title='هیچ ویدیو وجود ندارد !' />
+                        <EmptyField img={EmptyFieldImg} title={t('There are no items to display!')} />
                     )
                 ) : deactiveMediaList?.length ? (
                     deactiveListProvider
                 ) : (
-                    <EmptyField img={EmptyFieldImg} title='هیچ ویدیو وجود ندارد !' />
+                    <EmptyField img={EmptyFieldImg} title={t('There are no items to display!')} />
                 )}
             </ListVideoField>
         </LayoutProvider>

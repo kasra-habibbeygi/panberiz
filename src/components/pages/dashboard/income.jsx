@@ -20,8 +20,6 @@ function Income() {
     const [selectValue, setSelectValue] = useState([]);
     const [values, setValues] = useState();
 
-    console.log(values);
-
     const autoCompleteHandler = e => {
         setValues(e);
     };
@@ -61,7 +59,7 @@ function Income() {
             <div className='line-chart'>
                 <div className='header'>
                     <div className='title'>
-                        <h1>آمار بازدید</h1>
+                        <h1>{t('viewers statistics')}</h1>
                     </div>
                 </div>
                 <div className='chart'>

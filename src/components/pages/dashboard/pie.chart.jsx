@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { PieChart, Pie, Sector, ResponsiveContainer, Cell } from 'recharts';
+import { useTranslation } from 'next-i18next';
 
 const renderActiveShape = props => {
     const { cx, cy, innerRadius, outerRadius, startAngle, endAngle, fill, payload } = props;
@@ -33,6 +34,7 @@ const renderActiveShape = props => {
 };
 
 function ChartPie({ data, selectedValue }) {
+    const { t } = useTranslation('common');
     const test = data.filter(item => item.rank === selectedValue && { name: 'Group A', value: 400 });
 
     const dataData = test.map(item => ({
@@ -43,7 +45,7 @@ function ChartPie({ data, selectedValue }) {
     const finalData = [
         ...dataData,
         {
-            name: 'کل',
+            name: t('Total'),
             value: 100
         }
     ];

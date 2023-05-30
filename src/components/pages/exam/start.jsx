@@ -30,9 +30,11 @@ const StartExam = () => {
     return (
         <MainField>
             <div className='title'>
-                <h3>کوییز {mediaDetails?.title}</h3>
+                <h3>
+                    {t('Quiz')} {mediaDetails?.title}
+                </h3>
                 <p>
-                    {mediaDetails?.media_quiezes?.length} سوال - {mediaDetails?.period_of_time} دقیقه
+                    {mediaDetails?.media_quiezes?.length} {t('Question')} - {mediaDetails?.period_of_time} {t('Minutes')}
                 </p>
             </div>
             <Image src={RocketImg} alt='' />

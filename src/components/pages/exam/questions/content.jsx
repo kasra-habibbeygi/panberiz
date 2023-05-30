@@ -3,6 +3,9 @@
 /* eslint-disable no-unused-vars */
 // Assets
 import { TitleField, QuestionsField, AfterExam } from './content.style';
+import { useTranslation } from 'next-i18next';
+
+// Assets
 import Rafiki from '../../../../assets/images/empty/rafiki.png';
 
 // MUI
@@ -23,6 +26,7 @@ import { SubmitNewExam } from '@/api-request/exam';
 import Image from 'next/image';
 
 const QuestionsContent = () => {
+    const { t } = useTranslation('common');
     const router = useRouter();
     const userInfo = useSelector(state => state.UserInfo);
     const [radiosValues, setRadioValues] = useState([]);
@@ -97,9 +101,11 @@ const QuestionsContent = () => {
         <>
             <TitleField progressPercent={Math.abs(progressPercent)}>
                 <div className='title'>
-                    <h3>کوییز {mediaDetails?.title}</h3>
+                    <h3>
+                        {t('Quiz')} {mediaDetails?.title}
+                    </h3>
                     <p>
-                        {mediaDetails?.media_quiezes?.length} سوال - {mediaDetails?.period_of_time} دقیقه
+                        {mediaDetails?.media_quiezes?.length} {t('Minutes')} - {mediaDetails?.period_of_time} {t('Question')}
                     </p>
                 </div>
                 {!examStatus && (
@@ -118,7 +124,9 @@ const QuestionsContent = () => {
                     <>
                         {mediaDetails?.media_quiezes?.map((item, index) => (
                             <div className='question_card' key={`questions_${index}`}>
-                                <small>سوال {index + 1}</small>
+                                <small>
+                                    {t('Question')} {index + 1}
+                                </small>
                                 <h4>{item.title}</h4>
                                 <RadioGroup
                                     name='radio-buttons-group'
@@ -138,14 +146,16 @@ const QuestionsContent = () => {
                         ))}
 
                         <Button color='primary' type='filled' extraClass='submit_btn' handler={sumbitExamhandler}>
-                            ثبت آزمون
+                            {t('Test registration')}
                         </Button>
                     </>
                 ) : (
                     <AfterExam>
                         <Image src={Rafiki} alt='' />
-                        <p>آزمون شما به پایان رسید.</p>
-                        <p>امتیاز شما : {score} از ۱۰۰</p>
+                        <p>{t('Your test is over.')}</p>
+                        <p>
+                            {t('Your score')} : {score} {t('from')} ۱۰۰
+                        </p>
                     </AfterExam>
                 )}
             </QuestionsField>

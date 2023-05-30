@@ -70,6 +70,10 @@
     "Add new answer": "إضافة إجابة جديدة",
     "Cancel": "إلغاء",
     "Submit question": "تسجيل السؤال",
+    "Answer" : "إجابة",
+    "Enter the answer" : "أدخل الجواب",
+    "Uploaded videos" : "مقاطع الفيديو المحملة",
+    "Videos pending approval" : "مقاطع الفيديو في انتظار الموافقة",
 
     "Income": "دخل",
     "Weekly": "أسبوعي",
@@ -81,7 +85,23 @@
     "Hours of visit": "ساعات الزيارة",
     "Details": "تفاصيل",
     "Rank visit report": "تقرير زيارة الترتيب",
-
+    
+    "viewers statistics" : "إحصائيات المشاهدين",
+    "Total" : "المجموع",
+        
+    "Prerequisite videos" : "مقاطع الفيديو المطلوبة مسبقًا",
+    "Enter your opinion..." : "أدخل رأيك ...",
+    "Your score" : "درجاتك",
+    "score" : "نتيجة",
+    "Start the quiz" : "ابدأ الاختبار",
+    
+    "Minutes" : "دقائق",
+    "Question" : "سؤال",
+    "Test registration" : "التسجيل في الاختبار",
+    "Your test is over." : "انتهى الاختبار الخاص بك.",
+    "from" : "من",
+    
+    "Your message was successfully registered!" : "تم تسجيل رسالتك بنجاح!",
     "The code has been sent successfully": "تم إرسال الرمز بنجاح!",
     "The entered national code is not correct!": "الكود الوطني الذي تم إدخاله غير صحيح!",
     "The entered code is wrong!": "الكود الذي تم إدخاله خاطئ!",
@@ -90,5 +110,6 @@
     "Category added successfully!": "تمت إضافة الفئة بنجاح!",
     "No question has been asked!": "لم يتم طرح أي سؤال!",
     "Successfully updated!": "تم التحديث بنجاح!",
-    "An error occurred, please try again!": "حدث خطأ ، يرجى المحاولة مرة أخرى!"
+    "An error occurred, please try again!": "حدث خطأ ، يرجى المحاولة مرة أخرى!",
+    "There are no items to display!": "لا توجد عناصر لعرضها!"
 }

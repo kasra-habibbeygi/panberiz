@@ -29,6 +29,7 @@ import { GetCategoriesList } from '@/api-request/category';
 import { GetTagsList } from '@/api-request/tags';
 import { AddNewmedia } from '@/api-request/media/add';
 import { GetMyMediaList } from '@/api-request/media/list';
+import { toast } from 'react-hot-toast';
 
 const LangList = [
     { label: 'english', value: 'en' },
@@ -105,6 +106,8 @@ function AddForm() {
         }));
     };
 
+    console.log(inputValues);
+
     const addNewMediaHandler = () => {
         let newVal = {
             ...inputValues,
@@ -121,8 +124,25 @@ function AddForm() {
         });
 
         AddNewmedia(formData)
-            .then(() => {})
-            .catch(() => {})
+            .then(() => {
+                toast.success('ویدیو با موفقیت اضافه شد !');
+                setInputValued({
+                    lang: '',
+                    title: '',
+                    description: '',
+                    cover: '',
+                    file: '',
+                    media_type: '',
+                    category: '',
+                    period_of_time: '',
+                    tags: [],
+                    prerequisites: [],
+                    quize_and_answer: []
+                });
+            })
+            .catch(() => {
+                toast.error(t('Please enter all entries!'));
+            })
             .finally(() => {
                 setLoader(false);
             });

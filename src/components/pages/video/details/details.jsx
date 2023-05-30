@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
+import { useTranslation } from 'next-i18next';
+
 // Assets
 import Button from '@/components/form-group/button';
 import { MainField } from './details.style';
@@ -14,6 +16,7 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 const DetailsField = ({ mediaDetails }) => {
+    const { t } = useTranslation();
     const userInfo = useSelector(state => state.UserInfo);
     const [examBtnStatus, setExamBtnStatus] = useState(false);
 
@@ -41,7 +44,7 @@ const DetailsField = ({ mediaDetails }) => {
                 {examBtnStatus && (
                     <Button color='primary' type='outline'>
                         <Link href={`/exam/${mediaDetails?.id}`}>
-                            شروع کوییز
+                            {t('Start the quiz')}
                             <KeyboardBackspaceRoundedIcon />
                         </Link>
                     </Button>
