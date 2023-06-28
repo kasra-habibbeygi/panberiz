@@ -5,7 +5,11 @@ export const GetUserMediaList = async (id, lang) => {
 };
 
 export const GetMyMediaList = async () => {
-    return RequestHandler.call({ url: '/managers/my-media/', method: 'get' }).then(res => res.data);
+    return RequestHandler.call({ url: '/admins/media-for-agent/', method: 'get' }).then(res => res.data);
+};
+
+export const Test = async () => {
+    return RequestHandler.call({ url: '/admins/my-video-add/', method: 'get' }).then(res => res.data);
 };
 
 export const GetAllMedia = async lang => {

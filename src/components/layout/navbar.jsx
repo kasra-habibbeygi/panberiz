@@ -96,7 +96,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
                         options={LangList}
                     />
                 </div>
-                {userInfo.role !== 'User' ? (
+                {userInfo.role !== 'AgentAcademy' && userInfo.role !== 'User' ? (
                     <Button color='primary' type='outline' extraClass='button_link'>
                         <Link href='/video/add'>
                             <AddIcon />
@@ -109,7 +109,6 @@ function Navbar({ setAsideStatus, asideStatus }) {
                 <Link href='/favorits' className={`favorit_link ${userInfo.role === 'User' ? 'show' : ''}`}>
                     <Image src={heart} className='hearth_icon' alt='heart' />
                 </Link>
-
                 <div className='profile_dropdown_field' ref={ref}>
                     <Image
                         src={userInfo.theme === 'light' ? user : UserWhite}

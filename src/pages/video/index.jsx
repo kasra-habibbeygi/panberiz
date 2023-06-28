@@ -52,9 +52,15 @@ function Video() {
                     setMediaList(res.results);
                 })
                 .catch(() => {});
+
+            GetAllDeactiveMedia(userInfo.lang)
+                .then(res => {
+                    setDeactiveMediaList(res.results);
+                })
+                .catch(() => {});
         }
 
-        if (userInfo.role === 'AdminAcademy' || userInfo.role === 'User') {
+        if (userInfo.role === 'User') {
             router.push('/dashboard');
         }
     }, [router.query.id, userInfo.lang, userInfo.role, reload]);

@@ -106,8 +106,6 @@ function AddForm() {
         }));
     };
 
-    console.log(inputValues);
-
     const addNewMediaHandler = () => {
         let newVal = {
             ...inputValues,

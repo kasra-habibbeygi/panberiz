@@ -32,7 +32,11 @@ export const UserInfo = createSlice({
         },
         userInfohandler: (state, action) => {
             Object.keys(action.payload).forEach(item => {
-                state[item] = action.payload[item];
+                if (item === 'user_role') {
+                    state.role = action.payload[item];
+                } else {
+                    state[item] = action.payload[item];
+                }
             });
         },
         loginStatushandler: (state, action) => {
