@@ -7,9 +7,9 @@ export const ListVideoField = styled.div(() => ({
     flexWrap: 'wrap',
 
     '& .accept_button': {
-        background: "red",
+        background: 'red'
     },
-    
+
     '& .card_field': {
         width: '33.33%',
         padding: '10px'

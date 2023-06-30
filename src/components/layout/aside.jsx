@@ -59,7 +59,7 @@ function Aside({ asideStatus }) {
                             </Link>
                         </li>
                     )}
-                    {(userInfo.role === 'AdminAcademy' || userInfo.role === 'AgentAcademy') && (
+                    {userInfo.role === 'AgentAcademy' && (
                         <li>
                             <Link href='/video' className={`${router.pathname === '/video' ? 'active' : ''}`}>
                                 <Image src={video} alt='video' />
