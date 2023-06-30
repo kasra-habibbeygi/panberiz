@@ -27,3 +27,17 @@ export const UpdateMedia = async (id, data) => {
 export const DeleteMedia = async id => {
     return RequestHandler.call({ url: `/managers/media/delete-media/${id}/`, method: 'delete' }).then(res => res.data);
 };
+
+
+// Nima404 Updates
+export const GetAdminVideos = async id => {
+    return RequestHandler.call({ url: `/admins/media-for-agent/`, method: 'get' }).then(res => res.data);
+};
+
+export const PostAcceptVideo = async data => {
+    return RequestHandler.call({ url: `/admins/my-video-add/`, method: 'post', data }).then(res => res.data);
+};
+
+export const GetAcceptedVideos = async data => {
+    return RequestHandler.call({ url: `/admins/my-videos/`, method: 'get' }).then(res => res.data);
+};

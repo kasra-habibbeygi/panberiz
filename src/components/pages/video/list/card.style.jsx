@@ -13,6 +13,7 @@ export const CardField = styled.div(props => ({
         justifyContent: 'space-between',
         marginTop: '10px',
 
+
         '& .right_field': {
             color: props.theme.palette.colors.text.blackAndWhite,
             p: {

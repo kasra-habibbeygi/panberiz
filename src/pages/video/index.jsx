@@ -7,7 +7,7 @@ import Tab from '@/components/pages/video/list/tab';
 import HeaderField from '@/components/template/header';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
-import { GetMyMediaList, GetAllMedia, GetAllDeactiveMedia, UpdateMedia, DeleteMedia } from '@/api-request/media/list';
+import { GetMyMediaList, GetAllMedia, GetAllDeactiveMedia, UpdateMedia, DeleteMedia, GetAdminVideos, PostAcceptVideo, GetAcceptedVideos } from '@/api-request/media/list';
 import { useSelector } from 'react-redux';
 import { ListVideoField } from '@/components/pages/video/list/list-video.style';
 import { CardField } from '@/components/pages/video/list/card.style';
@@ -39,31 +39,45 @@ function Video() {
                 .then(res => {
                     setMediaList(res.results);
                 })
-                .catch(() => {});
+                .catch(() => { });
 
             GetAllDeactiveMedia(userInfo.lang)
                 .then(res => {
                     setDeactiveMediaList(res.results);
                 })
-                .catch(() => {});
+                .catch(() => { });
         } else if (userInfo.role === 'AgentAcademy') {
+            console.log("nima done")
+
             GetMyMediaList(router.query.id, userInfo.lang)
                 .then(res => {
                     setMediaList(res.results);
                 })
-                .catch(() => {});
+                .catch(() => { });
 
             GetAllDeactiveMedia(userInfo.lang)
                 .then(res => {
                     setDeactiveMediaList(res.results);
                 })
-                .catch(() => {});
+                .catch(() => { });
+
+            GetAdminVideos()
+                .then(res => {
+                    console.log("res", res)
+                    setMediaList(res.results);
+                })
+                .catch(() => {
+                });
         }
 
         if (userInfo.role === 'User') {
             router.push('/dashboard');
         }
     }, [router.query.id, userInfo.lang, userInfo.role, reload]);
+
+    useEffect(() => {
+        console.log("mediaList", mediaList)
+    }, [mediaList])
 
     useEffect(() => {
         if (userInfo.role === 'SuperAdminAcademy') {
@@ -76,6 +90,14 @@ function Video() {
             is_delete: !status,
             media_status: status
         };
+
+        PostAcceptVideo(id).then(() => {
+            setReload(!reload);
+            toast.success(t('Successfully updated!'));
+        })
+            .catch(() => {
+                toast.success(t('An error occurred, please try again!'));
+            });
 
         UpdateMedia(id, data)
             .then(() => {
@@ -92,8 +114,40 @@ function Video() {
             .then(() => {
                 setReload(!reload);
             })
-            .catch(() => {});
+            .catch(() => { });
     };
+
+    const handleAcceptVideo = async (id) => {
+        await PostAcceptVideo({
+            media: id
+        }).then(res => {
+            if (res.message === "با موفقیت تایید شد") {
+                toast.success(t(res.message));
+            } else {
+                toast.success(t("خطا"));
+            }
+        })
+            .catch(() => {
+            });
+
+        await GetAcceptedVideos().then(res => {
+            console.log("resAcc", res)
+            res?.results.map((node) => {
+                const finded = mediaList.find((item) => item.id === node.media)
+                if (
+                    finded
+                ) {
+                    const filtred = mediaList.filter((item) => item !== finded)
+                    setMediaList(filtred)
+                    console.log("filt-mediaList", mediaList)
+                    console.log("filt-", filtred)
+                }
+            })
+
+        })
+            .catch(() => {
+            });
+    }
 
     const mediaListProvider = mediaList?.map(item => (
         <div key={item.id} className='card_field'>
@@ -123,7 +177,9 @@ function Video() {
                             <p>{item?.score}</p>
                             <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
                         </div>
-                        <DeleteIcon className='deletemedia' onClick={() => deletespecificMedia(item.id)} />
+                        <button onClick={() => handleAcceptVideo(item.id)}>
+                            تایید
+                        </button>
                     </div>
                 </div>
                 <small>{item?.publisher_fullname}</small>
@@ -137,7 +193,6 @@ function Video() {
                 <div className='video_image'>
                     <div className='float'>
                         <Image className='icon' src={accept} alt='accept' onClick={() => changeMediahandler(true, item.id)} />
-                        <Image className='icon' src={reject} alt='reject' onClick={() => changeMediahandler(false, item.id)} />
                     </div>
                     <img
                         className='video_banner'

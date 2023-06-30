@@ -29,6 +29,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 // Hooks
 import useOutsideClick from '@/hooks/use-outside-click';
+import { GetAcceptedVideos } from '@/api-request/media/list';
 
 const LangList = [
     { label: 'english', value: 'en' },
@@ -73,7 +74,6 @@ function Navbar({ setAsideStatus, asideStatus }) {
         setLangValue(value);
         dispatch(langHandler(value.value));
     };
-
     return (
         <Styles.Navbar>
             <div className='right'>
@@ -96,7 +96,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
                         options={LangList}
                     />
                 </div>
-                {userInfo.role !== 'AgentAcademy' && userInfo.role !== 'User' ? (
+                {userInfo.role !== 'AdminAcademy' && userInfo.role !== 'AgentAcademy' ? (
                     <Button color='primary' type='outline' extraClass='button_link'>
                         <Link href='/video/add'>
                             <AddIcon />
