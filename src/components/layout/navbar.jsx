@@ -95,7 +95,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
                         options={LangList}
                     />
                 </div>
-                {userInfo.role === 'AdminAcademy' ? (
+                {userInfo.role !== 'User' ? (
                     <Button color='primary' type='outline' extraClass='button_link'>
                         <Link href='/video/add'>
                             <AddIcon />

@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Tab from '@/components/pages/video/list/tab';
 import HeaderField from '@/components/template/header';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+// import reject from '@/assets/icons/reject.svg';
 import { useRouter } from 'next/router';
 import {
     GetMyMediaList,
@@ -158,7 +159,11 @@ function Video() {
                             <p>{item?.score}</p>
                             <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
                         </div>
-                        {userInfo.role === 'AgentAcademy' && <button onClick={() => handleAcceptVideo(item.id)}>{t('verify')}</button>}
+                        {userInfo.role === 'AgentAcademy' && (
+                            <button className='accept_button' onClick={() => handleAcceptVideo(item.id)}>
+                                {t('verify')}
+                            </button>
+                        )}
                     </div>
                 </div>
                 <small>{item?.publisher_fullname}</small>
@@ -172,6 +177,7 @@ function Video() {
                 <div className='video_image'>
                     <div className='float'>
                         <Image className='icon' src={accept} alt='accept' onClick={() => changeMediahandler(true, item.id)} />
+                        {/* <Image className='icon' src={reject} alt='reject' onClick={() => changeMediahandler(false, item.id)} /> */}
                     </div>
                     <img
                         className='video_banner'

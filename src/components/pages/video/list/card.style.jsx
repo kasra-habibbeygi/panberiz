@@ -50,6 +50,12 @@ export const CardField = styled.div(props => ({
         fontSize: '0.9rem'
     },
 
+    '& .accept_button': {
+        padding: '5px 10px',
+        marginTop: '10px',
+        borderRadius: '5px'
+    },
+
     '& .video_image': {
         width: '100%',
         height: '250px',
