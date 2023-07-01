@@ -6,13 +6,13 @@ import { useEffect, useState } from 'react';
 import Tab from '@/components/pages/video/list/tab';
 import HeaderField from '@/components/template/header';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-// import reject from '@/assets/icons/reject.svg';
 import { useRouter } from 'next/router';
 import {
     GetMyMediaList,
     GetAllMedia,
     GetAllDeactiveMedia,
     UpdateMedia,
+    DeleteMedia,
     GetAdminVideos,
     PostAcceptVideo,
     GetAcceptedVideos
@@ -26,9 +26,11 @@ import play from '@/assets/icons/play.svg';
 import { useTranslation } from 'next-i18next';
 import StarIcon from '@mui/icons-material/Star';
 import accept from '@/assets/icons/accept.svg';
+import reject from '@/assets/icons/reject.svg';
 import { toast } from 'react-hot-toast';
 import EmptyFieldImg from '../../assets/images/empty/empty-media-list.png';
 import EmptyField from '@/components/template/empty-field';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function Video() {
     const { t } = useTranslation();
@@ -36,6 +38,7 @@ function Video() {
     const [selectedButton, setSelectedButton] = useState('uploaded');
     const [tabsStatus, setTabsStatus] = useState(false);
     const [mediaList, setMediaList] = useState([]);
+    const [notAcceptedList, setNotAcceptedList] = useState([]);
     const [deactiveMediaList, setDeactiveMediaList] = useState([]);
     const [reload, setReload] = useState(false);
     const userInfo = useSelector(state => state.UserInfo);
@@ -59,21 +62,14 @@ function Video() {
                     setMediaList(res.results);
                 })
                 .catch(() => {});
-
-            GetAllDeactiveMedia(userInfo.lang)
+            GetAdminVideos()
                 .then(res => {
-                    setDeactiveMediaList(res.results);
-                })
-                .catch(() => {});
-
-            GetAdminVideos(userInfo.lang)
-                .then(res => {
-                    setMediaList(res.results);
+                    setNotAcceptedList(res.results);
                 })
                 .catch(() => {});
         }
 
-        if (userInfo.role === 'User') {
+        if (userInfo.role === 'AdminAcademy' || userInfo.role === 'User') {
             router.push('/dashboard');
         }
     }, [router.query.id, userInfo.lang, userInfo.role, reload]);
@@ -90,15 +86,6 @@ function Video() {
             media_status: status
         };
 
-        PostAcceptVideo(id)
-            .then(() => {
-                setReload(!reload);
-                toast.success(t('Successfully updated!'));
-            })
-            .catch(() => {
-                toast.success(t('An error occurred, please try again!'));
-            });
-
         UpdateMedia(id, data)
             .then(() => {
                 setReload(!reload);
@@ -109,12 +96,18 @@ function Video() {
             });
     };
 
-    const handleAcceptVideo = async id => {
-        PostAcceptVideo({
-            media: id
-        })
+    const deletespecificMedia = id => {
+        DeleteMedia(id)
             .then(() => {
                 setReload(!reload);
+            })
+            .catch(() => {});
+    };
+
+    const handleAcceptVideo = async id => {
+        PostAcceptVideo({ media: id })
+            .then(res => {
+                toast.success(t(res.message));
             })
             .catch(() => {});
 
@@ -159,11 +152,41 @@ function Video() {
                             <p>{item?.score}</p>
                             <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
                         </div>
-                        {userInfo.role === 'AgentAcademy' && (
-                            <button className='accept_button' onClick={() => handleAcceptVideo(item.id)}>
-                                {t('verify')}
-                            </button>
+                        <DeleteIcon className='deletemedia' onClick={() => deletespecificMedia(item.id)} />
+                    </div>
+                </div>
+                <small>{item?.publisher_fullname}</small>
+            </CardField>
+        </div>
+    ));
+
+    const notAceptedListProvider = notAcceptedList?.map(item => (
+        <div key={item.id} className='card_field'>
+            <CardField>
+                <div className='video_image'>
+                    <div className='float'>
+                        <Image className='icon' src={accept} alt='accept' onClick={() => handleAcceptVideo(item.id)} />
+                    </div>
+                    <img
+                        className='video_banner'
+                        src={item?.cover.replace(
+                            'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
+                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm/'
                         )}
+                        alt='video-banner'
+                    />
+                </div>
+                <div className='card_details'>
+                    <div className='right_field'>
+                        <h3>{item?.title}</h3>
+                        <p>{item?.des}</p>
+                    </div>
+                    <div className='left_field'>
+                        <div>
+                            <p>{item?.score}</p>
+                            <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
+                        </div>
+                        <DeleteIcon className='deletemedia' onClick={() => deletespecificMedia(item.id)} />
                     </div>
                 </div>
                 <small>{item?.publisher_fullname}</small>
@@ -177,7 +200,7 @@ function Video() {
                 <div className='video_image'>
                     <div className='float'>
                         <Image className='icon' src={accept} alt='accept' onClick={() => changeMediahandler(true, item.id)} />
-                        {/* <Image className='icon' src={reject} alt='reject' onClick={() => changeMediahandler(false, item.id)} /> */}
+                        <Image className='icon' src={reject} alt='reject' onClick={() => changeMediahandler(false, item.id)} />
                     </div>
                     <img
                         className='video_banner'
@@ -210,7 +233,10 @@ function Video() {
             <ListVideoField>
                 {selectedButton === 'uploaded' ? (
                     mediaList?.length ? (
-                        mediaListProvider
+                        <>
+                            {notAceptedListProvider}
+                            {mediaListProvider}
+                        </>
                     ) : (
                         <EmptyField img={EmptyFieldImg} title={t('There are no items to display!')} />
                     )

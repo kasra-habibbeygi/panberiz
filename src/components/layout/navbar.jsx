@@ -73,6 +73,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
         setLangValue(value);
         dispatch(langHandler(value.value));
     };
+
     return (
         <Styles.Navbar>
             <div className='right'>
@@ -108,6 +109,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
                 <Link href='/favorits' className={`favorit_link ${userInfo.role === 'User' ? 'show' : ''}`}>
                     <Image src={heart} className='hearth_icon' alt='heart' />
                 </Link>
+
                 <div className='profile_dropdown_field' ref={ref}>
                     <Image
                         src={userInfo.theme === 'light' ? user : UserWhite}

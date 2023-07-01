@@ -51,7 +51,7 @@ function Aside({ asideStatus }) {
         <Style.AsideField asideStatus={asideStatus} categoriesListLength={categoriesList.length}>
             <div className='items'>
                 <ol>
-                    {(userInfo.role === 'AdminAcademy' || userInfo.role === 'SuperAdminAcademy') && (
+                    {(userInfo.role === 'SuperAdminAcademy' || userInfo.role === 'AgentAcademy') && (
                         <li>
                             <Link href='/dashboard' className={`${router.pathname === '/dashboard' ? 'active' : ''}`}>
                                 <Image src={home} alt='home' />
@@ -59,7 +59,7 @@ function Aside({ asideStatus }) {
                             </Link>
                         </li>
                     )}
-                    {userInfo.role === 'AgentAcademy' && (
+                    {(userInfo.role === 'SuperAdminAcademy' || userInfo.role === 'AgentAcademy') && (
                         <li>
                             <Link href='/video' className={`${router.pathname === '/video' ? 'active' : ''}`}>
                                 <Image src={video} alt='video' />
@@ -94,7 +94,7 @@ function Aside({ asideStatus }) {
                         </>
                     )}
 
-                    {userInfo.role === 'AdminAcademy' ? (
+                    {userInfo.role === 'SuperAdminAcademy' ? (
                         <>
                             <li>
                                 <Link href='/tags'>

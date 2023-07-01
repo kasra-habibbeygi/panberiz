@@ -2,14 +2,13 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { ReportItemField } from './report-item.style';
-import Collapse from '@mui/material/Collapse';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 function ReportItem({ data, index }) {
     const [firstColapseStatus, setFirstColapseStatus] = useState(true);
     const [secondColapseStatus, setsecondColapseStatus] = useState(true);
     const colapsehandler = (setter, status) => {
-        //     setter(!status);
+        setter(!status);
     };
 
     return (
@@ -21,7 +20,7 @@ function ReportItem({ data, index }) {
                 <p>{data.views}</p>
                 <div className='colapse_field'>{open ? <ExpandLess /> : <ExpandMore />}</div>
             </div>
-            <Collapse className='collapse' in={firstColapseStatus}>
+            <div className='collapse' in={firstColapseStatus}>
                 {data.media_data.map((item, count) => (
                     <ReportItemField
                         key={count}
@@ -33,9 +32,9 @@ function ReportItem({ data, index }) {
                             <p>{item.title}</p>
                             <p>{item.views}</p>
                         </div>
-                        <Collapse className='collapse' in={secondColapseStatus}>
+                        <div className='collapse' in={secondColapseStatus}>
                             {item.view_history.map((data, secCount) => (
-                                <div key={secCount}>
+                                <div key={secCount} style={{ width: '100%' }}>
                                     <div className='collapse-item'>
                                         <p>{data.jdate}</p>
                                         <p>{data.user_codemeli}</p>
@@ -43,10 +42,10 @@ function ReportItem({ data, index }) {
                                     </div>
                                 </div>
                             ))}
-                        </Collapse>
+                        </div>
                     </ReportItemField>
                 ))}
-            </Collapse>
+            </div>
         </ReportItemField>
     );
 }
