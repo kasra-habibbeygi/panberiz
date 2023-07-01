@@ -65,7 +65,7 @@ function Video() {
                 })
                 .catch(() => {});
 
-            GetAdminVideos()
+            GetAdminVideos(userInfo.lang)
                 .then(res => {
                     setMediaList(res.results);
                 })
@@ -112,7 +112,9 @@ function Video() {
         PostAcceptVideo({
             media: id
         })
-            .then(() => {})
+            .then(() => {
+                setReload(!reload);
+            })
             .catch(() => {});
 
         GetAcceptedVideos()

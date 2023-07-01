@@ -159,7 +159,7 @@ function AddForm() {
             })
             .catch(() => {});
 
-        GetMyMediaList()
+        GetMyMediaList(lang)
             .then(res => {
                 selectListProvider(res.results, 'title', 'prerequisites');
             })
