@@ -77,8 +77,6 @@ export const ReportItemField = styled.button(props => ({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
-        maxHeight: props.secondCollapseStatus ? '0px' : 'max-height',
-        overflow: 'hidden',
 
         '& .collapse-item': {
             width: '100%',
@@ -91,6 +89,7 @@ export const ReportItemField = styled.button(props => ({
             justifyContent: 'space-between',
             borderRadius: '15px',
             marginTop: '20px',
+            position : 'relative',
 
             p: {
                 color: props.theme.palette.colors.text.blackAndWhite,
@@ -127,6 +126,7 @@ export const ReportItemField = styled.button(props => ({
             justifyContent: 'space-between',
             borderRadius: '15px',
             marginTop: '20px',
+            position : 'relative',
 
             p: {
                 color: props.theme.palette.colors.text.blackAndWhite,

@@ -35,7 +35,7 @@ const VideoModal = ({ status, setStatus, mediaDetails }) => {
                     <source
                         src={mediaDetails?.file?.replace(
                             'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
-                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm'
+                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
                         )}
                         type='video/mp4'
                     />

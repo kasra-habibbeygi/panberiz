@@ -47,24 +47,34 @@ const VideoField = ({ mediaDetails }) => {
                     <img
                         className='video_banner'
                         src={mediaDetails?.cover?.replace(
-                            'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
-                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm'
+                            'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21',
+                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir'
                         )}
                         alt='video-banner'
                     />
                 </div>
             ) : (
-                <a
-                    href={mediaDetails?.file?.replace(
-                        'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
-                        'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm/'
-                    )}
-                    target='_blank'
-                    className='download_field'
-                    rel='noreferrer'
-                >
-                    دانلود فایل
-                </a>
+                <>
+                    <embed
+                        src={mediaDetails?.file?.replace(
+                            'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21',
+                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir'
+                        )}
+                        width='800px'
+                        height='2100px'
+                    />
+                    <a
+                        href={mediaDetails?.file?.replace(
+                            'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21',
+                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir'
+                        )}
+                        target='_blank'
+                        className='download_field'
+                        rel='noreferrer'
+                    >
+                        دانلود فایل
+                    </a>
+                </>
             )}
 
             <div className='card_details'>

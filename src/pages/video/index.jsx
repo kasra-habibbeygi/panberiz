@@ -14,8 +14,7 @@ import {
     UpdateMedia,
     DeleteMedia,
     GetAdminVideos,
-    PostAcceptVideo,
-    GetAcceptedVideos
+    PostAcceptVideo
 } from '@/api-request/media/list';
 import { useSelector } from 'react-redux';
 import { ListVideoField } from '@/components/pages/video/list/list-video.style';
@@ -108,18 +107,17 @@ function Video() {
         PostAcceptVideo({ media: id })
             .then(res => {
                 toast.success(t(res.message));
-            })
-            .catch(() => {});
 
-        GetAcceptedVideos()
-            .then(res => {
-                res?.results.map(node => {
-                    const finded = mediaList.find(item => item.id === node.media);
-                    if (finded) {
-                        const filtred = mediaList.filter(item => item !== finded);
-                        setMediaList(filtred);
-                    }
-                });
+                GetMyMediaList(router.query.id, userInfo.lang)
+                    .then(res => {
+                        setMediaList(res.results);
+                    })
+                    .catch(() => {});
+                GetAdminVideos()
+                    .then(res => {
+                        setNotAcceptedList(res.results);
+                    })
+                    .catch(() => {});
             })
             .catch(() => {});
     };
@@ -136,8 +134,8 @@ function Video() {
                     <img
                         className='video_banner'
                         src={item?.cover.replace(
-                            'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
-                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm/'
+                            'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21/',
+                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
                         )}
                         alt='video-banner'
                     />
@@ -170,8 +168,8 @@ function Video() {
                     <img
                         className='video_banner'
                         src={item?.cover.replace(
-                            'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
-                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm/'
+                            'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21',
+                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
                         )}
                         alt='video-banner'
                     />

@@ -7,8 +7,18 @@ import { ExpandLess, ExpandMore } from '@mui/icons-material';
 function ReportItem({ data, index }) {
     const [firstCollapseStatus, setFirstCollapseStatus] = useState(true);
     const [secondCollapseStatus, setsecondCollapseStatus] = useState(true);
-    const colapsehandler = (setter, status, count) => {
+    const [rowIndex, setRowIndex] = useState();
+    const colapsehandler = (setter, status, count = '') => {
         setter(!status);
+
+        console.log(count, rowIndex);
+
+        if (count !== '') {
+            setRowIndex(count);
+        }
+        if (rowIndex === count) {
+            setRowIndex('');
+        }
     };
 
     return (
@@ -30,18 +40,23 @@ function ReportItem({ data, index }) {
                             <p>{count + 1}</p>
                             <p>{item.title}</p>
                             <p>{item.views}</p>
+                            <div className='colapse_field'>
+                                {item.view_history.length ? firstCollapseStatus ? <ExpandLess /> : <ExpandMore /> : ''}
+                            </div>
                         </div>
-                        <div className='sub_collapse'>
-                            {item.view_history.map((data, secCount) => (
-                                <div key={secCount} style={{ width: '100%' }}>
-                                    <div className='collapse-item'>
-                                        <p>{data.jdate}</p>
-                                        <p>{data.user_codemeli}</p>
-                                        <p>{data.user_name}</p>
+                        {rowIndex === count && (
+                            <div className='sub_collapse'>
+                                {item.view_history.map((data, secCount) => (
+                                    <div key={secCount} style={{ width: '100%' }}>
+                                        <div className='collapse-item'>
+                                            <p>{data.jdate}</p>
+                                            <p>{data.user_codemeli}</p>
+                                            <p>{data.user_name}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        )}
                     </ReportItemField>
                 ))}
             </div>

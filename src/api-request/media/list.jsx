@@ -5,7 +5,7 @@ export const GetUserMediaList = async (id, lang) => {
 };
 
 export const GetMyMediaList = async () => {
-    return RequestHandler.call({ url: '/admins/media-for-agent/', method: 'get' }).then(res => res.data);
+    return RequestHandler.call({ url: '/admins/media/', method: 'get' }).then(res => res.data);
 };
 
 export const GetAllMedia = async lang => {
@@ -25,13 +25,9 @@ export const DeleteMedia = async id => {
 };
 
 export const GetAdminVideos = async () => {
-    return RequestHandler.call({ url: '/admins/media-for-agent/', method: 'get' }).then(res => res.data);
+    return RequestHandler.call({ url: '/admins/media-for-agent', method: 'get' }).then(res => res.data);
 };
 
 export const PostAcceptVideo = async data => {
     return RequestHandler.call({ url: '/admins/my-video-add/', method: 'post', data }).then(res => res.data);
-};
-
-export const GetAcceptedVideos = async () => {
-    return RequestHandler.call({ url: '/admins/my-videos/', method: 'get' }).then(res => res.data);
 };
