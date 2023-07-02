@@ -5,34 +5,33 @@ import { ReportItemField } from './report-item.style';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 function ReportItem({ data, index }) {
-    const [firstColapseStatus, setFirstColapseStatus] = useState(true);
-    const [secondColapseStatus, setsecondColapseStatus] = useState(true);
-    const colapsehandler = (setter, status) => {
+    const [firstCollapseStatus, setFirstCollapseStatus] = useState(true);
+    const [secondCollapseStatus, setsecondCollapseStatus] = useState(true);
+    const colapsehandler = (setter, status, count) => {
         setter(!status);
     };
 
     return (
-        <ReportItemField open={firstColapseStatus} onClick={() => colapsehandler(setFirstColapseStatus, firstColapseStatus)}>
-            <div className='item'>
+        <ReportItemField fistCollpaseStatus={firstCollapseStatus} secondCollapseStatus={secondCollapseStatus}>
+            <div className='item' onClick={() => colapsehandler(setFirstCollapseStatus, firstCollapseStatus)}>
                 <p>{index + 1}</p>
                 <p>{data.rank}</p>
                 <p>{data.media_count}</p>
                 <p>{data.views}</p>
-                <div className='colapse_field'>{open ? <ExpandLess /> : <ExpandMore />}</div>
+                <div className='colapse_field'>{firstCollapseStatus ? <ExpandLess /> : <ExpandMore />}</div>
             </div>
-            <div className='collapse' in={firstColapseStatus}>
+            <div className='collapse'>
                 {data.media_data.map((item, count) => (
-                    <ReportItemField
-                        key={count}
-                        className='sec_colapse_field'
-                        onClick={() => colapsehandler(setsecondColapseStatus, secondColapseStatus)}
-                    >
-                        <div className='collapse-item'>
+                    <ReportItemField key={count} className='sec_colapse_field'>
+                        <div
+                            className='collapse-item'
+                            onClick={() => item.view_history.length && colapsehandler(setsecondCollapseStatus, secondCollapseStatus, count)}
+                        >
                             <p>{count + 1}</p>
                             <p>{item.title}</p>
                             <p>{item.views}</p>
                         </div>
-                        <div className='collapse' in={secondColapseStatus}>
+                        <div className='sub_collapse'>
                             {item.view_history.map((data, secCount) => (
                                 <div key={secCount} style={{ width: '100%' }}>
                                     <div className='collapse-item'>
