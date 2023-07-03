@@ -7,11 +7,15 @@ import Button from '@/components/form-group/button';
 
 // API
 import { AddUserVideoViwe } from '@/api-request/media/details';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const VideoModal = ({ status, setStatus, mediaDetails }) => {
     const userInfo = useSelector(state => state.UserInfo);
+    const [test, setTest] = useState('');
+
+    console.log(test);
+
     useEffect(() => {
         if (status) {
             AddUserVideoViwe({
@@ -20,6 +24,7 @@ const VideoModal = ({ status, setStatus, mediaDetails }) => {
             })
                 .then(() => {})
                 .catch(() => {});
+            setTest(mediaDetails);
         }
     }, [status]);
 
@@ -31,15 +36,17 @@ const VideoModal = ({ status, setStatus, mediaDetails }) => {
     return (
         <MainField>
             <Dialog onClose={modalClosehandler} open={status} disablePortal keepMounted fullWidth={true} scroll='body' maxWidth='md'>
-                <video controls id='slider_video_player'>
-                    <source
-                        src={mediaDetails?.file?.replace(
-                            'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
-                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
-                        )}
-                        type='video/mp4'
-                    />
-                </video>
+                {test !== '' && (
+                    <video controls id='slider_video_player'>
+                        <source
+                            src={test?.file?.replace(
+                                'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21',
+                                'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir'
+                            )}
+                            type='video/mp4'
+                        />
+                    </video>
+                )}
                 <Button type='filled' color='primary' handler={modalClosehandler}>
                     بستن پنجره
                 </Button>
