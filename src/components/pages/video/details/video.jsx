@@ -55,14 +55,6 @@ const VideoField = ({ mediaDetails }) => {
                 </div>
             ) : (
                 <>
-                    <embed
-                        src={mediaDetails?.file?.replace(
-                            'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21',
-                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir'
-                        )}
-                        width='800px'
-                        height='2100px'
-                    />
                     <a
                         href={mediaDetails?.file?.replace(
                             'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21',

@@ -323,7 +323,7 @@ function AddForm() {
                     </div>
                     <div className='w-50'>
                         <label htmlFor='chose_file' className='upload-file'>
-                            {inputValues.file?.name ?? t('Click to upload media cover')}
+                            {inputValues.file?.name ?? t('Click to upload media jhjkjkjhk')}
                         </label>
                         <input hidden type='file' name='file' id='chose_file' onChange={e => fileValueHandler(e)} />
                     </div>

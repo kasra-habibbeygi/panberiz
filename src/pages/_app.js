@@ -1,22 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable @next/next/next-script-for-ga */
+import Head from 'next/head';
+import NProgress from 'nprogress';
+import { Toaster } from 'react-hot-toast';
+import { useEffect } from 'react';
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material/styles';
-import NProgress from 'nprogress';
-import Router, { useRouter } from 'next/router';
-import 'nprogress/nprogress.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { wrapper } from '../state-manager/store';
 import { appWithTranslation } from 'next-i18next';
+import Router, { useRouter } from 'next/router';
+import { langHandler } from '@/state-manager/reducer/user';
+import { themeStateHandler } from '@/state-manager/reducer/user';
+import 'nprogress/nprogress.css';
 
 //Config
 import { theme } from '../config/theme';
-
 import '../assets/styles/global/general.css';
-import { Toaster } from 'react-hot-toast';
-import { useEffect } from 'react';
-import Head from 'next/head';
 
 NProgress.configure({
     minimum: 0.3,
@@ -29,16 +30,17 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 const App = ({ Component, pageProps }) => {
+    const dispatch = useDispatch();
     const { locale } = useRouter();
     const themeStatus = useSelector(state => state.UserInfo.theme);
     const lang = useSelector(state => state.UserInfo.lang);
-    const darkModeTheme = createTheme(theme(themeStatus, lang === 'en' ? 'ltr' : 'rtl'));
+    const darkModeTheme = createTheme(theme(themeStatus, 'rtl'));
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('pmlmLang', locale);
-            document.dir = lang === 'en' ? 'ltr' : 'rtl';
-        }
+        localStorage.setItem('pmlmLang', locale);
+        document.documentElement.lang = localStorage.getItem('pmlmLang');
+        dispatch(themeStateHandler(localStorage.getItem('theme') !== null ? localStorage.getItem('theme') : 'light'));
+        dispatch(langHandler(localStorage.getItem('pmlmLang')));
     }, [lang]);
 
     return (

@@ -25,7 +25,7 @@ export const DeleteMedia = async id => {
 };
 
 export const GetAdminVideos = async () => {
-    return RequestHandler.call({ url: '/admins/media-for-agent', method: 'get' }).then(res => res.data);
+    return RequestHandler.call({ url: '/admins/media-for-agent/', method: 'get' }).then(res => res.data);
 };
 
 export const PostAcceptVideo = async data => {
