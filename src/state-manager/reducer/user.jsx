@@ -1,22 +1,11 @@
 /* eslint-disable camelcase */
 import { createSlice } from '@reduxjs/toolkit';
 
-const dirProvider = () => {
-    if (typeof window !== 'undefined') {
-        if (localStorage.getItem('pmlmLang') !== null) {
-            return localStorage.getItem('pmlmLang');
-        }
-        return 'fa';
-    }
-
-    return 'fa';
-};
-
 export const UserInfo = createSlice({
     name: 'userInfo',
     initialState: {
-        theme: typeof window !== 'undefined' && localStorage.getItem('theme') !== null ? localStorage.getItem('theme') : 'light',
-        lang: dirProvider(),
+        theme: 'light',
+        lang: 'fa',
         isLogin: typeof window !== 'undefined' && localStorage.getItem('pmlmToken') !== null ? true : false,
         role:
             typeof window !== 'undefined' && localStorage.getItem('pmlmToken') !== null
@@ -26,6 +15,7 @@ export const UserInfo = createSlice({
         fullname: '',
         rank: 1
     },
+
     reducers: {
         themeStateHandler: (state, action) => {
             state.theme = action.payload;
