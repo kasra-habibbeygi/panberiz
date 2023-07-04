@@ -203,8 +203,8 @@ function Video() {
                     <img
                         className='video_banner'
                         src={item?.cover.replace(
-                            'ftp://pmlm@fileacademy.pmlm.ir:%7DW7,-iI%7Bg;sh@31.25.90.38:21',
-                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm/'
+                            'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21/',
+                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
                         )}
                         alt='video-banner'
                     />
