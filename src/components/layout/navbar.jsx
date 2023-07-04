@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginStatushandler } from '@/state-manager/reducer/user';
 import { useRouter } from 'next/router';
@@ -43,6 +43,17 @@ function Navbar({ setAsideStatus, asideStatus }) {
     const userInfo = useSelector(state => state.UserInfo);
     const [langValue, setLangValue] = useState({ label: 'فارسی', value: 'fa' });
 
+    useEffect(() => {
+        setLangValue(() => {
+            if (localStorage.getItem('pmlmLang') === 'fa') {
+                return LangList[1];
+            } else if (localStorage.getItem('pmlmLang') === 'en') {
+                return LangList[0];
+            }
+            return LangList[2];
+        });
+    }, []);
+
     const openAside = () => {
         setAsideStatus(!asideStatus);
     };
@@ -72,6 +83,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
         localStorage.setItem('pmlmLang', value.value);
         setLangValue(value);
         dispatch(langHandler(value.value));
+        document.dir = value.value === 'en' ? 'ltr' : 'rtl';
     };
 
     return (

@@ -32,16 +32,17 @@ Router.events.on('routeChangeError', () => NProgress.done());
 const App = ({ Component, pageProps }) => {
     const dispatch = useDispatch();
     const { locale } = useRouter();
-    const themeStatus = useSelector(state => state.UserInfo.theme);
+    const userInfo = useSelector(state => state.UserInfo);
     const lang = useSelector(state => state.UserInfo.lang);
-    const darkModeTheme = createTheme(theme(themeStatus, 'rtl'));
+    const darkModeTheme = createTheme(theme(userInfo.theme, userInfo.lang === 'en' ? 'ltr' : 'rtl'));
 
     useEffect(() => {
         localStorage.setItem('pmlmLang', locale);
         document.documentElement.lang = localStorage.getItem('pmlmLang');
         dispatch(themeStateHandler(localStorage.getItem('theme') !== null ? localStorage.getItem('theme') : 'light'));
         dispatch(langHandler(localStorage.getItem('pmlmLang')));
-    }, [lang]);
+        document.dir = localStorage.getItem('pmlmLang') === 'en' ? 'ltr' : 'rtl';
+    }, []);
 
     return (
         <ThemeProvider theme={darkModeTheme}>
