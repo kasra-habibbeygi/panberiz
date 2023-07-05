@@ -19,6 +19,10 @@ export const MainField = styled.div(props => ({
         fontSize: '1.2rem'
     },
 
+    iframe: {
+        border: 'none'
+    },
+
     '& .card_details': {
         display: 'flex',
         alignItems: 'flex-start',
