@@ -63,7 +63,7 @@ function Aside({ asideStatus }) {
                         <li>
                             <Link href='/video' className={`${router.pathname === '/video' ? 'active' : ''}`}>
                                 <Image src={video} alt='video' />
-                                <p>{t('Video')}</p>
+                                <p>{t('Media')}</p>
                             </Link>
                         </li>
                     )}
