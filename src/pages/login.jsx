@@ -106,7 +106,7 @@ const Login = () => {
                     toast.error(t('The entered code is wrong!'));
                 });
         }
-    }, []);
+    }, [router]);
 
     return (
         <LoginLayout title={loginState === 0 ? t('login') : t('enter verify code')}>

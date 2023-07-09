@@ -153,7 +153,7 @@ function Video() {
                         <DeleteIcon className='deletemedia' onClick={() => deletespecificMedia(item.id)} />
                     </div>
                 </div>
-                <small>{item?.publisher_fullname}</small>
+                {userInfo.role !== 'User' && <small>{item?.publisher_fullname}</small>}
             </CardField>
         </div>
     ));
@@ -187,7 +187,7 @@ function Video() {
                         <DeleteIcon className='deletemedia' onClick={() => deletespecificMedia(item.id)} />
                     </div>
                 </div>
-                <small>{item?.publisher_fullname}</small>
+                {userInfo.role !== 'User' && <small>{item?.publisher_fullname}</small>}
             </CardField>
         </div>
     ));
@@ -219,7 +219,7 @@ function Video() {
                         <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
                     </div>
                 </div>
-                <small>{item?.publisher_fullname}</small>
+                {userInfo.role !== 'User' && <small>{item?.publisher_fullname}</small>}
             </CardField>
         </div>
     ));

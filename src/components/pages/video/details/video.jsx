@@ -39,14 +39,6 @@ const VideoField = ({ mediaDetails }) => {
 
     return (
         <MainField>
-            <iframe
-                src={mediaDetails?.file?.replace(
-                    'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21',
-                    'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir'
-                )}
-                width='100%'
-                height='500px'
-            />
             {mediaDetails?.media_type === 'video' ? (
                 <div className='video_image'>
                     <div className='float'>
@@ -63,6 +55,14 @@ const VideoField = ({ mediaDetails }) => {
                 </div>
             ) : (
                 <>
+                    <iframe
+                        src={mediaDetails?.file?.replace(
+                            'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21',
+                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir'
+                        )}
+                        width='100%'
+                        height='500px'
+                    />
                     <a
                         href={mediaDetails?.file?.replace(
                             'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21',
