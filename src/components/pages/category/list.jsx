@@ -3,8 +3,7 @@
 import { toast } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'next-i18next';
-
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import CloseIcon from '@mui/icons-material/Close';
 
 // Assets
 import { MainField } from './list.style';
@@ -21,16 +20,18 @@ import { DeleteCategory } from '@/api-request/category';
 const CategoryList = ({ categoriesList, setReaload, reload }) => {
     const { t } = useTranslation('common');
     const userRank = useSelector(state => state.UserInfo.rank);
+
     const removeCategory = id => {
         DeleteCategory(id)
             .then(() => {
-                toast.success(t('Category deleted successfully!'));
+                toast.success(t('Successfully updated!'));
                 setReaload(!reload);
             })
             .catch(() => {
-                toast.error(t('an Error'));
+                toast.error(t('An error occurred, please try again!'));
             });
     };
+
     return (
         <MainField>
             <HeaderField title={t('Category list')} />
@@ -47,7 +48,7 @@ const CategoryList = ({ categoriesList, setReaload, reload }) => {
                             return (
                                 <div className='item' key={item.id}>
                                     <p>
-                                        <DeleteOutlineIcon
+                                        <CloseIcon
                                             fontSize='large'
                                             color='error'
                                             className='icon_delete'

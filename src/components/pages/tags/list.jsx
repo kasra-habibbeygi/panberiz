@@ -4,8 +4,7 @@ import { MainField } from './list.style';
 import { toast } from 'react-hot-toast';
 import EmptyFieldImg from '@/assets/images/empty/empty-tag-list.svg';
 import { useTranslation } from 'next-i18next';
-
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import CloseIcon from '@mui/icons-material/Close';
 
 // Component
 import EmptyField from '@/components/template/empty-field';
@@ -13,17 +12,20 @@ import EmptyField from '@/components/template/empty-field';
 // APIs
 import { DeleteTag } from '@/api-request/tags';
 
-const TagsList = ({ tagsList }) => {
+const TagsList = ({ tagsList, setReaload }) => {
     const { t } = useTranslation('common');
+
     const removeTag = id => {
         DeleteTag(id)
             .then(() => {
-                toast.success(t('Category deleted successfully!'));
+                toast.success(t('Successfully updated!'));
+                setReaload(prev => !prev);
             })
             .catch(() => {
-                toast.error(t('an Error'));
+                toast.error(t('An error occurred, please try again!'));
             });
     };
+
     return (
         <MainField>
             <h4>{t('tags list')}</h4>
@@ -33,12 +35,7 @@ const TagsList = ({ tagsList }) => {
                         tagsList?.map(item => (
                             <span key={`tags_item_${item.id}`}>
                                 {item.title}{' '}
-                                <DeleteOutlineIcon
-                                    fontSize='large'
-                                    color='error'
-                                    className='icon_delete'
-                                    onClick={() => removeTag(item.id)}
-                                />
+                                <CloseIcon fontSize='large' color='error' className='icon_delete' onClick={() => removeTag(item.id)} />
                             </span>
                         ))
                     ) : (

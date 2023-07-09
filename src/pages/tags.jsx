@@ -38,7 +38,7 @@ const Tags = () => {
                 <HeaderField title={t('tags')} />
                 <TagsmainField>
                     {userInfo.role === 'SuperAdminAcademy' && <AddTag setReaload={setReaload} reload={reload} />}
-                    <TagsList tagsList={tagsList} />
+                    <TagsList tagsList={tagsList} setReaload={setReaload} />
                 </TagsmainField>
             </main>
         </LayoutProvider>

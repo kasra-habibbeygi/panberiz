@@ -32,9 +32,12 @@ export const MainField = styled.div(props => ({
             borderRadius: '12px',
             border: `1px dashed ${props.theme.mode === 'light' ? props.theme.palette.colors.primary : '#90899B'}`,
             background: props.theme.palette.colors.background.card,
+            gap: '5px',
 
             '& .icon_delete': {
-                cursor: 'pointer'
+                cursor: 'pointer',
+                color: '#565656',
+                width: '16px'
             }
         }
     },

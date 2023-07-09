@@ -78,13 +78,24 @@ const AddCategory = ({ setReaload, reload }) => {
 
         CreateCategory(formData)
             .then(() => {
-                setLoader(false);
                 Object.keys(inputValues).forEach(item => formData.delete(item, inputValues[item]));
                 toast.success(t('Category added successfully!'));
                 setReaload(!reload);
+                setInputValued({
+                    place: null,
+                    rank: null,
+                    title: '',
+                    description: '',
+                    image: '',
+                    is_public: false,
+                    lang: ''
+                });
             })
             .catch(() => {
                 toast.error(t('Please enter all entries!'));
+            })
+            .finally(() => {
+                setLoader(false);
             });
     };
 
@@ -155,12 +166,12 @@ const AddCategory = ({ setReaload, reload }) => {
                 </div>
                 <div className='upload_field'>
                     <div className='right_field'>
-                        <h3>{t('File upload')}</h3>
-                        <small>{t('Select the file you want.')}</small>
+                        <h3>{t('Chose image')}</h3>
+                        <small>{t('Select the image you want.')}</small>
                     </div>
                     <div className='left_field'>
-                        <p>{inputValues?.image?.name ? inputValues?.image?.name : t('no file selected')}</p>
-                        <label htmlFor='chose_file'>{t('Chose file')}</label>
+                        <p>{inputValues?.image?.name ? inputValues?.image?.name : t('no image selected')}</p>
+                        <label htmlFor='chose_file'>{t('Chose image')}</label>
                         <input type='file' name='file' id='chose_file' hidden onChange={e => fileValueHandler(e)} />
                     </div>
                 </div>

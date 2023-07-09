@@ -11,6 +11,7 @@ import AutoComplete from '@/components/form-group/auto-complete';
 
 // APIs
 import { Createtag } from '@/api-request/tags';
+import { toast } from 'react-hot-toast';
 
 const langList = [
     {
@@ -54,9 +55,18 @@ const AddTag = ({ setReaload, reload }) => {
         Createtag(tagsName)
             .then(() => {
                 setReaload(!reload);
-                setLoader(false);
+                toast.success(t('Successfully updated!'));
+                setTagsName({
+                    title: '',
+                    lang: ''
+                });
             })
-            .catch(() => {});
+            .catch(() => {
+                toast.error(t('An error occurred, please try again!'));
+            })
+            .finally(() => {
+                setLoader(false);
+            });
     };
 
     return (

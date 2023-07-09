@@ -21,5 +21,5 @@ export const GetAdminTagsList = async lang => {
 
 // Delete
 export const DeleteTag = async id => {
-    return RequestHandler.call({ url: `admins/media/tags/delete-tag/${id}`, method: 'delete' }).then(res => res.data);
+    return RequestHandler.call({ url: `/managers/tags/delete-tag/${id}/`, method: 'delete' }).then(res => res.data);
 };

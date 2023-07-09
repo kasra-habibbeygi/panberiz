@@ -44,7 +44,10 @@ export const MainField = styled.div(props => ({
         },
 
         '& .icon_delete': {
-            cursor: 'pointer'
+            cursor: 'pointer',
+            color: '#565656',
+            width: '20px',
+            marginLeft: '20px'
         }
     },
 
