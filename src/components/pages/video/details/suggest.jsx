@@ -33,9 +33,9 @@ const SuggestVideo = ({mediaDetails}) => {
                                 <img
                                     className='video_banner'
                                     src={item?.cover.replace(
-                                        'http://127.0.0.1:88ftp://pmlm@fileacademy.pmlm.ir:}W7,-iI{g;sh@31.25.90.38:21',
-                                        'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/pmlm/'
-                                    )}
+                                        'http://127.0.0.1:8000ftp://testuser@fileacademy.pmlm.ir:m@P7x-s{d28}@31.25.90.38:21/',
+                                        'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
+                                    )}                                    
                                     alt='video-banner'
                                 />
                             </div>

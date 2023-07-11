@@ -19,7 +19,7 @@ import { DeleteCategory } from '@/api-request/category';
 
 const CategoryList = ({ categoriesList, setReaload, reload }) => {
     const { t } = useTranslation('common');
-    const userRank = useSelector(state => state.UserInfo.rank);
+    const userInfo = useSelector(state => state.UserInfo);
 
     const removeCategory = id => {
         DeleteCategory(id)
@@ -44,7 +44,7 @@ const CategoryList = ({ categoriesList, setReaload, reload }) => {
                         <span>{t('General condition')}</span>
                     </div>
                     {categoriesList?.map(item => {
-                        if (userRank >= item.rank) {
+                        if (userInfo.rank >= item.rank || userInfo.role === 'SuperAdminAcademy') {
                             return (
                                 <div className='item' key={item.id}>
                                     <p>
