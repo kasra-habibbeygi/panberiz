@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/prop-types */
 import Image from 'next/image';
 import Link from 'next/link';
@@ -73,15 +74,45 @@ function Aside({ asideStatus }) {
                                 <div className='collapse_field'>
                                     <p onClick={collapseStatusHandler}>{t('Category')}</p>
                                     <div className={`collapse_menu ${collapseStatus ? 'open' : ''}`}>
-                                        {categoriesList?.map(item => (
-                                            <Link
-                                                href={`/video/${item.id}`}
-                                                key={item.id}
-                                                className={`${userInfo.rank < item?.rank ? 'disabled' : ''}`}
-                                            >
-                                                {item.title} <span>{userInfo.rank < item?.rank ? `${t('Rank')} ${item?.rank}` : ''}</span>
-                                            </Link>
-                                        ))}
+                                        {categoriesList
+                                            ?.sort((a, b) => {
+                                                return a.place - b.place;
+                                            })
+                                            .map(item => {
+                                                if (item.title === 'عمومی') {
+                                                    return (
+                                                        <Link href={`/video/${item.id}`} key={item.id}>
+                                                            <img
+                                                                className='video_banner'
+                                                                src={item?.image.replace(
+                                                                    'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21/',
+                                                                    'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
+                                                                )}
+                                                                alt='video-banner'
+                                                            />
+                                                            {item.title}
+                                                        </Link>
+                                                    );
+                                                }
+
+                                                return (
+                                                    <Link
+                                                        href={`/video/${item.id}`}
+                                                        key={item.id}
+                                                        className={`${userInfo.rank < item?.rank ? 'disabled' : ''}`}
+                                                    >
+                                                        <img
+                                                            className='video_banner'
+                                                            src={item?.image.replace(
+                                                                'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21/',
+                                                                'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
+                                                            )}
+                                                            alt='video-banner'
+                                                        />
+                                                        {item.title}
+                                                    </Link>
+                                                );
+                                            })}
                                     </div>
                                 </div>
                             </li>

@@ -78,7 +78,7 @@ export const AsideField = styled.aside(props => ({
         cursor: 'pointer',
 
         '& .collapse_menu': {
-            maxHeight: `calc(${props.categoriesListLength} * 44px)`,
+            maxHeight: `calc(${props.categoriesListLength} * 55px)`,
             overflow: 'hidden',
 
             p: {
@@ -93,6 +93,10 @@ export const AsideField = styled.aside(props => ({
                     color: 'red',
                     fontSize: '0.9rem'
                 }
+            },
+
+            img: {
+                width: '30px'
             },
 
             '&.open': {

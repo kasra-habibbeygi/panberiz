@@ -18,14 +18,17 @@ function Dashboard() {
             GetUserCategoriesList(userInfo.lang)
                 .then(res => {
                     setPageLoaded(true);
-                    router.push(`/video/${res.results[0].id}`);
+                    res.results.filter(item => {
+                        if (item.title === 'عمومی') {
+                            router.push(`/video/${item.id}`);
+                        }
+                    });
                 })
                 .catch(() => {});
-            router.push('/video/1');
         } else {
             setPageLoaded(true);
         }
-    }, []);
+    }, [userInfo.role]);
 
     return (
         <LayoutProvider>

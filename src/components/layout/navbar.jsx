@@ -79,7 +79,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
     };
 
     const handleChangeLanguage = value => {
-        router.replace(router.pathname, router.pathname, { locale: value.value });
+        router.replace(router.asPath, router.asPath, { locale: value.value });
         localStorage.setItem('pmlmLang', value.value);
         setLangValue(value);
         dispatch(langHandler(value.value));

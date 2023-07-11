@@ -12,9 +12,7 @@ import { useSelector } from 'react-redux';
 
 const VideoModal = ({ status, setStatus, mediaDetails }) => {
     const userInfo = useSelector(state => state.UserInfo);
-    const [test, setTest] = useState('');
-
-    console.log(test);
+    const [video, setVideo] = useState('');
 
     useEffect(() => {
         if (status) {
@@ -24,7 +22,7 @@ const VideoModal = ({ status, setStatus, mediaDetails }) => {
             })
                 .then(() => {})
                 .catch(() => {});
-            setTest(mediaDetails);
+            setVideo(mediaDetails);
         }
     }, [status]);
 
@@ -36,10 +34,10 @@ const VideoModal = ({ status, setStatus, mediaDetails }) => {
     return (
         <MainField>
             <Dialog onClose={modalClosehandler} open={status} disablePortal keepMounted fullWidth={true} scroll='body' maxWidth='md'>
-                {test !== '' && (
+                {video !== '' && (
                     <video controls id='slider_video_player'>
                         <source
-                            src={test?.file?.replace(
+                            src={video?.file?.replace(
                                 'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21',
                                 'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir'
                             )}

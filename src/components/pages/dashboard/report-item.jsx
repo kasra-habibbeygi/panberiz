@@ -11,8 +11,6 @@ function ReportItem({ data, index }) {
     const colapsehandler = (setter, status, count = '') => {
         setter(!status);
 
-        console.log(count, rowIndex);
-
         if (count !== '') {
             setRowIndex(count);
         }
