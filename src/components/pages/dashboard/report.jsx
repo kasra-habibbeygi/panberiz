@@ -29,7 +29,7 @@ function Report() {
                 })
                 .catch(() => {});
         }
-    }, []);
+    }, [userInfo.role]);
 
     return (
         <ReportField>
