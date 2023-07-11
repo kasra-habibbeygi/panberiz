@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
@@ -28,7 +29,7 @@ import Button from '@/components/form-group/button';
 import { GetCategoriesList } from '@/api-request/category';
 import { GetTagsList } from '@/api-request/tags';
 import { AddNewmedia } from '@/api-request/media/add';
-import { GetMyMediaList } from '@/api-request/media/list';
+import { GetAllMedia, GetMyMediaList } from '@/api-request/media/list';
 import { toast } from 'react-hot-toast';
 
 const LangList = [
@@ -48,6 +49,7 @@ function AddForm() {
     const [open, setOpen] = useState(false);
     const [loader, setLoader] = useState(false);
     const lang = useSelector(state => state.UserInfo.lang);
+    const role = useSelector(state => state.UserInfo.role);
 
     const [selectLists, setSelectLists] = useState({
         category: [],
@@ -159,12 +161,22 @@ function AddForm() {
             })
             .catch(() => {});
 
-        GetMyMediaList(lang)
-            .then(res => {
-                selectListProvider(res.results, 'title', 'prerequisites');
-            })
-            .catch(() => {});
-    }, [lang]);
+        if (role === 'SuperAdminAcademy') {
+            GetAllMedia(lang)
+                .then(res => {
+                    selectListProvider(res.results, 'title', 'prerequisites');
+                })
+                .catch(() => {});
+        }
+
+        if (role === 'AgentAcademy') {
+            GetMyMediaList(lang)
+                .then(res => {
+                    selectListProvider(res.results, 'title', 'prerequisites');
+                })
+                .catch(() => {});
+        }
+    }, [lang, role]);
 
     const questionListProvider = inputValues.quize_and_answer.map((item, index) => (
         <div className='question_card' key={`question_lists_${index}`}>

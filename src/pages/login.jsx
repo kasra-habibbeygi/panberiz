@@ -87,6 +87,7 @@ const Login = () => {
         }
 
         if (router.query.token) {
+            setLoader(true);
             LoginWithQuery({ token: router.query.token })
                 .then(res => {
                     localStorage.setItem(
@@ -104,6 +105,7 @@ const Login = () => {
                 })
                 .catch(() => {
                     toast.error(t('The entered code is wrong!'));
+                    setLoader(false);
                 });
         }
     }, [router]);

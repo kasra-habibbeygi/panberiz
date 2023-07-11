@@ -29,7 +29,7 @@ const Button = ({
             shadow={shadow}
             radius={radius}
             className={`${type} ${color} ${extraClass}`}
-            disabled={disabled}
+            disabled={disabled || loader}
         >
             {loader ? <PulseLoader loading={loader} color={loaderColor} size={10} /> : children}
         </S.ButtonField>
