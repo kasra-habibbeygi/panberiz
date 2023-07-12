@@ -82,6 +82,7 @@ const Login = () => {
     };
 
     useEffect(() => {
+        localStorage.removeItem('isLoggedInWithRedirect');
         if (typeof window !== 'undefined' && localStorage.getItem('pmlmToken') !== null) {
             router.push('/dashboard');
         }
@@ -99,6 +100,7 @@ const Login = () => {
                             accessTokenExpireAt: Date.now() + 1200000
                         })
                     );
+                    localStorage.setItem('isLoggedInWithRedirect', true);
                     dispatch(loginStatushandler(true));
                     dispatch(roleHandler(res.user_role));
                     router.push('/dashboard');

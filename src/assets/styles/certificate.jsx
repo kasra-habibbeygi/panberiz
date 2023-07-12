@@ -4,7 +4,7 @@ export const CertificateField = styled.div({
     minWidth: '1200px',
     maxWidth: '1200px',
     position: 'relative',
-    // display: 'none',
+    display: 'none',
 
     img: {
         width: '100%',

@@ -53,8 +53,8 @@ function Video() {
             })
             .then(function (dataUrl) {
                 download(dataUrl, 'referral-share-card.jpg');
-                // document.getElementById('my-node').style.display = 'none';
-                // document.getElementById('gap_field').style.display = 'none';
+                document.getElementById('my-node').style.display = 'none';
+                document.getElementById('gap_field').style.display = 'none';
             });
     };
 

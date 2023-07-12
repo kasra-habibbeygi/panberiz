@@ -132,15 +132,16 @@ function Aside({ asideStatus }) {
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <Link href='/certification' className={`${router.pathname === '/video' ? 'active' : ''}`}>
-                                    <Image src={AppreciationIcon} alt='video' className='sidebar_icon' />
-                                    <p>{t('Certification')}</p>
-                                </Link>
-                            </li>
                         </>
                     )}
-
+                    {userInfo.role === 'User' && (
+                        <li>
+                            <Link href='/certification' className={`${router.pathname === '/video' ? 'active' : ''}`}>
+                                <Image src={AppreciationIcon} alt='video' className='sidebar_icon' />
+                                <p>{t('Certification')}</p>
+                            </Link>
+                        </li>
+                    )}
                     {userInfo.role === 'SuperAdminAcademy' ? (
                         <>
                             <li>

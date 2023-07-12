@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginStatushandler } from '@/state-manager/reducer/user';
 import { useRouter } from 'next/router';
 import { langHandler } from '../../state-manager/reducer/user';
+import { useTranslation } from 'next-i18next';
 
 // Assets
 import * as Styles from './navbar.style';
@@ -15,7 +16,7 @@ import heart from '../../assets/icons/heart.svg';
 import logo from '../../assets/images/logo.png';
 import logoWhite from '../../assets/images/logo-white.svg';
 import LogoutIcon from '../../assets/images/layout/logout.svg';
-import { useTranslation } from 'next-i18next';
+import ForwardIcon from '../../assets/icons/forward.svg';
 // import SettingIcon from '../../assets/images/layout/setting.svg';
 
 // Component
@@ -42,6 +43,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
     const router = useRouter();
     const userInfo = useSelector(state => state.UserInfo);
     const [langValue, setLangValue] = useState({ label: 'فارسی', value: 'fa' });
+    const [isLoggedInWithRedirect, setIsLoggedInWithRedirect] = useState(false);
 
     useEffect(() => {
         setLangValue(() => {
@@ -52,6 +54,10 @@ function Navbar({ setAsideStatus, asideStatus }) {
             }
             return LangList[2];
         });
+
+        if (localStorage.getItem('isLoggedInWithRedirect') !== null) {
+            setIsLoggedInWithRedirect(true);
+        }
     }, []);
 
     const openAside = () => {
@@ -76,6 +82,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
         localStorage.removeItem('pmlmToken');
         dispatch(loginStatushandler(true));
         router.push('/login');
+        localStorage.removeItem('isLoggedInWithRedirect');
     };
 
     const handleChangeLanguage = value => {
@@ -143,6 +150,15 @@ function Navbar({ setAsideStatus, asideStatus }) {
                                     {t('Options')}
                                 </Link>
                             </li> */}
+                            {isLoggedInWithRedirect && (
+                                <li>
+                                    <a href='https://newshop.pmlm.ir/User/UserDashboard/index' onClick={logouthandler}>
+                                        <Image src={ForwardIcon} alt='' />
+                                        {t('Back to the desktop')}
+                                    </a>
+                                </li>
+                            )}
+
                             <li>
                                 <div onClick={logouthandler}>
                                     <Image src={LogoutIcon} alt='' />
