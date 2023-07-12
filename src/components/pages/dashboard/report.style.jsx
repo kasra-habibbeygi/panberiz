@@ -14,7 +14,7 @@ export const ReportField = styled.div(() => ({
         boxShadow: '0 4px 14px 0 rgb(0 0 0 / 10%)',
         height: '80px',
         borderRadius: '15px',
-        marginBottom: '25px',
+        marginBottom: '10px',
 
         p: {
             flex: 1,

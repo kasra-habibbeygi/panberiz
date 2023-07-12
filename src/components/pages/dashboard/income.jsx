@@ -9,7 +9,7 @@ import ChartPie from './pie.chart';
 import AutoComplete from '@/components/form-group/auto-complete';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'next-i18next';
-import { GetManagerChart1Info, GetAdminChart1Info, GetAdminChart2Info } from '@/api-request/chart';
+import { GetManagerChart1Info, GetAdminChart1Info, GetAdminChart2Info, GetManagerChart2Info } from '@/api-request/chart';
 import { useSelector } from 'react-redux';
 
 function Income() {
@@ -25,8 +25,28 @@ function Income() {
     };
 
     useEffect(() => {
-        if (userInfo.role === 'SuperAdminAcademy' || userInfo.role === 'AgentAcademy') {
+        if (userInfo.role === 'SuperAdminAcademy') {
             GetManagerChart1Info()
+                .then(res => {
+                    setChart1Data(res.result);
+                })
+                .catch(() => {});
+
+            GetManagerChart2Info()
+                .then(res => {
+                    setChart2Data(res.result);
+
+                    const newData = res.result.map(item => ({
+                        label: item.rank
+                    }));
+
+                    setSelectValue(newData);
+                    setValues(newData[0]);
+                })
+                .catch(() => {});
+        }
+        if (userInfo.role === 'AdminAcademy' || userInfo.role === 'AgentAcademy') {
+            GetAdminChart1Info()
                 .then(res => {
                     setChart1Data(res.result);
                 })
@@ -42,13 +62,6 @@ function Income() {
 
                     setSelectValue(newData);
                     setValues(newData[0]);
-                })
-                .catch(() => {});
-        }
-        if (userInfo.role === 'AdminAcademy') {
-            GetAdminChart1Info()
-                .then(res => {
-                    setChart1Data(res.result);
                 })
                 .catch(() => {});
         }

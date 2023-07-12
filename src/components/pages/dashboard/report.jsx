@@ -15,14 +15,14 @@ function Report() {
     const [chart3Data, setChart3Data] = useState([]);
 
     useEffect(() => {
-        if (userInfo.role === 'SuperAdminAcademy' || userInfo.role === 'AgentAcademy') {
+        if (userInfo.role === 'SuperAdminAcademy') {
             GetManagerChart3Info()
                 .then(res => {
                     setChart3Data(res.result);
                 })
                 .catch(() => {});
         }
-        if (userInfo.role === 'AdminAcademy') {
+        if (userInfo.role === 'AdminAcademy' || userInfo.role === 'AgentAcademy') {
             GetAdminChart3Info()
                 .then(res => {
                     setChart3Data(res.result);

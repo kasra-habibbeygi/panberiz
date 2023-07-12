@@ -81,7 +81,7 @@ const VideoField = ({ mediaDetails }) => {
                     <Image className='icon' src={UserIcon} alt='play' />
                     <div>
                         <h3>{mediaDetails?.title}</h3>
-                        <p>{mediaDetails?.publisher_fullname}</p>
+                        {userInfo.role !== 'User' && <small>{mediaDetails?.publisher_fullname}</small>}
                     </div>
                 </div>
                 <div className='left_field'>

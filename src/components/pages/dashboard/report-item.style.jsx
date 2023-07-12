@@ -24,7 +24,7 @@ export const ReportItemField = styled.button(props => ({
     },
 
     '& .item': {
-        height: '55px',
+        height: '45px',
         display: 'flex',
         position: 'relative',
         backgroundColor:
@@ -80,7 +80,7 @@ export const ReportItemField = styled.button(props => ({
 
         '& .collapse-item': {
             width: '100%',
-            height: '55px',
+            height: '45px',
             display: 'flex',
             alignSelf: 'center',
             alignItems: 'center',
@@ -88,7 +88,7 @@ export const ReportItemField = styled.button(props => ({
             border: '1px dashed rgba(157, 157, 158, 1)',
             justifyContent: 'space-between',
             borderRadius: '15px',
-            marginTop: '20px',
+            marginTop: '10px',
             position : 'relative',
 
             p: {
@@ -117,7 +117,7 @@ export const ReportItemField = styled.button(props => ({
 
         '& .collapse-item': {
             width: '100%',
-            height: '55px',
+            height: '45px',
             display: 'flex',
             alignSelf: 'center',
             alignItems: 'center',
@@ -125,7 +125,7 @@ export const ReportItemField = styled.button(props => ({
             border: '1px dashed rgba(157, 157, 158, 1)',
             justifyContent: 'space-between',
             borderRadius: '15px',
-            marginTop: '20px',
+            marginTop: '10px',
             position : 'relative',
 
             p: {

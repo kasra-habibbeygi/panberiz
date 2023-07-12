@@ -41,7 +41,7 @@
     "Certification" : "شهادة",
 
     "Seach": "البحث",
-    "Add media": "إضافة وسائط",
+    "Add media": "إضافة الوسائط",
     "Logout": "تسجيل الخروج",
     "Options": "الخيارات",
     "Dashboard": "لوحة القيادة",
@@ -101,7 +101,8 @@
     "Question" : "سؤال",
     "Test registration" : "التسجيل في الاختبار",
     "Your test is over." : "انتهى الاختبار الخاص بك.",
-    "from" : "من",
+    "from" : "من",    
+    "Chose image" : "اختار الصورة",
     
     "Your message was successfully registered!" : "تم تسجيل رسالتك بنجاح!",
     "The code has been sent successfully": "تم إرسال الرمز بنجاح!",

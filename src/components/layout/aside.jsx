@@ -48,6 +48,12 @@ function Aside({ asideStatus }) {
             .catch(() => {});
     }, [userInfo.lang]);
 
+    console.log(
+        categoriesList?.sort((a, b) => {
+            return a.place - b.place;
+        })
+    );
+
     return (
         <Style.AsideField asideStatus={asideStatus} categoriesListLength={categoriesList.length}>
             <div className='items'>
@@ -79,7 +85,7 @@ function Aside({ asideStatus }) {
                                                 return a.place - b.place;
                                             })
                                             .map(item => {
-                                                if (item.title === 'عمومی') {
+                                                if (item.place === 0) {
                                                     return (
                                                         <Link href={`/video/${item.id}`} key={item.id}>
                                                             <img

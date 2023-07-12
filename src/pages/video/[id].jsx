@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import LayoutProvider from '@/components/layout';
 import { useEffect, useState } from 'react';
@@ -7,7 +8,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { GetUserMediaList } from '@/api-request/media/list';
 import { useSelector } from 'react-redux';
-import { ListVideoField } from '@/components/pages/video/list/list-video.style';
+import { ListVideoField, SearchField } from '@/components/pages/video/list/list-video.style';
 import { CardField } from '@/components/pages/video/list/card.style';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -16,29 +17,48 @@ import { useTranslation } from 'next-i18next';
 import StarIcon from '@mui/icons-material/Star';
 import EmptyFieldImg from '../../assets/images/empty/empty-media-list.png';
 import EmptyField from '@/components/template/empty-field';
+import SearchIcon from '@mui/icons-material/Search';
 
 function UserVideo() {
     const { t } = useTranslation();
     const router = useRouter();
-    const [selectedButton, setSelectedButton] = useState('uploaded');
     const userInfo = useSelector(state => state.UserInfo);
+    const [selectedButton, setSelectedButton] = useState('uploaded');
     const [mediaList, setMediaList] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
+
     const selectButton = selected => {
         setSelectedButton(selected);
     };
 
     useEffect(() => {
-        GetUserMediaList(router.query.id, userInfo.lang)
+        GetUserMediaList(router.query.id, userInfo.lang, searchValue)
             .then(res => {
                 setMediaList(res.results);
             })
             .catch(() => {});
     }, [router.query.id, userInfo.lang]);
 
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            GetUserMediaList(router.query.id, userInfo.lang, searchValue)
+                .then(res => {
+                    setMediaList(res.results);
+                })
+                .catch(() => {});
+        }, 3000);
+
+        return () => clearTimeout(delayDebounceFn);
+    }, [searchValue]);
+
     return (
         <LayoutProvider>
+            <SearchField>
+                <input placeholder={t('Seach')} value={searchValue} onChange={e => setSearchValue(e.target.value)} />
+                <SearchIcon className='search_icon' />
+            </SearchField>
             <HeaderField title={t('Video')} />
-            {userInfo === 'SuperAdminAcademy' && <Tab selectButton={selectButton} selectedButton={selectedButton} />}
+            {userInfo.role === 'SuperAdminAcademy' && <Tab selectButton={selectButton} selectedButton={selectedButton} />}
             <ListVideoField>
                 {mediaList.length === 0 ? (
                     <EmptyField img={EmptyFieldImg} title={t('There are no items to display!')} />
@@ -71,7 +91,7 @@ function UserVideo() {
                                         <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
                                     </div>
                                 </div>
-                                <small>{item?.publisher_fullname}</small>
+                                {userInfo.role !== 'User' && <small>{item?.publisher_fullname}</small>}
                             </CardField>
                         </div>
                     ))

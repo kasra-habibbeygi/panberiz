@@ -14,6 +14,7 @@ export const AsideField = styled.aside(props => ({
     position: 'fixed',
     background: props.theme.palette.colors.background.layout,
     zIndex: '10',
+    overflow: 'auto',
 
     '& .items': {
         ol: {
