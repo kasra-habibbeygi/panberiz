@@ -4,7 +4,7 @@ export const CertificateField = styled.div({
     minWidth: '1200px',
     maxWidth: '1200px',
     position: 'relative',
-    display: 'none',
+    // display: 'none',
 
     img: {
         width: '100%',
@@ -30,14 +30,14 @@ export const CertificateField = styled.div({
     '& .rank': {
         position: 'absolute',
         top: '482px',
-        right: '590px',
+        right: '545px',
         fontSize: '1.1rem'
     },
 
     '& .time': {
         position: 'absolute',
         top: '482px',
-        right: '747px',
+        right: '740px',
         fontSize: '1.1rem'
     },
 

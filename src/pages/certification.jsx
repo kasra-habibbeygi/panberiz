@@ -53,14 +53,14 @@ function Video() {
             })
             .then(function (dataUrl) {
                 download(dataUrl, 'referral-share-card.jpg');
-                document.getElementById('my-node').style.display = 'none';
-                document.getElementById('gap_field').style.display = 'none';
+                // document.getElementById('my-node').style.display = 'none';
+                // document.getElementById('gap_field').style.display = 'none';
             });
     };
 
     const mediaListProvider = certificateList?.map(item => (
         <div key={item.id} className='card_field'>
-            <CardField pointer={true} onClick={() => ModalOpenHandler(item)}>
+            <CardField status={true} pointer={true} onClick={() => ModalOpenHandler(item)}>
                 <div className='video_image'>
                     <Image className='video_banner' src={CertificateImg} alt='video-banner' />
                 </div>
@@ -78,7 +78,6 @@ function Video() {
                         </p>
                     </div>
                 </div>
-                {/* <small>{item?.publisher_fullname}</small> */}
             </CardField>
         </div>
     ));
@@ -107,13 +106,40 @@ function Video() {
                 <br />
                 <br />
                 <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
             </GapField>
             <CertificateField id='my-node'>
                 <Image src={MainCertificateImg} alt='' />
                 <h3>{certificateData?.user_full_name}</h3>
                 <p className='code_field'>{certificateData?.user_code_meli}</p>
                 <p className='rank'>{certificateData?.media_rank}</p>
-                <p className='time'>{certificateData?.media_time}</p>
+                <p className='time'>
+                    {certificateData?.media_time > 60
+                        ? `${certificateData?.media_time / 60} ساعت ${certificateData?.media_time % 60} دقیقه`
+                        : `${certificateData?.media_time} دقیقه`}
+                </p>
                 <p className='date'>{certificateData?.jdate.replaceAll(',', '/')}</p>
             </CertificateField>
         </LayoutProvider>
