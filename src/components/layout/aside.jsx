@@ -14,6 +14,7 @@ import video from '../../assets/icons/sidebar/video.svg';
 import tag from '../../assets/icons/sidebar/tag.svg';
 import category from '../../assets/icons/sidebar/category.svg';
 import mode from '../../assets/icons/sidebar/mode.svg';
+import AppreciationIcon from '../../assets/icons/sidebar/appreciation.svg';
 
 // APIs
 import { GetUserCategoriesList } from '../../api-request/category';
@@ -80,7 +81,10 @@ function Aside({ asideStatus }) {
                         <>
                             <li>
                                 <div className='collapse_field'>
-                                    <p onClick={collapseStatusHandler}>{t('Category')}</p>
+                                    <div className='collapse_title' onClick={collapseStatusHandler}>
+                                        <Image src={category} alt='category' />
+                                        <p>{t('Category')}</p>
+                                    </div>
                                     <div className={`collapse_menu ${collapseStatus ? 'open' : ''}`}>
                                         {categoriesList
                                             ?.sort((a, b) => {
@@ -102,12 +106,13 @@ function Aside({ asideStatus }) {
                                                         </Link>
                                                     );
                                                 }
-
                                                 return (
                                                     <Link
                                                         href={`/video/${item.id}`}
                                                         key={item.id}
-                                                        className={`${userInfo.rank < item?.rank ? 'disabled' : ''}`}
+                                                        className={`${
+                                                            userInfo.rank > item?.rank || userInfo.role === 'AgentAcademy' ? '' : 'disabled'
+                                                        }`}
                                                     >
                                                         <img
                                                             className='video_banner'
@@ -126,7 +131,7 @@ function Aside({ asideStatus }) {
                             </li>
                             <li>
                                 <Link href='/certification' className={`${router.pathname === '/video' ? 'active' : ''}`}>
-                                    <Image src={video} alt='video' />
+                                    <Image src={AppreciationIcon} alt='video' className='sidebar_icon' />
                                     <p>{t('Certification')}</p>
                                 </Link>
                             </li>

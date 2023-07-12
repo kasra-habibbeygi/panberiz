@@ -50,6 +50,13 @@ export const AsideField = styled.aside(props => ({
         }
     },
 
+    '& .collapse_title': {
+        display: 'flex',
+        alignItems: 'center',
+        cursor: 'pointer',
+        gap: '10px'
+    },
+
     '& .active': {
         background: props.theme.mode === 'light' ? '#FAF6FA' : '#28073C',
         borderRight: '6px solid #751B74 !important',
@@ -60,6 +67,11 @@ export const AsideField = styled.aside(props => ({
                     ? 'invert(285%) sepia(374%) saturate(23498%) hue-rotate(1383deg) brightness(61%)'
                     : 'invert(21%) sepia(93%) saturate(2352%) hue-rotate(270deg) brightness(85%) contrast(91%)'
         }
+    },
+
+    '& .sidebar_icon': {
+        width: '30px',
+        height: 'auto'
     },
 
     '& .seprator': {

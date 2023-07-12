@@ -65,7 +65,7 @@ function UserVideo() {
                 ) : (
                     mediaList?.map(item => (
                         <div key={item.id} className='card_field'>
-                            <CardField>
+                            <CardField status={true}>
                                 <div className='video_image'>
                                     <div className='float'>
                                         <Link href={`/video/details/${item.id}`}>
