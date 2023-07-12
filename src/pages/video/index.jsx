@@ -124,7 +124,7 @@ function Video() {
 
     const mediaListProvider = mediaList?.map(item => (
         <div key={item.id} className='card_field'>
-            <CardField>
+            <CardField status={item.media_status}>
                 <div className='video_image'>
                     <div className='float'>
                         <Link href={`/video/details/${item.id}`}>

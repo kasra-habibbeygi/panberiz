@@ -44,15 +44,17 @@ function Aside({ asideStatus }) {
         GetUserCategoriesList(userInfo.lang)
             .then(res => {
                 setCategoriesList(res.results);
+
+                categoriesList
+                    ?.sort((a, b) => {
+                        return a.place - b.place;
+                    })
+                    .map(item => {
+                        console.log('rank: ', item.place, 'name : ', item.title);
+                    });
             })
             .catch(() => {});
     }, [userInfo.lang]);
-
-    console.log(
-        categoriesList?.sort((a, b) => {
-            return a.place - b.place;
-        })
-    );
 
     return (
         <Style.AsideField asideStatus={asideStatus} categoriesListLength={categoriesList.length}>
@@ -74,7 +76,7 @@ function Aside({ asideStatus }) {
                             </Link>
                         </li>
                     )}
-                    {userInfo.role === 'User' && (
+                    {(userInfo.role === 'User' || userInfo.role === 'AgentAcademy') && (
                         <>
                             <li>
                                 <div className='collapse_field'>
