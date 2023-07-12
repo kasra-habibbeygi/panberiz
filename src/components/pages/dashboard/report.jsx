@@ -38,7 +38,7 @@ function Report() {
             <div className='cards_field'>
                 <div className='header_field'>
                     <span>{t('Row')}</span>
-                    <span>{t('Rank')}</span>
+                    <span>{t('Category Name')}</span>
                     <span>{t('Number of content')}</span>
                     <span>{t('Number of visits')}</span>
                 </div>

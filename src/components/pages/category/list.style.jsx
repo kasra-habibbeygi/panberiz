@@ -62,7 +62,7 @@ export const MainField = styled.div(props => ({
 
         span: {
             width: '100%',
-            textAlign: 'right',
+            textAlign: props.theme.direction === 'rtl' ? 'right' : 'left',
 
             '&:last-child': {
                 textAlign: 'left'
