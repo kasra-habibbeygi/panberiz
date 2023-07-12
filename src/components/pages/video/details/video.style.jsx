@@ -20,7 +20,9 @@ export const MainField = styled.div(props => ({
     },
 
     iframe: {
-        border: 'none'
+        border: 'none',
+        height: '700px',
+        borderRadius: '10px'
     },
 
     '& .card_details': {
@@ -71,7 +73,6 @@ export const MainField = styled.div(props => ({
 
     '& .video_image': {
         width: '100%',
-        height: '600px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -100,13 +101,23 @@ export const MainField = styled.div(props => ({
         }
     },
 
+    video: {
+        width: '100%',
+        height: '600px',
+        background: 'black',
+        borderRadius: '20px'
+    },
+
     '@media(max-width : 800px)': {
         '& .video_image': {
             width: '100%',
-            height: '300px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center'
+        },
+
+        video: {
+            height: '300px'
         }
     },
 

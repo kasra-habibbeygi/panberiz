@@ -1,19 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/prop-types */
 import Image from 'next/image';
-import { useState } from 'react';
 
 // Assets
 import { MainField } from './video.style';
 import UserIcon from '@/assets/icons/user.svg';
 import HeartIcon from '@/assets/icons/heart.svg';
-import play from '@/assets/icons/play.svg';
 
 // MUI
 import StarIcon from '@mui/icons-material/Star';
-
-// Component
-import VideoModal from './video-modal';
 
 // APIs
 import { AddNewFavorits } from '@/api-request/favorit';
@@ -21,7 +16,6 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
 
 const VideoField = ({ mediaDetails }) => {
-    const [videoModalStatus, setVideoModalStatus] = useState(false);
     const userInfo = useSelector(state => state.UserInfo);
 
     const addFavoritHandler = id => {
@@ -41,17 +35,22 @@ const VideoField = ({ mediaDetails }) => {
         <MainField>
             {mediaDetails?.media_type === 'video' ? (
                 <div className='video_image'>
-                    <div className='float'>
-                        <Image className='icon' src={play} alt='play' onClick={() => setVideoModalStatus(true)} />
-                    </div>
-                    <img
-                        className='video_banner'
-                        src={mediaDetails?.cover?.replace(
+                    <video
+                        controls
+                        id='slider_video_player'
+                        poster={mediaDetails?.cover?.replace(
                             'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21',
                             'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir'
                         )}
-                        alt='video-banner'
-                    />
+                    >
+                        <source
+                            src={mediaDetails?.file?.replace(
+                                'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21',
+                                'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir'
+                            )}
+                            type='video/mp4'
+                        />
+                    </video>
                 </div>
             ) : (
                 <>
@@ -94,7 +93,7 @@ const VideoField = ({ mediaDetails }) => {
                     </div>
                 </div>
             </div>
-            <VideoModal status={videoModalStatus} setStatus={setVideoModalStatus} mediaDetails={mediaDetails} />
+            {/* <VideoModal status={videoModalStatus} setStatus={setVideoModalStatus} mediaDetails={mediaDetails} /> */}
         </MainField>
     );
 };

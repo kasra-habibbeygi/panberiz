@@ -21,7 +21,7 @@ const DetailsField = ({ mediaDetails }) => {
     const [examBtnStatus, setExamBtnStatus] = useState(false);
 
     useEffect(() => {
-        setExamBtnStatus(!mediaDetails?.media_quiezes[0]?.user_answer && userInfo.role === 'User' ? true : false);
+        setExamBtnStatus(!mediaDetails?.media_quiezes.length && userInfo.role === 'User' ? true : false);
     }, []);
 
     return (

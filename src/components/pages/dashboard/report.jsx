@@ -16,21 +16,20 @@ function Report() {
 
     useEffect(() => {
         if (userInfo.role === 'SuperAdminAcademy') {
-            GetManagerChart3Info()
+            GetManagerChart3Info(userInfo.lang)
                 .then(res => {
-                    setChart3Data(res.result);
+                    setChart3Data(res);
                 })
                 .catch(() => {});
         }
         if (userInfo.role === 'AdminAcademy' || userInfo.role === 'AgentAcademy') {
-            GetAdminChart3Info()
+            GetAdminChart3Info(userInfo.lang)
                 .then(res => {
-                    setChart3Data(res.result);
-                    console.log(1);
+                    setChart3Data(res);
                 })
                 .catch(() => {});
         }
-    }, [userInfo.role]);
+    }, [userInfo.role, userInfo.lang]);
 
     return (
         <ReportField>
