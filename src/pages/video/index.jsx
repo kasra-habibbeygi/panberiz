@@ -160,7 +160,7 @@ function Video() {
 
     const notAceptedListProvider = notAcceptedList?.map(item => (
         <div key={item.id} className='card_field'>
-            <CardField>
+            <CardField status={true}>
                 <div className='video_image'>
                     <div className='float'>
                         <Image className='icon' src={accept} alt='accept' onClick={() => handleAcceptVideo(item.id)} />
@@ -194,7 +194,7 @@ function Video() {
 
     const deactiveListProvider = deactiveMediaList?.map(item => (
         <div key={item.id} className='card_field'>
-            <CardField>
+            <CardField status={true}>
                 <div className='video_image'>
                     <div className='float'>
                         <Image className='icon' src={accept} alt='accept' onClick={() => changeMediahandler(true, item.id)} />
