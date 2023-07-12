@@ -32,7 +32,7 @@ function Income() {
                 })
                 .catch(() => {});
 
-            GetManagerChart2Info()
+            GetManagerChart2Info(userInfo.lang)
                 .then(res => {
                     setChart2Data(res.result);
 
@@ -52,7 +52,7 @@ function Income() {
                 })
                 .catch(() => {});
 
-            GetAdminChart2Info()
+            GetAdminChart2Info(userInfo.lang)
                 .then(res => {
                     setChart2Data(res.result);
 
@@ -65,7 +65,7 @@ function Income() {
                 })
                 .catch(() => {});
         }
-    }, [userInfo.role]);
+    }, [userInfo.role, userInfo.lang]);
 
     return (
         <IncomeField>

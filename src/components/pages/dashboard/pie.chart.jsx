@@ -38,7 +38,7 @@ function ChartPie({ data, selectedValue }) {
     const test = data.filter(item => item.rank === selectedValue && { name: 'Group A', value: 400 });
 
     const dataData = test.map(item => ({
-        name: `${(item.views / item.total) * 100} درصد`,
+        name: `${parseFloat((item.views / item.total) * 100).toFixed(1)} %`,
         value: (item.views / item.total) * 100
     }));
 

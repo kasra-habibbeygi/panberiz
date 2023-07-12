@@ -26,6 +26,7 @@ function Report() {
             GetAdminChart3Info()
                 .then(res => {
                     setChart3Data(res.result);
+                    console.log(1);
                 })
                 .catch(() => {});
         }

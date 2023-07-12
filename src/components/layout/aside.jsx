@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/prop-types */
 import Image from 'next/image';
@@ -51,7 +52,7 @@ function Aside({ asideStatus }) {
                         return a.place - b.place;
                     })
                     .map(item => {
-                        console.log('rank: ', item.place, 'name : ', item.title);
+                        console.log('rank: ', item.rank, 'name : ', item.title);
                     });
             })
             .catch(() => {});
@@ -111,7 +112,9 @@ function Aside({ asideStatus }) {
                                                         href={`/video/${item.id}`}
                                                         key={item.id}
                                                         className={`${
-                                                            userInfo.rank > item?.rank || userInfo.role === 'AgentAcademy' ? '' : 'disabled'
+                                                            item?.rank <= userInfo.rank || userInfo.role === 'AgentAcademy'
+                                                                ? ''
+                                                                : 'disabled'
                                                         }`}
                                                     >
                                                         <img
