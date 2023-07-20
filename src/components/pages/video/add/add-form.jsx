@@ -230,6 +230,7 @@ function AddForm() {
                             name='the_number_of_tests'
                             placeholder={t('Enter number of questions...')}
                             label={t('Number of questions')}
+                            type='number'
                         />
                     </div>
                     <div className='w-50'>
@@ -239,6 +240,7 @@ function AddForm() {
                             name='the_duration_of_the_test'
                             placeholder={t('Enter test answering time...')}
                             label={t('Test answering time')}
+                            type='number'
                         />
                     </div>
                     <div className='w-50'>

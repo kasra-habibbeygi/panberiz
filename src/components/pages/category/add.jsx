@@ -123,6 +123,7 @@ const AddCategory = ({ setReaload, reload }) => {
                             name='rank'
                             placeholder={t('Enter category rank')}
                             label={t('Rank')}
+                            type='number'
                         />
                     </div>
                     <div className='w-50'>
@@ -132,6 +133,7 @@ const AddCategory = ({ setReaload, reload }) => {
                             name='place'
                             placeholder={t('Enter the category position')}
                             label={t('position')}
+                            type='number'
                         />
                     </div>
                     <div className='w-50'>

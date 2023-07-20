@@ -1,19 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import { useTranslation } from 'next-i18next';
-
-// Assets
-import Button from '@/components/form-group/button';
-import { MainField } from './details.style';
-import CLockIcon from '@/assets/icons/clock.svg';
-import GridsIcon from '@/assets/icons/grids.svg';
-
-// MUI
-import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'next-i18next';
+
+// Assets
+import { MainField } from './details.style';
+import CLockIcon from '@/assets/icons/clock.svg';
+import GridsIcon from '@/assets/icons/grids.svg';
+
+// Component
+import Button from '@/components/form-group/button';
+
+// MUI
+import KeyboardBackspaceRoundedIcon from '@mui/icons-material/KeyboardBackspaceRounded';
 
 const DetailsField = ({ mediaDetails }) => {
     const { t } = useTranslation();
@@ -38,7 +40,7 @@ const DetailsField = ({ mediaDetails }) => {
                         {mediaDetails?.category_info.title}
                     </span>
                     {mediaDetails?.tags_name?.map((item, index) => (
-                        <span key={index}># {item}</span>
+                        <span key={index}>#{item}</span>
                     ))}
                 </div>
                 {examBtnStatus && (

@@ -34,12 +34,12 @@
     "Add category": "افزودن دسته",
     "Category list": "لیست دسته بندی",
     "General condition": "وضعیت عمومی",
-    "Category Name" : "نام دسته",
+    "Category Name": "نام دسته",
 
     "Favorites list": "لیست علاقه مندی ها",
 
     "Start exam": "شروع کوییز",
-    "Certification" : "تقدیر نامه",
+    "Certification": "تقدیر نامه",
 
     "Seach": "جستجو ...",
     "Add media": "افزودن مدیا",
@@ -48,7 +48,7 @@
     "Dashboard": "داشبورد",
     "Video": "ویدئو",
     "Dark mode": "حالت شب",
-    "Media" : "مدیا",
+    "Media": "مدیا",
 
     "Media Type": "نوع مدیا",
     "Enter media title...": "عنوان مدیا را وارد کنید ...",
@@ -73,10 +73,10 @@
     "Add new answer": "افزودن پاسخ جدید",
     "Cancel": "لغو",
     "Submit question": "ثبت سوال",
-    "Answer" : "پاسخ",
-    "Enter the answer" : "پاسخ را وارد کنید",
-    "Uploaded videos" : "ویدئو های آپلود شده",
-    "Videos pending approval" : "ویدئو های در انتظار تایید",
+    "Answer": "پاسخ",
+    "Enter the answer": "پاسخ را وارد کنید",
+    "Uploaded videos": "ویدئو های آپلود شده",
+    "Videos pending approval": "ویدئو های در انتظار تایید",
 
     "Income": "درآمد",
     "Weekly": "هفتگی",
@@ -89,24 +89,24 @@
     "Details": "جزئیات",
     "Rank visit report": "گزارش بازدید رنک ها",
 
-    "viewers statistics" : "آمار بازدید",
-    "Total" : "کل",
+    "viewers statistics": "آمار بازدید",
+    "Total": "کل",
 
-    "Prerequisite videos" : "ویدیو های پیشنیاز",
-    "Enter your opinion..." : "دیدگاه خود را وارد کنید ...",
-    "Your score" : "امتیاز شما",
-    "score" : "امتیاز",
-    "Start the quiz" : "شروع کوییز",
+    "Prerequisite videos": "ویدیو های پیشنیاز",
+    "Enter your opinion...": "دیدگاه خود را وارد کنید ...",
+    "Your score": "امتیاز شما",
+    "score": "امتیاز",
+    "Start the quiz": "شروع کوییز",
 
-    "Minutes" : "دقیقه",
-    "Question" : "سوال",
-    "Test registration" : "ثبت آزمون",
-    "Your test is over." : "آزمون شما به پایان رسید.",
-    "from" : "از",
-    "Chose image" : "انتخاب عکس",
-    "Back to the desktop" : "بازگشت به میز کار",
-    
-    "Your message was successfully registered!" : "پیام شما با موفقیت ثبت شد !",
+    "Minutes": "دقیقه",
+    "Question": "سوال",
+    "Test registration": "ثبت آزمون",
+    "Your test is over.": "آزمون شما به پایان رسید.",
+    "from": "از",
+    "Chose image": "انتخاب عکس",
+    "Back to the desktop": "بازگشت به میز کار",
+
+    "Your message was successfully registered!": "پیام شما با موفقیت ثبت شد !",
     "The code has been sent successfully": "کد با موفقیت ارسال شد !",
     "The entered national code is not correct!": "کد ملی وارد شده صحیح نمیباشد !",
     "The entered code is wrong!": "کد وارد شده اشتباه است !",
@@ -116,5 +116,6 @@
     "No question has been asked!": "سوالی طرح نشده است !",
     "Successfully updated!": "با موفقیت اپدیت شد !",
     "An error occurred, please try again!": "خطایی پیش آمده لطفا مجدد تلاش کنید !",
-    "There are no items to display!": "هیچ موردی برای نمایش وجود ندارد !"
+    "There are no items to display!": "هیچ موردی برای نمایش وجود ندارد !",
+    "Added to the list of favorites!": "به لیست علاقه مندی ها اضافه شد !"
 }

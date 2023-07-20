@@ -93,7 +93,6 @@ const Comment = ({ mediaDetails }) => {
                             <div className='info'>
                                 <div className='title'>
                                     <b>{item.user_fullname}</b>
-                                    {/* <small>چند دقیقه پیش</small> */}
                                 </div>
                                 <div className='rate'>
                                     <p>۴.۵/۵</p>

@@ -15,9 +15,10 @@ import SuggestVideo from '@/components/pages/video/details/suggest';
 import { GetMediaDetails } from '@/api-request/media/details';
 
 const VideoDetails = () => {
-    const [mediaDetails, setMediaDetails] = useState([]);
     const userInfo = useSelector(state => state.UserInfo);
+    const [mediaDetails, setMediaDetails] = useState([]);
     const router = useRouter();
+
     useEffect(() => {
         GetMediaDetails(router.query.id, userInfo.lang)
             .then(res => {

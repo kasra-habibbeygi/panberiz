@@ -12,7 +12,7 @@ import Link from 'next/link';
 
 function Card({ data, accepted }) {
     return (
-        <Style.CardField>
+        <Style.CardField status={true}>
             <div className='video_image'>
                 <div className='float'>
                     {accepted ? (
@@ -26,7 +26,14 @@ function Card({ data, accepted }) {
                         </>
                     )}
                 </div>
-                <img className='video_banner' src={data?.media_info?.cover} alt='video-banner' />
+                <img
+                    className='video_banner'
+                    src={data?.media_info?.cover?.replace(
+                        'http://127.0.0.1:8000ftp://testuser@fileacademy.pmlm.ir:m@P7x-s{d28}@31.25.90.38:21/files/',
+                        'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/files/'
+                    )}
+                    alt='video-banner'
+                />
             </div>
             <div className='card_details'>
                 <div className='right_field'>

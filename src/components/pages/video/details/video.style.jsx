@@ -25,6 +25,10 @@ export const MainField = styled.div(props => ({
         borderRadius: '10px'
     },
 
+    '& .red_heart': {
+        filter: 'invert(33%) sepia(81%) saturate(2399%) hue-rotate(337deg) brightness(106%) contrast(110%)'
+    },
+
     '& .card_details': {
         display: 'flex',
         alignItems: 'flex-start',
@@ -53,6 +57,7 @@ export const MainField = styled.div(props => ({
                 gap: '10px',
 
                 img: {
+                    cursor: 'pointer',
                     filter: 'invert(55%) sepia(0%) saturate(1107%) hue-rotate(144deg) brightness(90%) contrast(82%)'
                 }
             },

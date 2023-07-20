@@ -46,14 +46,6 @@ function Aside({ asideStatus }) {
         GetUserCategoriesList(userInfo.lang)
             .then(res => {
                 setCategoriesList(res.results);
-
-                categoriesList
-                    ?.sort((a, b) => {
-                        return a.place - b.place;
-                    })
-                    .map(item => {
-                        console.log('rank: ', item.rank, 'name : ', item.title);
-                    });
             })
             .catch(() => {});
     }, [userInfo.lang]);
