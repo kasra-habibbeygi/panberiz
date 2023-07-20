@@ -221,6 +221,7 @@ function AddForm() {
                             name='title'
                             placeholder={t('Enter media title...')}
                             label={t('Title')}
+                            onKeyDown={addNewMediaHandler}
                         />
                     </div>
                     <div className='w-50'>
@@ -231,6 +232,7 @@ function AddForm() {
                             placeholder={t('Enter number of questions...')}
                             label={t('Number of questions')}
                             type='number'
+                            onKeyDown={addNewMediaHandler}
                         />
                     </div>
                     <div className='w-50'>
@@ -241,6 +243,7 @@ function AddForm() {
                             placeholder={t('Enter test answering time...')}
                             label={t('Test answering time')}
                             type='number'
+                            onKeyDown={addNewMediaHandler}
                         />
                     </div>
                     <div className='w-50'>
@@ -253,6 +256,7 @@ function AddForm() {
                                 inputValues.media_type === 'video' ? t('Enter video duration...') : t('Enter number of PDF pages...')
                             }
                             label={inputValues.media_type === 'video' ? t('Video duration (minutes)') : t('Number of pages')}
+                            onKeyDown={addNewMediaHandler}
                         />
                     </div>
                     <div className='w-100'>
@@ -263,6 +267,7 @@ function AddForm() {
                             height='100px'
                             placeholder={t('Enter description...')}
                             label={t('Description')}
+                            onKeyDown={addNewMediaHandler}
                         />
                     </div>
                     <div className='w-50'>
@@ -275,6 +280,7 @@ function AddForm() {
                                         getOptionLabel={option => option?.label}
                                         renderInput={params => <TextField {...params} placeholder={t('Prerequisites')} />}
                                         onChange={(e, newValue) => autoCompleteHandler(newValue, 'prerequisites')}
+                                        onKeyDown={addNewMediaHandler}
                                     />
                                 </CacheProvider>
                             ) : (
@@ -284,6 +290,7 @@ function AddForm() {
                                     getOptionLabel={option => option?.label}
                                     renderInput={params => <TextField {...params} placeholder={t('Prerequisites')} />}
                                     onChange={(e, newValue) => autoCompleteHandler(newValue, 'prerequisites')}
+                                    onKeyDown={addNewMediaHandler}
                                 />
                             )}
                         </div>
@@ -295,6 +302,7 @@ function AddForm() {
                             name='lang'
                             valueHandler={autoCompleteHandler}
                             options={LangList}
+                            onKeyDown={addNewMediaHandler}
                         />
                     </div>
                     <div className='w-50'>
@@ -304,6 +312,7 @@ function AddForm() {
                             valueHandler={autoCompleteHandler}
                             options={selectLists?.category}
                             name='category'
+                            onKeyDown={addNewMediaHandler}
                         />
                     </div>
                     <div className='w-50'>
@@ -316,6 +325,7 @@ function AddForm() {
                                         getOptionLabel={option => option?.label}
                                         renderInput={params => <TextField {...params} placeholder={t('tags')} />}
                                         onChange={(e, newValue) => autoCompleteHandler(newValue, 'tags')}
+                                        onKeyDown={addNewMediaHandler}
                                     />
                                 </CacheProvider>
                             ) : (
@@ -325,6 +335,7 @@ function AddForm() {
                                     getOptionLabel={option => option?.label}
                                     renderInput={params => <TextField {...params} placeholder={t('tags')} />}
                                     onChange={(e, newValue) => autoCompleteHandler(newValue, 'tags')}
+                                    onKeyDown={addNewMediaHandler}
                                 />
                             )}
                         </div>

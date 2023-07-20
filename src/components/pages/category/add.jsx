@@ -124,6 +124,7 @@ const AddCategory = ({ setReaload, reload }) => {
                             placeholder={t('Enter category rank')}
                             label={t('Rank')}
                             type='number'
+                            onKeyDown={submitHandler}
                         />
                     </div>
                     <div className='w-50'>
@@ -134,6 +135,7 @@ const AddCategory = ({ setReaload, reload }) => {
                             placeholder={t('Enter the category position')}
                             label={t('position')}
                             type='number'
+                            onKeyDown={submitHandler}
                         />
                     </div>
                     <div className='w-50'>
@@ -143,6 +145,7 @@ const AddCategory = ({ setReaload, reload }) => {
                             name='title'
                             placeholder={t('Enter category title')}
                             label={t('Title')}
+                            onKeyDown={submitHandler}
                         />
                     </div>
                     <div className='w-50'>
@@ -152,6 +155,7 @@ const AddCategory = ({ setReaload, reload }) => {
                             name='description'
                             placeholder={t('Enter category description')}
                             label={t('Description')}
+                            onKeyDown={submitHandler}
                         />
                     </div>
                     <div className='w-50'>
@@ -162,6 +166,7 @@ const AddCategory = ({ setReaload, reload }) => {
                                 valueHandler={selectValueHandler}
                                 options={langList}
                                 name='lang'
+                                onKeyDown={submitHandler}
                             />
                         </div>
                     </div>

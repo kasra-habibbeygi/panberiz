@@ -81,6 +81,7 @@ const Comment = ({ mediaDetails }) => {
                         value={inputValues.comment}
                         name='comment'
                         placeholder={t('Enter your opinion...')}
+                        onKeyDown={sendCommentHandler}
                     />
                     <SendRoundedIcon onClick={sendCommentHandler} />
                 </div>

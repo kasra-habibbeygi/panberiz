@@ -15,8 +15,15 @@ const cacheRtl = createCache({
     stylisPlugins: [prefixer, rtlPlugin]
 });
 
-const AutoComplete = ({ placeholder, options, value, valueHandler, name }) => {
+const AutoComplete = ({ placeholder, options, value, valueHandler, name, onKeyDown }) => {
     const lang = useSelector(state => state.UserInfo.lang);
+
+    const keyDownHandler = e => {
+        if (e.key === 'Enter') {
+            onKeyDown();
+        }
+    };
+
     return (
         <MainField>
             {lang !== 'en' ? (
@@ -28,6 +35,7 @@ const AutoComplete = ({ placeholder, options, value, valueHandler, name }) => {
                         onChange={(e, newValue) => {
                             valueHandler(newValue, name);
                         }}
+                        onKeyDown={e => onKeyDown && keyDownHandler(e)}
                         popupIcon={<KeyboardArrowDownRoundedIcon style={{ color: '#170128' }} />}
                         renderInput={params => <TextField {...params} placeholder={placeholder} />}
                     />
@@ -40,6 +48,7 @@ const AutoComplete = ({ placeholder, options, value, valueHandler, name }) => {
                     onChange={(e, newValue) => {
                         valueHandler(newValue, name);
                     }}
+                    onKeyDown={e => onKeyDown && keyDownHandler(e)}
                     popupIcon={<KeyboardArrowDownRoundedIcon style={{ color: '#170128' }} />}
                     renderInput={params => <TextField {...params} placeholder={placeholder} />}
                 />

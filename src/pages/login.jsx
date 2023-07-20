@@ -49,7 +49,7 @@ const Login = () => {
             });
     };
 
-    const getTokenhandler = () => {
+    const getTokenHandler = e => {
         setLoader(true);
         GetToken(inputValues)
             .then(res => {
@@ -122,6 +122,7 @@ const Login = () => {
                         name='codemeli'
                         placeholder={t('enter national code')}
                         label={t('natinal code')}
+                        onKeyDown={getCodeHandler}
                     />
                     <Button type='filled' color='primary' handler={getCodeHandler} loader={loader}>
                         {t('login')}
@@ -135,6 +136,7 @@ const Login = () => {
                         name='code'
                         placeholder={t('enter verify code')}
                         label={t('verify code')}
+                        onKeyDown={getTokenHandler}
                     />
                     <p className='timer'>
                         {minutes !== 0 && seconds !== 0 ? (
@@ -147,7 +149,7 @@ const Login = () => {
                             </p>
                         )}
                     </p>
-                    <Button type='filled' color='primary' handler={getTokenhandler} loader={loader}>
+                    <Button type='filled' color='primary' handler={getTokenHandler} loader={loader}>
                         {t('verify')}
                     </Button>
                 </VerifyCodeField>

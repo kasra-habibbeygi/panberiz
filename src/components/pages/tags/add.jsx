@@ -77,6 +77,7 @@ const AddTag = ({ setReaload, reload }) => {
                 value={tagsName.title}
                 name='title'
                 valueHandler={e => InputValueHandler(e)}
+                onKeyDown={submitHandler}
             />
             <div className='lang_select'>
                 <AutoComplete
@@ -85,9 +86,10 @@ const AddTag = ({ setReaload, reload }) => {
                     valueHandler={selectValueHandler}
                     options={langList}
                     name='lang'
+                    onKeyDown={submitHandler}
                 />
             </div>
-            <Button color='primary' disabled={tagsName === ''} handler={() => submitHandler()} loader={loader} extraClass='sub_btn'>
+            <Button color='primary' disabled={tagsName === ''} handler={submitHandler} loader={loader} extraClass='sub_btn'>
                 {t('add tag')}
             </Button>
         </MainField>
