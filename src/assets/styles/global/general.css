@@ -1,23 +1,15 @@
-/* @font-face {
-    font-family: "main";
-    src: url(../../font/IRANYekanThin.ttf) format("truetype");
-    font-weight: 100;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: 'Vazirmatn';
 }
 
 
 table {
     border-collapse: collapse;
-}
-
-body,
-html {
-    font-family: 'main';
 }
 
 body {
@@ -55,15 +47,15 @@ article {
 }
 
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #ebebeb;
+    background: #c8c8c8;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgb(197, 197, 197);
+    background: #39164F;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -77,7 +69,7 @@ a {
 button {
     cursor: pointer;
     border: none;
-    font-family: 'main' !important;
+    font-family: 'Vazirmatn' !important;
 }
 
 h1,
@@ -98,5 +90,5 @@ p {
 input {
     font-size: 0.9rem;
     font-weight: 400;
-    font-family: 'main' !important;
+    font-family: 'Vazirmatn' !important;
 }

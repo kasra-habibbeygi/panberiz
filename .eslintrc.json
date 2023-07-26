@@ -71,7 +71,6 @@
         "comma-spacing": ["error"],
         "comma-dangle": ["error"],
         "semi-style": ["error"],
-        "camelcase": ["error"],
         "indent": ["error", 4],
         "max-len": ["error", 140],
         "no-multi-spaces": ["error"],

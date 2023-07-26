@@ -1,15 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable @next/next/next-script-for-ga */
+import Head from 'next/head';
+import NProgress from 'nprogress';
+import { Toaster } from 'react-hot-toast';
+import { useEffect } from 'react';
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material/styles';
-import NProgress from 'nprogress';
-import Router from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { wrapper } from '../state-manager/store';
+import { appWithTranslation } from 'next-i18next';
+import Router, { useRouter } from 'next/router';
+import { langHandler } from '@/state-manager/reducer/user';
+import { themeStateHandler } from '@/state-manager/reducer/user';
 import 'nprogress/nprogress.css';
 
 //Config
 import { theme } from '../config/theme';
-
-//Assets
 import '../assets/styles/global/general.css';
 
 NProgress.configure({
@@ -18,16 +25,41 @@ NProgress.configure({
     speed: 800,
     showSpinner: false
 });
-
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-export default function App({ Component, pageProps }) {
-    const darkModeTheme = createTheme(theme('light'));
+const App = ({ Component, pageProps }) => {
+    const dispatch = useDispatch();
+    const { locale } = useRouter();
+    const userInfo = useSelector(state => state.UserInfo);
+    const lang = useSelector(state => state.UserInfo.lang);
+    const darkModeTheme = createTheme(theme(userInfo.theme, userInfo.lang === 'en' ? 'ltr' : 'rtl'));
+
+    useEffect(() => {
+        localStorage.setItem('pmlmLang', locale);
+        document.documentElement.lang = localStorage.getItem('pmlmLang');
+        dispatch(themeStateHandler(localStorage.getItem('theme') !== null ? localStorage.getItem('theme') : 'light'));
+        dispatch(langHandler(localStorage.getItem('pmlmLang')));
+        document.dir = localStorage.getItem('pmlmLang') === 'en' ? 'ltr' : 'rtl';
+    }, []);
+
     return (
         <ThemeProvider theme={darkModeTheme}>
+            <Head>
+                <title>اکادمی پنبه ریز</title>
+            </Head>
+            <Toaster
+                position='bottom-left'
+                containerStyle={{
+                    zIndex: 9999,
+                    textAlign: 'right',
+                    direction: lang
+                }}
+            />
             <Component {...pageProps} />
         </ThemeProvider>
     );
-}
+};
+
+export default wrapper.withRedux(appWithTranslation(App));
