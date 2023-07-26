@@ -1,12 +1,36 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable indent */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
-import LayoutProvider from '@/components/layout';
+import { toast } from 'react-hot-toast';
 import { useEffect, useState } from 'react';
-import Tab from '@/components/pages/video/list/tab';
-import HeaderField from '@/components/template/header';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
+
+// Component
+import EmptyField from '@/components/template/empty-field';
+import Tab from '@/components/pages/video/list/tab';
+import HeaderField from '@/components/template/header';
+import LayoutProvider from '@/components/layout';
+
+// Assets
+import play from '@/assets/icons/play.svg';
+import accept from '@/assets/icons/accept.svg';
+import reject from '@/assets/icons/reject.svg';
+import EmptyFieldImg from '../../assets/images/empty/empty-media-list.png';
+import { CardField } from '@/components/pages/video/list/card.style';
+import { ListVideoField } from '@/components/pages/video/list/list-video.style';
+
+// MUI
+import DeleteIcon from '@mui/icons-material/Delete';
+import StarIcon from '@mui/icons-material/Star';
+import { Dialog } from '@mui/material';
+
+// API
 import {
     GetMyMediaList,
     GetAllMedia,
@@ -16,30 +40,19 @@ import {
     GetAdminVideos,
     PostAcceptVideo
 } from '@/api-request/media/list';
-import { useSelector } from 'react-redux';
-import { ListVideoField } from '@/components/pages/video/list/list-video.style';
-import { CardField } from '@/components/pages/video/list/card.style';
-import Link from 'next/link';
-import Image from 'next/image';
-import play from '@/assets/icons/play.svg';
-import { useTranslation } from 'next-i18next';
-import StarIcon from '@mui/icons-material/Star';
-import accept from '@/assets/icons/accept.svg';
-import reject from '@/assets/icons/reject.svg';
-import { toast } from 'react-hot-toast';
-import EmptyFieldImg from '../../assets/images/empty/empty-media-list.png';
-import EmptyField from '@/components/template/empty-field';
-import DeleteIcon from '@mui/icons-material/Delete';
+import Button from '@/components/form-group/button';
 
 function Video() {
     const { t } = useTranslation();
     const router = useRouter();
     const [selectedButton, setSelectedButton] = useState('uploaded');
     const [tabsStatus, setTabsStatus] = useState(false);
+    const [reload, setReload] = useState(false);
+    const [deleteModalStatus, setDeleteModalStatus] = useState(false);
     const [mediaList, setMediaList] = useState([]);
     const [notAcceptedList, setNotAcceptedList] = useState([]);
     const [deactiveMediaList, setDeactiveMediaList] = useState([]);
-    const [reload, setReload] = useState(false);
+    const [rejectReason, setRejectReason] = useState('');
     const userInfo = useSelector(state => state.UserInfo);
 
     useEffect(() => {
@@ -79,7 +92,7 @@ function Video() {
         }
     }, [userInfo]);
 
-    const changeMediahandler = (status, id) => {
+    const changeMediaHandler = (status, id) => {
         const data = {
             is_delete: !status,
             media_status: status
@@ -91,11 +104,11 @@ function Video() {
                 toast.success(t('Successfully updated!'));
             })
             .catch(() => {
-                toast.success(t('An error occurred, please try again!'));
+                toast.error(t('An error occurred, please try again!'));
             });
     };
 
-    const deletespecificMedia = id => {
+    const deleteSpecificMedia = id => {
         DeleteMedia(id)
             .then(() => {
                 setReload(!reload);
@@ -150,7 +163,7 @@ function Video() {
                             <p>{item?.score}</p>
                             <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
                         </div>
-                        <DeleteIcon className='deletemedia' onClick={() => deletespecificMedia(item.id)} />
+                        <DeleteIcon className='deletemedia' onClick={() => deleteSpecificMedia(item.id)} />
                     </div>
                 </div>
                 {userInfo.role !== 'User' && <small>{item?.publisher_fullname}</small>}
@@ -184,7 +197,7 @@ function Video() {
                             <p>{item?.score}</p>
                             <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
                         </div>
-                        <DeleteIcon className='deletemedia' onClick={() => deletespecificMedia(item.id)} />
+                        <DeleteIcon className='deletemedia' onClick={() => deleteSpecificMedia(item.id)} />
                     </div>
                 </div>
                 {userInfo.role !== 'User' && <small>{item?.publisher_fullname}</small>}
@@ -197,8 +210,8 @@ function Video() {
             <CardField status={true}>
                 <div className='video_image'>
                     <div className='float'>
-                        <Image className='icon' src={accept} alt='accept' onClick={() => changeMediahandler(true, item.id)} />
-                        <Image className='icon' src={reject} alt='reject' onClick={() => changeMediahandler(false, item.id)} />
+                        <Image className='icon' src={accept} alt='accept' onClick={() => changeMediaHandler(true, item.id)} />
+                        <Image className='icon' src={reject} alt='reject' onClick={() => setDeleteModalStatus(true)} />
                     </div>
                     <img
                         className='video_banner'
@@ -243,6 +256,29 @@ function Video() {
                 ) : (
                     <EmptyField img={EmptyFieldImg} title={t('There are no items to display!')} />
                 )}
+                <Dialog
+                    onClose={() => setDeleteModalStatus(false)}
+                    open={deleteModalStatus}
+                    disablePortal
+                    keepMounted
+                    fullWidth={true}
+                    scroll='body'
+                    maxWidth='sm'
+                >
+                    <div className='delete_modal_field'>
+                        <h3>{t('Why do you want to reject this media?')}</h3>
+                        <textarea onChange={e => setRejectReason(e.target.value)}></textarea>
+
+                        <div className='button_group'>
+                            <Button color='primary' handler={() => changeMediaHandler(false, 1)}>
+                                {t('Submit')}
+                            </Button>
+                            <Button color='dark' handler={() => setDeleteModalStatus(false)}>
+                                {t('close the window')}
+                            </Button>
+                        </div>
+                    </div>
+                </Dialog>
             </ListVideoField>
         </LayoutProvider>
     );

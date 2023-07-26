@@ -5,19 +5,18 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // Component
-const AddTag = dynamic(() => import('@/components/pages/tags/add'), {
-    ssr: false
-});
 import TagsList from '@/components/pages/tags/list';
 import LayoutProvider from '@/components/layout';
 import HeaderField from '@/components/template/header';
+const AddTag = dynamic(() => import('@/components/pages/tags/add'), {
+    ssr: false
+});
 
 // Assets
 import { TagsmainField } from '@/assets/styles/main';
 
 // APIs
 import { GetTagsList } from '@/api-request/tags';
-
 const Tags = () => {
     const { t } = useTranslation('common');
     const userInfo = useSelector(state => state.UserInfo);
