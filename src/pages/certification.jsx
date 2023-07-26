@@ -6,23 +6,23 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'next-i18next';
 import * as htmlToImage from 'html-to-image';
 import download from 'downloadjs';
+import Image from 'next/image';
 
 // Assets
 import CertificateImg from '../assets/images/video/certificate.jpg';
 import MainCertificateImg from '../assets/images/video/main-certificate.jpg';
 import EmptyFieldImg from '../assets/images/empty/empty-media-list.png';
-import { CardField } from '@/components/pages/video/list/card.style';
-import { ListVideoField } from '@/components/pages/video/list/list-video.style';
-import { CertificateField, GapField } from '@/assets/styles/certificate';
 
 // Component
 import LayoutProvider from '@/components/layout';
 import EmptyField from '@/components/template/empty-field';
 import HeaderField from '@/components/template/header';
+import { CardField } from '@/components/pages/video/list/card.style';
+import { ListVideoField } from '@/components/pages/video/list/list-video.style';
+import { CertificateField, GapField } from '@/assets/styles/certificate';
 
 // APIs
 import { GetCertificationList } from '@/api-request/certification';
-import Image from 'next/image';
 
 function Video() {
     const { t } = useTranslation();

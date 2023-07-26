@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // Component
 import CategoryList from '@/components/pages/category/list';
 import LayoutProvider from '@/components/layout';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 const AddCategory = dynamic(() => import('@/components/pages/category/add'), {
     ssr: false
 });

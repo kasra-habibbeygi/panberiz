@@ -10,14 +10,14 @@ import HeaderField from '@/components/template/header';
 import { GetFavoritsList } from '@/api-request/favorit';
 import { useEffect, useState } from 'react';
 
-const Favorits = () => {
+const Favorite = () => {
     const { t } = useTranslation('common');
-    const [favoritsList, setFavortsList] = useState([]);
+    const [favoritesList, setFavoritesList] = useState([]);
 
     useEffect(() => {
         GetFavoritsList()
             .then(res => {
-                setFavortsList(res.results);
+                setFavoritesList(res.results);
             })
             .catch(() => {});
     }, []);
@@ -25,12 +25,12 @@ const Favorits = () => {
     return (
         <LayoutProvider>
             <HeaderField title={t('Favorites list')} />
-            <ListVideo data={favoritsList} />
+            <ListVideo data={favoritesList} />
         </LayoutProvider>
     );
 };
 
-export default Favorits;
+export default Favorite;
 
 export async function getStaticProps({ locale }) {
     return {

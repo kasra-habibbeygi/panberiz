@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const ListVideoField = styled.div(() => ({
+export const ListVideoField = styled.div(props => ({
     display: 'flex',
     marginTop: '50px',
     alignItems: 'center',
@@ -13,6 +13,41 @@ export const ListVideoField = styled.div(() => ({
     '& .card_field': {
         width: '33.33%',
         padding: '10px'
+    },
+
+    '& .delete_modal_field': {
+        padding: '40px',
+        textAlign: props.theme.direction === 'rtl' ? 'right' : 'left',
+
+        textarea: {
+            height: '140px',
+            backgroundColor: 'red',
+            resize: 'none',
+            width: '100%',
+            borderRadius: '12px',
+            background: '#F1F1F1',
+            border: 'none',
+            padding: '15px',
+            color: '#000000',
+            marginTop: '10px'
+        },
+
+        '& .button_group': {
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+
+            button: {
+                width: '100%',
+                marginTop: '20px'
+            }
+        },
+
+        h3: {
+            textAlign: 'center',
+            marginBottom: '20px',
+            fontSize: '1.5rem'
+        }
     },
 
     '@media(max-width : 900px)': {

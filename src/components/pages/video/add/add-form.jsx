@@ -34,7 +34,7 @@ import { toast } from 'react-hot-toast';
 
 const LangList = [
     { label: 'english', value: 'en' },
-    { label: 'فارسی', value: 'fa' },
+    { label: 'فارسی', value: 'pr' },
     { label: 'عربی', value: 'ar' }
 ];
 
@@ -61,6 +61,7 @@ function AddForm() {
         lang: '',
         title: '',
         description: '',
+        short_description: '',
         cover: '',
         file: '',
         media_type: '',
@@ -130,6 +131,7 @@ function AddForm() {
                     lang: '',
                     title: '',
                     description: '',
+                    short_description: '',
                     cover: '',
                     file: '',
                     media_type: '',
@@ -256,6 +258,17 @@ function AddForm() {
                                 inputValues.media_type === 'video' ? t('Enter video duration...') : t('Enter number of PDF pages...')
                             }
                             label={inputValues.media_type === 'video' ? t('Video duration (minutes)') : t('Number of pages')}
+                            onKeyDown={addNewMediaHandler}
+                        />
+                    </div>
+                    <div className='w-100'>
+                        <Input
+                            valueHandler={inputValueHandler}
+                            value={inputValues.short_description}
+                            name='short_description'
+                            height='100px'
+                            placeholder={t('Enter a short description')}
+                            label={t('Short Description')}
                             onKeyDown={addNewMediaHandler}
                         />
                     </div>

@@ -28,6 +28,8 @@
     "Title": "عنوان",
     "Enter category description": "توضیحات دسته بندی را وارد کنید ...",
     "Description": "توضیحات",
+    "Short Description": "توضیحات کوتاه",
+    "Enter a short description": "توضیحات کوتاه را وارد کنید",
     "File upload": "آپلود فایل",
     "Select the image you want.": "عکس مورد نظر خود را انتخاب کنید.",
     "Chose file": "انتخاب فایل",
@@ -105,6 +107,9 @@
     "from": "از",
     "Chose image": "انتخاب عکس",
     "Back to the desktop": "بازگشت به میز کار",
+    "Why do you want to reject this media?": "چرا میخواهید این مدیا را رد کنید ؟ ",
+    "close the window": "بستن پنجره",
+    "Submit": "ثبت",
 
     "Your message was successfully registered!": "پیام شما با موفقیت ثبت شد !",
     "The code has been sent successfully": "کد با موفقیت ارسال شد !",

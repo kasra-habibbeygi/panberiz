@@ -4,6 +4,7 @@
 import { Dialog } from '@mui/material';
 import { MainField } from './video-modal.style';
 import Button from '@/components/form-group/button';
+import { useTranslation } from 'next-i18next';
 
 // API
 import { AddUserVideoViwe } from '@/api-request/media/details';
@@ -13,6 +14,7 @@ import { useSelector } from 'react-redux';
 const VideoModal = ({ status, setStatus, mediaDetails }) => {
     const userInfo = useSelector(state => state.UserInfo);
     const [video, setVideo] = useState('');
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (status) {
@@ -26,14 +28,14 @@ const VideoModal = ({ status, setStatus, mediaDetails }) => {
         }
     }, [status]);
 
-    const modalClosehandler = () => {
+    const modalCloseHandler = () => {
         setStatus(false);
         document.getElementById('slider_video_player').pause();
     };
 
     return (
         <MainField>
-            <Dialog onClose={modalClosehandler} open={status} disablePortal keepMounted fullWidth={true} scroll='body' maxWidth='md'>
+            <Dialog onClose={modalCloseHandler} open={status} disablePortal keepMounted fullWidth={true} scroll='body' maxWidth='md'>
                 {video !== '' && (
                     <video controls id='slider_video_player'>
                         <source
@@ -45,8 +47,8 @@ const VideoModal = ({ status, setStatus, mediaDetails }) => {
                         />
                     </video>
                 )}
-                <Button type='filled' color='primary' handler={modalClosehandler}>
-                    بستن پنجره
+                <Button type='filled' color='primary' handler={modalCloseHandler}>
+                    {t('close the window')}
                 </Button>
             </Dialog>
         </MainField>

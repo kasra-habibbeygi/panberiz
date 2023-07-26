@@ -1,23 +1,31 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
-import LayoutProvider from '@/components/layout';
-import { useEffect, useState } from 'react';
-import Tab from '@/components/pages/video/list/tab';
-import HeaderField from '@/components/template/header';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useRouter } from 'next/router';
-import { GetUserMediaList } from '@/api-request/media/list';
-import { useSelector } from 'react-redux';
-import { ListVideoField, SearchField } from '@/components/pages/video/list/list-video.style';
-import { CardField } from '@/components/pages/video/list/card.style';
 import Link from 'next/link';
 import Image from 'next/image';
-import play from '@/assets/icons/play.svg';
+import { useEffect, useState } from 'react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'next-i18next';
-import StarIcon from '@mui/icons-material/Star';
-import EmptyFieldImg from '../../assets/images/empty/empty-media-list.png';
+
+// Component
+import LayoutProvider from '@/components/layout';
+import Tab from '@/components/pages/video/list/tab';
+import HeaderField from '@/components/template/header';
 import EmptyField from '@/components/template/empty-field';
+
+// Assets
+import play from '@/assets/icons/play.svg';
+import { CardField } from '@/components/pages/video/list/card.style';
+import EmptyFieldImg from '../../assets/images/empty/empty-media-list.png';
+import { ListVideoField, SearchField } from '@/components/pages/video/list/list-video.style';
+
+// API
+import { GetUserMediaList } from '@/api-request/media/list';
+
+// MUI
 import SearchIcon from '@mui/icons-material/Search';
+import StarIcon from '@mui/icons-material/Star';
 
 function UserVideo() {
     const { t } = useTranslation();
