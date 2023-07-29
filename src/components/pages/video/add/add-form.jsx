@@ -60,8 +60,8 @@ function AddForm() {
     const [inputValues, setInputValued] = useState({
         lang: '',
         title: '',
-        description: '',
-        short_description: '',
+        full_description: '',
+        summary_description: '',
         cover: '',
         file: '',
         media_type: '',
@@ -130,8 +130,8 @@ function AddForm() {
                 setInputValued({
                     lang: '',
                     title: '',
-                    description: '',
-                    short_description: '',
+                    full_description: '',
+                    summary_description: '',
                     cover: '',
                     file: '',
                     media_type: '',
@@ -264,22 +264,22 @@ function AddForm() {
                     <div className='w-100'>
                         <Input
                             valueHandler={inputValueHandler}
-                            value={inputValues.short_description}
-                            name='short_description'
+                            value={inputValues.summary_description}
+                            name='summary_description'
                             height='100px'
-                            placeholder={t('Enter a short description')}
-                            label={t('Short Description')}
+                            placeholder={t('Enter full description')}
+                            label={t('Full description')}
                             onKeyDown={addNewMediaHandler}
                         />
                     </div>
                     <div className='w-100'>
                         <Input
                             valueHandler={inputValueHandler}
-                            value={inputValues.description}
-                            name='description'
+                            value={inputValues.full_description}
+                            name='full_description'
                             height='100px'
-                            placeholder={t('Enter description...')}
-                            label={t('Description')}
+                            placeholder={t('Enter summary description')}
+                            label={t('Summary description')}
                             onKeyDown={addNewMediaHandler}
                         />
                     </div>

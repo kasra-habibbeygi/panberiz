@@ -46,7 +46,7 @@ const AddTag = ({ setReaload, reload }) => {
     const selectValueHandler = (value, name) => {
         setTagsName({
             ...tagsName,
-            [name]: value.value
+            [name]: value?.value
         });
     };
 

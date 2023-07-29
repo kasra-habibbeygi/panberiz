@@ -66,7 +66,7 @@ const AddCategory = ({ setReaload, reload }) => {
     const selectValueHandler = (value, name) => {
         setInputValued({
             ...inputValues,
-            [name]: value.value
+            [name]: value?.value
         });
     };
 
