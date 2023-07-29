@@ -34,7 +34,7 @@ import { toast } from 'react-hot-toast';
 
 const LangList = [
     { label: 'english', value: 'en' },
-    { label: 'فارسی', value: 'pr' },
+    { label: 'فارسی', value: 'fa' },
     { label: 'عربی', value: 'ar' }
 ];
 
