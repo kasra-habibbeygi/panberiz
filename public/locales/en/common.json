@@ -130,6 +130,18 @@
     "Video declined" : "Video declined",
     "Deny reason" : "Deny reason",
     "All notification" : "All notification",
-    "read" : "read"
-
+    "read" : "read",
+    "Filters" : "Filters",
+    "Based on status" : "Based on status",
+    "Based on observation" : "Based on observation",
+    "Sorting" : "Sorting",
+    "Choose" : "Choose",
+    "Accepted" : "Accepted",
+    "Rejected" : "Rejected",
+    "Pending" : "Pending",
+    "Seen" : "Seen",
+    "Not Seen" : "Not Seen",
+    "Newest" : "Newest",
+    "Oldest" : "Oldest",
+    "Highest score" : "Highest score"
 }

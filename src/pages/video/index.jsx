@@ -23,12 +23,12 @@ import accept from '@/assets/icons/accept.svg';
 import reject from '@/assets/icons/reject.svg';
 import EmptyFieldImg from '../../assets/images/empty/empty-media-list.png';
 import { CardField } from '@/components/pages/video/list/card.style';
-import { ListVideoField } from '@/components/pages/video/list/list-video.style';
+import { FiltersWrapper, ListVideoField, PaginationWrapper } from '@/components/pages/video/list/list-video.style';
 
 // MUI
 import DeleteIcon from '@mui/icons-material/Delete';
 import StarIcon from '@mui/icons-material/Star';
-import { Dialog } from '@mui/material';
+import { CircularProgress, Dialog, Pagination } from '@mui/material';
 
 // API
 import {
@@ -53,15 +53,54 @@ function Video() {
     const [notAcceptedList, setNotAcceptedList] = useState([]);
     const [deactiveMediaList, setDeactiveMediaList] = useState([]);
     const [rejectReason, setRejectReason] = useState('');
+    const [pageLoading, setPageLoading] = useState(true);
+    const [pageStatus, setPageStatus] = useState({
+        total: 1,
+        current: 1
+    });
+    const [filters, setFilters] = useState({
+        status: '',
+        observing: '',
+        sorting: ''
+    });
     const userInfo = useSelector(state => state.UserInfo);
 
     useEffect(() => {
+        setPageLoading(true);
+        let filterParams = '';
+        if (filters.status) {
+            filterParams += `media_status=${filters.status}&`;
+        }
+        if (filters.observing === 'seen') {
+            filterParams += 'is_viewed=true&';
+        }
+        if (filters.observing === 'unseen') {
+            filterParams += 'is_viewed=false&';
+        }
+        if (filters.sorting === 'oldest') {
+            filterParams += 'oldest=true&';
+        }
+        if (filters.sorting === 'newest') {
+            filterParams += 'newest=true&';
+        }
+        if (filters.sorting === 'score') {
+            filterParams += 'score=true&';
+        }
+        if (pageStatus.current) {
+            filterParams += `page=${pageStatus.current}&`;
+        }
+
         if (userInfo.role === 'SuperAdminAcademy') {
-            GetAllMedia(userInfo.lang)
+            GetAllMedia(userInfo.lang, filterParams)
                 .then(res => {
                     setMediaList(res.results);
+                    setPageStatus(prev => ({
+                        ...prev,
+                        total: res.count
+                    }));
                 })
-                .catch(() => {});
+                .catch(() => {})
+                .finally(() => setPageLoading(false));
 
             GetAllDeactiveMedia(userInfo.lang)
                 .then(res => {
@@ -84,7 +123,7 @@ function Video() {
         if (userInfo.role === 'AdminAcademy' || userInfo.role === 'User') {
             router.push('/dashboard');
         }
-    }, [router.query.id, userInfo.lang, userInfo.role, reload]);
+    }, [router.query.id, userInfo.lang, userInfo.role, reload, filters, pageStatus.current]);
 
     useEffect(() => {
         if (userInfo.role === 'SuperAdminAcademy') {
@@ -241,12 +280,94 @@ function Video() {
         <LayoutProvider>
             <HeaderField title={t('Video')} />
             {tabsStatus && <Tab selectButton={name => setSelectedButton(name)} selectedButton={selectedButton} />}
+            {selectedButton === 'uploaded' && (
+                <FiltersWrapper>
+                    <p className='filters_title'>{t('Filters')}</p>
+                    <div className='selects_wrapper'>
+                        <div className='options_wrapper'>
+                            <p>{t('Based on status')}</p>
+                            <select
+                                value={filters.status}
+                                onChange={e =>
+                                    setFilters(prev => ({
+                                        ...prev,
+                                        status: e.target.value
+                                    }))
+                                }
+                            >
+                                <option value=''>{t('Choose')}</option>
+                                <option value='accepted'>{t('Accepted')}</option>
+                                <option value='failed'>{t('Rejected')}</option>
+                                <option value='pending'>{t('Pending')}</option>
+                            </select>
+                        </div>
+                        <div className='options_wrapper'>
+                            <p>{t('Based on observation')}</p>
+                            <select
+                                value={filters.observing}
+                                onChange={e =>
+                                    setFilters(prev => ({
+                                        ...prev,
+                                        observing: e.target.value
+                                    }))
+                                }
+                            >
+                                <option value=''>{t('Choose')}</option>
+                                <option value='seen'>{t('Seen')}</option>
+                                <option value='unseen'>{t('Not Seen')}</option>
+                            </select>
+                        </div>
+                        <div className='options_wrapper'>
+                            <p>{t('Sorting')}</p>
+                            <select
+                                value={filters.sorting}
+                                onChange={e =>
+                                    setFilters(prev => ({
+                                        ...prev,
+                                        sorting: e.target.value
+                                    }))
+                                }
+                            >
+                                <option value=''>{t('Choose')}</option>
+                                <option value='newest'>{t('Newest')}</option>
+                                <option value='oldest'>{t('Oldest')}</option>
+                                <option value='score'>{t('Highest score')}</option>
+                            </select>
+                        </div>
+                    </div>
+                </FiltersWrapper>
+            )}
+
             <ListVideoField>
                 {selectedButton === 'uploaded' ? (
                     mediaList?.length ? (
                         <>
-                            {notAceptedListProvider}
-                            {mediaListProvider}
+                            {pageLoading ? (
+                                <div className='loading'>
+                                    <CircularProgress />
+                                </div>
+                            ) : (
+                                <>
+                                    {notAceptedListProvider}
+                                    {mediaListProvider}
+                                </>
+                            )}
+
+                            <PaginationWrapper>
+                                <Pagination
+                                    color='primary'
+                                    count={pageStatus.total}
+                                    page={pageStatus.current}
+                                    onChange={(_, value) =>
+                                        setPageStatus(prev => {
+                                            return {
+                                                ...prev,
+                                                current: value
+                                            };
+                                        })
+                                    }
+                                />
+                            </PaginationWrapper>
                         </>
                     ) : (
                         <EmptyField img={EmptyFieldImg} title={t('There are no items to display!')} />

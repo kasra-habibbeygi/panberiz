@@ -60,6 +60,16 @@ export const ListVideoField = styled.div(props => ({
         '& .card_field': {
             width: '100%'
         }
+    },
+
+    '& .loading': {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '50px 0',
+        borderRadius: '18px',
+        margin: '10px 0'
     }
 }));
 
@@ -94,4 +104,42 @@ export const SearchField = styled.div(props => ({
         width: '30px',
         height: 'auto'
     }
+}));
+
+export const FiltersWrapper = styled.div(props => ({
+    '& .filters_title': {
+        fontSize: '20px',
+        fontWeight: 700,
+        marginTop: '50px',
+        color: props.theme.mode === 'light' ? 'black' : 'white'
+    },
+
+    '& .selects_wrapper': {
+        display: 'flex',
+        gap: '50px',
+        marginTop: '20px',
+        color: props.theme.mode === 'light' ? 'black' : 'white'
+    },
+
+    '& .options_wrapper': {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '10px',
+        alignItems: 'center',
+
+        select: {
+            width: '130px',
+            padding: '3px',
+            borderRadius: '5px',
+            borderColor: '#c5c5c5'
+        }
+    }
+}));
+
+export const PaginationWrapper = styled.div(() => ({
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignContent: 'center',
+    marginTop: '40px'
 }));

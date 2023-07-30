@@ -2,6 +2,7 @@ import { NotificationsWrapper } from '@/assets/styles/notifications.style';
 import LayoutProvider from '@/components/layout';
 import { Pagination } from '@mui/material';
 import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useState } from 'react';
 
 const Notifications = () => {
@@ -67,3 +68,11 @@ const Notifications = () => {
 };
 
 export default Notifications;
+
+export async function getServerSideProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale))
+        }
+    };
+}

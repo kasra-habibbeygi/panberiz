@@ -132,6 +132,18 @@
     "Video declined" : "الفيديو رفض",
     "Deny reason" : "رفض السبب",
     "All notification" : "كل الإخطار",
-    "read" : "يقرأ"
-
+    "read" : "يقرأ",
+    "Filters" : "المرشحات",
+    "Based on status" : "على أساس الحالة",
+    "Based on observation" : "بناء على الملاحظة",
+    "Sorting" : "فرز",
+    "Choose" : "يختار",
+    "Accepted" : "قبلت",
+    "Rejected" : "مرفوض",
+    "Pending" : "قيد الانتظار",
+    "Seen" : "مرئي",
+    "Not Seen" : "لم يرى",
+    "Newest" : "الأحدث",
+    "Oldest" : "الأقدم",
+    "Highest score" : "أعلى نتيجة"
 }

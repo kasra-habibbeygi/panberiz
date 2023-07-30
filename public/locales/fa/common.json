@@ -132,5 +132,18 @@
     "Video declined" : "ویدیو ارسالی شما رد شد",
     "Deny reason" : "علت رد شدن",
     "All notification" : "همه ی اعلان ها",
-    "read" : "خوانده شد"
+    "read" : "خوانده شد",
+    "Filters" : "فیلتر ها",
+    "Based on status" : "بر اساس وضعیت",
+    "Based on observation" : "بر اساس حالت مشاهده",
+    "Sorting" : "مرتب سازی",
+    "Choose" : "انتخاب کنید",
+    "Accepted" : "تایید شده",
+    "Rejected" : "رد شده",
+    "Pending" : "در حال بررسی",
+    "Seen" : "دیده شده ها",
+    "Not Seen" : "دیده نشده ها",
+    "Newest" : "جدید ترین",
+    "Oldest" : "قدیمی ترین",
+    "Highest score" : "بیشترین امتیاز"
 }
