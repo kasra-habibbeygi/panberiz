@@ -126,5 +126,12 @@
     "Successfully updated!": "تم التحديث بنجاح!",
     "An error occurred, please try again!": "حدث خطأ ، يرجى المحاولة مرة أخرى!",
     "There are no items to display!": "لا توجد عناصر لعرضها!",
-    "Added to the list of favorites!": "تمت الإضافة إلى قائمة المفضلة!"
+    "Added to the list of favorites!": "تمت الإضافة إلى قائمة المفضلة!",
+    "Mark as read" : "ضع إشارة مقروء",
+    "Show all" : "عرض الكل",
+    "Video declined" : "الفيديو رفض",
+    "Deny reason" : "رفض السبب",
+    "All notification" : "كل الإخطار",
+    "read" : "يقرأ"
+
 }

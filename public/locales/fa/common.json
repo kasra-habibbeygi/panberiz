@@ -126,5 +126,11 @@
     "Successfully updated!": "با موفقیت اپدیت شد !",
     "An error occurred, please try again!": "خطایی پیش آمده لطفا مجدد تلاش کنید !",
     "There are no items to display!": "هیچ موردی برای نمایش وجود ندارد !",
-    "Added to the list of favorites!": "به لیست علاقه مندی ها اضافه شد !"
+    "Added to the list of favorites!": "به لیست علاقه مندی ها اضافه شد !",
+    "Mark as read" : "علامت به عنوان خوانده شده",
+    "Show all" : "مشاهده همه",
+    "Video declined" : "ویدیو ارسالی شما رد شد",
+    "Deny reason" : "علت رد شدن",
+    "All notification" : "همه ی اعلان ها",
+    "read" : "خوانده شد"
 }

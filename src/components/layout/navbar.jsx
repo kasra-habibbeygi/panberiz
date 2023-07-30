@@ -12,6 +12,8 @@ import { useTranslation } from 'next-i18next';
 import * as Styles from './navbar.style';
 import user from '../../assets/icons/user.svg';
 import UserWhite from '../../assets/icons/user-white.svg';
+import notification from '../../assets/icons/notification.svg';
+import notificationLight from '../../assets/icons/notificationLight.svg';
 import heart from '../../assets/icons/heart.svg';
 import logo from '../../assets/images/logo.png';
 import logoWhite from '../../assets/images/logo-white.svg';
@@ -66,15 +68,29 @@ function Navbar({ setAsideStatus, asideStatus }) {
 
     const ref = useRef(null);
     const [DropDownStatus, setDropDownStatus] = useState('');
+    const [dropDownNotification, setDropDownNotification] = useState('');
 
     useOutsideClick(ref, () => {
         setDropDownStatus('');
     });
 
     const FilterDropDownStatusHandler = name => {
+        setDropDownNotification('');
         setDropDownStatus(name);
         if (name === DropDownStatus) {
             setDropDownStatus('');
+        }
+    };
+
+    useOutsideClick(ref, () => {
+        setDropDownNotification('');
+    });
+
+    const dropDownNotificationHandler = name => {
+        setDropDownStatus('');
+        setDropDownNotification(name);
+        if (name === dropDownNotification) {
+            setDropDownNotification('');
         }
     };
 
@@ -135,6 +151,9 @@ function Navbar({ setAsideStatus, asideStatus }) {
                         alt='user'
                         onClick={() => FilterDropDownStatusHandler('profile_dropdown')}
                     />
+                    <div className='notification' onClick={() => dropDownNotificationHandler('notification_dropdown')}>
+                        <Image src={userInfo.theme === 'light' ? notification : notificationLight} alt='user' />
+                    </div>
                     <div className={`dropdown_field ${DropDownStatus !== '' ? 'active' : ''}`}>
                         <div className='header'>
                             <Image src={user} alt='user' />
@@ -166,6 +185,35 @@ function Navbar({ setAsideStatus, asideStatus }) {
                                 </div>
                             </li>
                         </ol>
+                    </div>
+
+                    <div className={`dropdown_field ${dropDownNotification !== '' ? 'active' : ''}`}>
+                        <ul className='notifs_list'>
+                            <li className='notifs_item'>
+                                <p className='message'>{t('Video declined')}</p>
+                                <p className='message'>{t('Deny reason')} : </p>
+                                <button className='notifs_button'>{t('Mark as read')}</button>
+                            </li>
+                            <li className='notifs_item'>
+                                <p className='message'>{t('Video declined')}</p>
+                                <p className='message'>{t('Deny reason')} : </p>
+                                <button className='notifs_button'>{t('Mark as read')}</button>
+                            </li>
+                            <li className='notifs_item'>
+                                <p className='message'>{t('Video declined')}</p>
+                                <p className='message'>{t('Deny reason')} : </p>
+                                <button className='notifs_button'>{t('Mark as read')}</button>
+                            </li>
+                            <li className='notifs_item'>
+                                <p className='message'>{t('Video declined')}</p>
+                                <p className='message'>{t('Deny reason')} : </p>
+                                <button className='notifs_button'>{t('Mark as read')}</button>
+                            </li>
+
+                            <li className='notifs_showAll'>
+                                <Link href='/notifs'>{t('Show all')}</Link>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

@@ -110,6 +110,54 @@ export const Navbar = styled.nav(props => ({
                 opacity: '1',
                 pointerEvents: 'initial',
                 top: '70px'
+            },
+
+            '& .notifs_list': {
+                listStyle: 'none',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '15px'
+            },
+
+            '& .notifs_item': {
+                borderBottom: '1px solid #e1e1e1',
+                paddingBottom: '10px',
+
+                '& .message': {
+                    fontSize: '14px'
+                },
+
+                '& .notifs_button': {
+                    display: 'block',
+                    fontSize: '11px',
+                    padding: '1px 10px',
+                    borderRadius: '10px',
+                    marginTop: '10px',
+
+                    ...(props.theme.direction === 'rtl' && {
+                        marginRight: 'auto'
+                    }),
+                    ...(props.theme.direction !== 'rtl' && {
+                        marginLeft: 'auto'
+                    })
+                }
+            },
+
+            '& .notifs_showAll': {
+                ...(props.theme.direction === 'rtl' && {
+                    marginRight: 'auto'
+                }),
+                ...(props.theme.direction !== 'rtl' && {
+                    marginLeft: 'auto'
+                }),
+
+                a: {
+                    backgroundColor: '#8C2DB9',
+                    color: 'white',
+                    fontSize: '12px',
+                    padding: '3px 10px',
+                    borderRadius: '10px'
+                }
             }
         },
 
@@ -156,6 +204,23 @@ export const Navbar = styled.nav(props => ({
                     width: '25px'
                 }
             }
+        },
+
+        '& .notification': {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: '50%',
+            width: '44px',
+            height: '44px',
+            cursor: 'pointer',
+            backgroundColor: props.theme.mode === 'light' ? '#f1f1f1' : '#2E1F45',
+            ...(props.theme.direction === 'rtl' && {
+                marginRight: '10px'
+            }),
+            ...(props.theme.direction !== 'rtl' && {
+                marginLeft: '10px'
+            })
         }
     },
 

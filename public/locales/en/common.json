@@ -124,5 +124,12 @@
     "Category added successfully!": "Category added successfully !",
     "No question has been asked!": "No question has been asked!",
     "There are no items to display!": "There are no items to display!",
-    "Added to the list of favorites!": "Added to the list of favorites!"
+    "Added to the list of favorites!": "Added to the list of favorites!",
+    "Mark as read" : "Mark as read",
+    "Show all" : "Show all",
+    "Video declined" : "Video declined",
+    "Deny reason" : "Deny reason",
+    "All notification" : "All notification",
+    "read" : "read"
+
 }
