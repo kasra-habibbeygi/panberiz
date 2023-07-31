@@ -62,6 +62,7 @@ function AddForm() {
         title: '',
         full_description: '',
         summary_description: '',
+        ordering_number: '',
         cover: '',
         file: '',
         media_type: '',
@@ -132,6 +133,7 @@ function AddForm() {
                     title: '',
                     full_description: '',
                     summary_description: '',
+                    ordering_number: '',
                     cover: '',
                     file: '',
                     media_type: '',
@@ -267,8 +269,8 @@ function AddForm() {
                             value={inputValues.summary_description}
                             name='summary_description'
                             height='100px'
-                            placeholder={t('Enter full description')}
-                            label={t('Full description')}
+                            placeholder={t('Enter summary description')}
+                            label={t('Summary description')}
                             onKeyDown={addNewMediaHandler}
                         />
                     </div>
@@ -278,8 +280,20 @@ function AddForm() {
                             value={inputValues.full_description}
                             name='full_description'
                             height='100px'
-                            placeholder={t('Enter summary description')}
-                            label={t('Summary description')}
+                            placeholder={t('Enter full description')}
+                            label={t('Full description')}
+                            onKeyDown={addNewMediaHandler}
+                        />
+                    </div>
+                    <div className='w-100'>
+                        <Input
+                            valueHandler={inputValueHandler}
+                            value={inputValues.ordering_number}
+                            type='number'
+                            name='ordering_number'
+                            height='100px'
+                            placeholder={t('Enter order number')}
+                            label={t('Order Number')}
                             onKeyDown={addNewMediaHandler}
                         />
                     </div>

@@ -70,21 +70,45 @@ function Video() {
         let filterParams = '';
         if (filters.status) {
             filterParams += `media_status=${filters.status}&`;
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
         }
         if (filters.observing === 'seen') {
             filterParams += 'is_viewed=true&';
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
         }
         if (filters.observing === 'unseen') {
             filterParams += 'is_viewed=false&';
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
         }
         if (filters.sorting === 'oldest') {
             filterParams += 'oldest=true&';
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
         }
         if (filters.sorting === 'newest') {
             filterParams += 'newest=true&';
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
         }
         if (filters.sorting === 'score') {
             filterParams += 'score=true&';
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
         }
         if (pageStatus.current) {
             filterParams += `page=${pageStatus.current}&`;
@@ -96,7 +120,7 @@ function Video() {
                     setMediaList(res.results);
                     setPageStatus(prev => ({
                         ...prev,
-                        total: res.count
+                        total: Math.ceil(res.count / 10)
                     }));
                 })
                 .catch(() => {})
@@ -112,7 +136,9 @@ function Video() {
                 .then(res => {
                     setMediaList(res.results);
                 })
-                .catch(() => {});
+                .catch(() => {})
+                .finally(() => setPageLoading(false));
+
             GetAdminVideos()
                 .then(res => {
                     setNotAcceptedList(res.results);

@@ -116,6 +116,7 @@ export const FiltersWrapper = styled.div(props => ({
 
     '& .selects_wrapper': {
         display: 'flex',
+        flexWrap: 'wrap',
         gap: '50px',
         marginTop: '20px',
         color: props.theme.mode === 'light' ? 'black' : 'white'

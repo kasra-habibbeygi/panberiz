@@ -145,5 +145,8 @@
     "Not Seen" : "دیده نشده ها",
     "Newest" : "جدید ترین",
     "Oldest" : "قدیمی ترین",
-    "Highest score" : "بیشترین امتیاز"
+    "Highest score" : "بیشترین امتیاز",
+    "Enter order number" : "عدد اولویت بندی را وارد کنید",
+    "Order Number" : "اولویت بندی"
+
 }
