@@ -159,8 +159,9 @@
     "No test result" : "No test result",
     "Index" : "Index",
     "Visit" : "visit",
-    "Actions" : "Actions"
-
-
-
+    "Actions" : "Actions",
+    "Search user" : "Search user",
+    "Search result" : "Search result",
+    "Seen videos count" : "Seen videos count",
+    "Tests" : "Tests"
 }

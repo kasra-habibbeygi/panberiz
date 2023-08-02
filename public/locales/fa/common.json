@@ -162,6 +162,9 @@
     "No test result" : "آزمونی نداده است",
     "Index" : "ردیف",
     "Visit" : "مشاهده",
-    "Actions" : "عملیات"
-
+    "Actions" : "عملیات",
+    "Search user" : "جست و جوی کاربر",
+    "Search result" : "نتیجه ی جست و جو",
+    "Seen videos count" : "تعداد ویدیو های دیده شده",
+    "Tests" : "آزمون ها"
 }

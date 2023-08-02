@@ -162,7 +162,9 @@
     "No test result" : "لا توجد نتيجة اختبار",
     "Index" : "فِهرِس",
     "Visit" : "يزور",
-    "Actions" : "أجراءات"
-
-
+    "Actions" : "أجراءات",
+    "Search user" : "مستخدم البحث",
+    "Search result" : "نتيجة البحث",
+    "Seen videos count" : "عدد مقاطع الفيديو المرئية",
+    "Tests" : "الاختبارات"
 }
