@@ -13,6 +13,7 @@ import SuggestVideo from '@/components/pages/video/details/suggest';
 
 // APIs
 import { GetMediaDetails } from '@/api-request/media/details';
+import SimilarVideos from '@/components/pages/video/details/Similar';
 
 const VideoDetails = () => {
     const userInfo = useSelector(state => state.UserInfo);
@@ -32,6 +33,7 @@ const VideoDetails = () => {
             <VideoField mediaDetails={mediaDetails[0]} />
             <DetailsField mediaDetails={mediaDetails[0]} />
             <SuggestVideo mediaDetails={mediaDetails[0]} />
+            <SimilarVideos mediaDetails={mediaDetails[0]} />
             <Comment mediaDetails={mediaDetails[0]} />
         </LayoutProvider>
     );

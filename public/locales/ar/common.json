@@ -95,11 +95,13 @@
     "Hours of visit": "ساعات الزيارة",
     "Details": "تفاصيل",
     "Rank visit report": "تقرير زيارة الترتيب",
+    "Video visit report": "تقرير الزيارة بالفيديو",
     
     "viewers statistics" : "إحصائيات المشاهدين",
     "Total" : "المجموع",
         
     "Prerequisite videos" : "مقاطع الفيديو المطلوبة مسبقًا",
+    "Similar videos" : "مقاطع فيديو مماثلة",
     "Enter your opinion..." : "أدخل رأيك ...",
     "Your score" : "درجاتك",
     "score" : "نتيجة",

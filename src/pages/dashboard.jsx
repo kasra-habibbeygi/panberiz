@@ -7,10 +7,11 @@ import { useSelector } from 'react-redux';
 // Component
 import LayoutProvider from '@/components/layout';
 import Income from '@/components/pages/dashboard/income';
-import Report from '@/components/pages/dashboard/report';
+// import Report from '@/components/pages/dashboard/report';
 
 // API
 import { GetUserCategoriesList } from '@/api-request/category';
+import DashboardTable from '@/components/pages/dashboard/dashboard-table';
 
 function Dashboard() {
     const router = useRouter();
@@ -39,7 +40,8 @@ function Dashboard() {
             {pageLoaded && (
                 <>
                     <Income />
-                    <Report />
+                    <DashboardTable />
+                    {/* <Report /> */}
                 </>
             )}
         </LayoutProvider>
