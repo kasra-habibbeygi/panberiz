@@ -95,11 +95,13 @@
     "Hours of visit": "میزان ساعت بازدید",
     "Details": "جزئیات",
     "Rank visit report": "گزارش بازدید رنک ها",
+    "Video visit report": "گزارش بازدید ویدیو ها",
 
     "viewers statistics": "آمار بازدید",
     "Total": "کل",
 
     "Prerequisite videos": "ویدیو های پیشنیاز",
+    "Similar videos": "ویدیو های مشابه",
     "Enter your opinion...": "دیدگاه خود را وارد کنید ...",
     "Your score": "امتیاز شما",
     "score": "امتیاز",
@@ -148,6 +150,18 @@
     "Oldest" : "قدیمی ترین",
     "Highest score" : "بیشترین امتیاز",
     "Enter order number" : "عدد اولویت بندی را وارد کنید",
-    "Order Number" : "اولویت بندی"
+    "Order Number" : "اولویت بندی",
+    "Category name" : "نام دسته بندی",
+    "Category videos count" : "تعداد ویدیو های دسته بندی",
+    "Report videos count" : "تعداد ویدیو های گزارش",
+    "Video name" : "نام ویدیو",
+    "Views count" : "تعداد ویو",
+    "Username" : "نام کاربر",
+    "Date seen" : "تاریخ دیده شدن",
+    "Test score" : "نمره ی آزمون",
+    "No test result" : "آزمونی نداده است",
+    "Index" : "ردیف",
+    "Visit" : "مشاهده",
+    "Actions" : "عملیات"
 
 }

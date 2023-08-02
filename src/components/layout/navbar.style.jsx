@@ -241,6 +241,21 @@ export const Navbar = styled.nav(props => ({
             props.theme.mode === 'light' ? '' : 'invert(21%) sepia(93%) saturate(2352%) hue-rotate(270deg) brightness(85%) contrast(91%)'
     },
 
+    '& .read': {
+        fontSize: '11px',
+        padding: '1px 10px',
+        marginTop: '10px',
+        width: 'fit-content',
+        opacity: '0.7',
+
+        ...(props.theme.direction === 'rtl' && {
+            marginRight: 'auto'
+        }),
+        ...(props.theme.direction !== 'rtl' && {
+            marginLeft: 'auto'
+        })
+    },
+
     '@media(max-width : 1500px)': {
         '& .middle': {
             minWidth: '200px'

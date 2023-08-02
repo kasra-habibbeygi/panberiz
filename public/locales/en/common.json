@@ -94,11 +94,13 @@
     "Hours of visit": "Hours of visit",
     "Details": "Details",
     "Rank visit report": "Rank visit report",
+    "Video visit report": "Video visit report",
 
     "viewers statistics": "viewers statistics",
     "Total": "Total",
 
     "Prerequisite videos": "Prerequisite videos",
+    "Similar videos": "Similar videos",
     "Enter your opinion...": "Enter your opinion...",
     "Your score": "Your score",
     "score": "score",
@@ -145,5 +147,20 @@
     "Oldest" : "Oldest",
     "Highest score" : "Highest score",
     "Enter order number" : "Enter order number",
-    "Order Number" : "Order Number"
+    "Order Number" : "Order Number",
+    "Category name" : "Category name",
+    "Category videos count" : "Category videos count",
+    "Report videos count" : "Report videos count",
+    "Video name" : "Video name",
+    "Views count" : "Views count",
+    "Username" : "Username",
+    "Date seen" : "Date seen",
+    "Test score" : "Test score",
+    "No test result" : "No test result",
+    "Index" : "Index",
+    "Visit" : "visit",
+    "Actions" : "Actions"
+
+
+
 }
