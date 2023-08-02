@@ -27,7 +27,13 @@ export const DashboardTableWrapper = styled.div(props => {
             },
 
             '& .eye_icon': {
-                marginRight: '10px'
+                ...(props.theme.direction === 'rtl' && {
+                    marginRight: '10px'
+                }),
+
+                ...(props.theme.direction === 'ltr' && {
+                    marginLeft: '10px'
+                })
             }
         },
 
