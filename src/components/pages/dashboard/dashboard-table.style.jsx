@@ -19,7 +19,11 @@ export const DashboardTableWrapper = styled.div(props => {
 
             '& td, th': {
                 padding: '15px',
-                textAlign: ' center'
+                textAlign: ' center',
+
+                a: {
+                    color: 'inherit'
+                }
             },
 
             '& .eye_icon': {

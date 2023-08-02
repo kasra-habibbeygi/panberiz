@@ -8,6 +8,7 @@ import { DashboardTableWrapper, VideoListWrapper } from './dashboard-table.style
 import { Button, Dialog, Pagination } from '@mui/material';
 import { useState } from 'react';
 import UsersList from './users_list';
+import Link from 'next/link';
 
 const VideoList = () => {
     const [showModal, setShowModal] = useState(false);
@@ -33,66 +34,95 @@ const VideoList = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th>ردیف</th>
-                            <th>نام</th>
-                            <th>تعداد مشاهده</th>
-                            <th>تعداد ویدیو</th>
-                            <th>عملیات</th>
+                            <th>{t('index')}</th>
+                            <th>{t('Video name')}</th>
+                            <th>{t('Views count')}</th>
+                            <th>{t('Actions')}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>عنوان ویدیو</td>
-                            <td>236</td>
-                            <td>17</td>
                             <td>
-                                <Button variant='outlined' color='secondary' onClick={() => openModalHandler()}>
-                                    مشاهده <Image src={eye} alt='visit' className='eye_icon' />
+                                <Link href={'/'}>عنوان ویدیو</Link>
+                            </td>
+                            <td>236</td>
+                            <td>
+                                <Button
+                                    variant='outlined'
+                                    color='secondary'
+                                    onClick={() => openModalHandler()}
+                                    sx={{ textTransform: 'none' }}
+                                >
+                                    {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
                                 </Button>
                             </td>
                         </tr>
                         <tr>
                             <td>1</td>
-                            <td>عنوان ویدیو</td>
-                            <td>236</td>
-                            <td>17</td>
                             <td>
-                                <Button variant='outlined' color='secondary' onClick={() => openModalHandler()}>
-                                    مشاهده <Image src={eye} alt='visit' className='eye_icon' />
+                                <Link href={'/'}>عنوان ویدیو</Link>
+                            </td>
+                            <td>236</td>
+                            <td>
+                                <Button
+                                    variant='outlined'
+                                    color='secondary'
+                                    onClick={() => openModalHandler()}
+                                    sx={{ textTransform: 'none' }}
+                                >
+                                    {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
                                 </Button>
                             </td>
                         </tr>
                         <tr>
                             <td>1</td>
-                            <td>عنوان ویدیو</td>
-                            <td>236</td>
-                            <td>17</td>
                             <td>
-                                <Button variant='outlined' color='secondary' onClick={() => openModalHandler()}>
-                                    مشاهده <Image src={eye} alt='visit' className='eye_icon' />
+                                <Link href={'/'}>عنوان ویدیو</Link>
+                            </td>
+                            <td>236</td>
+                            <td>
+                                <Button
+                                    variant='outlined'
+                                    color='secondary'
+                                    onClick={() => openModalHandler()}
+                                    sx={{ textTransform: 'none' }}
+                                >
+                                    {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
                                 </Button>
                             </td>
                         </tr>
                         <tr>
                             <td>1</td>
-                            <td>عنوان ویدیو</td>
-                            <td>236</td>
-                            <td>17</td>
                             <td>
-                                <Button variant='outlined' color='secondary' onClick={() => openModalHandler()}>
-                                    مشاهده <Image src={eye} alt='visit' className='eye_icon' />
+                                <Link href={'/'}>عنوان ویدیو</Link>
+                            </td>
+                            <td>236</td>
+                            <td>
+                                <Button
+                                    variant='outlined'
+                                    color='secondary'
+                                    onClick={() => openModalHandler()}
+                                    sx={{ textTransform: 'none' }}
+                                >
+                                    {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
                                 </Button>
                             </td>
                         </tr>
                         <tr>
                             <td>1</td>
-                            <td>عنوان ویدیو</td>
-                            <td>236</td>
-                            <td>17</td>
                             <td>
-                                <Button variant='outlined' color='secondary' onClick={() => openModalHandler()}>
-                                    مشاهده <Image src={eye} alt='visit' className='eye_icon' />
+                                <Link href={'/'}>عنوان ویدیو</Link>
+                            </td>
+                            <td>236</td>
+                            <td>
+                                <Button
+                                    variant='outlined'
+                                    color='secondary'
+                                    onClick={() => openModalHandler()}
+                                    sx={{ textTransform: 'none' }}
+                                >
+                                    {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
                                 </Button>
                             </td>
                         </tr>

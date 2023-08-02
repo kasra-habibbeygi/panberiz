@@ -1,4 +1,3 @@
-import HeaderField from '@/components/template/header';
 import { useTranslation } from 'next-i18next';
 
 //Assets
@@ -17,14 +16,13 @@ const UsersList = () => {
     return (
         <VideoListWrapper>
             <DashboardTableWrapper>
-                <HeaderField title={t('Video visit report')} />
                 <table>
                     <thead>
                         <tr>
-                            <th>ردیف</th>
-                            <th>نام</th>
-                            <th>تعداد مشاهده</th>
-                            <th>تعداد ویدیو</th>
+                            <th>{t('index')}</th>
+                            <th>{t('Username')}</th>
+                            <th>{t('Date seen')}</th>
+                            <th>{t('Test score')}</th>
                         </tr>
                     </thead>
                     <tbody>

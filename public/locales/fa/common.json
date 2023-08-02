@@ -150,6 +150,18 @@
     "Oldest" : "قدیمی ترین",
     "Highest score" : "بیشترین امتیاز",
     "Enter order number" : "عدد اولویت بندی را وارد کنید",
-    "Order Number" : "اولویت بندی"
+    "Order Number" : "اولویت بندی",
+    "Category name" : "نام دسته بندی",
+    "Category videos count" : "تعداد ویدیو های دسته بندی",
+    "Report videos count" : "تعداد ویدیو های گزارش",
+    "Video name" : "نام ویدیو",
+    "Views count" : "تعداد ویو",
+    "Username" : "نام کاربر",
+    "Date seen" : "تاریخ دیده شدن",
+    "Test score" : "نمره ی آزمون",
+    "No test result" : "آزمونی نداده است",
+    "Index" : "ردیف",
+    "Visit" : "مشاهده",
+    "Actions" : "عملیات"
 
 }

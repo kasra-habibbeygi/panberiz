@@ -150,5 +150,19 @@
     "Oldest" : "الأقدم",
     "Highest score" : "أعلى نتيجة",
     "Enter order number" : "أدخل رقم الطلب",
-    "Order Number" : "رقم الأمر"
+    "Order Number" : "رقم الأمر",
+    "Category name" : "اسم التصنيف",
+    "Category videos count" : "عدد مقاطع الفيديو الخاصة بالفئة",
+    "Report videos count" : "الإبلاغ عن عدد مقاطع الفيديو",
+    "Video name" : "اسم الفيديو",
+    "Views count" : "عدد المشاهدات",
+    "Username" : "اسم المستخدم",
+    "Date seen" : "تاريخ المشاهدة",
+    "Test score" : "نتيجة اختبار",
+    "No test result" : "لا توجد نتيجة اختبار",
+    "Index" : "فِهرِس",
+    "Visit" : "يزور",
+    "Actions" : "أجراءات"
+
+
 }

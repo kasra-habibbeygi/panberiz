@@ -30,11 +30,11 @@ const DashboardTable = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>ردیف</th>
-                        <th>نام</th>
-                        <th>تعداد مشاهده</th>
-                        <th>تعداد ویدیو</th>
-                        <th>عملیات</th>
+                        <th>{t('index')}</th>
+                        <th>{t('Category name')}</th>
+                        <th>{t('Category videos count')}</th>
+                        <th>{t('Report videos count')}</th>
+                        <th>{t('Actions')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,8 +44,8 @@ const DashboardTable = () => {
                         <td>236</td>
                         <td>17</td>
                         <td>
-                            <Button variant='outlined' color='secondary' onClick={() => openModalHandler()}>
-                                مشاهده <Image src={eye} alt='visit' className='eye_icon' />
+                            <Button variant='outlined' color='secondary' onClick={() => openModalHandler()} sx={{ textTransform: 'none' }}>
+                                {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
                             </Button>
                         </td>
                     </tr>
@@ -55,8 +55,8 @@ const DashboardTable = () => {
                         <td>236</td>
                         <td>17</td>
                         <td>
-                            <Button variant='outlined' color='secondary' onClick={() => openModalHandler()}>
-                                مشاهده <Image src={eye} alt='visit' className='eye_icon' />
+                            <Button variant='outlined' color='secondary' onClick={() => openModalHandler()} sx={{ textTransform: 'none' }}>
+                                {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
                             </Button>
                         </td>
                     </tr>
@@ -66,8 +66,8 @@ const DashboardTable = () => {
                         <td>236</td>
                         <td>17</td>
                         <td>
-                            <Button variant='outlined' color='secondary' onClick={() => openModalHandler()}>
-                                مشاهده <Image src={eye} alt='visit' className='eye_icon' />
+                            <Button variant='outlined' color='secondary' onClick={() => openModalHandler()} sx={{ textTransform: 'none' }}>
+                                {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
                             </Button>
                         </td>
                     </tr>
@@ -77,8 +77,8 @@ const DashboardTable = () => {
                         <td>236</td>
                         <td>17</td>
                         <td>
-                            <Button variant='outlined' color='secondary' onClick={() => openModalHandler()}>
-                                مشاهده <Image src={eye} alt='visit' className='eye_icon' />
+                            <Button variant='outlined' color='secondary' onClick={() => openModalHandler()} sx={{ textTransform: 'none' }}>
+                                {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
                             </Button>
                         </td>
                     </tr>
@@ -88,8 +88,8 @@ const DashboardTable = () => {
                         <td>236</td>
                         <td>17</td>
                         <td>
-                            <Button variant='outlined' color='secondary' onClick={() => openModalHandler()}>
-                                مشاهده <Image src={eye} alt='visit' className='eye_icon' />
+                            <Button variant='outlined' color='secondary' onClick={() => openModalHandler()} sx={{ textTransform: 'none' }}>
+                                {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
                             </Button>
                         </td>
                     </tr>
