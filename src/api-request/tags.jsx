@@ -23,3 +23,8 @@ export const GetAdminTagsList = async lang => {
 export const DeleteTag = async id => {
     return RequestHandler.call({ url: `/managers/tags/delete-tag/${id}/`, method: 'delete' }).then(res => res.data);
 };
+
+// specifict tags
+export const SpecificTags = async id => {
+    return RequestHandler.call({ url: `//users/media/tags/${id}/`, method: 'get' }).then(res => res.data);
+};

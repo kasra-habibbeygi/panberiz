@@ -94,3 +94,30 @@ export const CardField = styled.div(props => ({
         }
     }
 }));
+
+export const TagsList = styled.div(props => ({
+    marginTop: '50px',
+
+    '& .tags_field': {
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        marginTop: '10px',
+        gap: '10px'
+    },
+
+    a: {
+        display: 'flex',
+        boxAlign: 'center',
+        alignItems: 'center',
+        boxPack: 'center',
+        justifyContent: 'center',
+        padding: '7px 15px',
+        color: 'rgb(117, 27, 116)',
+        borderRadius: '12px',
+        border: '1px dashed rgb(117, 27, 116)',
+        background: 'white',
+        gap: '5px'
+    }
+}));

@@ -16,12 +16,13 @@ import EmptyField from '@/components/template/empty-field';
 
 // Assets
 import play from '@/assets/icons/play.svg';
-import { CardField } from '@/components/pages/video/list/card.style';
+import { CardField, TagsList } from '@/components/pages/video/list/card.style';
 import EmptyFieldImg from '../../assets/images/empty/empty-media-list.png';
 import { ListVideoField, SearchField, FiltersWrapper } from '@/components/pages/video/list/list-video.style';
 
 // API
 import { GetUserMediaList } from '@/api-request/media/list';
+import { SpecificTags } from '@/api-request/tags';
 
 // MUI
 import SearchIcon from '@mui/icons-material/Search';
@@ -34,6 +35,12 @@ function UserVideo() {
     const [selectedButton, setSelectedButton] = useState('uploaded');
     const [mediaList, setMediaList] = useState([]);
     const [searchValue, setSearchValue] = useState('');
+    const [tagsList, setTagsList] = useState([]);
+
+    const [pageStatus, setPageStatus] = useState({
+        total: 1,
+        current: 1
+    });
 
     const [filters, setFilters] = useState({
         status: '',
@@ -46,7 +53,52 @@ function UserVideo() {
     };
 
     const getMediaUserApi = (id, lang, searchValue) => {
-        GetUserMediaList(router.query.id, userInfo.lang, searchValue)
+        let filterParams = `&page=${pageStatus.current}`;
+
+        if (filters.status) {
+            filterParams += `media_status=${filters.status}&`;
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
+        }
+        if (filters.observing === 'seen') {
+            filterParams += 'is_viewed=true&';
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
+        }
+        if (filters.observing === 'unseen') {
+            filterParams += 'is_viewed=false&';
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
+        }
+        if (filters.sorting === 'oldest') {
+            filterParams += 'oldest=true&';
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
+        }
+        if (filters.sorting === 'newest') {
+            filterParams += 'newest=true&';
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
+        }
+        if (filters.sorting === 'score') {
+            filterParams += 'score=true&';
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
+        }
+
+        GetUserMediaList(id, lang, searchValue, filterParams)
             .then(res => {
                 setMediaList(res.results);
             })
@@ -55,6 +107,12 @@ function UserVideo() {
 
     useEffect(() => {
         getMediaUserApi(router.query.id, userInfo.lang, searchValue);
+
+        SpecificTags(userInfo.lang)
+            .then(res => {
+                setTagsList(res.results);
+            })
+            .catch(() => {});
     }, [router.query.id, userInfo.lang, filters]);
 
     useEffect(() => {
@@ -64,6 +122,8 @@ function UserVideo() {
 
         return () => clearTimeout(delayDebounceFn);
     }, [searchValue]);
+
+    console.log(tagsList);
 
     return (
         <LayoutProvider>
@@ -113,6 +173,12 @@ function UserVideo() {
                     </div>
                 </FiltersWrapper>
             )}
+            <TagsList>
+                <p>تگ های مرتبط</p>
+                <div className='tags_field'>
+                    <Link href='/'>asdasd</Link>
+                </div>
+            </TagsList>
             <ListVideoField>
                 {mediaList.length === 0 ? (
                     <EmptyField img={EmptyFieldImg} title={t('There are no items to display!')} />

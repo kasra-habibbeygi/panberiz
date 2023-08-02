@@ -1,13 +1,13 @@
 import RequestHandler from '../../config/axios';
 
-export const GetUserMediaList = async (id, lang, search) => {
-    let query = '';
+export const GetUserMediaList = async (id, lang, search, filterParams) => {
+    let query = `${filterParams}`;
 
     if (search !== '') {
         query += `&search=${search}`;
     }
 
-    return RequestHandler.call({ url: `/users/media/${id}/?lang=${lang}${query}`, method: 'get' }).then(res => res.data);
+    return RequestHandler.call({ url: `/users/media/${id}/?lang=${lang}&${query}`, method: 'get' }).then(res => res.data);
 };
 
 export const GetMyMediaList = async () => {
