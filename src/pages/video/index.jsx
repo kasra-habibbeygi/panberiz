@@ -58,6 +58,7 @@ function Video() {
         total: 1,
         current: 1
     });
+
     const [filters, setFilters] = useState({
         status: '',
         observing: '',
@@ -67,27 +68,25 @@ function Video() {
 
     useEffect(() => {
         setPageLoading(true);
-        let filterParams = '';
+        let filterParams = `&page=${pageStatus.current}`;
+
         if (filters.status) {
-            filterParams += `media_status=${filters.status}&`;
+            filterParams += `&media_status=${filters.status}`;
         }
         if (filters.observing === 'seen') {
-            filterParams += 'is_viewed=true&';
+            filterParams += '&is_viewed=true';
         }
         if (filters.observing === 'unseen') {
-            filterParams += 'is_viewed=false&';
+            filterParams += '&is_viewed=false';
         }
         if (filters.sorting === 'oldest') {
-            filterParams += 'oldest=true&';
+            filterParams += '&oldest=true';
         }
         if (filters.sorting === 'newest') {
-            filterParams += 'newest=true&';
+            filterParams += '&newest=true';
         }
         if (filters.sorting === 'score') {
-            filterParams += 'score=true&';
-        }
-        if (pageStatus.current) {
-            filterParams += `page=${pageStatus.current}&`;
+            filterParams += '&score=true';
         }
 
         if (userInfo.role === 'SuperAdminAcademy') {
@@ -133,8 +132,7 @@ function Video() {
 
     const changeMediaHandler = (status, id) => {
         const data = {
-            is_delete: !status,
-            media_status: status
+            media_status: status ? 'accepted' : 'failed'
         };
 
         UpdateMedia(id, data)
@@ -280,7 +278,7 @@ function Video() {
         <LayoutProvider>
             <HeaderField title={t('Video')} />
             {tabsStatus && <Tab selectButton={name => setSelectedButton(name)} selectedButton={selectedButton} />}
-            {selectedButton === 'uploaded' && (
+            {userInfo.role !== 'SuperAdminAcademy' && (
                 <FiltersWrapper>
                     <p className='filters_title'>{t('Filters')}</p>
                     <div className='selects_wrapper'>

@@ -67,6 +67,7 @@ function AddForm() {
         media_type: '',
         category: '',
         period_of_time: '',
+        ordering_number: '',
         tags: [],
         prerequisites: [],
         quize_and_answer: []
@@ -132,6 +133,7 @@ function AddForm() {
                     title: '',
                     full_description: '',
                     summary_description: '',
+                    ordering_number: '',
                     cover: '',
                     file: '',
                     media_type: '',
@@ -258,6 +260,17 @@ function AddForm() {
                                 inputValues.media_type === 'video' ? t('Enter video duration...') : t('Enter number of PDF pages...')
                             }
                             label={inputValues.media_type === 'video' ? t('Video duration (minutes)') : t('Number of pages')}
+                            onKeyDown={addNewMediaHandler}
+                        />
+                    </div>
+                    <div className='w-100'>
+                        <Input
+                            valueHandler={inputValueHandler}
+                            value={inputValues.ordering_number}
+                            name='ordering_number'
+                            type='number'
+                            placeholder={t('Enter the position of the media')}
+                            label={t('position')}
                             onKeyDown={addNewMediaHandler}
                         />
                     </div>

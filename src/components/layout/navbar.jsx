@@ -187,7 +187,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
                         </ol>
                     </div>
 
-                    <div className={`dropdown_field ${dropDownNotification !== '' ? 'active' : ''}`}>
+                    {/* <div className={`dropdown_field ${dropDownNotification !== '' ? 'active' : ''}`}>
                         <ul className='notifs_list'>
                             <li className='notifs_item'>
                                 <p className='message'>{t('Video declined')}</p>
@@ -214,7 +214,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
                                 <Link href='/notifs'>{t('Show all')}</Link>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </Styles.Navbar>
