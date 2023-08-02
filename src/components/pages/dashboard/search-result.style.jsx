@@ -33,6 +33,13 @@ export const SearchResultWrapper = styled.div(props => ({
 
             '& .answer': {
                 //
+            },
+
+            ul: {
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '10px',
+                listStyle: 'none'
             }
         }
     }

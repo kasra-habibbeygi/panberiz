@@ -1,31 +1,29 @@
 import { SearchResultWrapper } from './search-result.style';
+import { useTranslation } from 'next-i18next';
 
 const SearchResult = () => {
+    const { t } = useTranslation();
+
     return (
         <SearchResultWrapper>
-            <p className='title'>نتیجه ی جست و جو</p>
+            <p className='title'>{t('Search result')}</p>
             <div className='container'>
                 <div className='item'>
-                    <p className='question'>نام کاربر : </p>
+                    <p className='question'>{t('Username')} : </p>
                     <p className='answer'>علی ازقندی</p>
                 </div>
                 <div className='item'>
-                    <p className='question'>تعداد ویدیو های دیده : </p>
-                    <p className='answer'>
-                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و
-                    </p>
+                    <p className='question'>{t('Seen videos count')} : </p>
+                    <p className='answer'>نعت چاپ، و با استفاده از طراحان گرافیک است، </p>
                 </div>
                 <div className='item'>
-                    <p className='question'>نام کاربر : </p>
-                    <p className='answer'>
-                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و
-                    </p>
-                </div>
-                <div className='item'>
-                    <p className='question'>تعداد ویدیو های دیده : </p>
-                    <p className='answer'>
-                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و
-                    </p>
+                    <p className='question'>{t('Tests')} : </p>
+                    <ul>
+                        <li>آزمون ۱</li>
+                        <li>آزمون ۲</li>
+                        <li>آزمون ۳</li>
+                        <li>آزمون ۴</li>
+                    </ul>
                 </div>
             </div>
         </SearchResultWrapper>
