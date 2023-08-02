@@ -151,9 +151,12 @@ function Navbar({ setAsideStatus, asideStatus }) {
                         alt='user'
                         onClick={() => FilterDropDownStatusHandler('profile_dropdown')}
                     />
-                    <div className='notification' onClick={() => dropDownNotificationHandler('notification_dropdown')}>
-                        <Image src={userInfo.theme === 'light' ? notification : notificationLight} alt='user' />
-                    </div>
+
+                    {userInfo.role === 'AgentAcademy' && (
+                        <div className='notification' onClick={() => dropDownNotificationHandler('notification_dropdown')}>
+                            <Image src={userInfo.theme === 'light' ? notification : notificationLight} alt='user' />
+                        </div>
+                    )}
                     <div className={`dropdown_field ${DropDownStatus !== '' ? 'active' : ''}`}>
                         <div className='header'>
                             <Image src={user} alt='user' />
@@ -187,7 +190,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
                         </ol>
                     </div>
 
-                    {/* <div className={`dropdown_field ${dropDownNotification !== '' ? 'active' : ''}`}>
+                    <div className={`dropdown_field ${dropDownNotification !== '' ? 'active' : ''}`}>
                         <ul className='notifs_list'>
                             <li className='notifs_item'>
                                 <p className='message'>{t('Video declined')}</p>
@@ -214,7 +217,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
                                 <Link href='/notifs'>{t('Show all')}</Link>
                             </li>
                         </ul>
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </Styles.Navbar>

@@ -71,22 +71,46 @@ function Video() {
         let filterParams = `&page=${pageStatus.current}`;
 
         if (filters.status) {
-            filterParams += `&media_status=${filters.status}`;
+            filterParams += `media_status=${filters.status}&`;
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
         }
         if (filters.observing === 'seen') {
-            filterParams += '&is_viewed=true';
+            filterParams += 'is_viewed=true&';
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
         }
         if (filters.observing === 'unseen') {
-            filterParams += '&is_viewed=false';
+            filterParams += 'is_viewed=false&';
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
         }
         if (filters.sorting === 'oldest') {
-            filterParams += '&oldest=true';
+            filterParams += 'oldest=true&';
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
         }
         if (filters.sorting === 'newest') {
-            filterParams += '&newest=true';
+            filterParams += 'newest=true&';
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
         }
         if (filters.sorting === 'score') {
-            filterParams += '&score=true';
+            filterParams += 'score=true&';
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
         }
 
         if (userInfo.role === 'SuperAdminAcademy') {
@@ -95,7 +119,7 @@ function Video() {
                     setMediaList(res.results);
                     setPageStatus(prev => ({
                         ...prev,
-                        total: res.count
+                        total: Math.ceil(res.count / 10)
                     }));
                 })
                 .catch(() => {})
@@ -111,7 +135,9 @@ function Video() {
                 .then(res => {
                     setMediaList(res.results);
                 })
-                .catch(() => {});
+                .catch(() => {})
+                .finally(() => setPageLoading(false));
+
             GetAdminVideos()
                 .then(res => {
                     setNotAcceptedList(res.results);
