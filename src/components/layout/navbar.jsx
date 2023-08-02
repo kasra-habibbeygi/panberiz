@@ -33,6 +33,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 // Hooks
 import useOutsideClick from '@/hooks/use-outside-click';
 
+//Axios
+import { GetNotificationList } from '@/api-request/notification';
+import { EditNotificationList } from '@/api-request/notification';
+
 const LangList = [
     { label: 'english', value: 'en' },
     { label: 'فارسی', value: 'fa' },
@@ -46,8 +50,12 @@ function Navbar({ setAsideStatus, asideStatus }) {
     const userInfo = useSelector(state => state.UserInfo);
     const [langValue, setLangValue] = useState({ label: 'فارسی', value: 'fa' });
     const [isLoggedInWithRedirect, setIsLoggedInWithRedirect] = useState(false);
+    const [NotifDataList, setNotifDataList] = useState([]);
+    const [reload, setReload] = useState(false);
 
     useEffect(() => {
+        GetNotificationList('5').then(res => setNotifDataList(res));
+
         setLangValue(() => {
             if (localStorage.getItem('pmlmLang') === 'fa') {
                 return LangList[1];
@@ -60,7 +68,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
         if (localStorage.getItem('isLoggedInWithRedirect') !== null) {
             setIsLoggedInWithRedirect(true);
         }
-    }, []);
+    }, [reload]);
 
     const openAside = () => {
         setAsideStatus(!asideStatus);
@@ -107,6 +115,11 @@ function Navbar({ setAsideStatus, asideStatus }) {
         setLangValue(value);
         dispatch(langHandler(value.value));
         document.dir = value.value === 'en' ? 'ltr' : 'rtl';
+    };
+
+    const reactNotifHandler = pk => {
+        EditNotificationList(pk);
+        setReload(!reload);
     };
 
     return (
@@ -192,26 +205,26 @@ function Navbar({ setAsideStatus, asideStatus }) {
 
                     <div className={`dropdown_field ${dropDownNotification !== '' ? 'active' : ''}`}>
                         <ul className='notifs_list'>
-                            <li className='notifs_item'>
-                                <p className='message'>{t('Video declined')}</p>
-                                <p className='message'>{t('Deny reason')} : </p>
-                                <button className='notifs_button'>{t('Mark as read')}</button>
-                            </li>
-                            <li className='notifs_item'>
-                                <p className='message'>{t('Video declined')}</p>
-                                <p className='message'>{t('Deny reason')} : </p>
-                                <button className='notifs_button'>{t('Mark as read')}</button>
-                            </li>
-                            <li className='notifs_item'>
-                                <p className='message'>{t('Video declined')}</p>
-                                <p className='message'>{t('Deny reason')} : </p>
-                                <button className='notifs_button'>{t('Mark as read')}</button>
-                            </li>
-                            <li className='notifs_item'>
-                                <p className='message'>{t('Video declined')}</p>
-                                <p className='message'>{t('Deny reason')} : </p>
-                                <button className='notifs_button'>{t('Mark as read')}</button>
-                            </li>
+                            {NotifDataList.map(item => (
+                                <li className='notifs_item' key={item.id}>
+                                    <p className='message'>{item.about_object}</p>
+                                    {item.message ? (
+                                        <div>
+                                            <p className='message'>{t('Deny reason')} : </p>
+                                            <p className='message'>{item.message}</p>
+                                        </div>
+                                    ) : (
+                                        ''
+                                    )}
+                                    {item.is_read ? (
+                                        <p className='read'>✔ {t('read')}</p>
+                                    ) : (
+                                        <button className='notifs_button' onClick={() => reactNotifHandler(item.id)}>
+                                            {t('Mark as read')}
+                                        </button>
+                                    )}
+                                </li>
+                            ))}
 
                             <li className='notifs_showAll'>
                                 <Link href='/notifs'>{t('Show all')}</Link>
