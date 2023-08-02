@@ -54,7 +54,9 @@ function Navbar({ setAsideStatus, asideStatus }) {
     const [reload, setReload] = useState(false);
 
     useEffect(() => {
-        GetNotificationList('5').then(res => setNotifDataList(res));
+        if (userInfo === 'AgentAcademy') {
+            GetNotificationList(5).then(res => setNotifDataList(res));
+        }
 
         setLangValue(() => {
             if (localStorage.getItem('pmlmLang') === 'fa') {

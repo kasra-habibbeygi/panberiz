@@ -25,6 +25,6 @@ export const DeleteTag = async id => {
 };
 
 // specifict tags
-export const SpecificTags = async id => {
-    return RequestHandler.call({ url: `//users/media/tags/${id}/`, method: 'get' }).then(res => res.data);
+export const SpecificTags = async (id, lang) => {
+    return RequestHandler.call({ url: `/users/media/tags/${id}/?lang=${lang}/`, method: 'get' }).then(res => res.data);
 };

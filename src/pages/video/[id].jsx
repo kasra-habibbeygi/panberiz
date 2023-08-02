@@ -56,42 +56,50 @@ function UserVideo() {
         let filterParams = `&page=${pageStatus.current}`;
 
         if (filters.status) {
-            filterParams += `media_status=${filters.status}&`;
+            filterParams += `&media_status=${filters.status}`;
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
         if (filters.observing === 'seen') {
-            filterParams += 'is_viewed=true&';
+            filterParams += '&is_viewed=true';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
         if (filters.observing === 'unseen') {
-            filterParams += 'is_viewed=false&';
+            filterParams += '&is_viewed=false';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
         if (filters.sorting === 'oldest') {
-            filterParams += 'oldest=true&';
+            filterParams += '&oldest=true';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
         if (filters.sorting === 'newest') {
-            filterParams += 'newest=true&';
+            filterParams += '&newest=true';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
         if (filters.sorting === 'score') {
-            filterParams += 'score=true&';
+            filterParams += '&score=true';
+            setPageStatus({
+                total: 1,
+                current: 1
+            });
+        }
+
+        if (router.query.tagId) {
+            filterParams += `&tagId=${router.query.tagId}`;
             setPageStatus({
                 total: 1,
                 current: 1
@@ -108,12 +116,12 @@ function UserVideo() {
     useEffect(() => {
         getMediaUserApi(router.query.id, userInfo.lang, searchValue);
 
-        SpecificTags(userInfo.lang)
+        SpecificTags(router.query.id, userInfo.lang)
             .then(res => {
                 setTagsList(res.results);
             })
             .catch(() => {});
-    }, [router.query.id, userInfo.lang, filters]);
+    }, [router.query.id, userInfo.lang, filters, router.query.tagId]);
 
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
@@ -122,8 +130,6 @@ function UserVideo() {
 
         return () => clearTimeout(delayDebounceFn);
     }, [searchValue]);
-
-    console.log(tagsList);
 
     return (
         <LayoutProvider>
@@ -176,7 +182,11 @@ function UserVideo() {
             <TagsList>
                 <p>تگ های مرتبط</p>
                 <div className='tags_field'>
-                    <Link href='/'>asdasd</Link>
+                    {tagsList.map(item => (
+                        <Link href={`/video/5/?tagId=${item.id}`} key={`tags_list_${item.id}`}>
+                            {item.title}
+                        </Link>
+                    ))}
                 </div>
             </TagsList>
             <ListVideoField>
