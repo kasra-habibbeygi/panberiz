@@ -8,13 +8,16 @@ import { DashboardTableWrapper } from './dashboard-table.style';
 import { Button, Dialog } from '@mui/material';
 import { useState } from 'react';
 import VideoList from './video-list';
-
-//Components
+import { useEffect } from 'react';
+import { GetAdminCategory, GetAgentCategory } from '@/api-request/chart';
+import { useSelector } from 'react-redux';
 
 const DashboardTable = () => {
-    const [showModal, setShowModal] = useState(false);
-
     const { t } = useTranslation();
+    const [showModal, setShowModal] = useState(false);
+    const userInfo = useSelector(state => state.UserInfo);
+    const [categoryList, setCategoryList] = useState([]);
+    const [categoryId, setCategoryId] = useState();
 
     const closeModalHandler = () => {
         setShowModal(false);
@@ -23,6 +26,19 @@ const DashboardTable = () => {
     const openModalHandler = () => {
         setShowModal(true);
     };
+
+    useEffect(() => {
+        if (userInfo.role === 'SuperAdminAcademy') {
+            GetAdminCategory(userInfo.lang).then(res => {
+                setCategoryList(res);
+            });
+        }
+        if (userInfo.role === 'AgentAcademy') {
+            GetAgentCategory(userInfo.lang).then(res => {
+                setCategoryList(res);
+            });
+        }
+    }, [userInfo.lang, userInfo.role]);
 
     return (
         <DashboardTableWrapper>
@@ -38,66 +54,32 @@ const DashboardTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>عنوان ویدیو</td>
-                        <td>236</td>
-                        <td>17</td>
-                        <td>
-                            <Button variant='outlined' color='secondary' onClick={() => openModalHandler()} sx={{ textTransform: 'none' }}>
-                                {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
-                            </Button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>عنوان ویدیو</td>
-                        <td>236</td>
-                        <td>17</td>
-                        <td>
-                            <Button variant='outlined' color='secondary' onClick={() => openModalHandler()} sx={{ textTransform: 'none' }}>
-                                {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
-                            </Button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>عنوان ویدیو</td>
-                        <td>236</td>
-                        <td>17</td>
-                        <td>
-                            <Button variant='outlined' color='secondary' onClick={() => openModalHandler()} sx={{ textTransform: 'none' }}>
-                                {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
-                            </Button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>عنوان ویدیو</td>
-                        <td>236</td>
-                        <td>17</td>
-                        <td>
-                            <Button variant='outlined' color='secondary' onClick={() => openModalHandler()} sx={{ textTransform: 'none' }}>
-                                {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
-                            </Button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>عنوان ویدیو</td>
-                        <td>236</td>
-                        <td>17</td>
-                        <td>
-                            <Button variant='outlined' color='secondary' onClick={() => openModalHandler()} sx={{ textTransform: 'none' }}>
-                                {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
-                            </Button>
-                        </td>
-                    </tr>
+                    {categoryList?.map(item => (
+                        <tr key={item.id}>
+                            <td>1</td>
+                            <td>{item.title}</td>
+                            <td>{item.videos_count}</td>
+                            <td>{item.report_videos_count}</td>
+                            <td>
+                                <Button
+                                    variant='outlined'
+                                    color='secondary'
+                                    onClick={() => {
+                                        openModalHandler();
+                                        setCategoryId(item.id);
+                                    }}
+                                    sx={{ textTransform: 'none' }}
+                                >
+                                    {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
+                                </Button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
 
             <Dialog open={showModal} onClose={closeModalHandler} maxWidth='lg'>
-                <VideoList />
+                <VideoList categoryId={categoryId} />
             </Dialog>
         </DashboardTableWrapper>
     );

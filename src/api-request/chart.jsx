@@ -23,3 +23,36 @@ export const GetAdminChart2Info = async lang => {
 export const GetAdminChart3Info = async lang => {
     return RequestHandler.call({ url: `/admins/chart3/visit/result/?lang=${lang}`, method: 'get' }).then(res => res.data);
 };
+
+// new chart 3
+export const GetAdminCategory = async lang => {
+    return RequestHandler.call({ url: `/managers/chart3/visit/result/categories/?lang=${lang}`, method: 'get' }).then(res => res.data);
+};
+
+export const GetAgentCategory = async lang => {
+    return RequestHandler.call({ url: `/admins/chart3/visit/result/categories/?lang=${lang}`, method: 'get' }).then(res => res.data);
+};
+
+export const GetAdminVideo = async (lang, id, page) => {
+    return RequestHandler.call({ url: `/managers/chart3/visit/result/medias/${id}/?lang=${lang}&page=${page}`, method: 'get' }).then(
+        res => res.data
+    );
+};
+
+export const GetAgentVideo = async (lang, id, page) => {
+    return RequestHandler.call({ url: `/admins/chart3/visit/result/medias/${id}/?lang=${lang}&page=${page}`, method: 'get' }).then(
+        res => res.data
+    );
+};
+
+export const GetAdminUsers = async (lang, id, page) => {
+    return RequestHandler.call({ url: `/managers/chart3/visit/result/users/${id}/?lang=${lang}&page=${page}`, method: 'get' }).then(
+        res => res.data
+    );
+};
+
+export const GetAgentUser = async (lang, id, page) => {
+    return RequestHandler.call({ url: `/admins/chart3/visit/result/users/${id}/?lang=${lang}&page=${page}`, method: 'get' }).then(
+        res => res.data
+    );
+};

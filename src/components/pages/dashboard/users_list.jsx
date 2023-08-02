@@ -1,17 +1,43 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
 import { useTranslation } from 'next-i18next';
 
 //Assets
 import { DashboardTableWrapper, VideoListWrapper } from './dashboard-table.style';
 import { Pagination } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { GetAdminUsers, GetAgentUser } from '@/api-request/chart';
+import { useSelector } from 'react-redux';
 
-const UsersList = () => {
+const UsersList = ({ videoId }) => {
+    const userInfo = useSelector(state => state.UserInfo);
+    const [usersList, setUsersList] = useState([]);
+    const { t } = useTranslation();
     const [pageStatus, setPageStatus] = useState({
         total: 1,
         current: 1
     });
 
-    const { t } = useTranslation();
+    useEffect(() => {
+        if (userInfo.role === 'SuperAdminAcademy') {
+            GetAdminUsers(userInfo.lang, videoId, pageStatus.current).then(res => {
+                setUsersList(res.results);
+                setPageStatus({
+                    current: pageStatus.current,
+                    total: res.total_page
+                });
+            });
+        }
+        if (userInfo.role === 'AgentAcademy') {
+            GetAgentUser(userInfo.lang, videoId, pageStatus.current).then(res => {
+                setUsersList(res.results);
+                setPageStatus({
+                    current: pageStatus.current,
+                    total: res.total_page
+                });
+            });
+        }
+    }, [userInfo.lang, userInfo.role, videoId, pageStatus.current]);
 
     return (
         <VideoListWrapper>
@@ -26,36 +52,14 @@ const UsersList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>عنوان ویدیو</td>
-                            <td>236</td>
-                            <td>17</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>عنوان ویدیو</td>
-                            <td>236</td>
-                            <td>17</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>عنوان ویدیو</td>
-                            <td>236</td>
-                            <td>17</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>عنوان ویدیو</td>
-                            <td>236</td>
-                            <td>17</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>عنوان ویدیو</td>
-                            <td>236</td>
-                            <td>17</td>
-                        </tr>
+                        {usersList.map(item => (
+                            <tr key={item.id}>
+                                <td>1</td>
+                                <td>{item.fullname}</td>
+                                <td>{item.date}</td>
+                                <td>17</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
 
