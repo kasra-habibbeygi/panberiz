@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { SearchResultWrapper } from './search-result.style';
 import { useTranslation } from 'next-i18next';
 
-const SearchResult = () => {
+const SearchResult = ({ userSearchValue }) => {
     const { t } = useTranslation();
 
     return (
@@ -10,7 +11,7 @@ const SearchResult = () => {
             <div className='container'>
                 <div className='item'>
                     <p className='question'>{t('Username')} : </p>
-                    <p className='answer'>علی ازقندی</p>
+                    <p className='answer'>{userSearchValue.fullname}</p>
                 </div>
                 <div className='item'>
                     <p className='question'>{t('Seen videos count')} : </p>

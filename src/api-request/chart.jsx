@@ -56,3 +56,8 @@ export const GetAgentUser = async (lang, id, page) => {
         res => res.data
     );
 };
+
+// search
+export const UserSearch = async (lang, inputValue) => {
+    return RequestHandler.call({ url: `/users/search-user/${inputValue}/`, method: 'get' }).then(res => res.data);
+};

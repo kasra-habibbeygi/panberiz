@@ -12,7 +12,7 @@ import searchSvg from './../../../assets/icons/search.svg';
 import AutoComplete from '@/components/form-group/auto-complete';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'next-i18next';
-import { GetManagerChart1Info, GetAdminChart1Info, GetAdminChart2Info, GetManagerChart2Info } from '@/api-request/chart';
+import { GetManagerChart1Info, GetAdminChart1Info, GetAdminChart2Info, GetManagerChart2Info, UserSearch } from '@/api-request/chart';
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
 import { Dialog } from '@mui/material';
@@ -27,6 +27,9 @@ function Income() {
     const [values, setValues] = useState();
     const [searchValue, setSearchValue] = useState('');
     const [showSearchModal, setShowSearchModal] = useState(false);
+    const [userSearchValue, setUserSearchValue] = useState({});
+
+    console.log(userSearchValue);
 
     const autoCompleteHandler = e => {
         setValues(e);
@@ -77,8 +80,14 @@ function Income() {
 
     const searchHandler = e => {
         e.preventDefault();
-        if (searchValue.trim()) {
+        if (searchValue) {
             setShowSearchModal(true);
+
+            UserSearch(userInfo.lang, searchValue)
+                .then(res => {
+                    setUserSearchValue(res);
+                })
+                .catch(() => {});
         }
     };
 
@@ -150,7 +159,7 @@ function Income() {
             </div>
 
             <Dialog open={showSearchModal} onClose={closeSearchModalHandler} maxWidth='sm'>
-                <SearchResult />
+                <SearchResult userSearchValue={userSearchValue} />
             </Dialog>
         </IncomeField>
     );
