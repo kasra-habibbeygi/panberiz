@@ -45,7 +45,7 @@ const UsersList = ({ videoId }) => {
                 <table>
                     <thead>
                         <tr>
-                            <th>{t('index')}</th>
+                            <th>{t('Index')}</th>
                             <th>{t('Username')}</th>
                             <th>{t('Date seen')}</th>
                             <th>{t('Test score')}</th>

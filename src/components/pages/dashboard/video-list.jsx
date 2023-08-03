@@ -62,7 +62,7 @@ const VideoList = ({ categoryId }) => {
                 <table>
                     <thead>
                         <tr>
-                            <th>{t('index')}</th>
+                            <th>{t('Index')}</th>
                             <th>{t('Video name')}</th>
                             <th>{t('Views count')}</th>
                             <th>{t('Actions')}</th>
