@@ -87,7 +87,7 @@ const Comment = ({ mediaDetails }) => {
                 </div>
             </div>
             <ul>
-                {mediaDetails?.comments.map(item => (
+                {mediaDetails?.comments?.map(item => (
                     <li key={`comment_${item.id}`}>
                         <Image src={UserIcon} alt='' />
                         <div className='content'>

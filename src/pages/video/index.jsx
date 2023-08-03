@@ -59,6 +59,8 @@ function Video() {
         current: 1
     });
 
+    console.log(pageStatus);
+
     const [filters, setFilters] = useState({
         status: '',
         observing: '',
@@ -119,7 +121,7 @@ function Video() {
                     setMediaList(res.results);
                     setPageStatus(prev => ({
                         ...prev,
-                        total: Math.ceil(res.count / 10)
+                        total: res.total_page
                     }));
                 })
                 .catch(() => {})
@@ -207,14 +209,7 @@ function Video() {
                             <Image className='icon' src={play} alt='play' />
                         </Link>
                     </div>
-                    <img
-                        className='video_banner'
-                        src={item?.cover.replace(
-                            'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21/',
-                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
-                        )}
-                        alt='video-banner'
-                    />
+                    <img className='video_banner' src={item?.cover} alt='video-banner' />
                 </div>
                 <div className='card_details'>
                     <div className='right_field'>
@@ -241,14 +236,7 @@ function Video() {
                     <div className='float'>
                         <Image className='icon' src={accept} alt='accept' onClick={() => handleAcceptVideo(item.id)} />
                     </div>
-                    <img
-                        className='video_banner'
-                        src={item?.cover.replace(
-                            'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21',
-                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
-                        )}
-                        alt='video-banner'
-                    />
+                    <img className='video_banner' src={item?.cover} alt='video-banner' />
                 </div>
                 <div className='card_details'>
                     <div className='right_field'>
@@ -274,16 +262,12 @@ function Video() {
                 <div className='video_image'>
                     <div className='float'>
                         <Image className='icon' src={accept} alt='accept' onClick={() => changeMediaHandler(true, item.id)} />
-                        <Image className='icon' src={reject} alt='reject' onClick={() => setDeleteModalStatus(true)} />
+                        <Image className='icon' src={reject} alt='reject' onClick={() => setDeleteModalStatus(true)} />{' '}
+                        <Link href={`/video/details/${item.id}`}>
+                            <Image className='icon' src={play} alt='play' />
+                        </Link>
                     </div>
-                    <img
-                        className='video_banner'
-                        src={item?.cover.replace(
-                            'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21',
-                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
-                        )}
-                        alt='video-banner'
-                    />
+                    <img className='video_banner' src={item?.cover} alt='video-banner' />
                 </div>
                 <div className='card_details'>
                     <div className='right_field'>

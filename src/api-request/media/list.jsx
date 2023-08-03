@@ -15,7 +15,7 @@ export const GetMyMediaList = async () => {
 };
 
 export const GetAllMedia = async (lang, params) => {
-    return RequestHandler.call({ url: `/managers/media/?lang=${lang}${params}`, method: 'get' }).then(res => res.data);
+    return RequestHandler.call({ url: `/managers/media/?lang=${lang}${params ? params : ''}`, method: 'get' }).then(res => res.data);
 };
 
 export const GetAllDeactiveMedia = async lang => {

@@ -21,7 +21,7 @@ const SuggestVideo = ({mediaDetails}) => {
         <MainField>
             <HeaderField title={t('Prerequisite videos')} />
             <div className='main_field'>
-                {mediaDetails?.prerequisites_info.map(item => (
+                {mediaDetails?.prerequisites_info?.map(item => (
                     <div key={item.id} className='card_field'>
                         <CardField status={true}>
                             <div className='video_image'>

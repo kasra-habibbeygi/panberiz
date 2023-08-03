@@ -23,7 +23,7 @@ const DetailsField = ({ mediaDetails }) => {
     const [examBtnStatus, setExamBtnStatus] = useState(false);
 
     useEffect(() => {
-        setExamBtnStatus(!mediaDetails?.media_quiezes.length && userInfo.role === 'User' ? true : false);
+        setExamBtnStatus(!mediaDetails?.media_quiezes?.length && userInfo.role === 'User' ? true : false);
     }, []);
 
     return (
@@ -37,7 +37,7 @@ const DetailsField = ({ mediaDetails }) => {
                     </span>
                     <span>
                         <Image src={GridsIcon} alt='' />
-                        {mediaDetails?.category_info.title}
+                        {mediaDetails?.category_info?.title}
                     </span>
                     {mediaDetails?.tags_name?.map((item, index) => (
                         <span key={index}>#{item}</span>

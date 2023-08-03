@@ -23,10 +23,12 @@ const VideoDetails = () => {
     useEffect(() => {
         GetMediaDetails(router.query.id, userInfo.lang)
             .then(res => {
-                setMediaDetails(res.results);
+                setMediaDetails(res);
             })
             .catch(() => {});
     }, [router.query.id, userInfo.lang]);
+
+    console.log(mediaDetails);
 
     return (
         <LayoutProvider>
