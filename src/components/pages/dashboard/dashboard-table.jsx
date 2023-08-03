@@ -46,7 +46,7 @@ const DashboardTable = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>{t('index')}</th>
+                        <th>{t('Index')}</th>
                         <th>{t('Category name')}</th>
                         <th>{t('Category videos count')}</th>
                         <th>{t('Report videos count')}</th>
