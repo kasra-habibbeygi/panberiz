@@ -15,11 +15,11 @@ import Image from 'next/image';
 const SimilarVideos = ({ mediaDetails }) => {
     const { t } = useTranslation();
 
-    return (
+    return mediaDetails?.similar_media?.length ? (
         <MainField>
             <HeaderField title={t('Similar videos')} />
             <div className='main_field'>
-                {mediaDetails?.prerequisites_info?.map(item => (
+                {mediaDetails?.similar_media?.map(item => (
                     <div key={item.id} className='card_field'>
                         <CardField status={true}>
                             <div className='video_image'>
@@ -28,14 +28,7 @@ const SimilarVideos = ({ mediaDetails }) => {
                                         <Image className='icon' src={play} alt='play' />
                                     </Link>
                                 </div>
-                                <img
-                                    className='video_banner'
-                                    src={item?.cover.replace(
-                                        'http://127.0.0.1:8000ftp://testuser@fileacademy.pmlm.ir:m@P7x-s{d28}@31.25.90.38:21/',
-                                        'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
-                                    )}
-                                    alt='video-banner'
-                                />
+                                <img className='video_banner' src={item?.cover.replace('http', 'https')} alt='video-banner' />
                             </div>
                             <div className='card_details'>
                                 <div className='right_field'>
@@ -49,6 +42,8 @@ const SimilarVideos = ({ mediaDetails }) => {
                 ))}
             </div>
         </MainField>
+    ) : (
+        ''
     );
 };
 

@@ -54,8 +54,10 @@ function Navbar({ setAsideStatus, asideStatus }) {
     const [reload, setReload] = useState(false);
 
     useEffect(() => {
-        if (userInfo === 'AgentAcademy') {
-            GetNotificationList(5).then(res => setNotifDataList(res));
+        if (userInfo.role === 'AgentAcademy') {
+            GetNotificationList(5).then(res => {
+                setNotifDataList(res);
+            });
         }
 
         setLangValue(() => {
@@ -70,7 +72,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
         if (localStorage.getItem('isLoggedInWithRedirect') !== null) {
             setIsLoggedInWithRedirect(true);
         }
-    }, [reload]);
+    }, [reload, userInfo.role]);
 
     const openAside = () => {
         setAsideStatus(!asideStatus);

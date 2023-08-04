@@ -28,8 +28,6 @@ const VideoDetails = () => {
             .catch(() => {});
     }, [router.query.id, userInfo.lang]);
 
-    console.log(mediaDetails);
-
     return (
         <LayoutProvider>
             <VideoField mediaDetails={mediaDetails[0]} />

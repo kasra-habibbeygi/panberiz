@@ -29,8 +29,6 @@ function Income() {
     const [showSearchModal, setShowSearchModal] = useState(false);
     const [userSearchValue, setUserSearchValue] = useState({});
 
-    console.log(userSearchValue);
-
     const autoCompleteHandler = e => {
         setValues(e);
     };

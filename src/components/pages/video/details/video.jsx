@@ -60,13 +60,13 @@ const VideoField = ({ mediaDetails, favoritsList }) => {
             {mediaDetails?.media_type === 'video' ? (
                 <div className='video_image'>
                     <video controls id='slider_video_player' poster={mediaDetails?.cover}>
-                        <source src={mediaDetails?.file} type='video/mp4' />
+                        <source src={mediaDetails?.file?.replace('http', 'https')} type='video/mp4' />
                     </video>
                 </div>
             ) : (
                 <>
-                    <iframe src={mediaDetails?.file} width='100%' height='500px' />
-                    <a href={mediaDetails?.file} target='_blank' className='download_field' rel='noreferrer'>
+                    <iframe src={mediaDetails?.file?.replace('http', 'https')} width='100%' height='500px' />
+                    <a href={mediaDetails?.file?.replace('http', 'https')} target='_blank' className='download_field' rel='noreferrer'>
                         دانلود فایل
                     </a>
                 </>

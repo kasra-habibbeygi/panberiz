@@ -18,39 +18,37 @@ import play from '@/assets/icons/play.svg';
 const SuggestVideo = ({mediaDetails}) => {
     const { t } = useTranslation();
     return (
-        <MainField>
-            <HeaderField title={t('Prerequisite videos')} />
-            <div className='main_field'>
-                {mediaDetails?.prerequisites_info?.map(item => (
-                    <div key={item.id} className='card_field'>
-                        <CardField status={true}>
-                            <div className='video_image'>
-                                <div className='float'>
-                                    <Link href={`/video/details/${item.id}`}>
-                                        <Image className='icon' src={play} alt='play' />
-                                    </Link>
+        mediaDetails?.prerequisites_info?.length ?
+            <MainField>
+                <HeaderField title={t('Prerequisite videos')} />
+                <div className='main_field'>
+                    {mediaDetails?.prerequisites_info?.map(item => (
+                        <div key={item.id} className='card_field'>
+                            <CardField status={true}>
+                                <div className='video_image'>
+                                    <div className='float'>
+                                        <Link href={`/video/details/${item.id}`}>
+                                            <Image className='icon' src={play} alt='play' />
+                                        </Link>
+                                    </div>
+                                    <img
+                                        className='video_banner'
+                                        src={item?.cover.replace('http', 'https')}                                    
+                                        alt='video-banner'
+                                    />
                                 </div>
-                                <img
-                                    className='video_banner'
-                                    src={item?.cover.replace(
-                                        'http://127.0.0.1:8000ftp://testuser@fileacademy.pmlm.ir:m@P7x-s{d28}@31.25.90.38:21/',
-                                        'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
-                                    )}                                    
-                                    alt='video-banner'
-                                />
-                            </div>
-                            <div className='card_details'>
-                                <div className='right_field'>
-                                    <h3>{item?.title}</h3>
-                                    <p>{item?.des}</p>
+                                <div className='card_details'>
+                                    <div className='right_field'>
+                                        <h3>{item?.title}</h3>
+                                        <p>{item?.des}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <small>{item?.publisher_fullname}</small>
-                        </CardField>
-                    </div>
-                ))}
-            </div>
-        </MainField>
+                                <small>{item?.publisher_fullname}</small>
+                            </CardField>
+                        </div>
+                    ))}
+                </div>
+            </MainField> : ''
     );
 };
 

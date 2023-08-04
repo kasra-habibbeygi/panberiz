@@ -20,7 +20,7 @@ const UsersList = ({ videoId }) => {
 
     useEffect(() => {
         if (userInfo.role === 'SuperAdminAcademy') {
-            GetAdminUsers(userInfo.lang, videoId, pageStatus.current).then(res => {
+            GetAdminUsers(videoId, pageStatus.current).then(res => {
                 setUsersList(res.results);
                 setPageStatus({
                     current: pageStatus.current,
@@ -29,7 +29,7 @@ const UsersList = ({ videoId }) => {
             });
         }
         if (userInfo.role === 'AgentAcademy') {
-            GetAgentUser(userInfo.lang, videoId, pageStatus.current).then(res => {
+            GetAgentUser(videoId, pageStatus.current).then(res => {
                 setUsersList(res.results);
                 setPageStatus({
                     current: pageStatus.current,

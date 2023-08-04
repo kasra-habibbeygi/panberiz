@@ -54,12 +54,11 @@ function Video() {
     const [deactiveMediaList, setDeactiveMediaList] = useState([]);
     const [rejectReason, setRejectReason] = useState('');
     const [pageLoading, setPageLoading] = useState(true);
+    const [deactiveSpecificId, setDeactiveSpecificId] = useState();
     const [pageStatus, setPageStatus] = useState({
         total: 1,
         current: 1
     });
-
-    console.log(pageStatus);
 
     const [filters, setFilters] = useState({
         status: '',
@@ -160,13 +159,18 @@ function Video() {
 
     const changeMediaHandler = (status, id) => {
         const data = {
-            media_status: status ? 'accepted' : 'failed'
+            media_status: status ? 'accepted' : 'failed',
+            message: status ? '' : rejectReason
         };
 
         UpdateMedia(id, data)
             .then(() => {
                 setReload(!reload);
                 toast.success(t('Successfully updated!'));
+
+                if (!status) {
+                    setDeleteModalStatus(false);
+                }
             })
             .catch(() => {
                 toast.error(t('An error occurred, please try again!'));
@@ -209,7 +213,7 @@ function Video() {
                             <Image className='icon' src={play} alt='play' />
                         </Link>
                     </div>
-                    <img className='video_banner' src={item?.cover} alt='video-banner' />
+                    <img className='video_banner' src={item?.cover?.replace('http', 'https')} alt='video-banner' />
                 </div>
                 <div className='card_details'>
                     <div className='right_field'>
@@ -236,7 +240,7 @@ function Video() {
                     <div className='float'>
                         <Image className='icon' src={accept} alt='accept' onClick={() => handleAcceptVideo(item.id)} />
                     </div>
-                    <img className='video_banner' src={item?.cover} alt='video-banner' />
+                    <img className='video_banner' src={item?.cover?.replace('http', 'https')} alt='video-banner' />
                 </div>
                 <div className='card_details'>
                     <div className='right_field'>
@@ -262,12 +266,20 @@ function Video() {
                 <div className='video_image'>
                     <div className='float'>
                         <Image className='icon' src={accept} alt='accept' onClick={() => changeMediaHandler(true, item.id)} />
-                        <Image className='icon' src={reject} alt='reject' onClick={() => setDeleteModalStatus(true)} />{' '}
+                        <Image
+                            className='icon'
+                            src={reject}
+                            alt='reject'
+                            onClick={() => {
+                                setDeleteModalStatus(true);
+                                setDeactiveSpecificId(item.id);
+                            }}
+                        />
                         <Link href={`/video/details/${item.id}`}>
                             <Image className='icon' src={play} alt='play' />
                         </Link>
                     </div>
-                    <img className='video_banner' src={item?.cover} alt='video-banner' />
+                    <img className='video_banner' src={item?.cover?.replace('http', 'https')} alt='video-banner' />
                 </div>
                 <div className='card_details'>
                     <div className='right_field'>
@@ -399,7 +411,7 @@ function Video() {
                         <textarea onChange={e => setRejectReason(e.target.value)}></textarea>
 
                         <div className='button_group'>
-                            <Button color='primary' handler={() => changeMediaHandler(false, 1)}>
+                            <Button color='primary' handler={() => changeMediaHandler(false, deactiveSpecificId)}>
                                 {t('Submit')}
                             </Button>
                             <Button color='dark' handler={() => setDeleteModalStatus(false)}>

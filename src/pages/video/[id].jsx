@@ -202,14 +202,7 @@ function UserVideo() {
                                             <Image className='icon' src={play} alt='play' />
                                         </Link>
                                     </div>
-                                    <img
-                                        className='video_banner'
-                                        src={item?.cover.replace(
-                                            'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21/',
-                                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
-                                        )}
-                                        alt='video-banner'
-                                    />
+                                    <img className='video_banner' src={item?.cover.replace('http', 'https')} alt='video-banner' />
                                 </div>
                                 <div className='card_details'>
                                     <div className='right_field'>

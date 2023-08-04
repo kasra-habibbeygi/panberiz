@@ -89,10 +89,7 @@ function Aside({ asideStatus }) {
                                                         <Link href={`/video/${item.id}`} key={item.id}>
                                                             <img
                                                                 className='video_banner'
-                                                                src={item?.image.replace(
-                                                                    'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21/',
-                                                                    'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
-                                                                )}
+                                                                src={item?.image.replace('http', 'https')}
                                                                 alt='video-banner'
                                                             />
                                                             {item.title}
@@ -111,10 +108,7 @@ function Aside({ asideStatus }) {
                                                     >
                                                         <img
                                                             className='video_banner'
-                                                            src={item?.image.replace(
-                                                                'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21/',
-                                                                'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
-                                                            )}
+                                                            src={item?.image.replace('http', 'https')}
                                                             alt='video-banner'
                                                         />
                                                         {item.title}
