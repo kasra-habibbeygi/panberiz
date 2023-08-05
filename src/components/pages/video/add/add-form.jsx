@@ -31,7 +31,6 @@ import { GetTagsList } from '@/api-request/tags';
 import { AddNewmedia, AddNewmediaAgent } from '@/api-request/media/add';
 import { GetAllMedia, GetMyMediaList } from '@/api-request/media/list';
 import { toast } from 'react-hot-toast';
-import { UserInfo } from '@/state-manager/reducer/user';
 
 const LangList = [
     { label: 'english', value: 'en' },
