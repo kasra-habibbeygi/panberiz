@@ -13,7 +13,7 @@ import SuggestVideo from '@/components/pages/video/details/suggest';
 
 // APIs
 import { GetMediaDetails } from '@/api-request/media/details';
-import SimilarVideos from '@/components/pages/video/details/Similar';
+import SimilarVideos from '@/components/pages/video/details/similar';
 
 const VideoDetails = () => {
     const userInfo = useSelector(state => state.UserInfo);
