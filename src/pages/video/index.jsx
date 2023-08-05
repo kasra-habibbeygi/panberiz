@@ -210,6 +210,9 @@ function Video() {
         <div key={item.id} className='card_field'>
             <CardField status={item.media_status}>
                 <div className='video_image'>
+                    {userInfo.role === 'AgentAcademy' && (
+                        <p className='media_status_pill'>{item.media_status === 'pending' ? 'در حال بررسی' : 'تایید شده'}</p>
+                    )}
                     <div className='float'>
                         <Link href={`/video/details/${item.id}`}>
                             <Image className='icon' src={play} alt='play' />

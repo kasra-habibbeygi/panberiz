@@ -7,6 +7,17 @@ export const CardField = styled.div(props => ({
     position: 'relative',
     cursor: props.pointer ? 'pointer' : 'normalize',
 
+    '& .media_status_pill': {
+        position: 'absolute',
+        top: '10px',
+        left: '10px',
+        background: props.status === 'pending' ? '#ffdeb5' : '#c1ffd4',
+        color: props.status === 'pending' ? '#ff7800' : '#11ad00',
+        borderRadius: '50px',
+        padding: '1px 10px',
+        fontSize: '0.9rem'
+    },
+
     '& .card_details': {
         display: 'flex',
         alignItems: 'flex-start',

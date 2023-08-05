@@ -51,11 +51,10 @@ function Navbar({ setAsideStatus, asideStatus }) {
     const [langValue, setLangValue] = useState({ label: 'فارسی', value: 'fa' });
     const [isLoggedInWithRedirect, setIsLoggedInWithRedirect] = useState(false);
     const [NotifDataList, setNotifDataList] = useState([]);
-    const [reload, setReload] = useState(false);
 
     useEffect(() => {
         if (userInfo.role === 'AgentAcademy') {
-            GetNotificationList(5).then(res => {
+            GetNotificationList(4).then(res => {
                 setNotifDataList(res);
             });
         }
@@ -72,7 +71,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
         if (localStorage.getItem('isLoggedInWithRedirect') !== null) {
             setIsLoggedInWithRedirect(true);
         }
-    }, [reload, userInfo.role]);
+    }, [userInfo.role]);
 
     const openAside = () => {
         setAsideStatus(!asideStatus);
@@ -122,8 +121,11 @@ function Navbar({ setAsideStatus, asideStatus }) {
     };
 
     const reactNotifHandler = pk => {
-        EditNotificationList(pk);
-        setReload(!reload);
+        EditNotificationList(pk).then(() => {
+            GetNotificationList(4).then(res => {
+                setNotifDataList(res);
+            });
+        });
     };
 
     return (
@@ -214,7 +216,6 @@ function Navbar({ setAsideStatus, asideStatus }) {
                                     <p className='message'>{item.about_object}</p>
                                     {item.message ? (
                                         <div>
-                                            <p className='message'>{t('Deny reason')} : </p>
                                             <p className='message'>{item.message}</p>
                                         </div>
                                     ) : (
@@ -231,7 +232,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
                             ))}
 
                             <li className='notifs_showAll'>
-                                <Link href='/notifs'>{t('Show all')}</Link>
+                                <Link href='/notification'>{t('Show all')}</Link>
                             </li>
                         </ul>
                     </div>

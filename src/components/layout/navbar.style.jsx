@@ -124,7 +124,10 @@ export const Navbar = styled.nav(props => ({
                 paddingBottom: '10px',
 
                 '& .message': {
-                    fontSize: '14px'
+                    fontSize: '14px',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap'
                 },
 
                 '& .notifs_button': {
