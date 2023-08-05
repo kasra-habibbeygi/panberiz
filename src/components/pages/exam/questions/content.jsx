@@ -37,11 +37,13 @@ const QuestionsContent = () => {
     const totalMiliSec = mediaDetails?.period_of_time * 60 * 1000;
     const progressPercent = ((countDown - totalMiliSec) / totalMiliSec) * 100;
 
+    console.log(mediaDetails);
+
     useEffect(() => {
         GetMediaDetails(router.query.id, userInfo.lang)
             .then(res => {
-                setMediaDetails(res.results[0]);
-                setNewCountDown(res.results[0].period_of_time * 60 * 1000);
+                setMediaDetails(res[0]);
+                setNewCountDown(res[0].period_of_time * 60 * 1000);
             })
             .catch(() => {});
     }, [router.query.id, userInfo.lang]);
@@ -114,7 +116,7 @@ const QuestionsContent = () => {
                             <span></span>
                         </div>
                         <p>
-                            {seconds} : {minutes}
+                            {seconds} : {minutes} : {hours}
                         </p>
                     </div>
                 )}

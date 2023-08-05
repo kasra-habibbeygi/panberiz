@@ -22,7 +22,7 @@ const StartExam = () => {
     useEffect(() => {
         GetMediaDetails(router.query.id, userInfo.lang)
             .then(res => {
-                setMediaDetails(res.results[0]);
+                setMediaDetails(res[0]);
             })
             .catch(() => {});
     }, [router.query.id, userInfo.lang]);

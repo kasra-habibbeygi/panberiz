@@ -23,6 +23,8 @@ export const CardField = styled.div(props => ({
         alignItems: 'flex-start',
         justifyContent: 'space-between',
         marginTop: '10px',
+        position: 'relative',
+        zIndex: '20',
 
         '& .right_field': {
             color: props.theme.palette.colors.text.blackAndWhite,
@@ -34,12 +36,11 @@ export const CardField = styled.div(props => ({
         '& .left_field': {
             display: 'flex',
             justifyContent: 'flex-end',
-            flexDirection: 'column',
             alignItems: 'flex-end',
 
             div: {
                 display: 'flex',
-                gap: '10px',
+                gap: '5px',
                 alignItems: 'center'
             },
 
