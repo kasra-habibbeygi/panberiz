@@ -26,8 +26,12 @@ export const UpdateMedia = async (id, data) => {
     return RequestHandler.call({ url: `/managers/media/update-media/${id}/`, method: 'put', data }).then(res => res.data);
 };
 
-export const DeleteMedia = async id => {
+export const DeleteSuperAdminMedia = async id => {
     return RequestHandler.call({ url: `/managers/media/delete-media/${id}/`, method: 'delete' }).then(res => res.data);
+};
+
+export const DeleteAgentMedia = async id => {
+    return RequestHandler.call({ url: `/admins/media/delete-media/${id}/`, method: 'delete' }).then(res => res.data);
 };
 
 export const GetAdminVideos = async () => {

@@ -36,9 +36,10 @@ import {
     GetAllMedia,
     GetAllDeactiveMedia,
     UpdateMedia,
-    DeleteMedia,
+    DeleteSuperAdminMedia,
     GetAdminVideos,
-    PostAcceptVideo
+    PostAcceptVideo,
+    DeleteAgentMedia
 } from '@/api-request/media/list';
 import Button from '@/components/form-group/button';
 
@@ -180,11 +181,19 @@ function Video() {
     };
 
     const deleteSpecificMedia = id => {
-        DeleteMedia(id)
-            .then(() => {
-                setReload(!reload);
-            })
-            .catch(() => {});
+        if (userInfo.role === 'SuperAdminAcademy') {
+            DeleteSuperAdminMedia(id)
+                .then(() => {
+                    setReload(!reload);
+                })
+                .catch(() => {});
+        } else {
+            DeleteAgentMedia(id)
+                .then(() => {
+                    setReload(!reload);
+                })
+                .catch(() => {});
+        }
     };
 
     const handleAcceptVideo = async id => {

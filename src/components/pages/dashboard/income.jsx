@@ -107,7 +107,7 @@ function Income() {
                     <Image src={searchSvg} alt='search' />
                 </button>
             </form>
-            <div className='container'>
+            <div className='container chart_field'>
                 <div className='line-chart'>
                     <div className='header'>
                         <div className='title'>
@@ -131,28 +131,6 @@ function Income() {
                     <div className='chart'>
                         <ChartPie data={chart2Data} selectedValue={values?.label} />
                     </div>
-                    {/* <div className='flags'>
-                    <div className='section'>
-                        <div>
-                            <CircleIcon fontSize='small' htmlColor='#39164F' />
-                            <p>{t('Repeat visit')}</p>
-                        </div>
-                        <div>
-                            <CircleIcon fontSize='small' htmlColor='#751B74' />
-                            <p>{t('Repeat visit')}</p>
-                        </div>
-                    </div>
-                    <div className='section'>
-                        <div>
-                            <CircleIcon fontSize='small' htmlColor='#D6A0F9' />
-                            <p>{t('Repeat visit')}</p>
-                        </div>
-                        <div>
-                            <CircleIcon fontSize='small' htmlColor='#EACFFC' />
-                            <p>{t('Repeat visit')}</p>
-                        </div>
-                    </div>
-                </div> */}
                 </div>
             </div>
 
