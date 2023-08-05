@@ -67,6 +67,8 @@ function Video() {
     });
     const userInfo = useSelector(state => state.UserInfo);
 
+    console.log(notAcceptedList);
+
     useEffect(() => {
         setPageLoading(true);
         let filterParams = `&page=${pageStatus.current}`;
@@ -239,6 +241,9 @@ function Video() {
                 <div className='video_image'>
                     <div className='float'>
                         <Image className='icon' src={accept} alt='accept' onClick={() => handleAcceptVideo(item.id)} />
+                        <Link href={`/video/details/${item.id}`}>
+                            <Image className='icon' src={play} alt='play' />
+                        </Link>
                     </div>
                     <img className='video_banner' src={item?.cover?.replace('http', 'https')} alt='video-banner' />
                 </div>
@@ -360,18 +365,10 @@ function Video() {
 
             <ListVideoField>
                 {selectedButton === 'uploaded' ? (
-                    mediaList?.length ? (
+                    mediaList?.length || notAceptedListProvider.length ? (
                         <>
-                            {pageLoading ? (
-                                <div className='loading'>
-                                    <CircularProgress />
-                                </div>
-                            ) : (
-                                <>
-                                    {notAceptedListProvider}
-                                    {mediaListProvider}
-                                </>
-                            )}
+                            {notAceptedListProvider}
+                            {mediaListProvider}
 
                             <PaginationWrapper>
                                 <Pagination

@@ -24,11 +24,11 @@ const DetailsField = ({ mediaDetails }) => {
 
     useEffect(() => {
         setExamBtnStatus(!mediaDetails?.media_quiezes?.length && userInfo.role === 'User' ? true : false);
-    }, []);
+    }, [userInfo.role, mediaDetails]);
 
     return (
         <MainField>
-            <p className='text'>{mediaDetails?.description}</p>
+            <p className='text'>{mediaDetails?.full_description}</p>
             <div className='footer_field'>
                 <div className='info'>
                     <span>
