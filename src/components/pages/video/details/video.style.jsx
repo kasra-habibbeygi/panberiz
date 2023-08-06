@@ -19,12 +19,6 @@ export const MainField = styled.div(props => ({
         fontSize: '1.2rem'
     },
 
-    iframe: {
-        border: 'none',
-        height: '700px',
-        borderRadius: '10px'
-    },
-
     '& .red_heart': {
         filter: 'invert(33%) sepia(81%) saturate(2399%) hue-rotate(337deg) brightness(106%) contrast(110%)'
     },
@@ -107,10 +101,16 @@ export const MainField = styled.div(props => ({
     },
 
     video: {
-        width: '100%',
+        width: '1110px',
         height: '600px',
         background: 'black',
         borderRadius: '20px'
+    },
+
+    '@media(max-width : 1200px)': {
+        video: {
+            width: '100%'
+        }
     },
 
     '@media(max-width : 800px)': {
@@ -127,6 +127,10 @@ export const MainField = styled.div(props => ({
     },
 
     '@media(max-width : 500px)': {
+        video: {
+            height: '200px'
+        },
+
         '& .card_details': {
             display: 'flex',
             alignItems: 'flex-start',

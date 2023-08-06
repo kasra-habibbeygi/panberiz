@@ -4,10 +4,10 @@ import { useTranslation } from 'next-i18next';
 
 // Assets
 import { ListVideoField } from './list-video.style';
+import EmptyFieldImg from '../../../../assets/images/empty/favorits_empty_field.png';
 
 // Component
 import Card from './card';
-import EmptyFieldImg from '../../../../assets/images/empty/empty-media-list.png';
 import EmptyField from '@/components/template/empty-field';
 
 function ListVideo({ data }) {
