@@ -41,6 +41,7 @@ const CategoryList = ({ categoriesList, setReaload, reload }) => {
                         <span>{t('Title')}</span>
                         <span>{t('Rank')}</span>
                         <span>{t('position')}</span>
+                        <span>{t('Media Count')}</span>
                         <span>{t('General condition')}</span>
                     </div>
                     {categoriesList?.map(item => {
@@ -58,6 +59,7 @@ const CategoryList = ({ categoriesList, setReaload, reload }) => {
                                     </p>
                                     <p>{item.rank}</p>
                                     <p>{item.place}</p>
+                                    <p>{item.media_count}</p>
                                     <p>{item.is_public ? <Image src={TickIcon} alt='' /> : <Image src={CrossIcon} alt='' />}</p>
                                 </div>
                             );

@@ -67,14 +67,17 @@ function Video() {
                 <div className='card_details'>
                     <div className='right_field'>
                         <h3>{item?.media_name}</h3>
-                        <p>{item?.jdate}</p>
+                        <p>{item?.jdate.replaceAll(',', '/')}</p>
                     </div>
                     <div className='left_field'>
                         <p>
                             {t('score')} : {item?.score}
                         </p>
                         <p>
-                            {t('Rank')} : {item?.media_rank}
+                            {t('Rank')} : {item?.category_rank}
+                        </p>
+                        <p>
+                            {t('Category')} : {item?.category_name}
                         </p>
                     </div>
                 </div>
@@ -134,11 +137,11 @@ function Video() {
                 <Image src={MainCertificateImg} alt='' />
                 <h3>{certificateData?.user_full_name}</h3>
                 <p className='code_field'>{certificateData?.user_code_meli}</p>
-                <p className='rank'>{certificateData?.media_rank}</p>
+                <p className='rank'>{certificateData?.category_rank}</p>
                 <p className='time'>
-                    {certificateData?.media_time > 60
-                        ? `${certificateData?.media_time / 60} ساعت ${certificateData?.media_time % 60} دقیقه`
-                        : `${certificateData?.media_time} دقیقه`}
+                    {certificateData?.total_time > 60
+                        ? `${certificateData?.total_time / 60} ساعت ${certificateData?.total_time % 60} دقیقه`
+                        : `${certificateData?.total_time} دقیقه`}
                 </p>
                 <p className='date'>{certificateData?.jdate.replaceAll(',', '/')}</p>
             </CertificateField>

@@ -34,7 +34,7 @@ const StartExam = () => {
                     {t('Quiz')} {mediaDetails?.title}
                 </h3>
                 <p>
-                    {mediaDetails?.media_quiezes?.length} {t('Question')} - {mediaDetails?.period_of_time} {t('Minutes')}
+                    {mediaDetails?.media_quiezes?.length} {t('Question')} - {mediaDetails?.the_duration_of_the_test} {t('Minutes')}
                 </p>
             </div>
             <Image src={RocketImg} alt='' />

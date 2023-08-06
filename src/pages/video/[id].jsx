@@ -180,7 +180,7 @@ function UserVideo() {
                 </FiltersWrapper>
             )}
             <TagsList>
-                <p>تگ های مرتبط</p>
+                {tagsList.length ? <p>تگ های مرتبط</p> : ''}
                 <div className='tags_field'>
                     {tagsList.map(item => (
                         <Link href={`/video/5/?tagId=${item.id}`} key={`tags_list_${item.id}`}>

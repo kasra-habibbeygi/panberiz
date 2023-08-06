@@ -49,14 +49,14 @@ const Comment = ({ mediaDetails }) => {
         AddnewComment(CommentData)
             .then(() => {
                 toast.success(t('Your message was successfully registered!'));
+
+                AddCommentScore(RateComment)
+                    .then(() => {})
+                    .catch(() => {});
             })
             .catch(err => {
                 toast.error(err.response.data.message);
             });
-
-        AddCommentScore(RateComment)
-            .then(() => {})
-            .catch(() => {});
     };
 
     return (

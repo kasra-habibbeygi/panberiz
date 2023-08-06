@@ -34,16 +34,14 @@ const QuestionsContent = () => {
     const [score, setScore] = useState(0);
     const [examStatus, setExamStatus] = useState(false);
     const [days, hours, minutes, seconds, countDown, setNewCountDown] = useTimer(0);
-    const totalMiliSec = mediaDetails?.period_of_time * 60 * 1000;
+    const totalMiliSec = mediaDetails?.the_duration_of_the_test * 60 * 1000;
     const progressPercent = ((countDown - totalMiliSec) / totalMiliSec) * 100;
-
-    console.log(mediaDetails);
 
     useEffect(() => {
         GetMediaDetails(router.query.id, userInfo.lang)
             .then(res => {
                 setMediaDetails(res[0]);
-                setNewCountDown(res[0].period_of_time * 60 * 1000);
+                setNewCountDown(res[0].the_duration_of_the_test * 60 * 1000);
             })
             .catch(() => {});
     }, [router.query.id, userInfo.lang]);
@@ -107,7 +105,7 @@ const QuestionsContent = () => {
                         {t('Quiz')} {mediaDetails?.title}
                     </h3>
                     <p>
-                        {mediaDetails?.media_quiezes?.length} {t('Minutes')} - {mediaDetails?.period_of_time} {t('Question')}
+                        {mediaDetails?.media_quiezes?.length} {t('Minutes')} - {mediaDetails?.the_duration_of_the_test} {t('Question')}
                     </p>
                 </div>
                 {!examStatus && (

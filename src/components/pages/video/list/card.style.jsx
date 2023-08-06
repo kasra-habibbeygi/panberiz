@@ -37,6 +37,7 @@ export const CardField = styled.div(props => ({
             display: 'flex',
             justifyContent: 'flex-end',
             alignItems: 'flex-end',
+            gap: '10px',
 
             div: {
                 display: 'flex',

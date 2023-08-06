@@ -28,7 +28,7 @@ import { FiltersWrapper, ListVideoField, PaginationWrapper } from '@/components/
 // MUI
 import DeleteIcon from '@mui/icons-material/Delete';
 import StarIcon from '@mui/icons-material/Star';
-import { CircularProgress, Dialog, Pagination } from '@mui/material';
+import { Dialog, Pagination } from '@mui/material';
 
 // API
 import {
@@ -75,42 +75,42 @@ function Video() {
         let filterParams = `&page=${pageStatus.current}`;
 
         if (filters.status) {
-            filterParams += `media_status=${filters.status}&`;
+            filterParams += `&media_status=${filters.status}`;
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
         if (filters.observing === 'seen') {
-            filterParams += 'is_viewed=true&';
+            filterParams += '&is_viewed=true';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
         if (filters.observing === 'unseen') {
-            filterParams += 'is_viewed=false&';
+            filterParams += '&is_viewed=false';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
         if (filters.sorting === 'oldest') {
-            filterParams += 'oldest=true&';
+            filterParams += '&oldest=true';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
         if (filters.sorting === 'newest') {
-            filterParams += 'newest=true&';
+            filterParams += '&newest=true';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
         if (filters.sorting === 'score') {
-            filterParams += 'score=true&';
+            filterParams += '&score=true';
             setPageStatus({
                 total: 1,
                 current: 1
@@ -135,7 +135,7 @@ function Video() {
                 })
                 .catch(() => {});
         } else if (userInfo.role === 'AgentAcademy') {
-            GetMyMediaList(router.query.id, userInfo.lang)
+            GetMyMediaList(userInfo.lang, filterParams)
                 .then(res => {
                     setMediaList(res.results);
                 })
