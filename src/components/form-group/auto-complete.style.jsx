@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
 
 export const MainField = styled.div(props => ({
+    width: '100%',
+
     '& .MuiInputBase-root': {
         background: props.theme.palette.colors.input.primary,
         padding: '0 10px !important',
-        // paddingLeft: '39px',
         borderRadius: '12px'
     },
 

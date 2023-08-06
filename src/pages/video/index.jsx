@@ -16,6 +16,8 @@ import EmptyField from '@/components/template/empty-field';
 import Tab from '@/components/pages/video/list/tab';
 import HeaderField from '@/components/template/header';
 import LayoutProvider from '@/components/layout';
+import Button from '@/components/form-group/button';
+import AutoComplete from '@/components/form-group/auto-complete';
 
 // Assets
 import play from '@/assets/icons/play.svg';
@@ -41,7 +43,6 @@ import {
     PostAcceptVideo,
     DeleteAgentMedia
 } from '@/api-request/media/list';
-import Button from '@/components/form-group/button';
 
 function Video() {
     const { t } = useTranslation();
@@ -54,62 +55,55 @@ function Video() {
     const [notAcceptedList, setNotAcceptedList] = useState([]);
     const [deactiveMediaList, setDeactiveMediaList] = useState([]);
     const [rejectReason, setRejectReason] = useState('');
-    const [pageLoading, setPageLoading] = useState(true);
+    const [statusFilter, setStatusFilter] = useState(null);
+    const [viewsFilter, setViewsFilter] = useState(null);
+    const [sortFilter, setSortFilter] = useState(null);
     const [deactiveSpecificId, setDeactiveSpecificId] = useState();
+    const userInfo = useSelector(state => state.UserInfo);
     const [pageStatus, setPageStatus] = useState({
         total: 1,
         current: 1
     });
 
-    const [filters, setFilters] = useState({
-        status: '',
-        observing: '',
-        sorting: ''
-    });
-    const userInfo = useSelector(state => state.UserInfo);
-
-    console.log(notAcceptedList);
-
     useEffect(() => {
-        setPageLoading(true);
         let filterParams = `&page=${pageStatus.current}`;
 
-        if (filters.status) {
-            filterParams += `&media_status=${filters.status}`;
+        if (statusFilter?.value) {
+            filterParams += `&media_status=${statusFilter?.value}`;
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
-        if (filters.observing === 'seen') {
+        if (viewsFilter?.value === 'seen') {
             filterParams += '&is_viewed=true';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
-        if (filters.observing === 'unseen') {
+        if (viewsFilter?.value === 'unseen') {
             filterParams += '&is_viewed=false';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
-        if (filters.sorting === 'oldest') {
+        if (sortFilter?.value === 'oldest') {
             filterParams += '&oldest=true';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
-        if (filters.sorting === 'newest') {
+        if (sortFilter?.value === 'newest') {
             filterParams += '&newest=true';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
-        if (filters.sorting === 'score') {
+        if (sortFilter?.value === 'score') {
             filterParams += '&score=true';
             setPageStatus({
                 total: 1,
@@ -126,8 +120,7 @@ function Video() {
                         total: res.total_page
                     }));
                 })
-                .catch(() => {})
-                .finally(() => setPageLoading(false));
+                .catch(() => {});
 
             GetAllDeactiveMedia(userInfo.lang)
                 .then(res => {
@@ -139,8 +132,7 @@ function Video() {
                 .then(res => {
                     setMediaList(res.results);
                 })
-                .catch(() => {})
-                .finally(() => setPageLoading(false));
+                .catch(() => {});
 
             GetAdminVideos()
                 .then(res => {
@@ -152,7 +144,7 @@ function Video() {
         if (userInfo.role === 'AdminAcademy' || userInfo.role === 'User') {
             router.push('/dashboard');
         }
-    }, [router.query.id, userInfo.lang, userInfo.role, reload, filters, pageStatus.current]);
+    }, [router.query.id, userInfo.lang, userInfo.role, reload, pageStatus.current, sortFilter, viewsFilter, statusFilter]);
 
     useEffect(() => {
         if (userInfo.role === 'SuperAdminAcademy') {
@@ -313,63 +305,90 @@ function Video() {
         </div>
     ));
 
+    const autoCompleteHandler = (e, name) => {
+        if (name === 'status') {
+            setStatusFilter(e);
+        } else if (name === 'views') {
+            setViewsFilter(e);
+        } else {
+            setSortFilter(e);
+        }
+    };
+
+    const options1 = [
+        {
+            label: t('Accepted'),
+            value: 'accepted'
+        },
+        {
+            label: t('Rejected'),
+            value: 'failed'
+        },
+        {
+            label: t('Pending'),
+            value: 'pending'
+        }
+    ];
+
+    const options2 = [
+        {
+            label: t('Not Seen'),
+            value: 'unseen'
+        },
+        {
+            label: t('Seen'),
+            value: 'seen'
+        }
+    ];
+
+    const options3 = [
+        {
+            label: t('Newest'),
+            value: 'newest'
+        },
+        {
+            label: t('Oldest'),
+            value: 'oldest'
+        },
+        {
+            label: t('Highest score'),
+            value: 'score'
+        }
+    ];
+
     return (
         <LayoutProvider>
             <HeaderField title={t('Video')} />
             {tabsStatus && <Tab selectButton={name => setSelectedButton(name)} selectedButton={selectedButton} />}
             {userInfo.role !== 'SuperAdminAcademy' && (
                 <FiltersWrapper>
-                    <p className='filters_title'>{t('Filters')}</p>
                     <div className='selects_wrapper'>
                         <div className='options_wrapper'>
-                            <p>{t('Based on status')}</p>
-                            <select
-                                value={filters.status}
-                                onChange={e =>
-                                    setFilters(prev => ({
-                                        ...prev,
-                                        status: e.target.value
-                                    }))
-                                }
-                            >
-                                <option value=''>{t('Choose')}</option>
-                                <option value='accepted'>{t('Accepted')}</option>
-                                <option value='failed'>{t('Rejected')}</option>
-                                <option value='pending'>{t('Pending')}</option>
-                            </select>
+                            <AutoComplete
+                                placeholder={t('Based on status')}
+                                value={statusFilter}
+                                name='status'
+                                valueHandler={autoCompleteHandler}
+                                options={options1}
+                            />
                         </div>
                         <div className='options_wrapper'>
-                            <p>{t('Based on observation')}</p>
-                            <select
-                                value={filters.observing}
-                                onChange={e =>
-                                    setFilters(prev => ({
-                                        ...prev,
-                                        observing: e.target.value
-                                    }))
-                                }
-                            >
-                                <option value=''>{t('Choose')}</option>
-                                <option value='seen'>{t('Seen')}</option>
-                                <option value='unseen'>{t('Not Seen')}</option>
-                            </select>
+                            <AutoComplete
+                                placeholder={t('Based on observation')}
+                                value={viewsFilter}
+                                name='views'
+                                valueHandler={autoCompleteHandler}
+                                options={options2}
+                            />
                         </div>
                         <div className='options_wrapper'>
-                            <p>{t('Sorting')}</p>
-                            <select
-                                value={filters.sorting}
-                                onChange={e =>
-                                    setFilters(prev => ({
-                                        ...prev,
-                                        sorting: e.target.value
-                                    }))
-                                }
-                            >
-                                <option value=''>{t('Choose')}</option>
-                                <option value='newest'>{t('Newest')}</option>
-                                <option value='oldest'>{t('Oldest')}</option>
-                                <option value='score'>{t('Highest score')}</option>
-                            </select>
+                            <AutoComplete
+                                placeholder={t('Sorting')}
+                                value={sortFilter}
+                                name='filter'
+                                valueHandler={autoCompleteHandler}
+                                options={options3}
+                            />
                         </div>
                     </div>
                 </FiltersWrapper>

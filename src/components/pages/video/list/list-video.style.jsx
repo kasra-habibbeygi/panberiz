@@ -74,7 +74,7 @@ export const ListVideoField = styled.div(props => ({
 }));
 
 export const SearchField = styled.div(props => ({
-    flex: 3,
+    flex: '3',
     display: 'flex',
     padding: '0 15px',
     alignItems: 'center',
@@ -110,15 +110,14 @@ export const FiltersWrapper = styled.div(props => ({
     '& .filters_title': {
         fontSize: '20px',
         fontWeight: 700,
-        marginTop: '50px',
         color: props.theme.mode === 'light' ? 'black' : 'white'
     },
 
     '& .selects_wrapper': {
         display: 'flex',
         flexWrap: 'wrap',
-        gap: '50px',
-        marginTop: '20px',
+        gap: '10px',
+        marginTop: '-30px',
         color: props.theme.mode === 'light' ? 'black' : 'white'
     },
 
@@ -127,6 +126,7 @@ export const FiltersWrapper = styled.div(props => ({
         flexDirection: 'column',
         gap: '10px',
         alignItems: 'center',
+        width: '220px',
 
         select: {
             width: '130px',

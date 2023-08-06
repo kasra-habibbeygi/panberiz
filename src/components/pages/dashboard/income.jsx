@@ -1,22 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useSelector } from 'react-redux';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'next-i18next';
+
 // Component
 import { IncomeField } from './income.style';
 import ChartArea from './area.chart';
 import ChartPie from './pie.chart';
+import SearchResult from './search-result';
+import AutoComplete from '@/components/form-group/auto-complete';
 
 //Assets
 import searchSvg from './../../../assets/icons/search.svg';
 
-//mui
-// import CircleIcon from '@mui/icons-material/Circle';
-import AutoComplete from '@/components/form-group/auto-complete';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'next-i18next';
-import { GetManagerChart1Info, GetAdminChart1Info, GetAdminChart2Info, GetManagerChart2Info, UserSearch } from '@/api-request/chart';
-import { useSelector } from 'react-redux';
-import Image from 'next/image';
+// MUI
 import { Dialog } from '@mui/material';
-import SearchResult from './search-result';
+
+// APIs
+import { GetManagerChart1Info, GetAdminChart1Info, GetAdminChart2Info, GetManagerChart2Info, UserSearch } from '@/api-request/chart';
 
 function Income() {
     const { t } = useTranslation('common');
