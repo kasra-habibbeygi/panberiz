@@ -165,7 +165,6 @@ function UserVideo() {
             {userInfo.role === 'SuperAdminAcademy' && <Tab selectButton={selectButton} selectedButton={selectedButton} />}
             {userInfo.role !== 'SuperAdminAcademy' && (
                 <FiltersWrapper>
-                    <p className='filters_title'>{t('Filters')}</p>
                     <div className='selects_wrapper'>
                         <div className='options_wrapper'>
                             <AutoComplete

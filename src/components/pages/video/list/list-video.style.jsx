@@ -103,6 +103,12 @@ export const SearchField = styled.div(props => ({
         color: props.theme.mode === 'light' ? '#b8b8b8' : 'white',
         width: '30px',
         height: 'auto'
+    },
+
+    '@media(max-width : 650px)': {
+        minWidth: 'unset',
+        width: '100%',
+        padding: '0'
     }
 }));
 
@@ -126,13 +132,18 @@ export const FiltersWrapper = styled.div(props => ({
         flexDirection: 'column',
         gap: '10px',
         alignItems: 'center',
-        width: '220px',
+        width: '220px'
+    },
 
-        select: {
-            width: '130px',
-            padding: '3px',
-            borderRadius: '5px',
-            borderColor: '#c5c5c5'
+    '@media(max-width : 800px)': {
+        '& .selects_wrapper': {
+            marginTop: '0'
+        }
+    },
+
+    '@media(max-width : 500px)': {
+        '& .options_wrapper': {
+            width: '100%'
         }
     }
 }));

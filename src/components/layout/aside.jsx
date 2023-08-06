@@ -50,6 +50,8 @@ function Aside({ asideStatus }) {
             .catch(() => {});
     }, [userInfo.lang]);
 
+    console.log(router);
+
     return (
         <Style.AsideField asideStatus={asideStatus} categoriesListLength={categoriesList.length}>
             <div className='items'>
@@ -86,7 +88,11 @@ function Aside({ asideStatus }) {
                                             .map(item => {
                                                 if (item.place === 0) {
                                                     return (
-                                                        <Link href={`/video/${item.id}`} key={item.id}>
+                                                        <Link
+                                                            href={`/video/${item.id}`}
+                                                            key={item.id}
+                                                            className={parseInt(router.query.id) === item.id ? 'submenu_active' : ''}
+                                                        >
                                                             <img
                                                                 className='video_banner'
                                                                 src={item?.image.replace('http', 'https')}
@@ -104,7 +110,7 @@ function Aside({ asideStatus }) {
                                                             item?.rank <= userInfo.rank || userInfo.role === 'AgentAcademy'
                                                                 ? ''
                                                                 : 'disabled'
-                                                        }`}
+                                                        } ${parseInt(router.query.id) === item.id ? 'submenu_active' : ''}`}
                                                     >
                                                         <img
                                                             className='video_banner'
