@@ -101,5 +101,15 @@ export const MainField = styled.div(props => ({
                 marginTop: '20px'
             }
         }
+    },
+
+    '& .comment_empty_field': {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '10px',
+        padding: '30px',
+        background: '#F1F1F1',
+        marginTop: '20px'
     }
 }));
