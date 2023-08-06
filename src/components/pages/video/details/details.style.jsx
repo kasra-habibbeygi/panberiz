@@ -6,7 +6,18 @@ export const MainField = styled.div(props => ({
     paddingTop: '20px',
 
     '& .text': {
-        lineHeight: '34px'
+        lineHeight: '34px',
+        display: 'flex',
+        gap: '10px',
+
+        span: {
+            width: '10px',
+            height: '10px',
+            background: '#e3e3e3',
+            borderRadius: '20px',
+            position: 'relative',
+            top: '10px'
+        }
     },
 
     p: {
