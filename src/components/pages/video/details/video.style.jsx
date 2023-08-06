@@ -23,6 +23,12 @@ export const MainField = styled.div(props => ({
         filter: 'invert(33%) sepia(81%) saturate(2399%) hue-rotate(337deg) brightness(106%) contrast(110%)'
     },
 
+    iframe: {
+        border: 'none',
+        height: '700px',
+        borderRadius: '10px'
+    },
+
     '& .card_details': {
         display: 'flex',
         alignItems: 'flex-start',
@@ -123,6 +129,10 @@ export const MainField = styled.div(props => ({
 
         video: {
             height: '300px'
+        },
+
+        iframe: {
+            height: '400px'
         }
     },
 
