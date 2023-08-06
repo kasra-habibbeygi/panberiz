@@ -28,6 +28,7 @@ const DetailsField = ({ mediaDetails }) => {
 
     return (
         <MainField>
+            <p className='text'>{mediaDetails?.summary_description}</p>
             <p className='text'>{mediaDetails?.full_description}</p>
             <div className='footer_field'>
                 <div className='info'>
