@@ -59,8 +59,8 @@ const VideoField = ({ mediaDetails, favoritsList }) => {
         <MainField>
             {mediaDetails?.media_type === 'video' ? (
                 <div className='video_image'>
-                    <video controls id='slider_video_player' poster={mediaDetails?.cover}>
-                        <source src={mediaDetails?.file?.replace('http', 'https')} type='video/mp4' />
+                    <video controls id='slider_video_player' poster={mediaDetails?.cover?.replace('http', 'https')}>
+                        <source src={mediaDetails?.get_video_info?.data?.video_url} type='video/mp4' />
                     </video>
                 </div>
             ) : (
