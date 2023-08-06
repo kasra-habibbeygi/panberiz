@@ -34,7 +34,7 @@ const DetailsField = ({ mediaDetails }) => {
             </p>
             <p className='text'>
                 <span></span>
-                {mediaDetails?.full_description}
+                {mediaDetails?.full_description ?? ''}
             </p>
             <div className='footer_field'>
                 <div className='info'>
