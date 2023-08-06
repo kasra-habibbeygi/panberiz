@@ -32,10 +32,13 @@ const DetailsField = ({ mediaDetails }) => {
                 <span></span>
                 {mediaDetails?.summary_description}
             </p>
-            <p className='text'>
-                <span></span>
-                {mediaDetails?.full_description ?? ''}
-            </p>
+            {mediaDetails?.full_description && (
+                <p className='text'>
+                    <span></span>
+                    {mediaDetails?.full_description}
+                </p>
+            )}
+
             <div className='footer_field'>
                 <div className='info'>
                     <span>
