@@ -33,7 +33,6 @@ const MobileNavbar = () => {
                         </Link>
                     </li>
                 )}
-
                 {userRole === 'User' && (
                     <li>
                         <Link href='/favorits'>

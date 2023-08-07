@@ -65,7 +65,7 @@ export const QuizForm = ({ open, setOpen, setInputValued, inputValues }) => {
     };
 
     return (
-        <QuizFormField scroll='body' maxWidth='80%' disablePortal open={open} onClose={() => setOpen(false)}>
+        <QuizFormField scroll='body' maxWidth='lg' fullWidth={true} disablePortal open={open} onClose={() => setOpen(false)}>
             <div className='border'>
                 <h3>{t('Add new question')}</h3>
             </div>

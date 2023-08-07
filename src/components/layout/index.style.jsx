@@ -35,5 +35,13 @@ export const LayoutProviderField = styled.div(props => ({
         '& .main_field': {
             paddingBottom: '80px'
         }
+    },
+
+    '@media (max-width : 400px)': {
+        div: {
+            '& .children-field': {
+                padding: '30px 10px'
+            }
+        }
     }
 }));

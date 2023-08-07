@@ -113,6 +113,14 @@ export const IncomeField = styled.div(props => ({
                     width: '100%'
                 }
             }
+        },
+
+        '& .search_wrapper': {
+            width: '100%',
+
+            '& .search_input': {
+                width: '100%'
+            }
         }
     }
 }));

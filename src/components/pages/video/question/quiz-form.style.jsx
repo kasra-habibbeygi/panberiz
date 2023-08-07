@@ -3,9 +3,8 @@ import { Dialog } from '@mui/material';
 
 export const QuizFormField = styled(Dialog)(props => ({
     '& .MuiDialog-paper': {
-        width: '70%',
-        textAlign: 'right',
         padding: '30px',
+        textAlign: props.theme.direction === 'rtl' ? 'right' : 'ltr',
 
         h3: {
             paddingBottom: '15px'
@@ -61,8 +60,20 @@ export const QuizFormField = styled(Dialog)(props => ({
     '@media(max-width : 600px)': {
         '& .buttons': {
             button: {
-                width: '20%',
-                flex: 1
+                flex: '1'
+            }
+        },
+
+        '& .MuiDialog-paper': {
+            '& .flex_field': {
+                '& .add-answer': {
+                    margin: '5px auto 15px 0',
+                    alignItems: 'center',
+
+                    p: {
+                        fontSize: '0.9rem'
+                    }
+                }
             }
         }
     }

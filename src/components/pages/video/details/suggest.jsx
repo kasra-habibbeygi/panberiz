@@ -3,16 +3,17 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 import { useTranslation } from 'next-i18next';
+import { useSelector } from 'react-redux';
+import Link from 'next/link';
+import Image from 'next/image';
 
 // Assets
 import { MainField } from './suggest.style';
+import { CardField } from '../list/card.style';
+import play from '@/assets/icons/play.svg';
 
 // Component
 import HeaderField from '@/components/template/header';
-import { CardField } from '../list/card.style';
-import Link from 'next/link';
-import Image from 'next/image';
-import play from '@/assets/icons/play.svg';
 
 const SuggestVideo = ({mediaDetails}) => {
     const { t } = useTranslation();

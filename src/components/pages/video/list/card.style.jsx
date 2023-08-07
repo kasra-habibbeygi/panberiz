@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 export const CardField = styled.div(props => ({
     width: '100%',
     borderRadius: '20px',
-    margin: '10px',
     position: 'relative',
     cursor: props.pointer ? 'pointer' : 'normalize',
 
