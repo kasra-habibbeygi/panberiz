@@ -212,12 +212,19 @@ function Video() {
             <CardField status={item.media_status}>
                 <div className='video_image'>
                     {userInfo.role === 'AgentAcademy' && (
-                        <p className='media_status_pill'>{item.media_status === 'pending' ? t('Pending') : t('Accepted')}</p>
+                        <p className='media_status_pill'>
+                            {item.media_status === 'pending'
+                                ? t('Pending')
+                                : item.media_status === 'failed'
+                                ? t('Rejected')
+                                : t('Accepted')}
+                        </p>
                     )}
                     <div className='float'>
                         <Link href={`/video/details/${item.id}`}>
                             <Image className='icon' src={play} alt='play' />
                         </Link>
+                        <DeleteIcon className='deletemedia' onClick={() => deleteSpecificMedia(item.id)} />
                     </div>
                     <img className='video_banner' src={item?.cover?.replace('http', 'https')} alt='video-banner' />
                 </div>
@@ -231,7 +238,6 @@ function Video() {
                             <p>{item?.score}</p>
                             <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
                         </div>
-                        <DeleteIcon className='deletemedia' onClick={() => deleteSpecificMedia(item.id)} />
                     </div>
                 </div>
                 {userInfo.role !== 'User' && <small>{item?.publisher_fullname}</small>}

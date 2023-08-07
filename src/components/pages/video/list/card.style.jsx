@@ -11,8 +11,8 @@ export const CardField = styled.div(props => ({
         position: 'absolute',
         top: '10px',
         left: '10px',
-        background: props.status === 'pending' ? '#ffdeb5' : '#c1ffd4',
-        color: props.status === 'pending' ? '#ff7800' : '#11ad00',
+        background: props.status === 'pending' ? '#ffdeb5' : props.status === 'failed' ? '#ffc7c1' : '#c1ffd4',
+        color: props.status === 'pending' ? '#ff7800' : props.status === 'failed' ? 'red' : '#11ad00',
         borderRadius: '50px',
         padding: '1px 10px',
         fontSize: '0.9rem'
@@ -96,10 +96,18 @@ export const CardField = styled.div(props => ({
             alignItems: 'center',
             justifyContent: 'center',
             width: '100%',
-            height: '100%',
+            height: 'inherit',
 
             '& .icon': {
                 margin: '5px',
+                cursor: 'pointer'
+            },
+
+            '& .deletemedia': {
+                position: 'absolute',
+                top: '10px',
+                right: '10px',
+                filter: 'invert(99%) sepia(2%) saturate(138%) hue-rotate(212deg) brightness(114%) contrast(89%)',
                 cursor: 'pointer'
             }
         }

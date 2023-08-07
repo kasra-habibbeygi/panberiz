@@ -43,7 +43,7 @@ const DetailsField = ({ mediaDetails }) => {
                 <div className='info'>
                     <span>
                         <Image src={CLockIcon} alt='' />
-                        {mediaDetails?.jdate}
+                        {mediaDetails?.jdate?.replaceAll(',', '/')}
                     </span>
                     <span>
                         <Image src={GridsIcon} alt='' />

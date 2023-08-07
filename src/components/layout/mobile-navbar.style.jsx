@@ -9,6 +9,7 @@ export const MobileNavbarMainField = styled.nav(props => ({
     bottom: '0',
     right: '0',
     borderTop: '1px solid #EEEEEE',
+    zIndex: '200',
 
     '@media(max-width : 800px)': {
         display: 'flex',

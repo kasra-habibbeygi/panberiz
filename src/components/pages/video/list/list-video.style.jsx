@@ -76,7 +76,6 @@ export const ListVideoField = styled.div(props => ({
 export const SearchField = styled.div(props => ({
     flex: '3',
     display: 'flex',
-    padding: '0 15px',
     alignItems: 'center',
     minWidth: '600px',
     position: 'relative',

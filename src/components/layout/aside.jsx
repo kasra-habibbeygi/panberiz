@@ -50,8 +50,6 @@ function Aside({ asideStatus }) {
             .catch(() => {});
     }, [userInfo.lang]);
 
-    console.log(router);
-
     return (
         <Style.AsideField asideStatus={asideStatus} categoriesListLength={categoriesList.length}>
             <div className='items'>

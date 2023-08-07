@@ -119,7 +119,7 @@ function UserVideo() {
         }, 1000);
 
         return () => clearTimeout(delayDebounceFn);
-    }, [searchValue]);
+    }, [searchValue, userInfo.lang]);
 
     const autoCompleteHandler = (e, name) => {
         if (name === 'views') {

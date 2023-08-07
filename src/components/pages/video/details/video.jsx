@@ -80,9 +80,11 @@ const VideoField = ({ mediaDetails, favoritsList }) => {
                     </div>
                 </div>
                 <div className='left_field'>
-                    <div className={`like ${isFavorit ? 'red_heart' : ''}`}>
-                        <Image className='icon' src={HeartIcon} alt='play' onClick={() => addFavoritHandler(mediaDetails?.id)} />
-                    </div>
+                    {userInfo.role === 'User' && (
+                        <div className={`like ${isFavorit ? 'red_heart' : ''}`}>
+                            <Image className='icon' src={HeartIcon} alt='play' onClick={() => addFavoritHandler(mediaDetails?.id)} />
+                        </div>
+                    )}
                     <div className='rate'>
                         <p>5 / {mediaDetails?.score} </p>
                         <StarIcon htmlColor='rgba(248, 170, 0, 1)' />

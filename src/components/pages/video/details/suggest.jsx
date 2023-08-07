@@ -13,10 +13,11 @@ import { CardField } from '../list/card.style';
 import Link from 'next/link';
 import Image from 'next/image';
 import play from '@/assets/icons/play.svg';
-// import StarIcon from '@mui/icons-material/Star';
 
 const SuggestVideo = ({mediaDetails}) => {
     const { t } = useTranslation();
+    const userInfo = useSelector(state => state.UserInfo);
+
     return (
         mediaDetails?.prerequisites_info?.length ?
             <MainField>
@@ -42,8 +43,8 @@ const SuggestVideo = ({mediaDetails}) => {
                                         <h3>{item?.title}</h3>
                                         <p>{item?.des}</p>
                                     </div>
-                                </div>
-                                <small>{item?.publisher_fullname}</small>
+                                </div>                             
+                                {userInfo.role !== 'User' && <small>{item?.publisher_fullname}</small>}
                             </CardField>
                         </div>
                     ))}
