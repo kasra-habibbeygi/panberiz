@@ -19,7 +19,7 @@ import StarIcon from '@mui/icons-material/Star';
 import Input from '@/components/form-group/input';
 
 // APIs
-import { AddnewComment, AddCommentScore } from '@/api-request/comment';
+import { AddNewComment, AddCommentScore } from '@/api-request/comment';
 
 const Comment = ({ mediaDetails }) => {
     const { t } = useTranslation();
@@ -46,7 +46,7 @@ const Comment = ({ mediaDetails }) => {
             media: mediaDetails?.id
         };
 
-        AddnewComment(CommentData)
+        AddNewComment(CommentData)
             .then(() => {
                 toast.success(t('Your message was successfully registered!'));
 

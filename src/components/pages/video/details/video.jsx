@@ -75,9 +75,6 @@ const VideoField = ({ mediaDetails, favoritsList }) => {
             ) : (
                 <>
                     <iframe src={mediaDetails?.file?.replace('http', 'https')} width='100%' height='500px' />
-                    <a href={mediaDetails?.file?.replace('http', 'https')} target='_blank' className='download_field' rel='noreferrer'>
-                        دانلود فایل
-                    </a>
                 </>
             )}
 

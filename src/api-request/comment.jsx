@@ -1,6 +1,6 @@
 import RequestHandler from '@/config/axios';
 
-export const AddnewComment = async data => {
+export const AddNewComment = async data => {
     return RequestHandler.call({ url: '/users/add-comment-point/', method: 'post', data }).then(res => res.data);
 };
 
