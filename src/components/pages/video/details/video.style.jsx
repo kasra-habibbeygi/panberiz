@@ -34,7 +34,7 @@ export const MainField = styled.div(props => ({
         overflow: 'hidden',
         width: '1110px',
         height: 'auto',
-        paddingTop: '44%'
+        paddingTop: '70vh'
     },
 
     '& .r1_iframe_embed iframe': {
@@ -126,12 +126,14 @@ export const MainField = styled.div(props => ({
     },
 
     '@media(max-width : 1200px)': {
-        video: {
+        '& .r1_iframe_embed': {
             width: '100%'
         }
     },
 
     '@media(max-width : 800px)': {
+        margin: '0',
+
         '& .video_image': {
             width: '100%',
             display: 'flex',
@@ -139,8 +141,12 @@ export const MainField = styled.div(props => ({
             justifyContent: 'center'
         },
 
-        video: {
+        '& .r1_iframe_embed iframe': {
             height: '300px'
+        },
+
+        '& .r1_iframe_embed': {
+            paddingTop: '40vh'
         },
 
         iframe: {
@@ -149,8 +155,12 @@ export const MainField = styled.div(props => ({
     },
 
     '@media(max-width : 500px)': {
-        video: {
+        '& .r1_iframe_embed iframe': {
             height: '200px'
+        },
+
+        '& .r1_iframe_embed': {
+            paddingTop: '220px'
         },
 
         '& .card_details': {
