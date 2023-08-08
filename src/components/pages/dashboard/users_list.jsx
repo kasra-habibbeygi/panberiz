@@ -1,13 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useTranslation } from 'next-i18next';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 //Assets
 import { DashboardTableWrapper, VideoListWrapper } from './dashboard-table.style';
-import { Pagination } from '@mui/material';
-import { useEffect, useState } from 'react';
+
+// APIs
 import { GetAdminUsers, GetAgentUser } from '@/api-request/chart';
-import { useSelector } from 'react-redux';
+
+// MUI
+import { Pagination } from '@mui/material';
+
+// Tools
+import Tools from '@/tools/utils';
 
 const UsersList = ({ videoId }) => {
     const userInfo = useSelector(state => state.UserInfo);
@@ -52,9 +59,9 @@ const UsersList = ({ videoId }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {usersList.map(item => (
+                        {usersList.map((item, index) => (
                             <tr key={item.id}>
-                                <td>1</td>
+                                <td>{Tools.tableRowCounter(pageStatus.current, index, 10)}</td>
                                 <td>{item.fullname}</td>
                                 <td>{item.date}</td>
                                 <td>17</td>

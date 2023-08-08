@@ -63,9 +63,9 @@ const DashboardTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {categoryList?.map(item => (
+                        {categoryList?.map((item, index) => (
                             <tr key={item.id}>
-                                <td>1</td>
+                                <td>{index}</td>
                                 <td>{item.title}</td>
                                 <td>{item.videos_count}</td>
                                 <td>{item.report_videos_count}</td>
