@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable consistent-return */
 /* eslint-disable @next/next/no-img-element */
@@ -59,9 +60,17 @@ const VideoField = ({ mediaDetails, favoritsList }) => {
         <MainField>
             {mediaDetails?.media_type === 'video' ? (
                 <div className='video_image'>
-                    <video controls id='slider_video_player' poster={mediaDetails?.cover?.replace('http', 'https')}>
-                        <source src={mediaDetails?.get_video_info?.data?.video_url} type='video/mp4' />
-                    </video>
+                    <div className='r1_iframe_embed'>
+                        <iframe
+                            src={mediaDetails?.get_video_info?.data?.player_url}
+                            name='لیست افراد'
+                            frameBorder='0'
+                            allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+                            allowFullScreen='true'
+                            webkitallowfullscreen='true'
+                            mozallowfullscreen='true'
+                        ></iframe>
+                    </div>
                 </div>
             ) : (
                 <>
@@ -71,6 +80,7 @@ const VideoField = ({ mediaDetails, favoritsList }) => {
                     </a>
                 </>
             )}
+
             <div className='card_details'>
                 <div className='right_field'>
                     <Image className='icon' src={UserIcon} alt='play' />

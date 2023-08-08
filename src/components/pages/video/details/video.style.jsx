@@ -29,6 +29,25 @@ export const MainField = styled.div(props => ({
         borderRadius: '10px'
     },
 
+    '& .r1_iframe_embed': {
+        position: 'relative',
+        overflow: 'hidden',
+        width: '1110px',
+        height: 'auto',
+        paddingTop: '44%'
+    },
+
+    '& .r1_iframe_embed iframe': {
+        position: 'absolute',
+        top: '0',
+        left: '0',
+        border: '0',
+        height: '600px',
+        borderRadius: '20px',
+        margin: '0 auto',
+        width: '100%'
+    },
+
     '& .card_details': {
         display: 'flex',
         alignItems: 'flex-start',
@@ -104,13 +123,6 @@ export const MainField = styled.div(props => ({
                 cursor: 'pointer'
             }
         }
-    },
-
-    video: {
-        width: '1110px',
-        height: '600px',
-        background: 'black',
-        borderRadius: '20px'
     },
 
     '@media(max-width : 1200px)': {
