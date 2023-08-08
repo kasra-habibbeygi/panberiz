@@ -193,13 +193,12 @@ function Navbar({ setAsideStatus, asideStatus }) {
                             </li> */}
                             {isLoggedInWithRedirect && (
                                 <li>
-                                    <a href='https://newshop.pmlm.ir/User/UserDashboard/index' onClick={logouthandler}>
+                                    <a href='https://pmlm.ir/User/UserDashboard/index' onClick={logouthandler}>
                                         <Image src={ForwardIcon} alt='' />
                                         {t('Back to the desktop')}
                                     </a>
                                 </li>
                             )}
-
                             <li>
                                 <div onClick={logouthandler}>
                                     <Image src={LogoutIcon} alt='' />
