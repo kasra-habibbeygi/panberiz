@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 // Component
 import LayoutProvider from '@/components/layout';
 import Income from '@/components/pages/dashboard/income';
-// import Report from '@/components/pages/dashboard/report';
 
 // API
 import { GetUserCategoriesList } from '@/api-request/category';
@@ -41,7 +40,6 @@ function Dashboard() {
                 <>
                     <Income />
                     <DashboardTable />
-                    {/* <Report /> */}
                 </>
             )}
         </LayoutProvider>
