@@ -139,3 +139,11 @@ export const TagsList = styled.div({
         gap: '5px'
     }
 });
+
+export const PaginationField = styled.div({
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '40px'
+});

@@ -28,6 +28,7 @@ import { SpecificTags } from '@/api-request/tags';
 import SearchIcon from '@mui/icons-material/Search';
 import StarIcon from '@mui/icons-material/Star';
 import AutoComplete from '@/components/form-group/auto-complete';
+import { Pagination } from '@mui/material';
 
 function UserVideo() {
     const { t } = useTranslation();
@@ -228,6 +229,21 @@ function UserVideo() {
                     ))
                 )}
             </ListVideoField>
+            <paginationField>
+                <Pagination
+                    color='primary'
+                    count={pageStatus.total}
+                    page={pageStatus.current}
+                    onChange={(_, value) =>
+                        setPageStatus(prev => {
+                            return {
+                                ...prev,
+                                current: value
+                            };
+                        })
+                    }
+                />
+            </paginationField>
         </LayoutProvider>
     );
 }

@@ -36,6 +36,7 @@ const renderActiveShape = props => {
 function ChartPie({ data, selectedValue }) {
     const { t } = useTranslation('common');
     const test = data.filter(item => item.rank === selectedValue && { name: 'Group A', value: 400 });
+    console.log(test);
 
     const dataData = test.map(item => ({
         name: `${parseFloat((item.views / item.total) * 100).toFixed(1)} %`,
