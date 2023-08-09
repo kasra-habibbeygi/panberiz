@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'next-i18next';
 
 // Component
@@ -29,9 +29,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import StarIcon from '@mui/icons-material/Star';
 import AutoComplete from '@/components/form-group/auto-complete';
 import { Pagination } from '@mui/material';
+import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 
 function UserVideo() {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
     const router = useRouter();
     const userInfo = useSelector(state => state.UserInfo);
     const [selectedButton, setSelectedButton] = useState('uploaded');
@@ -51,6 +53,7 @@ function UserVideo() {
     };
 
     const getMediaUserApi = (id, lang, searchValue) => {
+        dispatch(loaderStatusHandler(true));
         let filterParams = `&page=${pageStatus.current}`;
 
         if (viewsFilter?.value === 'seen') {
@@ -101,7 +104,10 @@ function UserVideo() {
             .then(res => {
                 setMediaList(res.results);
             })
-            .catch(() => {});
+            .catch(() => {})
+            .finally(() => {
+                dispatch(loaderStatusHandler(false));
+            });
     };
 
     useEffect(() => {
