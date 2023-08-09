@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -12,9 +13,12 @@ import { NotificationsWrapper } from '@/assets/styles/notifications.style';
 // MUI
 import LayoutProvider from '@/components/layout';
 import { Pagination } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 
 const Notifications = () => {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
     const [NotifDataList, setNotifDataList] = useState([]);
     const [reload, setReload] = useState(false);
     const [pageStatus, setPageStatus] = useState({
@@ -23,9 +27,15 @@ const Notifications = () => {
     });
 
     useEffect(() => {
-        GetNotificationList('5').then(res => {
-            setNotifDataList(res);
-        });
+        dispatch(loaderStatusHandler(true));
+        GetNotificationList('5')
+            .then(res => {
+                setNotifDataList(res);
+            })
+            .catch(() => {})
+            .finally(() => {
+                dispatch(loaderStatusHandler(false));
+            });
     }, [reload]);
 
     const reactNotifHandler = pk => {

@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 
-export const MainField = styled.header({
+export const MainField = styled.div({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    height: '500px',
+    minHeight: 'calc(100vh - 170px)',
 
     img: {
         filter: 'invert(13%) sepia(54%) saturate(4284%) hue-rotate(288deg) brightness(63%) contrast(66%)',

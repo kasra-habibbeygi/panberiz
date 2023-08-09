@@ -2,14 +2,15 @@
 /* eslint-disable indent */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
+import Link from 'next/link';
+import Image from 'next/image';
 import { toast } from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
-import Link from 'next/link';
-import Image from 'next/image';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'next-i18next';
+import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 
 // Component
 import EmptyField from '@/components/template/empty-field';
@@ -46,6 +47,7 @@ import {
 
 function Video() {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
     const router = useRouter();
     const [selectedButton, setSelectedButton] = useState('uploaded');
     const [tabsStatus, setTabsStatus] = useState(false);
@@ -112,6 +114,7 @@ function Video() {
         }
 
         if (userInfo.role === 'SuperAdminAcademy') {
+            dispatch(loaderStatusHandler(true));
             GetAllMedia(userInfo.lang, filterParams)
                 .then(res => {
                     setMediaList(res.results);
@@ -120,7 +123,10 @@ function Video() {
                         total: res.total_page
                     }));
                 })
-                .catch(() => {});
+                .catch(() => {})
+                .finally(() => {
+                    dispatch(loaderStatusHandler(false));
+                });
 
             GetAllDeactiveMedia(userInfo.lang)
                 .then(res => {
@@ -128,11 +134,15 @@ function Video() {
                 })
                 .catch(() => {});
         } else if (userInfo.role === 'AgentAcademy') {
+            dispatch(loaderStatusHandler(true));
             GetMyMediaList(userInfo.lang, filterParams)
                 .then(res => {
                     setMediaList(res.results);
                 })
-                .catch(() => {});
+                .catch(() => {})
+                .finally(() => {
+                    dispatch(loaderStatusHandler(false));
+                });
 
             GetAdminVideos()
                 .then(res => {
@@ -153,6 +163,7 @@ function Video() {
     }, [userInfo]);
 
     const changeMediaHandler = (status, id) => {
+        dispatch(loaderStatusHandler(true));
         const data = {
             media_status: status ? 'accepted' : 'failed',
             message: status ? '' : rejectReason
@@ -169,10 +180,14 @@ function Video() {
             })
             .catch(() => {
                 toast.error(t('An error occurred, please try again!'));
+            })
+            .finally(() => {
+                dispatch(loaderStatusHandler(false));
             });
     };
 
     const deleteSpecificMedia = id => {
+        dispatch(loaderStatusHandler(true));
         if (userInfo.role === 'SuperAdminAcademy') {
             DeleteSuperAdminMedia(id)
                 .then(() => {
@@ -184,11 +199,15 @@ function Video() {
                 .then(() => {
                     setReload(!reload);
                 })
-                .catch(() => {});
+                .catch(() => {})
+                .finally(() => {
+                    dispatch(loaderStatusHandler(false));
+                });
         }
     };
 
     const handleAcceptVideo = async id => {
+        dispatch(loaderStatusHandler(true));
         PostAcceptVideo({ media: id })
             .then(res => {
                 toast.success(t(res.message));
@@ -204,7 +223,10 @@ function Video() {
                     })
                     .catch(() => {});
             })
-            .catch(() => {});
+            .catch(() => {})
+            .finally(() => {
+                dispatch(loaderStatusHandler(false));
+            });
     };
 
     const mediaListProvider = mediaList?.map(item => (

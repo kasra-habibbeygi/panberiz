@@ -4,6 +4,7 @@
 // Assets
 import { TitleField, QuestionsField, AfterExam } from './content.style';
 import { useTranslation } from 'next-i18next';
+import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 
 // Assets
 import Rafiki from '../../../../assets/images/empty/rafiki.png';
@@ -16,7 +17,7 @@ import useTimer from '@/hooks/use-timer';
 
 // Component
 import Button from '@/components/form-group/button';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
@@ -27,6 +28,7 @@ import Image from 'next/image';
 
 const QuestionsContent = () => {
     const { t } = useTranslation('common');
+    const dispatch = useDispatch();
     const router = useRouter();
     const userInfo = useSelector(state => state.UserInfo);
     const [radiosValues, setRadioValues] = useState([]);
@@ -38,12 +40,16 @@ const QuestionsContent = () => {
     const progressPercent = ((countDown - totalMiliSec) / totalMiliSec) * 100;
 
     useEffect(() => {
+        dispatch(loaderStatusHandler(true));
         GetMediaDetails(router.query.id, userInfo.lang)
             .then(res => {
                 setMediaDetails(res[0]);
                 setNewCountDown(res[0].the_duration_of_the_test * 60 * 1000);
             })
-            .catch(() => {});
+            .catch(() => {})
+            .finally(() => {
+                dispatch(loaderStatusHandler(true));
+            });
     }, [router.query.id, userInfo.lang]);
 
     const radioValuehandler = (e, id) => {

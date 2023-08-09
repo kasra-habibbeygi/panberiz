@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // Component
@@ -14,18 +15,24 @@ import SuggestVideo from '@/components/pages/video/details/suggest';
 // APIs
 import { GetMediaDetails } from '@/api-request/media/details';
 import SimilarVideos from '@/components/pages/video/details/similar';
+import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 
 const VideoDetails = () => {
+    const dispatch = useDispatch();
     const userInfo = useSelector(state => state.UserInfo);
     const [mediaDetails, setMediaDetails] = useState([]);
     const router = useRouter();
 
     useEffect(() => {
+        dispatch(loaderStatusHandler(true));
         GetMediaDetails(router.query.id, userInfo.lang)
             .then(res => {
                 setMediaDetails(res);
             })
-            .catch(() => {});
+            .catch(() => {})
+            .finally(() => {
+                dispatch(loaderStatusHandler(false));
+            });
     }, [router.query.id, userInfo.lang]);
 
     return (

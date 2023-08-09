@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import UserInfo from './reducer/user';
 import { createWrapper } from 'next-redux-wrapper';
+import Utils from './reducer/utils';
+import UserInfo from './reducer/user';
 
 const makeStore = () =>
     configureStore({
         reducer: {
-            UserInfo: UserInfo
+            UserInfo: UserInfo,
+            Utils: Utils
         },
         devTools: true
     });

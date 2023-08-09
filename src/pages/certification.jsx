@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'next-i18next';
 import * as htmlToImage from 'html-to-image';
 import download from 'downloadjs';
@@ -23,9 +24,11 @@ import { CertificateField, GapField } from '@/assets/styles/certificate';
 
 // APIs
 import { GetCertificationList } from '@/api-request/certification';
+import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 
 function Video() {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
     const router = useRouter();
     const userInfo = useSelector(state => state.UserInfo);
     const [certificateList, setCertificateList] = useState([]);
@@ -37,11 +40,15 @@ function Video() {
     };
 
     useEffect(() => {
+        dispatch(loaderStatusHandler(true));
         GetCertificationList(userInfo.lang)
             .then(res => {
                 setCertificateList(res.results);
             })
-            .catch(() => {});
+            .catch(() => {})
+            .finally(() => {
+                dispatch(loaderStatusHandler(false));
+            });
     }, [router.query.id, userInfo.lang, userInfo.role]);
 
     const handleDownload = () => {
