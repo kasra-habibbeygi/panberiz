@@ -96,6 +96,7 @@ export const QuestionsField = styled.div(props => ({
         padding: '15px',
         color:props.theme.palette.colors.text.blackAndWhite,
         marginTop: '20px',
+
         small: {
             color: props.theme.palette.colors.text.light,
             fontSize: '1rem'
@@ -107,6 +108,10 @@ export const QuestionsField = styled.div(props => ({
             marginBottom: '20px',
             marginTop: '20px',
             lineHeight : '30px'
+        },
+
+        '&:first-of-type':{
+            margin :'0'
         }
     },
 

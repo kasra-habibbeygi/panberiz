@@ -33,6 +33,7 @@ export const IncomeField = styled.div(props => ({
         width: '100%',
         display: 'flex',
         gap: '30px',
+
         '& .line-chart': {
             width: '60%',
             padding: '15px 0',
@@ -93,26 +94,32 @@ export const IncomeField = styled.div(props => ({
 
             '& .chart': {
                 flex: 5
+            }
+        }
+    },
+
+    '@media(max-width : 800px)': {
+        '& .container': {
+            flexDirection: 'column',
+
+            '& .line-chart': {
+                width: '100%'
             },
 
-            '& .flags': {
-                flex: 1.5,
-                display: 'flex',
+            '& .circle-chart': {
+                width: '100%',
 
-                '& .section': {
-                    flex: 1,
-
-                    div: {
-                        display: 'flex',
-                        flex: 1,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-
-                        p: {
-                            marginRight: '20px'
-                        }
-                    }
+                '& .select-rank': {
+                    width: '100%'
                 }
+            }
+        },
+
+        '& .search_wrapper': {
+            width: '100%',
+
+            '& .search_input': {
+                width: '100%'
             }
         }
     }

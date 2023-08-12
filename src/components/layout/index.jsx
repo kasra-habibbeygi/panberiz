@@ -1,18 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userInfohandler } from '@/state-manager/reducer/user';
 import dynamic from 'next/dynamic';
 
 // Component
+import MobileNavbar from './mobile-navbar';
+import MainLoader from '../template/loader';
 const Aside = dynamic(() => import('./aside'), {
     ssr: false
 });
 const Navbar = dynamic(() => import('./navbar'), {
     ssr: false
 });
-import MobileNavbar from './mobile-navbar';
 
 // APIs
 import { GetUserInformation } from '@/api-request/user-info';
@@ -27,6 +28,7 @@ function LayoutProvider({ children }) {
     const dispatch = useDispatch();
     const { width } = useWindowDimensions();
     const [asideStatus, setAsideStatus] = useState(true);
+    const LoaderStatus = useSelector(state => state.Utils.loader);
 
     useEffect(() => {
         setAsideStatus(width < 1300 ? false : true);
@@ -41,7 +43,7 @@ function LayoutProvider({ children }) {
             <Navbar setAsideStatus={setAsideStatus} asideStatus={asideStatus} />
             <div className='main_field'>
                 <Aside asideStatus={asideStatus} />
-                <div className='children-field'>{children}</div>
+                <div className='children-field'>{LoaderStatus ? <MainLoader /> : children}</div>
             </div>
             <MobileNavbar />
         </Fields.LayoutProviderField>

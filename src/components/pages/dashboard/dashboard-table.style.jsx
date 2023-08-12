@@ -1,50 +1,59 @@
 import styled from '@emotion/styled';
 
-export const DashboardTableWrapper = styled.div(props => {
-    return {
-        overflow: 'auto',
-        marginTop: '70px',
+export const DashboardTableWrapper = styled.div(props => ({
+    overflow: 'auto',
+    marginTop: '70px',
 
-        table: {
-            width: '100%',
-            borderCollapse: 'separate',
-            borderSpacing: '0 10px',
-            color: props.theme.palette.colors.text.blackAndWhite,
+    table: {
+        width: '100%',
+        borderCollapse: 'separate',
+        borderSpacing: '0 10px',
+        color: props.theme.palette.colors.text.blackAndWhite,
 
-            tr: {
-                backgroundColor: props.theme.palette.colors.input.primary,
-                marginBottom: '10px',
-                whiteSpace: 'nowrap'
-            },
+        tr: {
+            backgroundColor: props.theme.palette.colors.input.primary,
+            marginBottom: '10px',
+            whiteSpace: 'nowrap'
+        },
 
-            '& td, th': {
-                padding: '15px',
-                textAlign: ' center',
+        '& td, th': {
+            padding: '15px',
+            textAlign: ' center',
 
-                a: {
-                    color: 'inherit'
-                }
-            },
-
-            '& .eye_icon': {
-                ...(props.theme.direction === 'rtl' && {
-                    marginRight: '10px'
-                }),
-
-                ...(props.theme.direction === 'ltr' && {
-                    marginLeft: '10px'
-                })
+            a: {
+                color: 'inherit'
             }
         },
 
-        '& .pagination_wrapper': {
-            display: 'flex',
-            justifyContent: 'center',
-            alignContent: 'center',
-            marginTop: '20px'
+        '& .eye_icon': {
+            ...(props.theme.direction === 'rtl' && {
+                marginRight: '10px'
+            }),
+
+            ...(props.theme.direction === 'ltr' && {
+                marginLeft: '10px'
+            })
         }
-    };
-});
+    },
+
+    '& .pagination_wrapper': {
+        display: 'flex',
+        justifyContent: 'center',
+        alignContent: 'center',
+        marginTop: '20px'
+    },
+
+    '& .empty_field': {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '30px',
+        fontSize: '1.2rem',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontWeight: 'bold'
+    }
+}));
 
 export const VideoListWrapper = styled.div(props => {
     return {

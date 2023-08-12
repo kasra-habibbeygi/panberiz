@@ -40,12 +40,19 @@ export const MainField = styled.div(props => ({
     '@media(max-width : 600px)': {
         '& .row-content': {
             position: 'relative',
+            gap: '8px',
+
+            img: {
+                width: '15px',
+                height: '15px'
+            },
 
             '& .icon': {
                 left: '0px',
                 top: '-45px',
                 img: {
-                    width: '35px'
+                    width: '25px',
+                    height: 'auto'
                 }
             }
         }

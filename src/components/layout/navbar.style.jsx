@@ -9,8 +9,9 @@ export const Navbar = styled.nav(props => ({
     top: '0',
     width: '100%',
     background: props.theme.palette.colors.background.layout,
-    zIndex: '10',
+    zIndex: '200',
     padding: '0 30px',
+
     '& .left': {
         flex: 1,
         alignItems: 'center',
@@ -42,6 +43,7 @@ export const Navbar = styled.nav(props => ({
         alignItems: 'center',
         minWidth: '600px',
         position: 'relative',
+
         input: {
             width: '100%',
             backgroundColor: props.theme.mode === 'light' ? '#F1F1F1' : '#2E1F45',
@@ -51,6 +53,7 @@ export const Navbar = styled.nav(props => ({
             padding: '20px',
             paddingRight: '50px',
             color: props.theme.palette.colors.text.blackAndWhite,
+
             '&::placeholder': {
                 color: props.theme.mode === 'light' ? '#8C8C8C' : 'white'
             }
@@ -100,8 +103,8 @@ export const Navbar = styled.nav(props => ({
             boxShadow: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
             position: 'absolute',
             top: '60px',
-            left: props.theme.direction === 'rtl' ? '0' : 'unser',
-            right: props.theme.direction === 'ltr' ? '0' : 'unser',
+            left: props.theme.direction === 'rtl' ? '0' : 'unset',
+            right: props.theme.direction === 'ltr' ? '0' : 'unset',
             opacity: '0',
             transition: 'all linear 0.1s',
             pointerEvents: 'none',
@@ -124,7 +127,10 @@ export const Navbar = styled.nav(props => ({
                 paddingBottom: '10px',
 
                 '& .message': {
-                    fontSize: '14px'
+                    fontSize: '14px',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap'
                 },
 
                 '& .notifs_button': {
@@ -137,6 +143,7 @@ export const Navbar = styled.nav(props => ({
                     ...(props.theme.direction === 'rtl' && {
                         marginRight: 'auto'
                     }),
+
                     ...(props.theme.direction !== 'rtl' && {
                         marginLeft: 'auto'
                     })
@@ -229,7 +236,9 @@ export const Navbar = styled.nav(props => ({
     },
 
     '& .show': {
-        display: 'block'
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     '& .mobile_search_field': {

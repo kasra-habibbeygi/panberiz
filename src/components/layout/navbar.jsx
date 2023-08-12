@@ -5,21 +5,20 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginStatushandler } from '@/state-manager/reducer/user';
 import { useRouter } from 'next/router';
-import { langHandler } from '../../state-manager/reducer/user';
+import { langHandler } from '@/state-manager/reducer/user';
 import { useTranslation } from 'next-i18next';
 
 // Assets
 import * as Styles from './navbar.style';
-import user from '../../assets/icons/user.svg';
-import UserWhite from '../../assets/icons/user-white.svg';
-import notification from '../../assets/icons/notification.svg';
-import notificationLight from '../../assets/icons/notificationLight.svg';
-import heart from '../../assets/icons/heart.svg';
-import logo from '../../assets/images/logo.png';
-import logoWhite from '../../assets/images/logo-white.svg';
-import LogoutIcon from '../../assets/images/layout/logout.svg';
-import ForwardIcon from '../../assets/icons/forward.svg';
-// import SettingIcon from '../../assets/images/layout/setting.svg';
+import user from '@/assets/icons/user.svg';
+import UserWhite from '@/assets/icons/user-white.svg';
+import notification from '@/assets/icons/notification.svg';
+import notificationLight from '@/assets/icons/notificationLight.svg';
+import heart from '@/assets/icons/heart.svg';
+import logo from '@/assets/images/logo.svg';
+import logoWhite from '@/assets/images/logo-white.svg';
+import LogoutIcon from '@/assets/images/layout/logout.svg';
+import ForwardIcon from '@/assets/icons/forward.svg';
 
 // Component
 import AutoComplete from '../form-group/auto-complete';
@@ -28,7 +27,6 @@ import Button from '../form-group/button';
 // MUI
 import AddIcon from '@mui/icons-material/Add';
 import MenuIcon from '@mui/icons-material/Menu';
-// import SearchIcon from '@mui/icons-material/Search';
 
 // Hooks
 import useOutsideClick from '@/hooks/use-outside-click';
@@ -51,11 +49,12 @@ function Navbar({ setAsideStatus, asideStatus }) {
     const [langValue, setLangValue] = useState({ label: 'فارسی', value: 'fa' });
     const [isLoggedInWithRedirect, setIsLoggedInWithRedirect] = useState(false);
     const [NotifDataList, setNotifDataList] = useState([]);
-    const [reload, setReload] = useState(false);
 
     useEffect(() => {
-        if (userInfo === 'AgentAcademy') {
-            GetNotificationList(5).then(res => setNotifDataList(res));
+        if (userInfo.role === 'AgentAcademy') {
+            GetNotificationList(4).then(res => {
+                setNotifDataList(res);
+            });
         }
 
         setLangValue(() => {
@@ -70,7 +69,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
         if (localStorage.getItem('isLoggedInWithRedirect') !== null) {
             setIsLoggedInWithRedirect(true);
         }
-    }, [reload]);
+    }, [userInfo.role]);
 
     const openAside = () => {
         setAsideStatus(!asideStatus);
@@ -120,8 +119,11 @@ function Navbar({ setAsideStatus, asideStatus }) {
     };
 
     const reactNotifHandler = pk => {
-        EditNotificationList(pk);
-        setReload(!reload);
+        EditNotificationList(pk).then(() => {
+            GetNotificationList(4).then(res => {
+                setNotifDataList(res);
+            });
+        });
     };
 
     return (
@@ -130,14 +132,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
                 <MenuIcon onClick={openAside} />
                 <Image src={userInfo.theme === 'light' ? logo : logoWhite} alt='logo' />
             </div>
-            {/* <div className='middle'>
-                <input placeholder={t('Seach')} />
-                <SearchIcon className='search_icon' />
-            </div> */}
             <div className='left'>
-                {/* <div className='mobile_search_field'>
-                    <SearchIcon className='search_icon' />
-                </div> */}
                 <div className='lang_select'>
                     <AutoComplete
                         placeholder={t('lang')}
@@ -189,13 +184,12 @@ function Navbar({ setAsideStatus, asideStatus }) {
                             </li> */}
                             {isLoggedInWithRedirect && (
                                 <li>
-                                    <a href='https://newshop.pmlm.ir/User/UserDashboard/index' onClick={logouthandler}>
+                                    <a href='https://pmlm.ir/User/UserDashboard/index' onClick={logouthandler}>
                                         <Image src={ForwardIcon} alt='' />
                                         {t('Back to the desktop')}
                                     </a>
                                 </li>
                             )}
-
                             <li>
                                 <div onClick={logouthandler}>
                                     <Image src={LogoutIcon} alt='' />
@@ -212,7 +206,6 @@ function Navbar({ setAsideStatus, asideStatus }) {
                                     <p className='message'>{item.about_object}</p>
                                     {item.message ? (
                                         <div>
-                                            <p className='message'>{t('Deny reason')} : </p>
                                             <p className='message'>{item.message}</p>
                                         </div>
                                     ) : (
@@ -229,7 +222,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
                             ))}
 
                             <li className='notifs_showAll'>
-                                <Link href='/notifs'>{t('Show all')}</Link>
+                                <Link href='/notification'>{t('Show all')}</Link>
                             </li>
                         </ul>
                     </div>

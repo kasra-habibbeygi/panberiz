@@ -28,7 +28,7 @@ import Button from '@/components/form-group/button';
 // APIs
 import { GetCategoriesList } from '@/api-request/category';
 import { GetTagsList } from '@/api-request/tags';
-import { AddNewmedia } from '@/api-request/media/add';
+import { AddNewmedia, AddNewmediaAgent } from '@/api-request/media/add';
 import { GetAllMedia, GetMyMediaList } from '@/api-request/media/list';
 import { toast } from 'react-hot-toast';
 
@@ -125,31 +125,59 @@ function AddForm() {
             formData.append(item, newVal[item]);
         });
 
-        AddNewmedia(formData)
-            .then(() => {
-                toast.success('ویدیو با موفقیت اضافه شد !');
-                setInputValued({
-                    lang: '',
-                    title: '',
-                    full_description: '',
-                    summary_description: '',
-                    ordering_number: '',
-                    cover: '',
-                    file: '',
-                    media_type: '',
-                    category: '',
-                    period_of_time: '',
-                    tags: [],
-                    prerequisites: [],
-                    quize_and_answer: []
+        if (role !== 'AgentAcademy') {
+            AddNewmedia(formData)
+                .then(() => {
+                    toast.success('ویدیو با موفقیت اضافه شد !');
+                    setInputValued({
+                        lang: '',
+                        title: '',
+                        full_description: '',
+                        summary_description: '',
+                        ordering_number: '',
+                        cover: '',
+                        file: '',
+                        media_type: '',
+                        category: '',
+                        period_of_time: '',
+                        tags: [],
+                        prerequisites: [],
+                        quize_and_answer: []
+                    });
+                })
+                .catch(() => {
+                    toast.error(t('Please enter all entries!'));
+                })
+                .finally(() => {
+                    setLoader(false);
                 });
-            })
-            .catch(() => {
-                toast.error(t('Please enter all entries!'));
-            })
-            .finally(() => {
-                setLoader(false);
-            });
+        } else {
+            AddNewmediaAgent(formData)
+                .then(() => {
+                    toast.success('ویدیو با موفقیت اضافه شد !');
+                    setInputValued({
+                        lang: '',
+                        title: '',
+                        full_description: '',
+                        summary_description: '',
+                        ordering_number: '',
+                        cover: '',
+                        file: '',
+                        media_type: '',
+                        category: '',
+                        period_of_time: '',
+                        tags: [],
+                        prerequisites: [],
+                        quize_and_answer: []
+                    });
+                })
+                .catch(() => {
+                    toast.error(t('Please enter all entries!'));
+                })
+                .finally(() => {
+                    setLoader(false);
+                });
+        }
     };
 
     useEffect(() => {

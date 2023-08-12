@@ -2,20 +2,23 @@
 /* eslint-disable indent */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
+import Link from 'next/link';
+import Image from 'next/image';
 import { toast } from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
-import Link from 'next/link';
-import Image from 'next/image';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'next-i18next';
+import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 
 // Component
 import EmptyField from '@/components/template/empty-field';
 import Tab from '@/components/pages/video/list/tab';
 import HeaderField from '@/components/template/header';
 import LayoutProvider from '@/components/layout';
+import Button from '@/components/form-group/button';
+import AutoComplete from '@/components/form-group/auto-complete';
 
 // Assets
 import play from '@/assets/icons/play.svg';
@@ -28,7 +31,7 @@ import { FiltersWrapper, ListVideoField, PaginationWrapper } from '@/components/
 // MUI
 import DeleteIcon from '@mui/icons-material/Delete';
 import StarIcon from '@mui/icons-material/Star';
-import { CircularProgress, Dialog, Pagination } from '@mui/material';
+import { Dialog, Pagination } from '@mui/material';
 
 // API
 import {
@@ -36,14 +39,15 @@ import {
     GetAllMedia,
     GetAllDeactiveMedia,
     UpdateMedia,
-    DeleteMedia,
+    DeleteSuperAdminMedia,
     GetAdminVideos,
-    PostAcceptVideo
+    PostAcceptVideo,
+    DeleteAgentMedia
 } from '@/api-request/media/list';
-import Button from '@/components/form-group/button';
 
 function Video() {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
     const router = useRouter();
     const [selectedButton, setSelectedButton] = useState('uploaded');
     const [tabsStatus, setTabsStatus] = useState(false);
@@ -53,62 +57,56 @@ function Video() {
     const [notAcceptedList, setNotAcceptedList] = useState([]);
     const [deactiveMediaList, setDeactiveMediaList] = useState([]);
     const [rejectReason, setRejectReason] = useState('');
-    const [pageLoading, setPageLoading] = useState(true);
+    const [statusFilter, setStatusFilter] = useState(null);
+    const [viewsFilter, setViewsFilter] = useState(null);
+    const [sortFilter, setSortFilter] = useState(null);
+    const [deactiveSpecificId, setDeactiveSpecificId] = useState();
+    const userInfo = useSelector(state => state.UserInfo);
     const [pageStatus, setPageStatus] = useState({
         total: 1,
         current: 1
     });
 
-    console.log(pageStatus);
-
-    const [filters, setFilters] = useState({
-        status: '',
-        observing: '',
-        sorting: ''
-    });
-    const userInfo = useSelector(state => state.UserInfo);
-
     useEffect(() => {
-        setPageLoading(true);
         let filterParams = `&page=${pageStatus.current}`;
 
-        if (filters.status) {
-            filterParams += `media_status=${filters.status}&`;
+        if (statusFilter?.value) {
+            filterParams += `&media_status=${statusFilter?.value}`;
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
-        if (filters.observing === 'seen') {
-            filterParams += 'is_viewed=true&';
+        if (viewsFilter?.value === 'seen') {
+            filterParams += '&is_viewed=true';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
-        if (filters.observing === 'unseen') {
-            filterParams += 'is_viewed=false&';
+        if (viewsFilter?.value === 'unseen') {
+            filterParams += '&is_viewed=false';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
-        if (filters.sorting === 'oldest') {
-            filterParams += 'oldest=true&';
+        if (sortFilter?.value === 'oldest') {
+            filterParams += '&oldest=true';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
-        if (filters.sorting === 'newest') {
-            filterParams += 'newest=true&';
+        if (sortFilter?.value === 'newest') {
+            filterParams += '&newest=true';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
-        if (filters.sorting === 'score') {
-            filterParams += 'score=true&';
+        if (sortFilter?.value === 'score') {
+            filterParams += '&score=true';
             setPageStatus({
                 total: 1,
                 current: 1
@@ -116,6 +114,7 @@ function Video() {
         }
 
         if (userInfo.role === 'SuperAdminAcademy') {
+            dispatch(loaderStatusHandler(true));
             GetAllMedia(userInfo.lang, filterParams)
                 .then(res => {
                     setMediaList(res.results);
@@ -125,7 +124,9 @@ function Video() {
                     }));
                 })
                 .catch(() => {})
-                .finally(() => setPageLoading(false));
+                .finally(() => {
+                    dispatch(loaderStatusHandler(false));
+                });
 
             GetAllDeactiveMedia(userInfo.lang)
                 .then(res => {
@@ -133,12 +134,15 @@ function Video() {
                 })
                 .catch(() => {});
         } else if (userInfo.role === 'AgentAcademy') {
-            GetMyMediaList(router.query.id, userInfo.lang)
+            dispatch(loaderStatusHandler(true));
+            GetMyMediaList(userInfo.lang, filterParams)
                 .then(res => {
                     setMediaList(res.results);
                 })
                 .catch(() => {})
-                .finally(() => setPageLoading(false));
+                .finally(() => {
+                    dispatch(loaderStatusHandler(false));
+                });
 
             GetAdminVideos()
                 .then(res => {
@@ -150,7 +154,7 @@ function Video() {
         if (userInfo.role === 'AdminAcademy' || userInfo.role === 'User') {
             router.push('/dashboard');
         }
-    }, [router.query.id, userInfo.lang, userInfo.role, reload, filters, pageStatus.current]);
+    }, [router.query.id, userInfo.lang, userInfo.role, reload, pageStatus.current, sortFilter, viewsFilter, statusFilter]);
 
     useEffect(() => {
         if (userInfo.role === 'SuperAdminAcademy') {
@@ -159,29 +163,51 @@ function Video() {
     }, [userInfo]);
 
     const changeMediaHandler = (status, id) => {
+        dispatch(loaderStatusHandler(true));
         const data = {
-            media_status: status ? 'accepted' : 'failed'
+            media_status: status ? 'accepted' : 'failed',
+            message: status ? '' : rejectReason
         };
 
         UpdateMedia(id, data)
             .then(() => {
                 setReload(!reload);
                 toast.success(t('Successfully updated!'));
+
+                if (!status) {
+                    setDeleteModalStatus(false);
+                }
             })
             .catch(() => {
                 toast.error(t('An error occurred, please try again!'));
+            })
+            .finally(() => {
+                dispatch(loaderStatusHandler(false));
             });
     };
 
     const deleteSpecificMedia = id => {
-        DeleteMedia(id)
-            .then(() => {
-                setReload(!reload);
-            })
-            .catch(() => {});
+        dispatch(loaderStatusHandler(true));
+        if (userInfo.role === 'SuperAdminAcademy') {
+            DeleteSuperAdminMedia(id)
+                .then(() => {
+                    setReload(!reload);
+                })
+                .catch(() => {});
+        } else {
+            DeleteAgentMedia(id)
+                .then(() => {
+                    setReload(!reload);
+                })
+                .catch(() => {})
+                .finally(() => {
+                    dispatch(loaderStatusHandler(false));
+                });
+        }
     };
 
     const handleAcceptVideo = async id => {
+        dispatch(loaderStatusHandler(true));
         PostAcceptVideo({ media: id })
             .then(res => {
                 toast.success(t(res.message));
@@ -197,19 +223,32 @@ function Video() {
                     })
                     .catch(() => {});
             })
-            .catch(() => {});
+            .catch(() => {})
+            .finally(() => {
+                dispatch(loaderStatusHandler(false));
+            });
     };
 
     const mediaListProvider = mediaList?.map(item => (
         <div key={item.id} className='card_field'>
             <CardField status={item.media_status}>
                 <div className='video_image'>
+                    {userInfo.role === 'AgentAcademy' && (
+                        <p className='media_status_pill'>
+                            {item.media_status === 'pending'
+                                ? t('Pending')
+                                : item.media_status === 'failed'
+                                ? t('Rejected')
+                                : t('Accepted')}
+                        </p>
+                    )}
                     <div className='float'>
                         <Link href={`/video/details/${item.id}`}>
                             <Image className='icon' src={play} alt='play' />
                         </Link>
+                        <DeleteIcon className='deletemedia' onClick={() => deleteSpecificMedia(item.id)} />
                     </div>
-                    <img className='video_banner' src={item?.cover} alt='video-banner' />
+                    <img className='video_banner' src={item?.cover?.replace('http', 'https')} alt='video-banner' />
                 </div>
                 <div className='card_details'>
                     <div className='right_field'>
@@ -221,7 +260,6 @@ function Video() {
                             <p>{item?.score}</p>
                             <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
                         </div>
-                        <DeleteIcon className='deletemedia' onClick={() => deleteSpecificMedia(item.id)} />
                     </div>
                 </div>
                 {userInfo.role !== 'User' && <small>{item?.publisher_fullname}</small>}
@@ -235,8 +273,11 @@ function Video() {
                 <div className='video_image'>
                     <div className='float'>
                         <Image className='icon' src={accept} alt='accept' onClick={() => handleAcceptVideo(item.id)} />
+                        <Link href={`/video/details/${item.id}`}>
+                            <Image className='icon' src={play} alt='play' />
+                        </Link>
                     </div>
-                    <img className='video_banner' src={item?.cover} alt='video-banner' />
+                    <img className='video_banner' src={item?.cover?.replace('http', 'https')} alt='video-banner' />
                 </div>
                 <div className='card_details'>
                     <div className='right_field'>
@@ -262,12 +303,20 @@ function Video() {
                 <div className='video_image'>
                     <div className='float'>
                         <Image className='icon' src={accept} alt='accept' onClick={() => changeMediaHandler(true, item.id)} />
-                        <Image className='icon' src={reject} alt='reject' onClick={() => setDeleteModalStatus(true)} />{' '}
+                        <Image
+                            className='icon'
+                            src={reject}
+                            alt='reject'
+                            onClick={() => {
+                                setDeleteModalStatus(true);
+                                setDeactiveSpecificId(item.id);
+                            }}
+                        />
                         <Link href={`/video/details/${item.id}`}>
                             <Image className='icon' src={play} alt='play' />
                         </Link>
                     </div>
-                    <img className='video_banner' src={item?.cover} alt='video-banner' />
+                    <img className='video_banner' src={item?.cover?.replace('http', 'https')} alt='video-banner' />
                 </div>
                 <div className='card_details'>
                     <div className='right_field'>
@@ -284,63 +333,90 @@ function Video() {
         </div>
     ));
 
+    const autoCompleteHandler = (e, name) => {
+        if (name === 'status') {
+            setStatusFilter(e);
+        } else if (name === 'views') {
+            setViewsFilter(e);
+        } else {
+            setSortFilter(e);
+        }
+    };
+
+    const options1 = [
+        {
+            label: t('Accepted'),
+            value: 'accepted'
+        },
+        {
+            label: t('Rejected'),
+            value: 'failed'
+        },
+        {
+            label: t('Pending'),
+            value: 'pending'
+        }
+    ];
+
+    const options2 = [
+        {
+            label: t('Not Seen'),
+            value: 'unseen'
+        },
+        {
+            label: t('Seen'),
+            value: 'seen'
+        }
+    ];
+
+    const options3 = [
+        {
+            label: t('Newest'),
+            value: 'newest'
+        },
+        {
+            label: t('Oldest'),
+            value: 'oldest'
+        },
+        {
+            label: t('Highest score'),
+            value: 'score'
+        }
+    ];
+
     return (
         <LayoutProvider>
             <HeaderField title={t('Video')} />
             {tabsStatus && <Tab selectButton={name => setSelectedButton(name)} selectedButton={selectedButton} />}
             {userInfo.role !== 'SuperAdminAcademy' && (
                 <FiltersWrapper>
-                    <p className='filters_title'>{t('Filters')}</p>
                     <div className='selects_wrapper'>
                         <div className='options_wrapper'>
-                            <p>{t('Based on status')}</p>
-                            <select
-                                value={filters.status}
-                                onChange={e =>
-                                    setFilters(prev => ({
-                                        ...prev,
-                                        status: e.target.value
-                                    }))
-                                }
-                            >
-                                <option value=''>{t('Choose')}</option>
-                                <option value='accepted'>{t('Accepted')}</option>
-                                <option value='failed'>{t('Rejected')}</option>
-                                <option value='pending'>{t('Pending')}</option>
-                            </select>
+                            <AutoComplete
+                                placeholder={t('Based on status')}
+                                value={statusFilter}
+                                name='status'
+                                valueHandler={autoCompleteHandler}
+                                options={options1}
+                            />
                         </div>
                         <div className='options_wrapper'>
-                            <p>{t('Based on observation')}</p>
-                            <select
-                                value={filters.observing}
-                                onChange={e =>
-                                    setFilters(prev => ({
-                                        ...prev,
-                                        observing: e.target.value
-                                    }))
-                                }
-                            >
-                                <option value=''>{t('Choose')}</option>
-                                <option value='seen'>{t('Seen')}</option>
-                                <option value='unseen'>{t('Not Seen')}</option>
-                            </select>
+                            <AutoComplete
+                                placeholder={t('Based on observation')}
+                                value={viewsFilter}
+                                name='views'
+                                valueHandler={autoCompleteHandler}
+                                options={options2}
+                            />
                         </div>
                         <div className='options_wrapper'>
-                            <p>{t('Sorting')}</p>
-                            <select
-                                value={filters.sorting}
-                                onChange={e =>
-                                    setFilters(prev => ({
-                                        ...prev,
-                                        sorting: e.target.value
-                                    }))
-                                }
-                            >
-                                <option value=''>{t('Choose')}</option>
-                                <option value='newest'>{t('Newest')}</option>
-                                <option value='oldest'>{t('Oldest')}</option>
-                                <option value='score'>{t('Highest score')}</option>
-                            </select>
+                            <AutoComplete
+                                placeholder={t('Sorting')}
+                                value={sortFilter}
+                                name='filter'
+                                valueHandler={autoCompleteHandler}
+                                options={options3}
+                            />
                         </div>
                     </div>
                 </FiltersWrapper>
@@ -348,18 +424,10 @@ function Video() {
 
             <ListVideoField>
                 {selectedButton === 'uploaded' ? (
-                    mediaList?.length ? (
+                    mediaList?.length || notAceptedListProvider.length ? (
                         <>
-                            {pageLoading ? (
-                                <div className='loading'>
-                                    <CircularProgress />
-                                </div>
-                            ) : (
-                                <>
-                                    {notAceptedListProvider}
-                                    {mediaListProvider}
-                                </>
-                            )}
+                            {notAceptedListProvider}
+                            {mediaListProvider}
 
                             <PaginationWrapper>
                                 <Pagination
@@ -399,7 +467,7 @@ function Video() {
                         <textarea onChange={e => setRejectReason(e.target.value)}></textarea>
 
                         <div className='button_group'>
-                            <Button color='primary' handler={() => changeMediaHandler(false, 1)}>
+                            <Button color='primary' handler={() => changeMediaHandler(false, deactiveSpecificId)}>
                                 {t('Submit')}
                             </Button>
                             <Button color='dark' handler={() => setDeleteModalStatus(false)}>

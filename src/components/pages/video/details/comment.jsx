@@ -19,7 +19,7 @@ import StarIcon from '@mui/icons-material/Star';
 import Input from '@/components/form-group/input';
 
 // APIs
-import { AddnewComment, AddCommentScore } from '@/api-request/comment';
+import { AddNewComment, AddCommentScore } from '@/api-request/comment';
 
 const Comment = ({ mediaDetails }) => {
     const { t } = useTranslation();
@@ -46,17 +46,17 @@ const Comment = ({ mediaDetails }) => {
             media: mediaDetails?.id
         };
 
-        AddnewComment(CommentData)
+        AddNewComment(CommentData)
             .then(() => {
                 toast.success(t('Your message was successfully registered!'));
+
+                AddCommentScore(RateComment)
+                    .then(() => {})
+                    .catch(() => {});
             })
             .catch(err => {
                 toast.error(err.response.data.message);
             });
-
-        AddCommentScore(RateComment)
-            .then(() => {})
-            .catch(() => {});
     };
 
     return (
@@ -86,25 +86,34 @@ const Comment = ({ mediaDetails }) => {
                     <SendRoundedIcon onClick={sendCommentHandler} />
                 </div>
             </div>
-            <ul>
-                {mediaDetails?.comments?.map(item => (
-                    <li key={`comment_${item.id}`}>
-                        <Image src={UserIcon} alt='' />
-                        <div className='content'>
-                            <div className='info'>
-                                <div className='title'>
-                                    <b>{item.user_fullname}</b>
+
+            {mediaDetails?.comments.length ? (
+                <ul>
+                    {mediaDetails?.comments?.map(item => (
+                        <li key={`comment_${item.id}`}>
+                            <Image src={UserIcon} alt='' />
+                            <div className='content'>
+                                <div className='info'>
+                                    <div className='title'>
+                                        <b>{item.user_fullname}</b>
+                                    </div>
+                                    <div className='rate'>
+                                        <p>۴.۵/۵</p>
+                                        <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
+                                    </div>
                                 </div>
-                                <div className='rate'>
-                                    <p>۴.۵/۵</p>
-                                    <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
-                                </div>
+                                <p className='comment_text'>{item.comment}</p>
                             </div>
-                            <p className='comment_text'>{item.comment}</p>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <>
+                    <div className='comment_empty_field'>
+                        <p>{t('There are no comments for this video yet!')}</p>
+                    </div>
+                </>
+            )}
         </MainField>
     );
 };

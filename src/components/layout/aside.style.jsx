@@ -44,7 +44,7 @@ export const AsideField = styled.aside(props => ({
                 borderRight: '6px solid transparent',
 
                 p: {
-                    marginRight: 10
+                    marginRight: '10px'
                 }
             }
         }
@@ -118,7 +118,12 @@ export const AsideField = styled.aside(props => ({
         },
 
         p: {
-            marginRight: 10
+            marginRight: '10px'
         }
+    },
+
+    '& .submenu_active': {
+        background: '#751b7424',
+        borderRadius: '15px'
     }
 }));

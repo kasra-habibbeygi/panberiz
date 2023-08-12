@@ -1,22 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useSelector } from 'react-redux';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'next-i18next';
+
 // Component
 import { IncomeField } from './income.style';
 import ChartArea from './area.chart';
 import ChartPie from './pie.chart';
+import SearchResult from './search-result';
+import AutoComplete from '@/components/form-group/auto-complete';
 
 //Assets
 import searchSvg from './../../../assets/icons/search.svg';
 
-//mui
-// import CircleIcon from '@mui/icons-material/Circle';
-import AutoComplete from '@/components/form-group/auto-complete';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'next-i18next';
-import { GetManagerChart1Info, GetAdminChart1Info, GetAdminChart2Info, GetManagerChart2Info, UserSearch } from '@/api-request/chart';
-import { useSelector } from 'react-redux';
-import Image from 'next/image';
+// MUI
 import { Dialog } from '@mui/material';
-import SearchResult from './search-result';
+
+// APIs
+import { GetManagerChart1Info, GetAdminChart1Info, GetAdminChart2Info, GetManagerChart2Info, UserSearch } from '@/api-request/chart';
 
 function Income() {
     const { t } = useTranslation('common');
@@ -28,8 +30,6 @@ function Income() {
     const [searchValue, setSearchValue] = useState('');
     const [showSearchModal, setShowSearchModal] = useState(false);
     const [userSearchValue, setUserSearchValue] = useState({});
-
-    console.log(userSearchValue);
 
     const autoCompleteHandler = e => {
         setValues(e);
@@ -109,7 +109,7 @@ function Income() {
                     <Image src={searchSvg} alt='search' />
                 </button>
             </form>
-            <div className='container'>
+            <div className='container chart_field'>
                 <div className='line-chart'>
                     <div className='header'>
                         <div className='title'>
@@ -133,28 +133,6 @@ function Income() {
                     <div className='chart'>
                         <ChartPie data={chart2Data} selectedValue={values?.label} />
                     </div>
-                    {/* <div className='flags'>
-                    <div className='section'>
-                        <div>
-                            <CircleIcon fontSize='small' htmlColor='#39164F' />
-                            <p>{t('Repeat visit')}</p>
-                        </div>
-                        <div>
-                            <CircleIcon fontSize='small' htmlColor='#751B74' />
-                            <p>{t('Repeat visit')}</p>
-                        </div>
-                    </div>
-                    <div className='section'>
-                        <div>
-                            <CircleIcon fontSize='small' htmlColor='#D6A0F9' />
-                            <p>{t('Repeat visit')}</p>
-                        </div>
-                        <div>
-                            <CircleIcon fontSize='small' htmlColor='#EACFFC' />
-                            <p>{t('Repeat visit')}</p>
-                        </div>
-                    </div>
-                </div> */}
                 </div>
             </div>
 

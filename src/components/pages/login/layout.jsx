@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
+import Image from 'next/image';
+
 // Assets
 import { MainField } from './layout.style';
-import RTLLogo from '../../../assets/images/logo-ltr.png';
-import Image from 'next/image';
+import RTLLogo from '@/assets/images/logo.svg';
 
 const LoginLayout = ({ children, title }) => {
     return (

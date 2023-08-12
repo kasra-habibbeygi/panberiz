@@ -3,17 +3,27 @@ import styled from '@emotion/styled';
 export const CardField = styled.div(props => ({
     width: '100%',
     borderRadius: '20px',
-    margin: '10px',
     position: 'relative',
     cursor: props.pointer ? 'pointer' : 'normalize',
-    opacity: props.status ? '1' : '0.5',
-    pointerEvents: props.status ? 'initial' : 'none',
+
+    '& .media_status_pill': {
+        position: 'absolute',
+        top: '10px',
+        left: '10px',
+        background: props.status === 'pending' ? '#ffdeb5' : props.status === 'failed' ? '#ffc7c1' : '#c1ffd4',
+        color: props.status === 'pending' ? '#ff7800' : props.status === 'failed' ? 'red' : '#11ad00',
+        borderRadius: '50px',
+        padding: '1px 10px',
+        fontSize: '0.9rem'
+    },
 
     '& .card_details': {
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'space-between',
         marginTop: '10px',
+        position: 'relative',
+        zIndex: '20',
 
         '& .right_field': {
             color: props.theme.palette.colors.text.blackAndWhite,
@@ -25,12 +35,12 @@ export const CardField = styled.div(props => ({
         '& .left_field': {
             display: 'flex',
             justifyContent: 'flex-end',
-            flexDirection: 'column',
             alignItems: 'flex-end',
+            gap: '10px',
 
             div: {
                 display: 'flex',
-                gap: '10px',
+                gap: '5px',
                 alignItems: 'center'
             },
 
@@ -85,17 +95,25 @@ export const CardField = styled.div(props => ({
             alignItems: 'center',
             justifyContent: 'center',
             width: '100%',
-            height: '100%',
+            height: 'inherit',
 
             '& .icon': {
                 margin: '5px',
+                cursor: 'pointer'
+            },
+
+            '& .deletemedia': {
+                position: 'absolute',
+                top: '10px',
+                right: '10px',
+                filter: 'invert(99%) sepia(2%) saturate(138%) hue-rotate(212deg) brightness(114%) contrast(89%)',
                 cursor: 'pointer'
             }
         }
     }
 }));
 
-export const TagsList = styled.div(props => ({
+export const TagsList = styled.div({
     marginTop: '50px',
 
     '& .tags_field': {
@@ -120,4 +138,12 @@ export const TagsList = styled.div(props => ({
         background: 'white',
         gap: '5px'
     }
-}));
+});
+
+export const PaginationField = styled.div({
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '40px'
+});

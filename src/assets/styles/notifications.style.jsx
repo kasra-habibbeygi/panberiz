@@ -20,7 +20,13 @@ export const NotificationsWrapper = styled.div(props => ({
         color: props.theme.mode === 'light' ? 'black' : 'white',
 
         '& .message': {
-            fontSize: '14px'
+            fontSize: '14px',
+
+            '&.header': {
+                fontWeight: 'bold',
+                fontSize: '1rem',
+                marginBottom: '10px'
+            }
         },
 
         '& .notifs_button': {

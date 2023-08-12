@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'next-i18next';
 
 // Component
@@ -27,25 +27,25 @@ import { SpecificTags } from '@/api-request/tags';
 // MUI
 import SearchIcon from '@mui/icons-material/Search';
 import StarIcon from '@mui/icons-material/Star';
+import AutoComplete from '@/components/form-group/auto-complete';
+import { Pagination } from '@mui/material';
+import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 
 function UserVideo() {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
     const router = useRouter();
     const userInfo = useSelector(state => state.UserInfo);
     const [selectedButton, setSelectedButton] = useState('uploaded');
     const [mediaList, setMediaList] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const [tagsList, setTagsList] = useState([]);
+    const [viewsFilter, setViewsFilter] = useState(null);
+    const [sortFilter, setSortFilter] = useState(null);
 
     const [pageStatus, setPageStatus] = useState({
         total: 1,
         current: 1
-    });
-
-    const [filters, setFilters] = useState({
-        status: '',
-        observing: '',
-        sorting: ''
     });
 
     const selectButton = selected => {
@@ -53,44 +53,38 @@ function UserVideo() {
     };
 
     const getMediaUserApi = (id, lang, searchValue) => {
+        dispatch(loaderStatusHandler(true));
         let filterParams = `&page=${pageStatus.current}`;
 
-        if (filters.status) {
-            filterParams += `&media_status=${filters.status}`;
-            setPageStatus({
-                total: 1,
-                current: 1
-            });
-        }
-        if (filters.observing === 'seen') {
+        if (viewsFilter?.value === 'seen') {
             filterParams += '&is_viewed=true';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
-        if (filters.observing === 'unseen') {
+        if (viewsFilter?.value === 'unseen') {
             filterParams += '&is_viewed=false';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
-        if (filters.sorting === 'oldest') {
+        if (sortFilter?.value === 'oldest') {
             filterParams += '&oldest=true';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
-        if (filters.sorting === 'newest') {
+        if (sortFilter?.value === 'newest') {
             filterParams += '&newest=true';
             setPageStatus({
                 total: 1,
                 current: 1
             });
         }
-        if (filters.sorting === 'score') {
+        if (sortFilter?.value === 'score') {
             filterParams += '&score=true';
             setPageStatus({
                 total: 1,
@@ -110,7 +104,10 @@ function UserVideo() {
             .then(res => {
                 setMediaList(res.results);
             })
-            .catch(() => {});
+            .catch(() => {})
+            .finally(() => {
+                dispatch(loaderStatusHandler(false));
+            });
     };
 
     useEffect(() => {
@@ -121,15 +118,49 @@ function UserVideo() {
                 setTagsList(res.results);
             })
             .catch(() => {});
-    }, [router.query.id, userInfo.lang, filters, router.query.tagId]);
+    }, [router.query.id, userInfo.lang, router.query.tagId, sortFilter, viewsFilter]);
 
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
-            getMediaUserApi(router.query.id, userInfo.lang, searchValue);
-        }, 3000);
+            getMediaUserApi(router.query.id, userInfo.lang, searchValue, sortFilter, viewsFilter);
+        }, 1000);
 
         return () => clearTimeout(delayDebounceFn);
-    }, [searchValue]);
+    }, [searchValue, userInfo.lang]);
+
+    const autoCompleteHandler = (e, name) => {
+        if (name === 'views') {
+            setViewsFilter(e);
+        } else {
+            setSortFilter(e);
+        }
+    };
+
+    const options2 = [
+        {
+            label: t('Not Seen'),
+            value: 'unseen'
+        },
+        {
+            label: t('Seen'),
+            value: 'seen'
+        }
+    ];
+
+    const options3 = [
+        {
+            label: t('Newest'),
+            value: 'newest'
+        },
+        {
+            label: t('Oldest'),
+            value: 'oldest'
+        },
+        {
+            label: t('Highest score'),
+            value: 'score'
+        }
+    ];
 
     return (
         <LayoutProvider>
@@ -141,46 +172,30 @@ function UserVideo() {
             {userInfo.role === 'SuperAdminAcademy' && <Tab selectButton={selectButton} selectedButton={selectedButton} />}
             {userInfo.role !== 'SuperAdminAcademy' && (
                 <FiltersWrapper>
-                    <p className='filters_title'>{t('Filters')}</p>
                     <div className='selects_wrapper'>
                         <div className='options_wrapper'>
-                            <p>{t('Based on observation')}</p>
-                            <select
-                                value={filters.observing}
-                                onChange={e =>
-                                    setFilters(prev => ({
-                                        ...prev,
-                                        observing: e.target.value
-                                    }))
-                                }
-                            >
-                                <option value=''>{t('Choose')}</option>
-                                <option value='seen'>{t('Seen')}</option>
-                                <option value='unseen'>{t('Not Seen')}</option>
-                            </select>
+                            <AutoComplete
+                                placeholder={t('Based on observation')}
+                                value={viewsFilter}
+                                name='views'
+                                valueHandler={autoCompleteHandler}
+                                options={options2}
+                            />
                         </div>
                         <div className='options_wrapper'>
-                            <p>{t('Sorting')}</p>
-                            <select
-                                value={filters.sorting}
-                                onChange={e =>
-                                    setFilters(prev => ({
-                                        ...prev,
-                                        sorting: e.target.value
-                                    }))
-                                }
-                            >
-                                <option value=''>{t('Choose')}</option>
-                                <option value='newest'>{t('Newest')}</option>
-                                <option value='oldest'>{t('Oldest')}</option>
-                                <option value='score'>{t('Highest score')}</option>
-                            </select>
+                            <AutoComplete
+                                placeholder={t('Sorting')}
+                                value={sortFilter}
+                                name='filter'
+                                valueHandler={autoCompleteHandler}
+                                options={options3}
+                            />
                         </div>
                     </div>
                 </FiltersWrapper>
             )}
             <TagsList>
-                <p>تگ های مرتبط</p>
+                {tagsList.length ? <p>تگ های مرتبط</p> : ''}
                 <div className='tags_field'>
                     {tagsList.map(item => (
                         <Link href={`/video/5/?tagId=${item.id}`} key={`tags_list_${item.id}`}>
@@ -202,14 +217,7 @@ function UserVideo() {
                                             <Image className='icon' src={play} alt='play' />
                                         </Link>
                                     </div>
-                                    <img
-                                        className='video_banner'
-                                        src={item?.cover.replace(
-                                            'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21/',
-                                            'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
-                                        )}
-                                        alt='video-banner'
-                                    />
+                                    <img className='video_banner' src={item?.cover.replace('http', 'https')} alt='video-banner' />
                                 </div>
                                 <div className='card_details'>
                                     <div className='right_field'>
@@ -227,6 +235,21 @@ function UserVideo() {
                     ))
                 )}
             </ListVideoField>
+            <paginationField>
+                <Pagination
+                    color='primary'
+                    count={pageStatus.total}
+                    page={pageStatus.current}
+                    onChange={(_, value) =>
+                        setPageStatus(prev => {
+                            return {
+                                ...prev,
+                                current: value
+                            };
+                        })
+                    }
+                />
+            </paginationField>
         </LayoutProvider>
     );
 }

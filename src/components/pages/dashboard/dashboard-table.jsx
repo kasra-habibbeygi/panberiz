@@ -1,16 +1,23 @@
 import HeaderField from '@/components/template/header';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 //Assets
 import eye from './../../../assets/icons/eye.svg';
-import { DashboardTableWrapper } from './dashboard-table.style';
-import { Button, Dialog } from '@mui/material';
-import { useState } from 'react';
+import EmptyField from '../../../assets/images/empty/empty-media-list.png';
+
+// Component
 import VideoList from './video-list';
-import { useEffect } from 'react';
+import { DashboardTableWrapper } from './dashboard-table.style';
+
+// MUI
+import { Button, Dialog } from '@mui/material';
+
+// API
 import { GetAdminCategory, GetAgentCategory } from '@/api-request/chart';
-import { useSelector } from 'react-redux';
 
 const DashboardTable = () => {
     const { t } = useTranslation();
@@ -43,40 +50,48 @@ const DashboardTable = () => {
     return (
         <DashboardTableWrapper>
             <HeaderField title={t('Video visit report')} />
-            <table>
-                <thead>
-                    <tr>
-                        <th>{t('Index')}</th>
-                        <th>{t('Category name')}</th>
-                        <th>{t('Category videos count')}</th>
-                        <th>{t('Report videos count')}</th>
-                        <th>{t('Actions')}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {categoryList?.map(item => (
-                        <tr key={item.id}>
-                            <td>1</td>
-                            <td>{item.title}</td>
-                            <td>{item.videos_count}</td>
-                            <td>{item.report_videos_count}</td>
-                            <td>
-                                <Button
-                                    variant='outlined'
-                                    color='secondary'
-                                    onClick={() => {
-                                        openModalHandler();
-                                        setCategoryId(item.id);
-                                    }}
-                                    sx={{ textTransform: 'none' }}
-                                >
-                                    {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
-                                </Button>
-                            </td>
+
+            {categoryList.length ? (
+                <table>
+                    <thead>
+                        <tr>
+                            <th>{t('Index')}</th>
+                            <th>{t('Category name')}</th>
+                            <th>{t('Category videos count')}</th>
+                            <th>{t('Report videos count')}</th>
+                            <th>{t('Actions')}</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {categoryList?.map((item, index) => (
+                            <tr key={item.id}>
+                                <td>{index}</td>
+                                <td>{item.title}</td>
+                                <td>{item.videos_count}</td>
+                                <td>{item.report_videos_count}</td>
+                                <td>
+                                    <Button
+                                        variant='outlined'
+                                        color='secondary'
+                                        onClick={() => {
+                                            openModalHandler();
+                                            setCategoryId(item.id);
+                                        }}
+                                        sx={{ textTransform: 'none' }}
+                                    >
+                                        {t('Visit')} <Image src={eye} alt='visit' className='eye_icon' />
+                                    </Button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            ) : (
+                <div className='empty_field'>
+                    <Image src={EmptyField} alt='' />
+                    <p>{t('No report has been registered yet!')}</p>
+                </div>
+            )}
 
             <Dialog open={showModal} onClose={closeModalHandler} maxWidth='lg'>
                 <VideoList categoryId={categoryId} />

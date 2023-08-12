@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // Component
@@ -13,18 +14,24 @@ const AddCategory = dynamic(() => import('@/components/pages/category/add'), {
 
 // APIs
 import { GetCategoriesList } from '@/api-request/category';
+import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 
 const Category = () => {
+    const dispatch = useDispatch();
     const userInfo = useSelector(state => state.UserInfo);
     const [categoriesList, setCategoriesList] = useState([]);
     const [reload, setReaload] = useState(false);
 
     useEffect(() => {
+        dispatch(loaderStatusHandler(true));
         GetCategoriesList(userInfo.lang)
             .then(res => {
                 setCategoriesList(res.results);
             })
-            .catch(() => {});
+            .catch(() => {})
+            .finally(() => {
+                dispatch(loaderStatusHandler(false));
+            });
     }, [reload, userInfo]);
 
     return (

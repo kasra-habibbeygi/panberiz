@@ -105,6 +105,7 @@
     "Your score": "Your score",
     "score": "score",
     "Start the quiz": "Start the quiz",
+    "Media Count" : "Media Count",
 
     "Minutes": "Minutes",
     "Question": "Question",
@@ -163,5 +164,7 @@
     "Search user" : "Search user",
     "Search result" : "Search result",
     "Seen videos count" : "Seen videos count",
-    "Tests" : "Tests"
+    "Tests" : "Tests",    
+    "No report has been registered yet!" : "No report has been registered yet!",
+    "There are no comments for this video yet!": "There are no comments for this video yet!"
 }

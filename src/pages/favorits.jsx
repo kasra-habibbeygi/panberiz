@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
@@ -9,17 +10,24 @@ import HeaderField from '@/components/template/header';
 // APIs
 import { GetFavoritsList } from '@/api-request/favorit';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 
 const Favorite = () => {
     const { t } = useTranslation('common');
+    const dispatch = useDispatch();
     const [favoritesList, setFavoritesList] = useState([]);
 
     useEffect(() => {
+        dispatch(loaderStatusHandler(true));
         GetFavoritsList()
             .then(res => {
                 setFavoritesList(res.results);
             })
-            .catch(() => {});
+            .catch(() => {})
+            .finally(() => {
+                dispatch(loaderStatusHandler(false));
+            });
     }, []);
 
     return (

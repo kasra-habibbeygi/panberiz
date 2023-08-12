@@ -86,13 +86,14 @@ function Aside({ asideStatus }) {
                                             .map(item => {
                                                 if (item.place === 0) {
                                                     return (
-                                                        <Link href={`/video/${item.id}`} key={item.id}>
+                                                        <Link
+                                                            href={`/video/${item.id}`}
+                                                            key={item.id}
+                                                            className={parseInt(router.query.id) === item.id ? 'submenu_active' : ''}
+                                                        >
                                                             <img
                                                                 className='video_banner'
-                                                                src={item?.image.replace(
-                                                                    'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21/',
-                                                                    'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
-                                                                )}
+                                                                src={item?.image.replace('http', 'https')}
                                                                 alt='video-banner'
                                                             />
                                                             {item.title}
@@ -107,14 +108,11 @@ function Aside({ asideStatus }) {
                                                             item?.rank <= userInfo.rank || userInfo.role === 'AgentAcademy'
                                                                 ? ''
                                                                 : 'disabled'
-                                                        }`}
+                                                        } ${parseInt(router.query.id) === item.id ? 'submenu_active' : ''}`}
                                                     >
                                                         <img
                                                             className='video_banner'
-                                                            src={item?.image.replace(
-                                                                'ftp://testuser@fileacademy.pmlm.ir:m@P7x-s%7Bd28%7D@31.25.90.38:21/',
-                                                                'https://fileacademy.pmlm.ir/fileacademy.pmlm.ir/'
-                                                            )}
+                                                            src={item?.image.replace('http', 'https')}
                                                             alt='video-banner'
                                                         />
                                                         {item.title}

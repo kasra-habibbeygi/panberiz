@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable consistent-return */
 /* eslint-disable @next/next/no-img-element */
@@ -59,18 +60,24 @@ const VideoField = ({ mediaDetails, favoritsList }) => {
         <MainField>
             {mediaDetails?.media_type === 'video' ? (
                 <div className='video_image'>
-                    <video controls id='slider_video_player' poster={mediaDetails?.cover}>
-                        <source src={mediaDetails?.file} type='video/mp4' />
-                    </video>
+                    <div className='r1_iframe_embed'>
+                        <iframe
+                            src={mediaDetails?.get_video_info?.data?.player_url}
+                            name='لیست افراد'
+                            frameBorder='0'
+                            allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+                            allowFullScreen='true'
+                            webkitallowfullscreen='true'
+                            mozallowfullscreen='true'
+                        ></iframe>
+                    </div>
                 </div>
             ) : (
                 <>
-                    <iframe src={mediaDetails?.file} width='100%' height='500px' />
-                    <a href={mediaDetails?.file} target='_blank' className='download_field' rel='noreferrer'>
-                        دانلود فایل
-                    </a>
+                    <iframe src={mediaDetails?.file?.replace('http', 'https')} width='100%' height='500px' />
                 </>
             )}
+
             <div className='card_details'>
                 <div className='right_field'>
                     <Image className='icon' src={UserIcon} alt='play' />
@@ -80,9 +87,11 @@ const VideoField = ({ mediaDetails, favoritsList }) => {
                     </div>
                 </div>
                 <div className='left_field'>
-                    <div className={`like ${isFavorit ? 'red_heart' : ''}`}>
-                        <Image className='icon' src={HeartIcon} alt='play' onClick={() => addFavoritHandler(mediaDetails?.id)} />
-                    </div>
+                    {userInfo.role === 'User' && (
+                        <div className={`like ${isFavorit ? 'red_heart' : ''}`}>
+                            <Image className='icon' src={HeartIcon} alt='play' onClick={() => addFavoritHandler(mediaDetails?.id)} />
+                        </div>
+                    )}
                     <div className='rate'>
                         <p>5 / {mediaDetails?.score} </p>
                         <StarIcon htmlColor='rgba(248, 170, 0, 1)' />

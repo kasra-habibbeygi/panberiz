@@ -3,16 +3,25 @@
 import HeaderField from '@/components/template/header';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 //Assets
 import eye from './../../../assets/icons/eye.svg';
 import { DashboardTableWrapper, VideoListWrapper } from './dashboard-table.style';
-import { Button, Dialog, Pagination } from '@mui/material';
-import { useEffect, useState } from 'react';
+
+// Components
 import UsersList from './users_list';
-import Link from 'next/link';
-import { useSelector } from 'react-redux';
+
+// MUI
+import { Button, Dialog, Pagination } from '@mui/material';
+
+// APIs
 import { GetAdminVideo, GetAgentVideo } from '@/api-request/chart';
+
+// Tools
+import Tools from '@/tools/utils';
 
 const VideoList = ({ categoryId }) => {
     const [showModal, setShowModal] = useState(false);
@@ -69,9 +78,9 @@ const VideoList = ({ categoryId }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {videoList?.map(item => (
+                        {videoList?.map((item, index) => (
                             <tr key={item.id}>
-                                <td>1</td>
+                                <td>{Tools.tableRowCounter(pageStatus.current, index, 10)}</td>
                                 <td>
                                     <Link href={`/video/details/${item.id}`}>{item.title}</Link>
                                 </td>

@@ -26,7 +26,7 @@ export const GetAdminChart3Info = async lang => {
 
 // new chart 3
 export const GetAdminCategory = async lang => {
-    return RequestHandler.call({ url: `/managers/chart3/visit/result/categories/?lang=${lang}`, method: 'get' }).then(res => res.data);
+    return RequestHandler.call({ url: `/managers/chart3/visit/result/categories/?lang=${lang}`, method: 'get' }).then(res => res);
 };
 
 export const GetAgentCategory = async lang => {
@@ -45,10 +45,8 @@ export const GetAgentVideo = async (lang, id, page) => {
     );
 };
 
-export const GetAdminUsers = async (lang, id, page) => {
-    return RequestHandler.call({ url: `/managers/chart3/visit/result/users/${id}/?lang=${lang}&page=${page}`, method: 'get' }).then(
-        res => res.data
-    );
+export const GetAdminUsers = async (id, page) => {
+    return RequestHandler.call({ url: `/managers/chart3/visit/result/users/${id}/?page=${page}`, method: 'get' }).then(res => res.data);
 };
 
 export const GetAgentUser = async (lang, id, page) => {

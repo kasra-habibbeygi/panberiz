@@ -19,14 +19,33 @@ export const MainField = styled.div(props => ({
         fontSize: '1.2rem'
     },
 
+    '& .red_heart': {
+        filter: 'invert(33%) sepia(81%) saturate(2399%) hue-rotate(337deg) brightness(106%) contrast(110%)'
+    },
+
     iframe: {
         border: 'none',
         height: '700px',
         borderRadius: '10px'
     },
 
-    '& .red_heart': {
-        filter: 'invert(33%) sepia(81%) saturate(2399%) hue-rotate(337deg) brightness(106%) contrast(110%)'
+    '& .r1_iframe_embed': {
+        position: 'relative',
+        overflow: 'hidden',
+        width: '1110px',
+        height: 'auto',
+        paddingTop: '70vh'
+    },
+
+    '& .r1_iframe_embed iframe': {
+        position: 'absolute',
+        top: '0',
+        left: '0',
+        border: '0',
+        height: '600px',
+        borderRadius: '20px',
+        margin: '0 auto',
+        width: '100%'
     },
 
     '& .card_details': {
@@ -106,14 +125,15 @@ export const MainField = styled.div(props => ({
         }
     },
 
-    video: {
-        width: '100%',
-        height: '600px',
-        background: 'black',
-        borderRadius: '20px'
+    '@media(max-width : 1200px)': {
+        '& .r1_iframe_embed': {
+            width: '100%'
+        }
     },
 
     '@media(max-width : 800px)': {
+        margin: '0',
+
         '& .video_image': {
             width: '100%',
             display: 'flex',
@@ -121,12 +141,28 @@ export const MainField = styled.div(props => ({
             justifyContent: 'center'
         },
 
-        video: {
+        '& .r1_iframe_embed iframe': {
             height: '300px'
+        },
+
+        '& .r1_iframe_embed': {
+            paddingTop: '40vh'
+        },
+
+        iframe: {
+            height: '400px'
         }
     },
 
     '@media(max-width : 500px)': {
+        '& .r1_iframe_embed iframe': {
+            height: '200px'
+        },
+
+        '& .r1_iframe_embed': {
+            paddingTop: '220px'
+        },
+
         '& .card_details': {
             display: 'flex',
             alignItems: 'flex-start',

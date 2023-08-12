@@ -37,6 +37,8 @@ export const AddFormField = styled.div(props => ({
         borderBottom: `1px dashed ${props.theme.palette.colors.border.primary}`,
         paddingBottom: '20px',
         marginBottom: '20px',
+        gap: '10px',
+
         '& .title': {
             display: 'flex',
             alignItems: 'center',
@@ -69,7 +71,7 @@ export const AddFormField = styled.div(props => ({
     '& .quiz-header': {
         display: 'flex',
         color: props.theme.palette.colors.text.blackAndWhite,
-        padding: '20px',
+        padding: '20px 0',
         alignItems: 'center',
         justifyContent: 'space-between',
         button: {
@@ -134,6 +136,10 @@ export const AddFormField = styled.div(props => ({
 
         p: {
             fontSize: '1rem'
+        },
+
+        svg: {
+            transform: props.theme.direction === 'rtl' ? 'unset' : 'rotate(180deg)'
         }
     },
 
@@ -178,6 +184,12 @@ export const AddFormField = styled.div(props => ({
                 flexDirection: 'column',
                 alignItems: 'flex-start'
             }
+        }
+    },
+
+    '@media(max-width : 400px)': {
+        '& .form_field': {
+            marginTop: '20px'
         }
     }
 }));

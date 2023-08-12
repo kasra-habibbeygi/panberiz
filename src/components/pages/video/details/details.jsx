@@ -23,17 +23,27 @@ const DetailsField = ({ mediaDetails }) => {
     const [examBtnStatus, setExamBtnStatus] = useState(false);
 
     useEffect(() => {
-        setExamBtnStatus(!mediaDetails?.media_quiezes?.length && userInfo.role === 'User' ? true : false);
-    }, []);
+        setExamBtnStatus(mediaDetails?.media_quiezes?.length && userInfo.role === 'User' ? true : false);
+    }, [userInfo.role, mediaDetails]);
 
     return (
         <MainField>
-            <p className='text'>{mediaDetails?.description}</p>
+            <p className='text'>
+                <span></span>
+                {mediaDetails?.summary_description}
+            </p>
+            {mediaDetails?.full_description && (
+                <p className='text'>
+                    <span></span>
+                    {mediaDetails?.full_description}
+                </p>
+            )}
+
             <div className='footer_field'>
                 <div className='info'>
                     <span>
                         <Image src={CLockIcon} alt='' />
-                        {mediaDetails?.jdate}
+                        {mediaDetails?.jdate?.replaceAll(',', '/')}
                     </span>
                     <span>
                         <Image src={GridsIcon} alt='' />
