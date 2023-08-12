@@ -33,7 +33,7 @@ export const MainField = styled.div(props => ({
         position: 'relative',
         overflow: 'hidden',
         width: '1110px',
-        height: '900px',
+        height: 'auto',
         paddingTop: '70vh'
     },
 
@@ -128,6 +128,12 @@ export const MainField = styled.div(props => ({
     '@media(max-width : 1200px)': {
         '& .r1_iframe_embed': {
             width: '100%'
+        }
+    },
+
+    '@media(min-width : 800px)': {
+        '& .r1_iframe_embed': {
+            height: '650px'
         }
     },
 
