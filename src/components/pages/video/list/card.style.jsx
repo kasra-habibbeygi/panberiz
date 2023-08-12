@@ -79,7 +79,7 @@ export const CardField = styled.div(props => ({
             width: '100%',
             height: '100%',
             borderRadius: '20px',
-            objectFit: 'cover'
+            objectFit: 'fill'
         },
 
         '& .play': {

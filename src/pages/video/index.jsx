@@ -193,7 +193,10 @@ function Video() {
                 .then(() => {
                     setReload(!reload);
                 })
-                .catch(() => {});
+                .catch(() => {})
+                .finally(() => {
+                    dispatch(loaderStatusHandler(false));
+                });
         } else {
             DeleteAgentMedia(id)
                 .then(() => {
@@ -246,7 +249,11 @@ function Video() {
                         <Link href={`/video/details/${item.id}`}>
                             <Image className='icon' src={play} alt='play' />
                         </Link>
-                        <DeleteIcon className='deletemedia' onClick={() => deleteSpecificMedia(item.id)} />
+                        <DeleteIcon
+                            className='deletemedia'
+                            onClick={() => deleteSpecificMedia(item.id)}
+                            style={{ color: item?.publisher_id === userInfo?.id ? '#EE4B2B' : 'gray', filter: 'none' }}
+                        />
                     </div>
                     <img className='video_banner' src={item?.cover?.replace('http', 'https')} alt='video-banner' />
                 </div>

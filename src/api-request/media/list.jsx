@@ -37,3 +37,11 @@ export const GetAdminVideos = async () => {
 export const PostAcceptVideo = async data => {
     return RequestHandler.call({ url: '/admins/my-video-add/', method: 'post', data }).then(res => res.data);
 };
+
+export const DeleteSuperAdminMedia = async id => {
+    return RequestHandler.call({ url: `/managers/media/delete-media/${id}/`, method: 'delete' }).then(res => res.data);
+};
+
+export const DeleteAgentMedia = async id => {
+    return RequestHandler.call({ url: `admins/media/delete-media/${id}/`, method: 'delete' }).then(res => res.data);
+};
