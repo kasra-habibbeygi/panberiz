@@ -69,12 +69,13 @@ const VideoField = ({ mediaDetails, favoritsList }) => {
                             allowFullScreen='true'
                             webkitallowfullscreen='true'
                             mozallowfullscreen='true'
+                            height='1500px'
                         ></iframe>
                     </div>
                 </div>
             ) : (
                 <>
-                    <iframe src={mediaDetails?.file?.replace('http', 'https')} width='100%' height='500px' />
+                    <iframe src={mediaDetails?.file?.replace('http', 'https')} width='100%' height='1500px' />
                 </>
             )}
 

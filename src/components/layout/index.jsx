@@ -32,11 +32,13 @@ function LayoutProvider({ children }) {
 
     useEffect(() => {
         setAsideStatus(width < 1300 ? false : true);
+    }, [width]);
 
+    useEffect(() => {
         GetUserInformation().then(res => {
             dispatch(userInfohandler(res));
         });
-    }, [width]);
+    }, []);
 
     return (
         <Fields.LayoutProviderField asideStatus={asideStatus}>

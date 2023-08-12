@@ -33,7 +33,7 @@ export const MainField = styled.div(props => ({
         position: 'relative',
         overflow: 'hidden',
         width: '1110px',
-        height: 'auto',
+        height: '900px',
         paddingTop: '70vh'
     },
 
