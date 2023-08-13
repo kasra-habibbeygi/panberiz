@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 export const ListVideoField = styled.div(props => ({
     display: 'flex',
     marginTop: '50px',
-    alignItems: 'center',
     flexWrap: 'wrap',
 
     '& .accept_button': {

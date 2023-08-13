@@ -4,7 +4,7 @@ export const CardField = styled.div(props => ({
     width: '100%',
     borderRadius: '20px',
     position: 'relative',
-    cursor: props.pointer ? 'pointer' : 'normalize',
+    cursor: props.pointer ? 'pointer' : 'initial',
 
     '& .media_status_pill': {
         position: 'absolute',
@@ -70,7 +70,7 @@ export const CardField = styled.div(props => ({
 
     '& .video_image': {
         width: '100%',
-        height: '250px',
+        height: '18vw',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -110,6 +110,18 @@ export const CardField = styled.div(props => ({
                 cursor: 'pointer'
             }
         }
+    },
+
+    '@media(max-width : 900px)': {
+        '& .video_image': {
+            height: '30vw'
+        }
+    },
+
+    '@media(max-width : 600px)': {
+        '& .video_image': {
+            height: '55vw'
+        }
     }
 }));
 
@@ -137,6 +149,10 @@ export const TagsList = styled.div({
         border: '1px dashed rgb(117, 27, 116)',
         background: 'white',
         gap: '5px'
+    },
+
+    '& .active_tag': {
+        background: '#69127729'
     }
 });
 

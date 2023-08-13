@@ -167,6 +167,10 @@ function UserVideo() {
         }
     ];
 
+    if (router.query.tagId) {
+        console.log(router.query.tagId);
+    }
+
     return (
         <LayoutProvider>
             <SearchField>
@@ -202,8 +206,51 @@ function UserVideo() {
             <TagsList>
                 {tagsList.length ? <p>تگ های مرتبط</p> : ''}
                 <div className='tags_field'>
+                    <Link className={typeof router.query.tagId === 'undefined' ? 'active_tag' : ''} href='/video/5/'>
+                        {t('All')}
+                    </Link>
                     {tagsList.map(item => (
-                        <Link href={`/video/5/?tagId=${item.id}`} key={`tags_list_${item.id}`}>
+                        <Link
+                            className={parseInt(router.query.tagId) === item.id ? 'active_tag' : ''}
+                            href={`/video/5/?tagId=${item.id}`}
+                            key={`tags_list_${item.id}`}
+                        >
+                            {item.title}
+                        </Link>
+                    ))}
+                    {tagsList.map(item => (
+                        <Link
+                            className={parseInt(router.query.tagId) === item.id ? 'active_tag' : ''}
+                            href={`/video/5/?tagId=${item.id}`}
+                            key={`tags_list_${item.id}`}
+                        >
+                            {item.title}
+                        </Link>
+                    ))}
+                    {tagsList.map(item => (
+                        <Link
+                            className={parseInt(router.query.tagId) === item.id ? 'active_tag' : ''}
+                            href={`/video/5/?tagId=${item.id}`}
+                            key={`tags_list_${item.id}`}
+                        >
+                            {item.title}
+                        </Link>
+                    ))}
+                    {tagsList.map(item => (
+                        <Link
+                            className={parseInt(router.query.tagId) === item.id ? 'active_tag' : ''}
+                            href={`/video/5/?tagId=${item.id}`}
+                            key={`tags_list_${item.id}`}
+                        >
+                            {item.title}
+                        </Link>
+                    ))}
+                    {tagsList.map(item => (
+                        <Link
+                            className={parseInt(router.query.tagId) === item.id ? 'active_tag' : ''}
+                            href={`/video/5/?tagId=${item.id}`}
+                            key={`tags_list_${item.id}`}
+                        >
                             {item.title}
                         </Link>
                     ))}
