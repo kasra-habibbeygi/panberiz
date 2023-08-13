@@ -10,8 +10,8 @@ export const GetUserMediaList = async (id, lang, search, filterParams) => {
     return RequestHandler.call({ url: `/users/media/${id}/?lang=${lang}${query}`, method: 'get' }).then(res => res.data);
 };
 
-export const GetMyMediaList = async () => {
-    return RequestHandler.call({ url: '/admins/media/', method: 'get' }).then(res => res.data);
+export const GetMyMediaList = async (lang) => {
+    return RequestHandler.call({ url: `/admins/media/?lang=${lang}`, method: 'get' }).then(res => res.data);
 };
 
 export const GetAllMedia = async (lang, params) => {
