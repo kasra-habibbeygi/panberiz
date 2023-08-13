@@ -9,7 +9,7 @@ export const Navbar = styled.nav(props => ({
     top: '0',
     width: '100%',
     background: props.theme.palette.colors.background.layout,
-    zIndex: '200',
+    zIndex: '650',
     padding: '0 30px',
 
     '& .left': {

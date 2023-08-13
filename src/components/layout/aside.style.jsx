@@ -13,7 +13,7 @@ export const AsideField = styled.aside(props => ({
     flexDirection: 'column',
     position: 'fixed',
     background: props.theme.palette.colors.background.layout,
-    zIndex: '10',
+    zIndex: '700',
     overflow: 'auto',
 
     '& .items': {
@@ -125,5 +125,26 @@ export const AsideField = styled.aside(props => ({
     '& .submenu_active': {
         background: '#751b7424',
         borderRadius: '15px'
+    }
+}));
+
+export const Layer = styled.div(props => ({
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100vh',
+    background: 'black',
+    opacity: '0',
+    zIndex: '600',
+    display: 'none',
+    pointerEvents: 'none',
+    transition: 'all cubic-bezier(0, 1, 1, 1) 0.8s',
+    cursor: 'pointer',
+
+    '@media (max-width : 1300px)': {
+        display: 'block',
+        opacity: props.asideStatus ? '0.5' : '0',
+        pointerEvents: props.asideStatus ? 'initial' : 'none'
     }
 }));

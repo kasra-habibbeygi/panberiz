@@ -44,7 +44,7 @@ function LayoutProvider({ children }) {
         <Fields.LayoutProviderField asideStatus={asideStatus}>
             <Navbar setAsideStatus={setAsideStatus} asideStatus={asideStatus} />
             <div className='main_field'>
-                <Aside asideStatus={asideStatus} />
+                <Aside asideStatus={asideStatus} setAsideStatus={setAsideStatus} />
                 <div className='children-field'>{LoaderStatus ? <MainLoader /> : children}</div>
             </div>
             <MobileNavbar />

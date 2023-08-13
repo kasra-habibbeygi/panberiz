@@ -24,7 +24,7 @@ import { GetUserCategoriesList } from '../../api-request/category';
 import { Switch } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-function Aside({ asideStatus }) {
+function Aside({ asideStatus, setAsideStatus }) {
     const { t } = useTranslation();
     const userInfo = useSelector(state => state.UserInfo);
     const dispatch = useDispatch();
@@ -51,45 +51,66 @@ function Aside({ asideStatus }) {
     }, [userInfo.lang]);
 
     return (
-        <Style.AsideField asideStatus={asideStatus} categoriesListLength={categoriesList.length}>
-            <div className='items'>
-                <ol>
-                    {(userInfo.role === 'SuperAdminAcademy' || userInfo.role === 'AgentAcademy') && (
-                        <li>
-                            <Link href='/dashboard' className={`${router.pathname === '/dashboard' ? 'active' : ''}`}>
-                                <Image src={home} alt='home' />
-                                <p>{t('Dashboard')}</p>
-                            </Link>
-                        </li>
-                    )}
-                    {(userInfo.role === 'SuperAdminAcademy' || userInfo.role === 'AgentAcademy') && (
-                        <li>
-                            <Link href='/video' className={`${router.pathname === '/video' ? 'active' : ''}`}>
-                                <Image src={video} alt='video' />
-                                <p>{t('Media')}</p>
-                            </Link>
-                        </li>
-                    )}
-                    {(userInfo.role === 'User' || userInfo.role === 'AgentAcademy') && (
-                        <>
+        <>
+            <Style.Layer asideStatus={asideStatus} onClick={() => setAsideStatus(false)}></Style.Layer>
+            <Style.AsideField asideStatus={asideStatus} categoriesListLength={categoriesList.length}>
+                <div className='items'>
+                    <ol>
+                        {(userInfo.role === 'SuperAdminAcademy' || userInfo.role === 'AgentAcademy') && (
                             <li>
-                                <div className='collapse_field'>
-                                    <div className='collapse_title' onClick={collapseStatusHandler}>
-                                        <Image src={category} alt='category' />
-                                        <p>{t('Category')}</p>
-                                    </div>
-                                    <div className={`collapse_menu ${collapseStatus ? 'open' : ''}`}>
-                                        {categoriesList
-                                            ?.sort((a, b) => {
-                                                return a.place - b.place;
-                                            })
-                                            .map(item => {
-                                                if (item.place === 0) {
+                                <Link href='/dashboard' className={`${router.pathname === '/dashboard' ? 'active' : ''}`}>
+                                    <Image src={home} alt='home' />
+                                    <p>{t('Dashboard')}</p>
+                                </Link>
+                            </li>
+                        )}
+                        {(userInfo.role === 'SuperAdminAcademy' || userInfo.role === 'AgentAcademy') && (
+                            <li>
+                                <Link href='/video' className={`${router.pathname === '/video' ? 'active' : ''}`}>
+                                    <Image src={video} alt='video' />
+                                    <p>{t('Media')}</p>
+                                </Link>
+                            </li>
+                        )}
+                        {(userInfo.role === 'User' || userInfo.role === 'AgentAcademy') && (
+                            <>
+                                <li>
+                                    <div className='collapse_field'>
+                                        <div className='collapse_title' onClick={collapseStatusHandler}>
+                                            <Image src={category} alt='category' />
+                                            <p>{t('Category')}</p>
+                                        </div>
+                                        <div className={`collapse_menu ${collapseStatus ? 'open' : ''}`}>
+                                            {categoriesList
+                                                ?.sort((a, b) => {
+                                                    return a.place - b.place;
+                                                })
+                                                .map(item => {
+                                                    if (item.place === 0) {
+                                                        return (
+                                                            <Link
+                                                                href={`/video/${item.id}`}
+                                                                key={item.id}
+                                                                className={parseInt(router.query.id) === item.id ? 'submenu_active' : ''}
+                                                            >
+                                                                <img
+                                                                    className='video_banner'
+                                                                    src={item?.image.replace('http', 'https')}
+                                                                    alt='video-banner'
+                                                                />
+                                                                {item.title}
+                                                            </Link>
+                                                        );
+                                                    }
                                                     return (
                                                         <Link
                                                             href={`/video/${item.id}`}
                                                             key={item.id}
-                                                            className={parseInt(router.query.id) === item.id ? 'submenu_active' : ''}
+                                                            className={`${
+                                                                item?.rank <= userInfo.rank || userInfo.role === 'AgentAcademy'
+                                                                    ? ''
+                                                                    : 'disabled'
+                                                            } ${parseInt(router.query.id) === item.id ? 'submenu_active' : ''}`}
                                                         >
                                                             <img
                                                                 className='video_banner'
@@ -99,72 +120,54 @@ function Aside({ asideStatus }) {
                                                             {item.title}
                                                         </Link>
                                                     );
-                                                }
-                                                return (
-                                                    <Link
-                                                        href={`/video/${item.id}`}
-                                                        key={item.id}
-                                                        className={`${
-                                                            item?.rank <= userInfo.rank || userInfo.role === 'AgentAcademy'
-                                                                ? ''
-                                                                : 'disabled'
-                                                        } ${parseInt(router.query.id) === item.id ? 'submenu_active' : ''}`}
-                                                    >
-                                                        <img
-                                                            className='video_banner'
-                                                            src={item?.image.replace('http', 'https')}
-                                                            alt='video-banner'
-                                                        />
-                                                        {item.title}
-                                                    </Link>
-                                                );
-                                            })}
+                                                })}
+                                        </div>
                                     </div>
-                                </div>
+                                </li>
+                            </>
+                        )}
+                        {userInfo.role === 'User' && (
+                            <li>
+                                <Link href='/certification' className={`${router.pathname === '/video' ? 'active' : ''}`}>
+                                    <Image src={AppreciationIcon} alt='video' className='sidebar_icon' />
+                                    <p>{t('Certification')}</p>
+                                </Link>
                             </li>
-                        </>
-                    )}
-                    {userInfo.role === 'User' && (
-                        <li>
-                            <Link href='/certification' className={`${router.pathname === '/video' ? 'active' : ''}`}>
-                                <Image src={AppreciationIcon} alt='video' className='sidebar_icon' />
-                                <p>{t('Certification')}</p>
-                            </Link>
+                        )}
+                        {userInfo.role === 'SuperAdminAcademy' ? (
+                            <>
+                                <li>
+                                    <Link href='/tags'>
+                                        <Image src={tag} alt='tag' />
+                                        <p>{t('tags')}</p>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href='/category'>
+                                        <Image src={category} alt='category' />
+                                        <p>{t('Category')}</p>
+                                    </Link>
+                                </li>
+                            </>
+                        ) : (
+                            ''
+                        )}
+                    </ol>
+                </div>
+                <span className='seprator' />
+                <div className='items'>
+                    <ol>
+                        <li className='night-mode'>
+                            <div>
+                                <Image src={mode} alt='mode' />
+                                <p>{t('Dark mode')}</p>
+                            </div>
+                            <Switch checked={themeState === 'dark'} onChange={themeHandler} />
                         </li>
-                    )}
-                    {userInfo.role === 'SuperAdminAcademy' ? (
-                        <>
-                            <li>
-                                <Link href='/tags'>
-                                    <Image src={tag} alt='tag' />
-                                    <p>{t('tags')}</p>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href='/category'>
-                                    <Image src={category} alt='category' />
-                                    <p>{t('Category')}</p>
-                                </Link>
-                            </li>
-                        </>
-                    ) : (
-                        ''
-                    )}
-                </ol>
-            </div>
-            <span className='seprator' />
-            <div className='items'>
-                <ol>
-                    <li className='night-mode'>
-                        <div>
-                            <Image src={mode} alt='mode' />
-                            <p>{t('Dark mode')}</p>
-                        </div>
-                        <Switch checked={themeState === 'dark'} onChange={themeHandler} />
-                    </li>
-                </ol>
-            </div>
-        </Style.AsideField>
+                    </ol>
+                </div>
+            </Style.AsideField>
+        </>
     );
 }
 
