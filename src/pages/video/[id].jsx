@@ -18,7 +18,7 @@ import EmptyField from '@/components/template/empty-field';
 import play from '@/assets/icons/play.svg';
 import { CardField, TagsList } from '@/components/pages/video/list/card.style';
 import EmptyFieldImg from '../../assets/images/empty/empty-media-list.png';
-import { ListVideoField, SearchField, FiltersWrapper } from '@/components/pages/video/list/list-video.style';
+import { ListVideoField, SearchField, FiltersWrapper, PaginationWrapper } from '@/components/pages/video/list/list-video.style';
 
 // API
 import { GetUserMediaList } from '@/api-request/media/list';
@@ -103,6 +103,11 @@ function UserVideo() {
         GetUserMediaList(id, lang, searchValue, filterParams)
             .then(res => {
                 setMediaList(res.results);
+                console.log(res);
+                setPageStatus({
+                    ...pageStatus,
+                    total: res.total_page
+                });
             })
             .catch(() => {})
             .finally(() => {
@@ -118,7 +123,7 @@ function UserVideo() {
                 setTagsList(res.results);
             })
             .catch(() => {});
-    }, [router.query.id, userInfo.lang, router.query.tagId, sortFilter, viewsFilter]);
+    }, [router.query.id, userInfo.lang, router.query.tagId, sortFilter, viewsFilter, pageStatus.current]);
 
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
@@ -234,22 +239,22 @@ function UserVideo() {
                         </div>
                     ))
                 )}
+                <PaginationWrapper>
+                    <Pagination
+                        color='primary'
+                        count={pageStatus.total}
+                        page={pageStatus.current}
+                        onChange={(_, value) =>
+                            setPageStatus(prev => {
+                                return {
+                                    ...prev,
+                                    current: value
+                                };
+                            })
+                        }
+                    />
+                </PaginationWrapper>
             </ListVideoField>
-            <paginationField>
-                <Pagination
-                    color='primary'
-                    count={pageStatus.total}
-                    page={pageStatus.current}
-                    onChange={(_, value) =>
-                        setPageStatus(prev => {
-                            return {
-                                ...prev,
-                                current: value
-                            };
-                        })
-                    }
-                />
-            </paginationField>
         </LayoutProvider>
     );
 }

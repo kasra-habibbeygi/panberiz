@@ -151,6 +151,6 @@ export const PaginationWrapper = styled.div(() => ({
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    alignContent: 'center',
+    alignItems: 'center',
     marginTop: '40px'
 }));
