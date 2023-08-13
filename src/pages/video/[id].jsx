@@ -218,42 +218,6 @@ function UserVideo() {
                             {item.title}
                         </Link>
                     ))}
-                    {tagsList.map(item => (
-                        <Link
-                            className={parseInt(router.query.tagId) === item.id ? 'active_tag' : ''}
-                            href={`/video/5/?tagId=${item.id}`}
-                            key={`tags_list_${item.id}`}
-                        >
-                            {item.title}
-                        </Link>
-                    ))}
-                    {tagsList.map(item => (
-                        <Link
-                            className={parseInt(router.query.tagId) === item.id ? 'active_tag' : ''}
-                            href={`/video/5/?tagId=${item.id}`}
-                            key={`tags_list_${item.id}`}
-                        >
-                            {item.title}
-                        </Link>
-                    ))}
-                    {tagsList.map(item => (
-                        <Link
-                            className={parseInt(router.query.tagId) === item.id ? 'active_tag' : ''}
-                            href={`/video/5/?tagId=${item.id}`}
-                            key={`tags_list_${item.id}`}
-                        >
-                            {item.title}
-                        </Link>
-                    ))}
-                    {tagsList.map(item => (
-                        <Link
-                            className={parseInt(router.query.tagId) === item.id ? 'active_tag' : ''}
-                            href={`/video/5/?tagId=${item.id}`}
-                            key={`tags_list_${item.id}`}
-                        >
-                            {item.title}
-                        </Link>
-                    ))}
                 </div>
             </TagsList>
             <ListVideoField>
