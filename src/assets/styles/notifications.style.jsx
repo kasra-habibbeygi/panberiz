@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const NotificationsWrapper = styled.div(props => ({
     '& .title': {
         fontSize: '25px',
-        fontWeight: 800,
+        fontWeight: '800',
         borderBottom: '1px solid black',
         width: 'fit-content',
         marginBottom: '70px',
@@ -14,7 +14,7 @@ export const NotificationsWrapper = styled.div(props => ({
     '& .item': {
         maxWidth: '500px',
         margin: '0 auto',
-        borderBottom: '1px solid #e1e1e1',
+        borderBottom: props.theme.mode === 'light' ? '1px solid #e1e1e1' : '1px solid #464646',
         paddingBottom: '10px',
         marginTop: '20px',
         color: props.theme.mode === 'light' ? 'black' : 'white',

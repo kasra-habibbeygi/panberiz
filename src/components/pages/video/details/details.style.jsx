@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const MainField = styled.div(props => ({
-    borderTop: '1px solid #F0F0F0',
+    borderTop: props.theme.mode === 'light' ? '1px solid #dfdfdf' : '1px solid #464646',
     marginTop: '20px',
     paddingTop: '20px',
 

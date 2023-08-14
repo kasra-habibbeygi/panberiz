@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const MainField = styled.div(props => ({
-    borderTop: '1px solid #F0F0F0',
+    borderTop: props.theme.mode === 'light' ? '1px solid #dfdfdf' : '1px solid #464646',
     paddingTop: '20px',
     marginTop: '20px',
 
@@ -16,6 +16,12 @@ export const MainField = styled.div(props => ({
 
         p: {
             color: props.theme.palette.colors.text.light
+        },
+
+        svg: {
+            ...(props.theme !== 'light' && {
+                fill: '#999999'
+            })
         }
     },
 
@@ -109,7 +115,8 @@ export const MainField = styled.div(props => ({
         justifyContent: 'center',
         borderRadius: '10px',
         padding: '30px',
-        background: '#F1F1F1',
+        background: props.theme.mode === 'light' ? '#F1F1F1' : '#2D2140',
+        color: props.theme.palette.colors.text.blackAndWhite,
         marginTop: '20px'
     }
 }));

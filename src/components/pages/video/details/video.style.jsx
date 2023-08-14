@@ -84,7 +84,8 @@ export const MainField = styled.div(props => ({
             '& .rate': {
                 display: 'flex',
                 alignItems: 'center',
-                gap: '10px'
+                gap: '10px',
+                color: props.theme.palette.colors.text.blackAndWhite
             },
 
             p: {

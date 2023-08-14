@@ -125,35 +125,42 @@ export const CardField = styled.div(props => ({
     }
 }));
 
-export const TagsList = styled.div({
-    marginTop: '50px',
+export const TagsList = styled.div(props => {
+    console.log(props);
+    return {
+        marginTop: '50px',
 
-    '& .tags_field': {
-        width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        marginTop: '10px',
-        gap: '10px'
-    },
+        p: {
+            color: props.theme.palette.colors.text.blackAndWhite
+        },
 
-    a: {
-        display: 'flex',
-        boxAlign: 'center',
-        alignItems: 'center',
-        boxPack: 'center',
-        justifyContent: 'center',
-        padding: '7px 15px',
-        color: 'rgb(117, 27, 116)',
-        borderRadius: '12px',
-        border: '1px dashed rgb(117, 27, 116)',
-        background: 'white',
-        gap: '5px'
-    },
+        '& .tags_field': {
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            marginTop: '10px',
+            gap: '10px'
+        },
 
-    '& .active_tag': {
-        background: '#69127729'
-    }
+        a: {
+            display: 'flex',
+            boxAlign: 'center',
+            alignItems: 'center',
+            boxPack: 'center',
+            justifyContent: 'center',
+            padding: '7px 15px',
+            color: props.theme.mode === 'light' ? 'rgb(117, 27, 116)' : '#a343a2',
+            borderRadius: '12px',
+            border: props.theme.mode === 'light' ? '1px dashed rgb(117, 27, 116)' : '1px dashed #a343a2',
+            background: props.theme.mode === 'light' ? 'white' : '#11011e',
+            gap: '5px'
+        },
+
+        '& .active_tag': {
+            background: '#69127729'
+        }
+    };
 });
 
 export const PaginationField = styled.div({

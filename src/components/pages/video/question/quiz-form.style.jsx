@@ -2,16 +2,21 @@ import styled from '@emotion/styled';
 import { Dialog } from '@mui/material';
 
 export const QuizFormField = styled(Dialog)(props => ({
+    '& .MuiPaper-elevation': {
+        background: props.theme.mode === 'light' ? 'white' : '#3B2D51'
+    },
+
     '& .MuiDialog-paper': {
         padding: '30px',
         textAlign: props.theme.direction === 'rtl' ? 'right' : 'ltr',
 
         h3: {
-            paddingBottom: '15px'
+            paddingBottom: '15px',
+            color: props.theme.palette.colors.text.blackAndWhite
         },
 
         '& .border': {
-            borderBottom: '1px solid rgba(228, 228, 228, 0.9)'
+            borderBottom: props.theme.mode === 'light' ? '1px solid rgba(228, 228, 228, 0.9)' : '1px solid #464646'
         },
 
         '& .flex_field': {

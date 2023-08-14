@@ -31,6 +31,7 @@ import { GetTagsList } from '@/api-request/tags';
 import { AddNewmedia, AddNewmediaAgent } from '@/api-request/media/add';
 import { GetAllMedia, GetMyMediaList } from '@/api-request/media/list';
 import { toast } from 'react-hot-toast';
+import EmptyField from '@/components/template/empty-field';
 
 const LangList = [
     { label: 'english', value: 'en' },
@@ -418,8 +419,7 @@ function AddForm() {
                                 <QuestionsField>{questionListProvider}</QuestionsField>
                             ) : (
                                 <>
-                                    <Image src={QuestionEmptyIcon} alt='quiz-empty' />
-                                    <h3>{t('No question has been asked!')}</h3>
+                                    <EmptyField title={t('No question has been asked!')} img={QuestionEmptyIcon} />
                                 </>
                             )}
                         </div>

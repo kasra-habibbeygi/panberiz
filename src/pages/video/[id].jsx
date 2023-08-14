@@ -43,6 +43,8 @@ function UserVideo() {
     const [viewsFilter, setViewsFilter] = useState(null);
     const [sortFilter, setSortFilter] = useState(null);
 
+    console.log(userInfo.role);
+
     const [pageStatus, setPageStatus] = useState({
         total: 1,
         current: 1
@@ -58,52 +60,31 @@ function UserVideo() {
 
         if (viewsFilter?.value === 'seen') {
             filterParams += '&is_viewed=true';
-            setPageStatus({
-                total: 1,
-                current: 1
-            });
         }
+
         if (viewsFilter?.value === 'unseen') {
             filterParams += '&is_viewed=false';
-            setPageStatus({
-                total: 1,
-                current: 1
-            });
         }
+
         if (sortFilter?.value === 'oldest') {
             filterParams += '&oldest=true';
-            setPageStatus({
-                total: 1,
-                current: 1
-            });
         }
+
         if (sortFilter?.value === 'newest') {
             filterParams += '&newest=true';
-            setPageStatus({
-                total: 1,
-                current: 1
-            });
         }
+
         if (sortFilter?.value === 'score') {
             filterParams += '&score=true';
-            setPageStatus({
-                total: 1,
-                current: 1
-            });
         }
 
         if (router.query.tagId) {
             filterParams += `&tagId=${router.query.tagId}`;
-            setPageStatus({
-                total: 1,
-                current: 1
-            });
         }
 
-        GetUserMediaList(id, lang, searchValue, filterParams)
+        GetUserMediaList(id, lang, searchValue, filterParams, userInfo.role)
             .then(res => {
                 setMediaList(res.results);
-                console.log(res);
                 setPageStatus({
                     ...pageStatus,
                     total: res.total_page
@@ -131,7 +112,7 @@ function UserVideo() {
         }, 1000);
 
         return () => clearTimeout(delayDebounceFn);
-    }, [searchValue, userInfo.lang]);
+    }, [searchValue]);
 
     const autoCompleteHandler = (e, name) => {
         if (name === 'views') {
@@ -166,10 +147,6 @@ function UserVideo() {
             value: 'score'
         }
     ];
-
-    if (router.query.tagId) {
-        console.log(router.query.tagId);
-    }
 
     return (
         <LayoutProvider>

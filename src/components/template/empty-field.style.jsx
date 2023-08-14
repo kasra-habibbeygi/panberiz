@@ -9,7 +9,7 @@ export const MainField = styled.div(props => ({
     gap: '40px',
 
     img: {
-        width: '500px',
+        width: '300px',
         height: 'auto'
     },
 
