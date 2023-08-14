@@ -80,18 +80,20 @@ function UserVideo() {
             filterParams += `&tagId=${router.query.tagId}`;
         }
 
-        GetUserMediaList(id, lang, searchValue, filterParams, userInfo.role)
-            .then(res => {
-                setMediaList(res.results);
-                setPageStatus({
-                    ...pageStatus,
-                    total: res.total_page
+        if (userInfo.role) {
+            GetUserMediaList(id, lang, searchValue, filterParams, userInfo.role)
+                .then(res => {
+                    setMediaList(res.results);
+                    setPageStatus({
+                        ...pageStatus,
+                        total: res.total_page
+                    });
+                })
+                .catch(() => {})
+                .finally(() => {
+                    dispatch(loaderStatusHandler(false));
                 });
-            })
-            .catch(() => {})
-            .finally(() => {
-                dispatch(loaderStatusHandler(false));
-            });
+        }
     };
 
     useEffect(() => {
@@ -102,7 +104,7 @@ function UserVideo() {
                 setTagsList(res.results);
             })
             .catch(() => {});
-    }, [router.query.id, userInfo.lang, router.query.tagId, sortFilter, viewsFilter, pageStatus.current]);
+    }, [router.query.id, userInfo.lang, router.query.tagId, sortFilter, viewsFilter, pageStatus.current, userInfo.role]);
 
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {

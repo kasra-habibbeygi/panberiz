@@ -40,16 +40,12 @@ const QuestionsContent = () => {
     const progressPercent = ((countDown - totalMiliSec) / totalMiliSec) * 100;
 
     useEffect(() => {
-        dispatch(loaderStatusHandler(true));
         GetMediaDetails(router.query.id, userInfo.lang)
             .then(res => {
                 setMediaDetails(res[0]);
                 setNewCountDown(res[0].the_duration_of_the_test * 60 * 1000);
             })
-            .catch(() => {})
-            .finally(() => {
-                dispatch(loaderStatusHandler(true));
-            });
+            .catch(() => {});
     }, [router.query.id, userInfo.lang]);
 
     const radioValuehandler = (e, id) => {
