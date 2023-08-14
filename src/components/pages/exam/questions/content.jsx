@@ -40,13 +40,13 @@ const QuestionsContent = () => {
     const progressPercent = ((countDown - totalMiliSec) / totalMiliSec) * 100;
 
     useEffect(() => {
-        GetMediaDetails(router.query.id, userInfo.lang)
+        GetMediaDetails(router.query.id, userInfo.lang, userInfo.role)
             .then(res => {
-                setMediaDetails(res[0]);
-                setNewCountDown(res[0].the_duration_of_the_test * 60 * 1000);
+                setMediaDetails(res.results[0]);
+                setNewCountDown(res.results[0].the_duration_of_the_test * 60 * 1000);
             })
             .catch(() => {});
-    }, [router.query.id, userInfo.lang]);
+    }, [router.query.id, userInfo.lang, userInfo.role]);
 
     const radioValuehandler = (e, id) => {
         setRadioValues(prev => {

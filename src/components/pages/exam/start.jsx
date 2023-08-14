@@ -20,12 +20,12 @@ const StartExam = () => {
     const [mediaDetails, setMediaDetails] = useState([]);
 
     useEffect(() => {
-        GetMediaDetails(router.query.id, userInfo.lang)
+        GetMediaDetails(router.query.id, userInfo.lang, userInfo.role)
             .then(res => {
-                setMediaDetails(res[0]);
+                setMediaDetails(res.results[0]);
             })
             .catch(() => {});
-    }, [router.query.id, userInfo.lang]);
+    }, [router.query.id, userInfo.lang, userInfo.role]);
 
     return (
         <MainField>

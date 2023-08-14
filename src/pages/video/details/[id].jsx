@@ -28,7 +28,8 @@ const VideoDetails = () => {
         if (userInfo.role) {
             GetMediaDetails(router.query.id, userInfo.lang, userInfo.role)
                 .then(res => {
-                    setMediaDetails(res);
+                    console.log(res);
+                    setMediaDetails(res.results);
                 })
                 .catch(() => {})
                 .finally(() => {
