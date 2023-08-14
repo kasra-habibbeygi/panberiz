@@ -47,7 +47,7 @@ article {
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -56,10 +56,12 @@ article {
 
 ::-webkit-scrollbar-thumb {
     background: #39164F;
+    border-radius: 50px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: rgb(85, 94, 129);
+    border-radius: 50px;
 }
 
 a {

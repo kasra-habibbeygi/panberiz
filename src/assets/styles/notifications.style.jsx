@@ -4,8 +4,6 @@ export const NotificationsWrapper = styled.div(props => ({
     '& .title': {
         fontSize: '25px',
         fontWeight: '800',
-        borderBottom: '1px solid black',
-        width: 'fit-content',
         marginBottom: '70px',
         color: props.theme.mode === 'light' ? 'black' : 'white',
         borderColor: props.theme.mode === 'light' ? 'black' : 'white'

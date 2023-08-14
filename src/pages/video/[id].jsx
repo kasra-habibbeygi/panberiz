@@ -43,8 +43,6 @@ function UserVideo() {
     const [viewsFilter, setViewsFilter] = useState(null);
     const [sortFilter, setSortFilter] = useState(null);
 
-    console.log(userInfo.role);
-
     const [pageStatus, setPageStatus] = useState({
         total: 1,
         current: 1
