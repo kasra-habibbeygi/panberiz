@@ -75,7 +75,7 @@ const QuestionsContent = () => {
         });
     };
 
-    const sumbitExamhandler = () => {
+    const submitExamHandler = () => {
         var score = '';
 
         radiosValues.map(checkbox => {
@@ -147,7 +147,7 @@ const QuestionsContent = () => {
                             </div>
                         ))}
 
-                        <Button color='primary' type='filled' extraClass='submit_btn' handler={sumbitExamhandler}>
+                        <Button color='primary' type='filled' extraClass='submit_btn' handler={submitExamHandler}>
                             {t('Test registration')}
                         </Button>
                     </>

@@ -25,15 +25,17 @@ const VideoDetails = () => {
 
     useEffect(() => {
         dispatch(loaderStatusHandler(true));
-        GetMediaDetails(router.query.id, userInfo.lang)
-            .then(res => {
-                setMediaDetails(res);
-            })
-            .catch(() => {})
-            .finally(() => {
-                dispatch(loaderStatusHandler(false));
-            });
-    }, [router.query.id, userInfo.lang]);
+        if (userInfo.role) {
+            GetMediaDetails(router.query.id, userInfo.lang, userInfo.role)
+                .then(res => {
+                    setMediaDetails(res);
+                })
+                .catch(() => {})
+                .finally(() => {
+                    dispatch(loaderStatusHandler(false));
+                });
+        }
+    }, [router.query.id, userInfo.lang, userInfo.role]);
 
     return (
         <LayoutProvider>

@@ -10,7 +10,9 @@ export const TitleField = styled.div(props => ({
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '100%',
-        backgroundColor: 'white',
+        backgroundColor: props.theme.mode === 'light' ? '#e9e9e9' : '#2D2140',
+        padding  :'20px',
+        borderRadius : '10px',
 
         h3: {
             fontSize: '1.3rem'
@@ -32,7 +34,7 @@ export const TitleField = styled.div(props => ({
         '& .progress': {
             width: '100%',
             borderRadius: '50px',
-            background: '#f4f4f4',
+            background:  props.theme.mode === 'light' ? '#f4f4f4' : '#2D2140',
             height: '15px',
             position: 'relative',
 

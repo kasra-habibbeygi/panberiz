@@ -81,7 +81,7 @@ function Video() {
                             {t('score')} : {item?.score}
                         </p>
                         <p>
-                            {t('Rank')} : {item?.category_rank}
+                            {t('Rank')} : {item?.category_name}
                         </p>
                         <p>
                             {t('Category')} : {item?.category_name}
@@ -144,7 +144,7 @@ function Video() {
                 <Image src={MainCertificateImg} alt='' />
                 <h3>{certificateData?.user_full_name}</h3>
                 <p className='code_field'>{certificateData?.user_code_meli}</p>
-                <p className='rank'>{certificateData?.category_rank}</p>
+                <p className='rank'>{certificateData?.category_name}</p>
                 <p className='time'>
                     {certificateData?.total_time > 60
                         ? `${certificateData?.total_time / 60} ساعت ${certificateData?.total_time % 60} دقیقه`

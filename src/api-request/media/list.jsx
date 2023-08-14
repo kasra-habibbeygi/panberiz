@@ -14,11 +14,12 @@ export const GetUserMediaList = async (id, lang, search, filterParams, role) => 
     return RequestHandler.call({ url: `/admins/media/${id}/?lang=${lang}${query}`, method: 'get' }).then(res => res.data);
 };
 
-export const GetMyMediaList = async lang => {
-    return RequestHandler.call({ url: `/admins/media/?lang=${lang}`, method: 'get' }).then(res => res.data);
+export const GetMyMediaList = async (lang, filterParams) => {
+    return RequestHandler.call({ url: `/admins/media/?lang=${lang}${filterParams}`, method: 'get' }).then(res => res.data);
 };
 
 export const GetAllMedia = async (lang, params) => {
+    console.log(params);
     return RequestHandler.call({ url: `/managers/media/?lang=${lang}${params ? params : ''}`, method: 'get' }).then(res => res.data);
 };
 

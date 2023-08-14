@@ -47,7 +47,8 @@ export const CardField = styled.div(props => ({
             p: {
                 position: 'relative',
                 top: '3px',
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                color: props.theme.palette.colors.text.blackAndWhite
             },
 
             '& .deletemedia': {

@@ -19,7 +19,7 @@ import StarIcon from '@mui/icons-material/Star';
 import Input from '@/components/form-group/input';
 
 // APIs
-import { AddNewComment, AddCommentScore } from '@/api-request/comment';
+import { AddNewComment, AddNewCommentPoint } from '@/api-request/comment';
 
 const Comment = ({ mediaDetails }) => {
     const { t } = useTranslation();
@@ -40,23 +40,20 @@ const Comment = ({ mediaDetails }) => {
             comment: inputValues.comment,
             media: mediaDetails?.id
         };
-
-        const RateComment = {
-            score: inputValues.rate,
-            media: mediaDetails?.id
-        };
-
         AddNewComment(CommentData)
-            .then(() => {
+            .then(res => {
                 toast.success(t('Your message was successfully registered!'));
 
-                AddCommentScore(RateComment)
+                const RateComment = {
+                    point: inputValues.rate.toString(),
+                    comment: res.id
+                };
+
+                AddNewCommentPoint(RateComment)
                     .then(() => {})
                     .catch(() => {});
             })
-            .catch(err => {
-                toast.error(err.response.data.message);
-            });
+            .catch(() => {});
     };
 
     return (
