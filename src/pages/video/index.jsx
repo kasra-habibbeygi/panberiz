@@ -72,45 +72,21 @@ function Video() {
 
         if (statusFilter?.value) {
             filterParams += `&media_status=${statusFilter?.value}`;
-            setPageStatus({
-                total: 1,
-                current: 1
-            });
         }
         if (viewsFilter?.value === 'seen') {
             filterParams += '&is_viewed=true';
-            setPageStatus({
-                total: 1,
-                current: 1
-            });
         }
         if (viewsFilter?.value === 'unseen') {
             filterParams += '&is_viewed=false';
-            setPageStatus({
-                total: 1,
-                current: 1
-            });
         }
         if (sortFilter?.value === 'oldest') {
             filterParams += '&oldest=true';
-            setPageStatus({
-                total: 1,
-                current: 1
-            });
         }
         if (sortFilter?.value === 'newest') {
             filterParams += '&newest=true';
-            setPageStatus({
-                total: 1,
-                current: 1
-            });
         }
         if (sortFilter?.value === 'score') {
             filterParams += '&score=true';
-            setPageStatus({
-                total: 1,
-                current: 1
-            });
         }
 
         if (userInfo.role === 'SuperAdminAcademy') {
@@ -138,6 +114,10 @@ function Video() {
             GetMyMediaList(userInfo.lang, filterParams)
                 .then(res => {
                     setMediaList(res.results);
+                    setPageStatus(prev => ({
+                        ...prev,
+                        total: res.total_page
+                    }));
                 })
                 .catch(() => {})
                 .finally(() => {
