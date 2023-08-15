@@ -321,6 +321,10 @@ function Video() {
     ));
 
     const autoCompleteHandler = (e, name) => {
+        setPageStatus({
+            ...pageStatus,
+            current: 1
+        });
         if (name === 'status') {
             setStatusFilter(e);
         } else if (name === 'views') {

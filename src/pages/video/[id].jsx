@@ -52,9 +52,9 @@ function UserVideo() {
         setSelectedButton(selected);
     };
 
-    const getMediaUserApi = (id, lang, searchValue) => {
+    const getMediaUserApi = (id, lang, resetPage = false) => {
         dispatch(loaderStatusHandler(true));
-        let filterParams = `&page=${pageStatus.current}`;
+        let filterParams = `&page=${resetPage ? 1 : pageStatus.current}`;
 
         if (viewsFilter?.value === 'seen') {
             filterParams += '&is_viewed=true';
@@ -84,10 +84,17 @@ function UserVideo() {
             GetUserMediaList(id, lang, searchValue, filterParams, userInfo.role)
                 .then(res => {
                     setMediaList(res.results);
-                    setPageStatus({
-                        ...pageStatus,
-                        total: res.total_page
-                    });
+                    if (resetPage) {
+                        setPageStatus({
+                            current: 1,
+                            total: res.total_page
+                        });
+                    } else {
+                        setPageStatus({
+                            ...pageStatus,
+                            total: res.total_page
+                        });
+                    }
                 })
                 .catch(() => {})
                 .finally(() => {
@@ -97,7 +104,7 @@ function UserVideo() {
     };
 
     useEffect(() => {
-        getMediaUserApi(router.query.id, userInfo.lang, searchValue);
+        getMediaUserApi(router.query.id, userInfo.lang);
 
         SpecificTags(router.query.id, userInfo.lang)
             .then(res => {
@@ -108,13 +115,17 @@ function UserVideo() {
 
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
-            getMediaUserApi(router.query.id, userInfo.lang, searchValue, sortFilter, viewsFilter);
+            getMediaUserApi(router.query.id, userInfo.lang, true);
         }, 1000);
 
         return () => clearTimeout(delayDebounceFn);
     }, [searchValue]);
 
     const autoCompleteHandler = (e, name) => {
+        setPageStatus({
+            ...pageStatus,
+            current: 1
+        });
         if (name === 'views') {
             setViewsFilter(e);
         } else {
@@ -191,6 +202,12 @@ function UserVideo() {
                             className={parseInt(router.query.tagId) === item.id ? 'active_tag' : ''}
                             href={`/video/${router.query.id}/?tagId=${item.id}`}
                             key={`tags_list_${item.id}`}
+                            onClick={() => {
+                                setPageStatus({
+                                    ...pageStatus,
+                                    current: 1
+                                });
+                            }}
                         >
                             {item.title}
                         </Link>
