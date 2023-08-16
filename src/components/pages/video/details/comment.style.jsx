@@ -52,7 +52,7 @@ export const MainField = styled.div(props => ({
         }
     },
 
-    ul: {
+    '& .comments_list': {
         listStyle: 'none',
         marginTop: '40px',
         width: '100%',
@@ -117,6 +117,13 @@ export const MainField = styled.div(props => ({
         padding: '30px',
         background: props.theme.mode === 'light' ? '#F1F1F1' : '#2D2140',
         color: props.theme.palette.colors.text.blackAndWhite,
+        marginTop: '20px'
+    },
+
+    '& .pagination_wrapper': {
+        display: 'flex',
+        justifyContent: 'center',
+        alignContent: 'center',
         marginTop: '20px'
     }
 }));

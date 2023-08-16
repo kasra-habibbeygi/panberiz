@@ -19,7 +19,6 @@ export const GetMyMediaList = async (lang, filterParams) => {
 };
 
 export const GetAllMedia = async (lang, params) => {
-    console.log(params);
     return RequestHandler.call({ url: `/managers/media/?lang=${lang}${params ? params : ''}`, method: 'get' }).then(res => res.data);
 };
 

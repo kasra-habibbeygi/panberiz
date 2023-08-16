@@ -27,7 +27,8 @@ export const MainField = styled.div(props => ({
     '& .footer_field': {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginTop: '20px'
     },
 
     '& .info': {
