@@ -11,7 +11,7 @@ export const GetCategoriesList = async lang => {
 
 // User
 export const GetUserCategoriesList = async lang => {
-    return RequestHandler.call({ url: `/users/categories/?lang=${lang}&page_size=`, method: 'get' }).then(res => res.data);
+    return RequestHandler.call({ url: `/users/categories/?lang=${lang}&page_size=200`, method: 'get' }).then(res => res.data);
 };
 
 // Admin
