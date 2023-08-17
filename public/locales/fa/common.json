@@ -167,5 +167,6 @@
     "Reject": "رد",
     "No score has been recorded": "امتیازی ثبت نشده است",
     "Condition": "وضعیت",
-    "The comment status has been changed successfully": "وضعیت کامنت با موفقیت عوض شد"
+    "The comment status has been changed successfully": "وضعیت کامنت با موفقیت عوض شد",
+    "Comments" : "کامنت ها"
 }

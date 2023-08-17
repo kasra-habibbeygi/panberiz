@@ -16,6 +16,11 @@ export const AsideField = styled.aside(props => ({
     zIndex: '700',
     overflow: 'auto',
 
+    '& .items_icon': {
+        width: '28px',
+        height: 'auto'
+    },
+
     '& .items': {
         ol: {
             listStyle: 'none',

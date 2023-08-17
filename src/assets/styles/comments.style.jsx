@@ -6,6 +6,10 @@ export const MainField = styled.div(props => ({
         margin: '40px auto'
     },
 
+    h3: {
+        color: props.theme.palette.colors.text.blackAndWhite
+    },
+
     '& .MuiRating-root': {
         direction: props.theme.direction
     },
@@ -59,7 +63,7 @@ export const MainField = styled.div(props => ({
         width: '100%',
 
         li: {
-            borderBottom: '1px solid #F0F0F0',
+            borderBottom: props.theme.mode === 'light' ? '1px solid #F0F0F0' : '1px solid #252525',
             paddingBottom: '20px',
             marginBottom: '20px',
             display: 'flex',

@@ -20,5 +20,5 @@ export const UpdateCommentStatus = async (data, role) => {
     if (role === 'AgentAcademy') {
         return RequestHandler.call({ url: 'admins/media/comment-update/', method: 'put', data }).then(res => res.data);
     }
-    return RequestHandler.call({ url: 'managers/media/comment-update/', method: 'put', data }).then(res => res.data);
+    return RequestHandler.call({ url: `managers/comments/update-comment/${data.comment}/`, method: 'put', data }).then(res => res.data);
 };

@@ -58,7 +58,7 @@ const CommentsManager = () => {
         )
             .then(() => {
                 setReload(!reload);
-                toast.success('');
+                toast.success(t('The comment status has been changed successfully'));
             })
             .catch(() => {});
     };

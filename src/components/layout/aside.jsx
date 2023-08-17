@@ -16,6 +16,7 @@ import tag from '../../assets/icons/sidebar/tag.svg';
 import category from '../../assets/icons/sidebar/category.svg';
 import mode from '../../assets/icons/sidebar/mode.svg';
 import AppreciationIcon from '../../assets/icons/sidebar/appreciation.svg';
+import CommentsIcon from '../../assets/icons/comment.svg';
 
 // APIs
 import { GetUserCategoriesList } from '../../api-request/category';
@@ -69,6 +70,14 @@ function Aside({ asideStatus, setAsideStatus }) {
                                 <Link href='/video' className={`${router.pathname === '/video' ? 'active' : ''}`}>
                                     <Image src={video} alt='video' />
                                     <p>{t('Media')}</p>
+                                </Link>
+                            </li>
+                        )}
+                        {userInfo.role !== 'User' && (
+                            <li>
+                                <Link href='/comments' className={`${router.pathname === '/comments' ? 'active' : ''}`}>
+                                    <Image src={CommentsIcon} alt='video' className='items_icon' />
+                                    <p>{t('Comments')}</p>
                                 </Link>
                             </li>
                         )}
@@ -128,7 +137,7 @@ function Aside({ asideStatus, setAsideStatus }) {
                         )}
                         {userInfo.role === 'User' && (
                             <li>
-                                <Link href='/certification' className={`${router.pathname === '/video' ? 'active' : ''}`}>
+                                <Link href='/certification' className={`${router.pathname === '/certification' ? 'active' : ''}`}>
                                     <Image src={AppreciationIcon} alt='video' className='sidebar_icon' />
                                     <p>{t('Certification')}</p>
                                 </Link>
@@ -137,13 +146,13 @@ function Aside({ asideStatus, setAsideStatus }) {
                         {userInfo.role === 'SuperAdminAcademy' ? (
                             <>
                                 <li>
-                                    <Link href='/tags'>
+                                    <Link href='/tags' className={`${router.pathname === '/tags' ? 'active' : ''}`}>
                                         <Image src={tag} alt='tag' />
                                         <p>{t('tags')}</p>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href='/category'>
+                                    <Link href='/category' className={`${router.pathname === '/category' ? 'active' : ''}`}>
                                         <Image src={category} alt='category' />
                                         <p>{t('Category')}</p>
                                     </Link>
