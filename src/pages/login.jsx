@@ -9,7 +9,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
 // Assets
-import { NationalCodeField, VerifyCodeField } from '@/assets/styles/login';
+import { NationalCodeField, VerifyCodeField } from '@/assets/styles/login.style';
 
 // Component
 import Button from '@/components/form-group/button';

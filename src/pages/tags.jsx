@@ -14,7 +14,7 @@ const AddTag = dynamic(() => import('@/components/pages/tags/add'), {
 });
 
 // Assets
-import { TagsmainField } from '@/assets/styles/main';
+import { TagsmainField } from '@/assets/styles/main.style';
 
 // APIs
 import { GetTagsList } from '@/api-request/tags';

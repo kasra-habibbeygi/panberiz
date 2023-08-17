@@ -6,7 +6,6 @@
     "add tag": "افزودن تگ",
     "tags list": "لیست تگ ها",
     "Tag title": "عنوان تگ",
-
     "natinal code": "کد ملی",
     "enter national code": "کدملی خود را وارد کنید",
     "login": "ورود",
@@ -15,7 +14,6 @@
     "Remaining until resend": "مانده تا ارسال کد",
     "Get the verify code again": "دریافت مجدد کد",
     "verify": "تایید",
-
     "Category type": "نوع دسته بندی",
     "Category": "دسته بندی",
     "Public": "عمومی",
@@ -43,12 +41,9 @@
     "Category Name": "نام دسته",
     "Enter the position of the media": "جایگاه قرارگرفتن مدیا را وارد کنید",
     "Media Count": "تعداد مدیا",
-
     "Favorites list": "لیست علاقه مندی ها",
-
     "Start exam": "شروع کوییز",
     "Certification": "تقدیر نامه",
-
     "Seach": "جستجو ...",
     "Add media": "افزودن مدیا",
     "Logout": "خروج از حساب کاربری",
@@ -57,7 +52,6 @@
     "Video": "ویدئو",
     "Dark mode": "حالت شب",
     "Media": "مدیا",
-
     "Media Type": "نوع مدیا",
     "Enter media title...": "عنوان مدیا را وارد کنید ...",
     "Enter number of questions...": "تعداد سوالات را وارد کنید ...",
@@ -85,7 +79,6 @@
     "Enter the answer": "پاسخ را وارد کنید",
     "Uploaded videos": "ویدئو های آپلود شده",
     "Videos pending approval": "ویدئو های در انتظار تایید",
-
     "Income": "درآمد",
     "Weekly": "هفتگی",
     "Rank selection": "انتخاب رنک",
@@ -97,17 +90,14 @@
     "Details": "جزئیات",
     "Rank visit report": "گزارش بازدید رنک ها",
     "Video visit report": "گزارش بازدید ویدیو ها",
-
     "viewers statistics": "آمار بازدید",
     "Total": "کل",
-
     "Prerequisite videos": "ویدیو های پیشنیاز",
     "Similar videos": "ویدیو های مشابه",
     "Enter your opinion...": "دیدگاه خود را وارد کنید ...",
     "Your score": "امتیاز شما",
     "score": "امتیاز",
     "Start the quiz": "شروع کوییز",
-
     "Minutes": "دقیقه",
     "Question": "سوال",
     "Test registration": "ثبت آزمون",
@@ -118,7 +108,6 @@
     "Why do you want to reject this media?": "چرا میخواهید این مدیا را رد کنید ؟ ",
     "close the window": "بستن پنجره",
     "Submit": "ثبت",
-
     "Your message was successfully registered!": "پیام شما با موفقیت ثبت شد !",
     "The code has been sent successfully": "کد با موفقیت ارسال شد !",
     "The entered national code is not correct!": "کد ملی وارد شده صحیح نمیباشد !",
@@ -172,5 +161,11 @@
     "There are no comments for this video yet!": "هنوز نظری برای این ویدیو درج نشده است !",
     "All": "همه",
     "Edit media": "ویرایش مدیا",
-    "No user found": "هیچ کاربری یافت نشد"
+    "No user found": "هیچ کاربری یافت نشد",
+    "Manage comments": "مدیرت کامنت ها",
+    "Accept": "تایید",
+    "Reject": "رد",
+    "No score has been recorded": "امتیازی ثبت نشده است",
+    "Condition": "وضعیت",
+    "The comment status has been changed successfully": "وضعیت کامنت با موفقیت عوض شد"
 }

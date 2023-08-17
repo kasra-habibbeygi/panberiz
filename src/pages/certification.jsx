@@ -20,7 +20,7 @@ import EmptyField from '@/components/template/empty-field';
 import HeaderField from '@/components/template/header';
 import { CardField } from '@/components/pages/video/list/card.style';
 import { ListVideoField } from '@/components/pages/video/list/list-video.style';
-import { CertificateField, GapField } from '@/assets/styles/certificate';
+import { CertificateField, GapField } from '@/assets/styles/certificate.style';
 
 // APIs
 import { GetCertificationList } from '@/api-request/certification';

@@ -117,7 +117,7 @@ const Comment = () => {
                                             <b>{item.user_fullname}</b>
                                         </div>
                                         <div className='rate'>
-                                            <p>{item.point ? `${parseFloat(item.point)} / 5` : 'امتیازی ثبت نشده است'}</p>
+                                            <p>{item.point ? `${parseFloat(item.point)} / 5` : t('No score has been recorded')}</p>
 
                                             <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
                                         </div>
