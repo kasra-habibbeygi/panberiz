@@ -19,6 +19,7 @@ import { Dialog } from '@mui/material';
 
 // APIs
 import { GetManagerChart1Info, GetAdminChart1Info, GetAdminChart2Info, GetManagerChart2Info, UserSearch } from '@/api-request/chart';
+import { toast } from 'react-hot-toast';
 
 function Income() {
     const { t } = useTranslation('common');
@@ -81,13 +82,14 @@ function Income() {
     const searchHandler = e => {
         e.preventDefault();
         if (searchValue) {
-            setShowSearchModal(true);
-
             UserSearch(userInfo.lang, searchValue)
                 .then(res => {
                     setUserSearchValue(res);
+                    setShowSearchModal(true);
                 })
-                .catch(() => {});
+                .catch(() => {
+                    toast.error(t('No user found'));
+                });
         }
     };
 

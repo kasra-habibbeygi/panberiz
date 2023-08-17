@@ -113,7 +113,7 @@ export const SearchField = styled.div(props => ({
 export const FiltersWrapper = styled.div(props => ({
     '& .filters_title': {
         fontSize: '20px',
-        fontWeight: 700,
+        fontWeight: '700',
         color: props.theme.mode === 'light' ? 'black' : 'white'
     },
 

@@ -30,6 +30,7 @@ import { FiltersWrapper, ListVideoField, PaginationWrapper } from '@/components/
 
 // MUI
 import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import StarIcon from '@mui/icons-material/Star';
 import { Dialog, Pagination } from '@mui/material';
 
@@ -229,11 +230,10 @@ function Video() {
                         <Link href={`/video/details/${item.id}`}>
                             <Image className='icon' src={play} alt='play' />
                         </Link>
-                        <DeleteIcon
-                            className='deletemedia'
-                            onClick={() => deleteSpecificMedia(item.id)}
-                            style={{ color: item?.publisher_id === userInfo?.id ? '#EE4B2B' : 'gray', filter: 'none' }}
-                        />
+                        <DeleteIcon className='deletemedia' onClick={() => deleteSpecificMedia(item.id)} />
+                        <Link href={`/video/edit/${item.id}`}>
+                            <ModeEditOutlineIcon className='editMedia' />
+                        </Link>
                     </div>
                     <img className='video_banner' src={item?.cover?.replace('http', 'https')} alt='video-banner' />
                 </div>
@@ -277,6 +277,9 @@ function Video() {
                             <StarIcon htmlColor='rgba(248, 170, 0, 1)' />
                         </div>
                         <DeleteIcon className='deletemedia' onClick={() => deleteSpecificMedia(item.id)} />
+                        <Link href={`/video/edit/${item.id}`}>
+                            <ModeEditOutlineIcon className='editMedia' />
+                        </Link>
                     </div>
                 </div>
                 {userInfo.role !== 'User' && <small>{item?.publisher_fullname}</small>}

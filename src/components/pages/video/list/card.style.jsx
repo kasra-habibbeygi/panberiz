@@ -27,6 +27,7 @@ export const CardField = styled.div(props => ({
 
         '& .right_field': {
             color: props.theme.palette.colors.text.blackAndWhite,
+
             p: {
                 color: props.theme.palette.colors.text.light
             }
@@ -107,6 +108,14 @@ export const CardField = styled.div(props => ({
                 position: 'absolute',
                 top: '10px',
                 right: '10px',
+                filter: 'invert(99%) sepia(2%) saturate(138%) hue-rotate(212deg) brightness(114%) contrast(89%)',
+                cursor: 'pointer'
+            },
+
+            '& .editMedia': {
+                position: 'absolute',
+                top: '10px',
+                right: '40px',
                 filter: 'invert(99%) sepia(2%) saturate(138%) hue-rotate(212deg) brightness(114%) contrast(89%)',
                 cursor: 'pointer'
             }
