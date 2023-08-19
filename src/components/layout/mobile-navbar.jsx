@@ -1,14 +1,16 @@
 // Assets
 import Link from 'next/link';
+import Image from 'next/image';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 // Assets
 import { MobileNavbarMainField } from './mobile-navbar.style';
 import HomeIcon from '../../assets/icons/home.svg';
 import HeartIcon from '../../assets/icons/heart.svg';
+
+// MUi
 import AddSharpIcon from '@mui/icons-material/AddSharp';
-import Image from 'next/image';
-import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
 
 const MobileNavbar = () => {
     const userInfo = useSelector(state => state.UserInfo);

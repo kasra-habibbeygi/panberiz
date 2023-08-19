@@ -4,12 +4,19 @@ export const MobileNavbarMainField = styled.nav(props => ({
     display: 'none',
     width: '100%',
     height: '60px',
-    background: 'white',
+    background: props.theme.mode === 'light' ? 'white' : '#11011E',
     position: 'fixed',
     bottom: '0',
     right: '0',
-    borderTop: '1px solid #EEEEEE',
+    borderTop: props.theme.mode === 'light' ? '1px solid #EEEEEE' : '1px solid #2E1F45',
     zIndex: '200',
+
+    img: {
+        filter:
+            props.theme.mode === 'light'
+                ? 'none'
+                : 'invert(99%) sepia(1%) saturate(418%) hue-rotate(131deg) brightness(118%) contrast(100%)'
+    },
 
     '@media(max-width : 800px)': {
         display: 'flex',

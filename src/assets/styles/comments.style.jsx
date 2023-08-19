@@ -21,12 +21,6 @@ export const MainField = styled.div(props => ({
 
         p: {
             color: props.theme.palette.colors.text.light
-        },
-
-        svg: {
-            ...(props.theme !== 'light' && {
-                fill: '#999999'
-            })
         }
     },
 
@@ -134,7 +128,7 @@ export const MainField = styled.div(props => ({
 
         button: {
             '&.accept': {
-                background: '#e0fdd9 !important',
+                background: props.theme.mode === 'light' ? '#e0fdd9 !important' : '#243220 !important',
                 color: '#009d56 !important',
                 padding: '0 19px',
                 minHeight: '33px',
@@ -143,7 +137,7 @@ export const MainField = styled.div(props => ({
             },
 
             '&.reject': {
-                background: '#fdd9d9 !important',
+                background: props.theme.mode === 'light' ? '#fdd9d9 !important' : '#381414 !important',
                 color: '#9d0000 !important',
                 padding: '0 19px',
                 minHeight: '33px',

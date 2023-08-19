@@ -4,7 +4,7 @@ export const MainField = styled.div(props => ({
     display: 'flex',
     justifyContent: 'center',
     alignContent: 'center',
-    marginTop: '20px',
+    marginTop: '40px',
     width: '100%',
 
     li: {
