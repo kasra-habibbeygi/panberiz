@@ -4,5 +4,6 @@ export const MainField = styled.div(props => ({
     display: 'flex',
     justifyContent: 'center',
     alignContent: 'center',
-    marginTop: '20px'
+    marginTop: '20px',
+    width: '100%'
 }));

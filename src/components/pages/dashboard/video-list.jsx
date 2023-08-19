@@ -1,21 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import HeaderField from '@/components/template/header';
-import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 //Assets
-import eye from './../../../assets/icons/eye.svg';
+import eye from '@/assets/icons/eye.svg';
 import { DashboardTableWrapper, VideoListWrapper } from './dashboard-table.style';
 
 // Components
 import UsersList from './users_list';
+import PaginationField from '@/components/template/pagination';
 
 // MUI
-import { Button, Dialog, Pagination } from '@mui/material';
+import { Button, Dialog } from '@mui/material';
 
 // APIs
 import { GetAdminVideo, GetAgentVideo } from '@/api-request/chart';
@@ -102,23 +103,7 @@ const VideoList = ({ categoryId }) => {
                         ))}
                     </tbody>
                 </table>
-
-                <div className='pagination_wrapper'>
-                    <Pagination
-                        color='secondary'
-                        count={pageStatus.total}
-                        page={pageStatus.current}
-                        onChange={(_, value) =>
-                            setPageStatus(prev => {
-                                return {
-                                    ...prev,
-                                    current: value
-                                };
-                            })
-                        }
-                    />
-                </div>
-
+                <PaginationField paginationStatus={pageStatus} setPaginationStatus={setPageStatus} />
                 <Dialog open={showModal} onClose={closeModalHandler} maxWidth='lg'>
                     <UsersList videoId={videoId} />
                 </Dialog>

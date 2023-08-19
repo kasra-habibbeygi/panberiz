@@ -26,13 +26,13 @@ import accept from '@/assets/icons/accept.svg';
 import reject from '@/assets/icons/reject.svg';
 import EmptyFieldImg from '../../assets/images/empty/empty-media-list.png';
 import { CardField } from '@/components/pages/video/list/card.style';
-import { FiltersWrapper, ListVideoField, PaginationWrapper } from '@/components/pages/video/list/list-video.style';
+import { FiltersWrapper, ListVideoField } from '@/components/pages/video/list/list-video.style';
 
 // MUI
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import StarIcon from '@mui/icons-material/Star';
-import { Dialog, Pagination } from '@mui/material';
+import { Dialog } from '@mui/material';
 
 // API
 import {
@@ -45,6 +45,7 @@ import {
     PostAcceptVideo,
     DeleteAgentMedia
 } from '@/api-request/media/list';
+import PaginationField from '@/components/template/pagination';
 
 function Video() {
     const { t } = useTranslation();
@@ -422,22 +423,7 @@ function Video() {
                         <>
                             {notAceptedListProvider}
                             {mediaListProvider}
-
-                            <PaginationWrapper>
-                                <Pagination
-                                    color='primary'
-                                    count={pageStatus.total}
-                                    page={pageStatus.current}
-                                    onChange={(_, value) =>
-                                        setPageStatus(prev => {
-                                            return {
-                                                ...prev,
-                                                current: value
-                                            };
-                                        })
-                                    }
-                                />
-                            </PaginationWrapper>
+                            <PaginationField paginationStatus={pageStatus} setPaginationStatus={setPageStatus} />
                         </>
                     ) : (
                         <EmptyField img={EmptyFieldImg} title={t('There are no items to display!')} />

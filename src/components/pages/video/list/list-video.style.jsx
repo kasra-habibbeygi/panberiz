@@ -145,11 +145,3 @@ export const FiltersWrapper = styled.div(props => ({
         }
     }
 }));
-
-export const PaginationWrapper = styled.div(() => ({
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: '40px'
-}));

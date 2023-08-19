@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
+import Image from 'next/image';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
@@ -11,12 +11,13 @@ import { MainField } from './comment.style';
 import UserIcon from '@/assets/icons/user.svg';
 
 // MUI
-import { Pagination, Rating } from '@mui/material';
+import { Rating } from '@mui/material';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import StarIcon from '@mui/icons-material/Star';
 
 // Component
 import Input from '@/components/form-group/input';
+import PaginationField from '@/components/template/pagination';
 
 // APIs
 import { AddNewComment, AddNewCommentPoint } from '@/api-request/comment';
@@ -132,21 +133,7 @@ const Comment = () => {
                             </li>
                         ))}
                     </ul>
-                    <div className='pagination_wrapper'>
-                        <Pagination
-                            color='primary'
-                            count={pageStatus.total}
-                            page={pageStatus.current}
-                            onChange={(_, value) =>
-                                setPageStatus(prev => {
-                                    return {
-                                        ...prev,
-                                        current: value
-                                    };
-                                })
-                            }
-                        />
-                    </div>
+                    <PaginationField paginationStatus={pageStatus} setPaginationStatus={setPageStatus} />
                 </>
             ) : (
                 <>

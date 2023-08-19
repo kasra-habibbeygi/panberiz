@@ -125,13 +125,6 @@ export const MainField = styled.div(props => ({
         marginTop: '20px'
     },
 
-    '& .pagination_wrapper': {
-        display: 'flex',
-        justifyContent: 'center',
-        alignContent: 'center',
-        marginTop: '20px'
-    },
-
     '& .status_field': {
         display: 'flex',
         alignItems: 'center',

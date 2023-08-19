@@ -56,12 +56,5 @@ export const NotificationsWrapper = styled.div(props => ({
                 marginLeft: 'auto'
             })
         }
-    },
-
-    '& .pagination_wrapper': {
-        display: 'flex',
-        justifyContent: 'center',
-        alignContent: 'center',
-        marginTop: '40px'
     }
 }));

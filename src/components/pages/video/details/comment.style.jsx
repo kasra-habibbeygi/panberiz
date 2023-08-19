@@ -118,12 +118,5 @@ export const MainField = styled.div(props => ({
         background: props.theme.mode === 'light' ? '#F1F1F1' : '#2D2140',
         color: props.theme.palette.colors.text.blackAndWhite,
         marginTop: '20px'
-    },
-
-    '& .pagination_wrapper': {
-        display: 'flex',
-        justifyContent: 'center',
-        alignContent: 'center',
-        marginTop: '20px'
     }
 }));

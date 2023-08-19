@@ -69,7 +69,6 @@ const UsersList = ({ videoId }) => {
                         ))}
                     </tbody>
                 </table>
-
                 <PaginationField paginationStatus={pageStatus} setPaginationStatus={setPageStatus} />
             </DashboardTableWrapper>
         </VideoListWrapper>

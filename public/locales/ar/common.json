@@ -44,7 +44,7 @@
     "Favorites list": "قائمة المفضلة",
     "Start exam": "بدء الاختبار",
     "Certification": "شهادة",
-    "Seach": "بحث...",
+    "search": "بحث...",
     "Add media": "إضافة وسائط",
     "Logout": "تسجيل الخروج",
     "Options": "خيارات",
@@ -168,5 +168,6 @@
     "No score has been recorded": "لم يتم تسجيل أي درجة",
     "Condition": "الحالة",
     "The comment status has been changed successfully": "تم تغيير حالة التعليق بنجاح",
-    "Comments" : "تعليقات"
+    "Comments" : "تعليقات",
+    "Related tags" : "العلامات ذات الصلة"
 }

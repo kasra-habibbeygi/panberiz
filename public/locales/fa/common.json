@@ -44,7 +44,7 @@
     "Favorites list": "لیست علاقه مندی ها",
     "Start exam": "شروع کوییز",
     "Certification": "تقدیر نامه",
-    "Seach": "جستجو ...",
+    "search": "جستجو ...",
     "Add media": "افزودن مدیا",
     "Logout": "خروج از حساب کاربری",
     "Options": "تنظیمات",
@@ -168,5 +168,6 @@
     "No score has been recorded": "امتیازی ثبت نشده است",
     "Condition": "وضعیت",
     "The comment status has been changed successfully": "وضعیت کامنت با موفقیت عوض شد",
-    "Comments" : "کامنت ها"
+    "Comments" : "کامنت ها",
+    "Related tags" : "تگ های مرتبط"
 }

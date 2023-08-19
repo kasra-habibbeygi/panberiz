@@ -1,22 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable vars-on-top */
+import Image from 'next/image';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
 
 // Assets
-import { MainField } from '../assets/styles/comments.style';
+import { MainField } from '@/assets/styles/comments.style';
 import UserIcon from '@/assets/icons/user.svg';
 
 // Components
 import LayoutProvider from '@/components/layout/layout-provider';
 import Button from '@/components/form-group/button';
+import { PaginationField } from '@/components/pages/video/list/card.style';
 
 // MUI
-import { Pagination } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 
 // APIs
@@ -103,19 +103,7 @@ const CommentsManager = () => {
                                     </li>
                                 ))}
                             </ul>
-                            <div className='pagination_wrapper'>
-                                <Pagination
-                                    color='primary'
-                                    count={pageStatus.total}
-                                    page={pageStatus.current}
-                                    onChange={(_, value) =>
-                                        setPageStatus(prev => ({
-                                            ...prev,
-                                            current: value
-                                        }))
-                                    }
-                                />
-                            </div>
+                            <PaginationField paginationStatus={pageStatus} setPaginationStatus={setPageStatus} />
                         </>
                     ) : (
                         <>

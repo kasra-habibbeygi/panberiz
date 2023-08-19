@@ -7,18 +7,21 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'next-i18next';
+import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 
 // Component
 import LayoutProvider from '@/components/layout/layout-provider';
 import Tab from '@/components/pages/video/list/tab';
 import HeaderField from '@/components/template/header';
 import EmptyField from '@/components/template/empty-field';
+import PaginationField from '@/components/template/pagination';
+import AutoComplete from '@/components/form-group/auto-complete';
 
 // Assets
 import play from '@/assets/icons/play.svg';
 import { CardField, TagsList } from '@/components/pages/video/list/card.style';
 import EmptyFieldImg from '../../assets/images/empty/empty-media-list.png';
-import { ListVideoField, SearchField, FiltersWrapper, PaginationWrapper } from '@/components/pages/video/list/list-video.style';
+import { ListVideoField, SearchField, FiltersWrapper } from '@/components/pages/video/list/list-video.style';
 
 // API
 import { GetUserMediaList } from '@/api-request/media/list';
@@ -27,9 +30,6 @@ import { SpecificTags } from '@/api-request/tags';
 // MUI
 import SearchIcon from '@mui/icons-material/Search';
 import StarIcon from '@mui/icons-material/Star';
-import AutoComplete from '@/components/form-group/auto-complete';
-import { Pagination } from '@mui/material';
-import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 
 function UserVideo() {
     const { t } = useTranslation();
@@ -162,7 +162,7 @@ function UserVideo() {
     return (
         <LayoutProvider>
             <SearchField>
-                <input placeholder={t('Seach')} value={searchValue} onChange={e => setSearchValue(e.target.value)} />
+                <input placeholder={t('search')} value={searchValue} onChange={e => setSearchValue(e.target.value)} />
                 <SearchIcon className='search_icon' />
             </SearchField>
             <HeaderField title={t('Video')} />
@@ -192,7 +192,7 @@ function UserVideo() {
                 </FiltersWrapper>
             )}
             <TagsList>
-                {tagsList.length ? <p>تگ های مرتبط</p> : ''}
+                {tagsList.length ? <p>{t('Related tags')}</p> : ''}
                 <div className='tags_field'>
                     <Link className={typeof router.query.tagId === 'undefined' ? 'active_tag' : ''} href={`/video/${router.query.id}/`}>
                         {t('All')}
@@ -244,21 +244,7 @@ function UserVideo() {
                         </div>
                     ))
                 )}
-                <PaginationWrapper>
-                    <Pagination
-                        color='primary'
-                        count={pageStatus.total}
-                        page={pageStatus.current}
-                        onChange={(_, value) =>
-                            setPageStatus(prev => {
-                                return {
-                                    ...prev,
-                                    current: value
-                                };
-                            })
-                        }
-                    />
-                </PaginationWrapper>
+                <PaginationField paginationStatus={pageStatus} setPaginationStatus={setPageStatus} />
             </ListVideoField>
         </LayoutProvider>
     );

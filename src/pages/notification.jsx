@@ -2,19 +2,19 @@
 import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { loaderStatusHandler } from '@/state-manager/reducer/utils';
+import { useDispatch } from 'react-redux';
 
-//Axios
+//APIs
 import { GetNotificationList } from '@/api-request/notification';
 import { EditNotificationList } from '@/api-request/notification';
 
 // Assets
 import { NotificationsWrapper } from '@/assets/styles/notifications.style';
+import { PaginationField } from '@/components/pages/video/list/card.style';
 
-// MUI
+// Components
 import LayoutProvider from '@/components/layout/layout-provider';
-import { Pagination } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 
 const Notifications = () => {
     const { t } = useTranslation();
@@ -67,22 +67,7 @@ const Notifications = () => {
                         )}
                     </div>
                 ))}
-
-                <div className='pagination_wrapper'>
-                    <Pagination
-                        color='primary'
-                        count={pageStatus.total}
-                        page={pageStatus.current}
-                        onChange={(_, value) =>
-                            setPageStatus(prev => {
-                                return {
-                                    ...prev,
-                                    current: value
-                                };
-                            })
-                        }
-                    />
-                </div>
+                <PaginationField paginationStatus={pageStatus} setPaginationStatus={setPageStatus} />
             </NotificationsWrapper>
         </LayoutProvider>
     );

@@ -44,7 +44,7 @@
     "Favorites list": "Favorites List",
     "Start exam": "Start Quiz",
     "Certification": "Certification",
-    "Seach": "Search...",
+    "search": "Search...",
     "Add media": "Add Media",
     "Logout": "Logout",
     "Options": "Options",
@@ -168,5 +168,6 @@
     "No score has been recorded": "No score has been recorded",
     "Condition": "Condition",
     "The comment status has been changed successfully": "The comment status has been changed successfully",
-    "Comments" : "Comments"
+    "Comments" : "Comments",
+    "Related tags" : "Related tags"
 }
