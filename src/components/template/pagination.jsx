@@ -6,6 +6,7 @@ import { MainField } from './pagination.style';
 import { Pagination } from '@mui/material';
 
 const PaginationField = ({ paginationStatus, setPaginationStatus }) => {
+    console.log(paginationStatus);
     return (
         <MainField>
             {paginationStatus.total !== 1 && (

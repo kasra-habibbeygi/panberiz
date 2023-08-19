@@ -11,7 +11,7 @@ import { EditNotificationList } from '@/api-request/notification';
 
 // Assets
 import { NotificationsWrapper } from '@/assets/styles/notifications.style';
-import { PaginationField } from '@/components/pages/video/list/card.style';
+import PaginationField from '@/components/template/pagination';
 
 // Components
 import LayoutProvider from '@/components/layout/layout-provider';

@@ -14,7 +14,7 @@ import UserIcon from '@/assets/icons/user.svg';
 // Components
 import LayoutProvider from '@/components/layout/layout-provider';
 import Button from '@/components/form-group/button';
-import { PaginationField } from '@/components/pages/video/list/card.style';
+import PaginationField from '@/components/template/pagination';
 
 // MUI
 import StarIcon from '@mui/icons-material/Star';
