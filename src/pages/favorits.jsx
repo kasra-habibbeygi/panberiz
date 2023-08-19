@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 
 // Component
 import ListVideo from '@/components/pages/video/list/list-video';
-import LayoutProvider from '@/components/layout';
+import LayoutProvider from '@/components/layout/layout-provider';
 import HeaderField from '@/components/template/header';
 
 // APIs

@@ -68,7 +68,8 @@ export const MainField = styled.div(props => ({
         h3: {
             fontWeight: 'bold',
             fontSize: '1.1rem',
-            margin: '10px'
+            margin: '10px',
+            color: props.theme.palette.colors.text.blackAndWhite
         },
 
         small: {
@@ -77,13 +78,13 @@ export const MainField = styled.div(props => ({
         },
 
         label: {
-            boxShadow: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
+            boxShadow: props.theme.mode === 'light' ? 'rgba(0, 0, 0, 0.16) 0px 1px 4px' : 'rgb(0 0 0 / 41%) 0px 1px 4px',
             padding: '5px 20px',
             fontWeight: '500',
             borderRadius: '7px',
-            color: '#000000',
             fontSize: '0.8rem',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            color: props.theme.palette.colors.text.blackAndWhite
         },
 
         '& .left_field': {
@@ -93,7 +94,8 @@ export const MainField = styled.div(props => ({
         },
 
         p: {
-            fontSize: '0.9rem'
+            fontSize: '0.9rem',
+            color: props.theme.palette.colors.text.blackAndWhite
         }
     },
 

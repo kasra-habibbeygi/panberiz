@@ -3,23 +3,18 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userInfohandler } from '@/state-manager/reducer/user';
-import dynamic from 'next/dynamic';
 
 // Component
 import MobileNavbar from './mobile-navbar';
 import MainLoader from '../template/loader';
-const Aside = dynamic(() => import('./aside'), {
-    ssr: false
-});
-const Navbar = dynamic(() => import('./navbar'), {
-    ssr: false
-});
+import Aside from './aside';
+import Navbar from './navbar';
 
 // APIs
 import { GetUserInformation } from '@/api-request/user-info';
 
 // Assets
-import * as Fields from './index.style';
+import * as Fields from './layout-provider.style';
 
 // Hooks
 import useWindowDimensions from '@/hooks/use-windows-dimensions';

@@ -2,7 +2,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // Component
 import StartExam from '@/components/pages/exam/start';
-import LayoutProvider from '@/components/layout';
+import LayoutProvider from '@/components/layout/layout-provider';
 
 const Exam = () => {
     return (

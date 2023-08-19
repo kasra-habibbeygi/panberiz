@@ -17,7 +17,7 @@ import HeaderField from '@/components/template/header';
 // APIs
 import { DeleteCategory } from '@/api-request/category';
 
-const CategoryList = ({ categoriesList, setReaload, reload }) => {
+const CategoryList = ({ categoriesList, setReload, reload }) => {
     const { t } = useTranslation('common');
     const userInfo = useSelector(state => state.UserInfo);
 
@@ -25,7 +25,7 @@ const CategoryList = ({ categoriesList, setReaload, reload }) => {
         DeleteCategory(id)
             .then(() => {
                 toast.success(t('Successfully updated!'));
-                setReaload(!reload);
+                setReload(!reload);
             })
             .catch(() => {
                 toast.error(t('An error occurred, please try again!'));

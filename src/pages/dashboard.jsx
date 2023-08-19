@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 // Component
-import LayoutProvider from '@/components/layout';
+import LayoutProvider from '@/components/layout/layout-provider';
 import Income from '@/components/pages/dashboard/income';
 
 // API

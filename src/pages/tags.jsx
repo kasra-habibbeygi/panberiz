@@ -1,24 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import dynamic from 'next/dynamic';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 
 // Component
 import TagsList from '@/components/pages/tags/list';
-import LayoutProvider from '@/components/layout';
+import LayoutProvider from '@/components/layout/layout-provider';
 import HeaderField from '@/components/template/header';
-const AddTag = dynamic(() => import('@/components/pages/tags/add'), {
-    ssr: false
-});
+import AddTag from '@/components/pages/tags/add';
 
 // Assets
 import { TagsmainField } from '@/assets/styles/main.style';
 
 // APIs
 import { GetTagsList } from '@/api-request/tags';
-import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 
 const Tags = () => {
     const dispatch = useDispatch();

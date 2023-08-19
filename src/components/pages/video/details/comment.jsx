@@ -59,7 +59,12 @@ const Comment = () => {
                 };
 
                 AddNewCommentPoint(RateComment)
-                    .then(() => {})
+                    .then(() => {
+                        setInputValued({
+                            rate: 0,
+                            comment: ''
+                        });
+                    })
                     .catch(() => {});
             })
             .catch(() => {});

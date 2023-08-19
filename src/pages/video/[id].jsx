@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'next-i18next';
 
 // Component
-import LayoutProvider from '@/components/layout';
+import LayoutProvider from '@/components/layout/layout-provider';
 import Tab from '@/components/pages/video/list/tab';
 import HeaderField from '@/components/template/header';
 import EmptyField from '@/components/template/empty-field';

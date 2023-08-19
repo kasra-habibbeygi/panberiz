@@ -16,7 +16,7 @@ import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 import EmptyField from '@/components/template/empty-field';
 import Tab from '@/components/pages/video/list/tab';
 import HeaderField from '@/components/template/header';
-import LayoutProvider from '@/components/layout';
+import LayoutProvider from '@/components/layout/layout-provider';
 import Button from '@/components/form-group/button';
 import AutoComplete from '@/components/form-group/auto-complete';
 

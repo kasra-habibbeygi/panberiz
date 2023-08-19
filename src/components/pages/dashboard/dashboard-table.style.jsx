@@ -36,13 +36,6 @@ export const DashboardTableWrapper = styled.div(props => ({
         }
     },
 
-    '& .pagination_wrapper': {
-        display: 'flex',
-        justifyContent: 'center',
-        alignContent: 'center',
-        marginTop: '20px'
-    },
-
     '& .empty_field': {
         width: '100%',
         display: 'flex',

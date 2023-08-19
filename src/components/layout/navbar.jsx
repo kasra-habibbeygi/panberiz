@@ -103,7 +103,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
         }
     };
 
-    const logouthandler = () => {
+    const logoutHandler = () => {
         localStorage.removeItem('pmlmToken');
         dispatch(loginStatushandler(true));
         router.push('/login');
@@ -111,7 +111,7 @@ function Navbar({ setAsideStatus, asideStatus }) {
     };
 
     const handleChangeLanguage = value => {
-        router.replace(router.asPath, router.asPath, { locale: value.value });
+        router.replace('/dashboard', '/dashboard', { locale: value.value });
         localStorage.setItem('pmlmLang', value.value);
         setLangValue(value);
         dispatch(langHandler(value.value));
@@ -142,26 +142,24 @@ function Navbar({ setAsideStatus, asideStatus }) {
                     />
                 </div>
                 {userInfo.role !== 'User' ? (
-                    <Button color='primary' type='outline' extraClass='button_link'>
-                        <Link href='/video/add'>
+                    <Link href='/video/add'>
+                        <Button color='primary' type='outline' extraClass='button_link'>
                             <AddIcon />
                             <p>{t('Add media')}</p>
-                        </Link>
-                    </Button>
+                        </Button>
+                    </Link>
                 ) : (
                     ''
                 )}
                 <Link href='/favorits' className={`favorit_link ${userInfo.role === 'User' ? 'show' : ''}`}>
                     <Image src={heart} className='hearth_icon' alt='heart' />
                 </Link>
-
                 <div className='profile_dropdown_field' ref={ref}>
                     <Image
                         src={userInfo.theme === 'light' ? user : UserWhite}
                         alt='user'
                         onClick={() => FilterDropDownStatusHandler('profile_dropdown')}
                     />
-
                     {userInfo.role === 'AgentAcademy' && (
                         <div className='notification' onClick={() => dropDownNotificationHandler('notification_dropdown')}>
                             <Image src={userInfo.theme === 'light' ? notification : notificationLight} alt='user' />
@@ -176,29 +174,22 @@ function Navbar({ setAsideStatus, asideStatus }) {
                             </div>
                         </div>
                         <ol>
-                            {/* <li>
-                                <Link href=''>
-                                    <Image src={SettingIcon} alt='' />
-                                    {t('Options')}
-                                </Link>
-                            </li> */}
                             {isLoggedInWithRedirect && (
                                 <li>
-                                    <a href='https://pmlm.ir/User/UserDashboard/index' onClick={logouthandler}>
+                                    <a href='https://pmlm.ir/User/UserDashboard/index' onClick={logoutHandler}>
                                         <Image src={ForwardIcon} alt='' />
                                         {t('Back to the desktop')}
                                     </a>
                                 </li>
                             )}
                             <li>
-                                <div onClick={logouthandler}>
+                                <div onClick={logoutHandler}>
                                     <Image src={LogoutIcon} alt='' />
                                     {t('Logout')}
                                 </div>
                             </li>
                         </ol>
                     </div>
-
                     <div className={`dropdown_field ${dropDownNotification !== '' ? 'active' : ''}`}>
                         <ul className='notifs_list'>
                             {NotifDataList.map(item => (

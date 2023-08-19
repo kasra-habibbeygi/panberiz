@@ -137,6 +137,7 @@ export const MainField = styled.div(props => ({
         alignItems: 'center',
         justifyContent: 'flex-end',
         gap: '10px',
+        marginTop: '20px',
 
         button: {
             '&.accept': {
@@ -178,6 +179,35 @@ export const MainField = styled.div(props => ({
 
         '& .comments_container': {
             width: '100%'
+        }
+    },
+
+    '@media(max-width : 500px)': {
+        '& .comments_list': {
+            li: {
+                '& .info': {
+                    '& .rate': {
+                        p: {
+                            fontSize: '0.8rem'
+                        }
+                    },
+
+                    '& .title': {
+                        b: {
+                            fontSize: '0.8rem'
+                        }
+                    }
+                },
+
+                '& .comment_text': {
+                    fontSize: '0.9rem'
+                }
+            },
+
+            '& .avatar_img': {
+                width: '30px',
+                height: '40px'
+            }
         }
     }
 }));

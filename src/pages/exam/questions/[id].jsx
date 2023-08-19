@@ -1,5 +1,5 @@
 // Component
-import LayoutProvider from '@/components/layout';
+import LayoutProvider from '@/components/layout/layout-provider';
 import QuestionsContent from '@/components/pages/exam/questions/content';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 

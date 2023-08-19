@@ -11,7 +11,7 @@ import { EditNotificationList } from '@/api-request/notification';
 import { NotificationsWrapper } from '@/assets/styles/notifications.style';
 
 // MUI
-import LayoutProvider from '@/components/layout';
+import LayoutProvider from '@/components/layout/layout-provider';
 import { Pagination } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { loaderStatusHandler } from '@/state-manager/reducer/utils';

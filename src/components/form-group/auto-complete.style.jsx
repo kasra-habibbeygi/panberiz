@@ -13,6 +13,15 @@ export const MainField = styled.div(props => ({
         border: 'none'
     },
 
+    '& .MuiPaper-elevation': {
+        backgroundColor: props.theme.mode === 'light' ? '#fff' : '#3B2D51 !important',
+        marginTop: '7px',
+
+        li: {
+            color: props.theme.palette.colors.text.blackAndWhite
+        }
+    },
+
     input: {
         fontSize: '0.9rem',
         height: '25px',

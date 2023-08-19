@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // Component
-import LayoutProvider from '@/components/layout';
+import LayoutProvider from '@/components/layout/layout-provider';
 import VideoField from '@/components/pages/video/details/video';
 import DetailsField from '@/components/pages/video/details/details';
 import Comment from '@/components/pages/video/details/comment';

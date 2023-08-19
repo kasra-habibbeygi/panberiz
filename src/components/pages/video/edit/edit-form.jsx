@@ -217,9 +217,7 @@ function EditForm() {
     useEffect(() => {
         if (role) {
             GetMediaDetails(router.query.id, lang, role)
-                .then(res => {
-                    console.log(res.results[0]);
-                })
+                .then(() => {})
                 .catch(() => {})
                 .finally(() => {});
         }

@@ -12,7 +12,7 @@ import { MainField } from '../assets/styles/comments.style';
 import UserIcon from '@/assets/icons/user.svg';
 
 // Components
-import LayoutProvider from '@/components/layout';
+import LayoutProvider from '@/components/layout/layout-provider';
 import Button from '@/components/form-group/button';
 
 // MUI
@@ -73,7 +73,7 @@ const CommentsManager = () => {
                             <ul className='comments_list'>
                                 {commentsList.map(item => (
                                     <li key={item.id}>
-                                        <Image src={UserIcon} alt='' />
+                                        <Image src={UserIcon} alt='' className='avatar_img' />
                                         <div className='content'>
                                             <div className='info'>
                                                 <div className='title'>

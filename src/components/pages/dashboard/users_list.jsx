@@ -10,11 +10,11 @@ import { DashboardTableWrapper, VideoListWrapper } from './dashboard-table.style
 // APIs
 import { GetAdminUsers, GetAgentUser } from '@/api-request/chart';
 
-// MUI
-import { Pagination } from '@mui/material';
-
 // Tools
 import Tools from '@/tools/utils';
+
+// Components
+import PaginationField from '@/components/template/pagination';
 
 const UsersList = ({ videoId }) => {
     const userInfo = useSelector(state => state.UserInfo);
@@ -70,21 +70,7 @@ const UsersList = ({ videoId }) => {
                     </tbody>
                 </table>
 
-                <div className='pagination_wrapper'>
-                    <Pagination
-                        color='secondary'
-                        count={pageStatus.total}
-                        page={pageStatus.current}
-                        onChange={(_, value) =>
-                            setPageStatus(prev => {
-                                return {
-                                    ...prev,
-                                    current: value
-                                };
-                            })
-                        }
-                    />
-                </div>
+                <PaginationField paginationStatus={pageStatus} setPaginationStatus={setPageStatus} />
             </DashboardTableWrapper>
         </VideoListWrapper>
     );

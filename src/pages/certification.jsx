@@ -15,7 +15,7 @@ import MainCertificateImg from '../assets/images/video/main-certificate.jpg';
 import EmptyFieldImg from '../assets/images/empty/empty-media-list.png';
 
 // Component
-import LayoutProvider from '@/components/layout';
+import LayoutProvider from '@/components/layout/layout-provider';
 import EmptyField from '@/components/template/empty-field';
 import HeaderField from '@/components/template/header';
 import { CardField } from '@/components/pages/video/list/card.style';

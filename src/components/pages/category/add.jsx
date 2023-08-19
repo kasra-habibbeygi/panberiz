@@ -35,7 +35,7 @@ const langList = [
     }
 ];
 
-const AddCategory = ({ setReaload, reload }) => {
+const AddCategory = ({ setReload, reload }) => {
     const { t } = useTranslation('common');
     const formData = new FormData();
     const [loader, setLoader] = useState(false);
@@ -80,7 +80,7 @@ const AddCategory = ({ setReaload, reload }) => {
             .then(() => {
                 Object.keys(inputValues).forEach(item => formData.delete(item, inputValues[item]));
                 toast.success(t('Category added successfully!'));
-                setReaload(!reload);
+                setReload(!reload);
                 setInputValued({
                     place: null,
                     rank: null,
