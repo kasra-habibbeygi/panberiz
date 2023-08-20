@@ -8,12 +8,12 @@ export const AddNewComment = async data => {
     return RequestHandler.call({ url: '/users/add-comment/', method: 'post', data }).then(res => res.data);
 };
 
-export const GetAllComments = async (role, page) => {
+export const GetAllComments = async (role, query) => {
     if (role === 'AgentAcademy') {
-        return RequestHandler.call({ url: `admins/media/comments/?page=${page}`, method: 'get' }).then(res => res.data);
+        return RequestHandler.call({ url: `admins/media/comments/${query}`, method: 'get' }).then(res => res.data);
     }
 
-    return RequestHandler.call({ url: `managers/comments/?page=${page}`, method: 'get' }).then(res => res.data);
+    return RequestHandler.call({ url: `managers/comments/${query}`, method: 'get' }).then(res => res.data);
 };
 
 export const UpdateCommentStatus = async (data, role) => {

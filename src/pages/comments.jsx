@@ -17,6 +17,7 @@ import UserIcon from '@/assets/icons/user.svg';
 import LayoutProvider from '@/components/layout/layout-provider';
 import Button from '@/components/form-group/button';
 import PaginationField from '@/components/template/pagination';
+import AutoComplete from '@/components/form-group/auto-complete';
 
 // MUI
 import StarIcon from '@mui/icons-material/Star';
@@ -30,6 +31,10 @@ const CommentsManager = () => {
     const userInfo = useSelector(state => state.UserInfo);
     const [commentsList, setCommentsList] = useState([]);
     const [reload, setReload] = useState(false);
+    const [filterStatus, setFilterStatus] = useState({
+        status: null,
+        day: null
+    });
     const [pageStatus, setPageStatus] = useState({
         total: 1,
         current: 1
@@ -38,7 +43,17 @@ const CommentsManager = () => {
     useEffect(() => {
         dispatch(loaderStatusHandler(true));
         if (userInfo.role) {
-            GetAllComments(userInfo.role, pageStatus.current)
+            let query = `?page=${pageStatus.current}`;
+
+            if (filterStatus.status) {
+                query += `&status=${filterStatus.status.value}`;
+            }
+
+            if (filterStatus.day) {
+                query += `&day=${filterStatus.day.value}`;
+            }
+
+            GetAllComments(userInfo.role, query)
                 .then(res => {
                     setCommentsList(res.results);
                     setPageStatus({
@@ -50,7 +65,7 @@ const CommentsManager = () => {
                 .catch(() => {})
                 .finally(() => {});
         }
-    }, [userInfo.role, pageStatus.current, reload]);
+    }, [userInfo.role, pageStatus.current, reload, filterStatus]);
 
     const commentStatusHandler = (status, commentId, mediaId) => {
         UpdateCommentStatus(
@@ -68,10 +83,72 @@ const CommentsManager = () => {
             .catch(() => {});
     };
 
+    const autoCompleteHandler = (e, name) => {
+        setPageStatus({
+            ...pageStatus,
+            current: 1
+        });
+
+        setFilterStatus({
+            ...filterStatus,
+            [name]: e
+        });
+    };
+
+    const statusOptions = [
+        {
+            value: false,
+            label: 'نظرات رد شده'
+        },
+        {
+            value: true,
+            label: 'نظرات تایید شده'
+        }
+    ];
+
+    const daysOptions = [
+        {
+            value: 1,
+            label: 'یک روز گذشته'
+        },
+        {
+            value: 3,
+            label: 'سه رور گذشته'
+        },
+        {
+            value: 7,
+            label: 'یک هفته گذشته'
+        },
+        {
+            value: 365,
+            label: '1 سال گذشته'
+        }
+    ];
+
     return (
         <LayoutProvider>
             <MainField>
                 <h3>{t('Manage comments')}</h3>
+                <div className='filter_container'>
+                    <div className='filter_item'>
+                        <AutoComplete
+                            placeholder={t('Based on observation')}
+                            value={filterStatus.status}
+                            name='status'
+                            valueHandler={autoCompleteHandler}
+                            options={statusOptions}
+                        />
+                    </div>
+                    <div className='filter_item'>
+                        <AutoComplete
+                            placeholder={t('Based on observation')}
+                            value={filterStatus.day}
+                            name='day'
+                            valueHandler={autoCompleteHandler}
+                            options={daysOptions}
+                        />
+                    </div>
+                </div>
                 <div className='comments_container'>
                     {commentsList.length ? (
                         <>

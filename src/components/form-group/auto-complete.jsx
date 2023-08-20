@@ -32,7 +32,7 @@ const AutoComplete = ({ placeholder, options, value, valueHandler, name, onKeyDo
                         disablePortal
                         options={options}
                         value={value}
-                        onChange={(e, newValue) => {
+                        onChange={(_, newValue) => {
                             valueHandler(newValue, name);
                         }}
                         onKeyDown={e => onKeyDown && keyDownHandler(e)}
@@ -45,7 +45,7 @@ const AutoComplete = ({ placeholder, options, value, valueHandler, name, onKeyDo
                     disablePortal
                     options={options}
                     value={value}
-                    onChange={(e, newValue) => {
+                    onChange={(_, newValue) => {
                         valueHandler(newValue, name);
                     }}
                     onKeyDown={e => onKeyDown && keyDownHandler(e)}

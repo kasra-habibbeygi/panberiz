@@ -6,6 +6,17 @@ export const MainField = styled.div(props => ({
         margin: '40px auto'
     },
 
+    '& .filter_container': {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '20px',
+        marginTop: '30px'
+    },
+
+    '& .filter_item': {
+        width: '250px'
+    },
+
     h3: {
         color: props.theme.palette.colors.text.blackAndWhite
     },
