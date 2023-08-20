@@ -236,7 +236,7 @@ function EditForm() {
     const questionListProvider = inputValues.quize_and_answer.map((item, index) => (
         <div className='question_card' key={`question_lists_${index}`}>
             <small>
-                سوال {index + 1} <HighlightOffIcon onClick={() => removeQuestionHandler(item.title)} />
+                {t('Question')} {index + 1} <HighlightOffIcon onClick={() => removeQuestionHandler(item.title)} />
             </small>
             <h4>{item.title}</h4>
             <RadioGroup className='four_choice'>

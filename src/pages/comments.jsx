@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable vars-on-top */
 import Image from 'next/image';
+import Link from 'next/link';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
+import { loaderStatusHandler } from '@/state-manager/reducer/utils';
 
 // Assets
 import { MainField } from '@/assets/styles/comments.style';
@@ -21,10 +23,10 @@ import StarIcon from '@mui/icons-material/Star';
 
 // APIs
 import { GetAllComments, UpdateCommentStatus } from '@/api-request/comment';
-import Link from 'next/link';
 
 const CommentsManager = () => {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
     const userInfo = useSelector(state => state.UserInfo);
     const [commentsList, setCommentsList] = useState([]);
     const [reload, setReload] = useState(false);
@@ -34,6 +36,7 @@ const CommentsManager = () => {
     });
 
     useEffect(() => {
+        dispatch(loaderStatusHandler(true));
         if (userInfo.role) {
             GetAllComments(userInfo.role, pageStatus.current)
                 .then(res => {
@@ -42,6 +45,7 @@ const CommentsManager = () => {
                         ...pageStatus,
                         total: res.total_page
                     });
+                    dispatch(loaderStatusHandler(false));
                 })
                 .catch(() => {})
                 .finally(() => {});
