@@ -8,18 +8,14 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 
 // MUI
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import rtlPlugin from 'stylis-plugin-rtl';
 import createCache from '@emotion/cache';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { prefixer } from 'stylis';
 import { CacheProvider } from '@emotion/react';
 
 // Assets
-import { EditFormField, IndexField } from './edit-form.style';
-import { QuestionsField } from '../../exam/questions/content.style';
+import { EditFormField } from './edit-form.style';
 import gallery from '@/assets/icons/gallery.svg';
-import QuestionEmptyIcon from '@/assets/images/video/quiz-empty.png';
 
 // Components
 import { QuizForm } from '../question/quiz-form';
@@ -34,7 +30,6 @@ import { EditMedia } from '@/api-request/media/add';
 import { GetAllMedia, GetMyMediaList } from '@/api-request/media/list';
 import { toast } from 'react-hot-toast';
 import { GetMediaDetails } from '@/api-request/media/details';
-import EmptyField from '@/components/template/empty-field';
 
 const LangList = [
     { label: 'english', value: 'en' },
@@ -121,8 +116,7 @@ function EditForm() {
             category: inputValues.category.value,
             tags: JSON.stringify(inputValues.tags.map(item => item.value)),
             lang: inputValues.lang.value,
-            quize_and_answer: JSON.stringify(inputValues.quize_and_answer),
-            prerequisites: JSON.stringify(inputValues.prerequisites.map(item => item.value))
+            quize_and_answer: JSON.stringify(inputValues.quize_and_answer)
         };
 
         setLoader(true);
@@ -133,21 +127,6 @@ function EditForm() {
         EditMedia(router.query.id, formData, role)
             .then(() => {
                 toast.success(t('The video has been successfully added!'));
-                setInputValued({
-                    lang: '',
-                    title: '',
-                    full_description: '',
-                    summary_description: '',
-                    ordering_number: '',
-                    cover: '',
-                    file: '',
-                    media_type: '',
-                    category: '',
-                    period_of_time: '',
-                    tags: [],
-                    prerequisites: [],
-                    quize_and_answer: []
-                });
             })
             .catch(() => {
                 toast.error(t('Please enter all entries!'));
@@ -196,14 +175,6 @@ function EditForm() {
                         label: item.title
                     }));
 
-                    const quize_and_answer = res.results[0].media_quiezes.map(item => ({
-                        title: item.title,
-                        answers: item.quiz_answers.map(answersData => ({
-                            value: answersData.value,
-                            is_correct: answersData.is_correct
-                        }))
-                    }));
-
                     setInputValued({
                         lang: LangList.filter(item => item.value === res.results[0].lang)[0],
                         title: res.results[0].title,
@@ -216,7 +187,6 @@ function EditForm() {
                         media_type: res.results[0].media_type,
                         period_of_time: res.results[0].period_of_time,
                         prerequisites,
-                        quize_and_answer,
                         category: selectLists?.category.filter(item => item.value === res.results[0].category)[0],
                         tags: selectLists.tags.filter(item => res.results[0].tags_name.includes(item.label))
                     });
@@ -225,35 +195,6 @@ function EditForm() {
                 .finally(() => {});
         }
     }, [router.query.id, lang, role, selectLists?.category]);
-
-    const removeQuestionHandler = title => {
-        setInputValued({
-            ...inputValues,
-            quize_and_answer: inputValues.quize_and_answer.filter(item => item.title !== title)
-        });
-    };
-
-    const questionListProvider = inputValues.quize_and_answer.map((item, index) => (
-        <div className='question_card' key={`question_lists_${index}`}>
-            <small>
-                {t('Question')} {index + 1} <HighlightOffIcon onClick={() => removeQuestionHandler(item.title)} />
-            </small>
-            <h4>{item.title}</h4>
-            <RadioGroup className='four_choice'>
-                {item.answers.map((data, count) => (
-                    <FormControlLabel
-                        control={
-                            <IndexField currect={data.is_correct}>
-                                <p>{count + 1}</p>
-                            </IndexField>
-                        }
-                        label={data.value}
-                        key={`question_answer_${count}`}
-                    />
-                ))}
-            </RadioGroup>
-        </div>
-    ));
 
     return (
         <EditFormField>
@@ -427,24 +368,6 @@ function EditForm() {
                             {inputValues.cover?.name ?? t('Click to upload media cover')}
                         </label>
                         <input hidden type='file' name='cover' id='chose_file_cover' onChange={e => fileValueHandler(e)} />
-                    </div>
-                    <div className='w-100'>
-                        <div className='quiz-header'>
-                            <h3>{t('Quiz')}</h3>
-                            <Button handler={() => setOpen(true)} extraClass='add_question_btn'>
-                                <p>{t('Add new question')}</p>
-                                <KeyboardBackspaceIcon size='small' />
-                            </Button>
-                        </div>
-                        <div className='quiz-container'>
-                            {inputValues.quize_and_answer.length > 0 ? (
-                                <QuestionsField>{questionListProvider}</QuestionsField>
-                            ) : (
-                                <>
-                                    <EmptyField title={t('No question has been asked!')} img={QuestionEmptyIcon} />
-                                </>
-                            )}
-                        </div>
                     </div>
                 </div>
                 <Button type='filled' color='primary' handler={addNewMediaHandler} loader={loader}>

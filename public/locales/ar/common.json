@@ -168,7 +168,13 @@
     "No score has been recorded": "لم يتم تسجيل أي درجة",
     "Condition": "الحالة",
     "The comment status has been changed successfully": "تم تغيير حالة التعليق بنجاح",
-    "Comments" : "تعليقات",
-    "Related tags" : "العلامات ذات الصلة",
-    "The video has been successfully added!": "تمت إضافة الفيديو بنجاح!"
+    "Comments": "تعليقات",
+    "Related tags": "العلامات ذات الصلة",
+    "The video has been successfully added!": "تمت إضافة الفيديو بنجاح!",
+    "Comments rejected": "تم رفض التعليقات",
+    "Comments approved": "تمت الموافقة على التعليقات",
+    "One day passed": "مر يوم واحد",
+    "The past three days": "الأيام الثلاثة الماضية",
+    "A week ago": "منذ أسبوع",
+    "A year past": "عام مضى"
 }

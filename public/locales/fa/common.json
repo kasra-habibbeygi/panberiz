@@ -170,5 +170,11 @@
     "The comment status has been changed successfully": "وضعیت کامنت با موفقیت عوض شد",
     "Comments" : "کامنت ها",
     "Related tags" : "تگ های مرتبط",
-    "The video has been successfully added!": "ویدیو با موفقیت اضافه شد !"
+    "The video has been successfully added!": "ویدیو با موفقیت اضافه شد !",
+    "Comments rejected" : "نظرات رد شده",
+    "Comments approved" : "نظرات تایید شده",
+    "One day passed" : "یک روز گذشته",
+    "The past three days" : "سه رور گذشته",
+    "A week ago" : "یک هفته گذشته",
+    "A year past" : "یک سال گذشته"
 }

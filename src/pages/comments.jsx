@@ -98,30 +98,30 @@ const CommentsManager = () => {
     const statusOptions = [
         {
             value: false,
-            label: 'نظرات رد شده'
+            label: t('Comments rejected')
         },
         {
             value: true,
-            label: 'نظرات تایید شده'
+            label: t('Comments approved')
         }
     ];
 
     const daysOptions = [
         {
             value: 1,
-            label: 'یک روز گذشته'
+            label: t('One day passed')
         },
         {
             value: 3,
-            label: 'سه رور گذشته'
+            label: t('The past three days')
         },
         {
             value: 7,
-            label: 'یک هفته گذشته'
+            label: t('A week ago')
         },
         {
             value: 365,
-            label: '1 سال گذشته'
+            label: t('A year past')
         }
     ];
 

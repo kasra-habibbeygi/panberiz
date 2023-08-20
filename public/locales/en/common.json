@@ -168,7 +168,13 @@
     "No score has been recorded": "No score has been recorded",
     "Condition": "Condition",
     "The comment status has been changed successfully": "The comment status has been changed successfully",
-    "Comments" : "Comments",
-    "Related tags" : "Related tags",
-    "The video has been successfully added!": "The video has been successfully added!"
+    "Comments": "Comments",
+    "Related tags": "Related tags",
+    "The video has been successfully added!": "The video has been successfully added!",
+    "Comments rejected": "Comments rejected",
+    "Comments approved": "Comments approved",
+    "One day passed": "One day passed",
+    "The past three days": "The past three days",
+    "A week ago": "A week ago",
+    "A year past": "A year past"
 }
