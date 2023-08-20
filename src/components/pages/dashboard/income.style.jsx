@@ -38,6 +38,10 @@ export const IncomeField = styled.div(props => ({
             width: '60%',
             padding: '15px 0',
 
+            svg: {
+                direction: 'initial'
+            },
+
             '& .header': {
                 display: 'flex',
                 alignItems: 'center',

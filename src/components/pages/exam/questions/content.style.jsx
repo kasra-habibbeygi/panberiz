@@ -101,7 +101,14 @@ export const QuestionsField = styled.div(props => ({
 
         small: {
             color: props.theme.palette.colors.text.light,
-            fontSize: '1rem'
+            fontSize: '1rem',
+            display : 'flex',
+            alignItems : 'center',
+            justifyContent : 'space-between',
+
+            svg : {
+                cursor : 'pointer'
+            }
         },
 
         h4: {

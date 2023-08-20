@@ -81,7 +81,7 @@ const VideoList = ({ categoryId }) => {
                     <tbody>
                         {videoList?.map((item, index) => (
                             <tr key={item.id}>
-                                <td>{Tools.tableRowCounter(pageStatus.current, index, 10)}</td>
+                                <td>{Tools.tableRowCounter(pageStatus.current, index, 12)}</td>
                                 <td>
                                     <Link href={`/video/details/${item.id}`}>{item.title}</Link>
                                 </td>

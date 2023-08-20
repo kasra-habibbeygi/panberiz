@@ -47,6 +47,8 @@ const DashboardTable = () => {
         }
     }, [userInfo.lang, userInfo.role]);
 
+    console.log(categoryList);
+
     return (
         <DashboardTableWrapper>
             <HeaderField title={t('Video visit report')} />

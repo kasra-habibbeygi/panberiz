@@ -26,7 +26,7 @@ export const GetAdminChart3Info = async lang => {
 
 // new chart 3
 export const GetAdminCategory = async lang => {
-    return RequestHandler.call({ url: `/managers/chart3/visit/result/categories/?lang=${lang}`, method: 'get' }).then(res => res);
+    return RequestHandler.call({ url: `/managers/chart3/visit/result/categories/?lang=${lang}`, method: 'get' }).then(res => res.data);
 };
 
 export const GetAgentCategory = async lang => {

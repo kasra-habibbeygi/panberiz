@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import rtlPlugin from 'stylis-plugin-rtl';
 import createCache from '@emotion/cache';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { prefixer } from 'stylis';
 import { CacheProvider } from '@emotion/react';
 
@@ -29,7 +30,7 @@ import Button from '@/components/form-group/button';
 // APIs
 import { GetCategoriesList } from '@/api-request/category';
 import { GetTagsList } from '@/api-request/tags';
-import { AddNewmedia, AddNewmediaAgent } from '@/api-request/media/add';
+import { EditMedia } from '@/api-request/media/add';
 import { GetAllMedia, GetMyMediaList } from '@/api-request/media/list';
 import { toast } from 'react-hot-toast';
 import { GetMediaDetails } from '@/api-request/media/details';
@@ -129,59 +130,31 @@ function EditForm() {
             formData.append(item, newVal[item]);
         });
 
-        if (role !== 'AgentAcademy') {
-            AddNewmedia(formData)
-                .then(() => {
-                    toast.success('ویدیو با موفقیت اضافه شد !');
-                    setInputValued({
-                        lang: '',
-                        title: '',
-                        full_description: '',
-                        summary_description: '',
-                        ordering_number: '',
-                        cover: '',
-                        file: '',
-                        media_type: '',
-                        category: '',
-                        period_of_time: '',
-                        tags: [],
-                        prerequisites: [],
-                        quize_and_answer: []
-                    });
-                })
-                .catch(() => {
-                    toast.error(t('Please enter all entries!'));
-                })
-                .finally(() => {
-                    setLoader(false);
+        EditMedia(router.query.id, formData, role)
+            .then(() => {
+                toast.success(t('The video has been successfully added!'));
+                setInputValued({
+                    lang: '',
+                    title: '',
+                    full_description: '',
+                    summary_description: '',
+                    ordering_number: '',
+                    cover: '',
+                    file: '',
+                    media_type: '',
+                    category: '',
+                    period_of_time: '',
+                    tags: [],
+                    prerequisites: [],
+                    quize_and_answer: []
                 });
-        } else {
-            AddNewmediaAgent(formData)
-                .then(() => {
-                    toast.success('ویدیو با موفقیت اضافه شد !');
-                    setInputValued({
-                        lang: '',
-                        title: '',
-                        full_description: '',
-                        summary_description: '',
-                        ordering_number: '',
-                        cover: '',
-                        file: '',
-                        media_type: '',
-                        category: '',
-                        period_of_time: '',
-                        tags: [],
-                        prerequisites: [],
-                        quize_and_answer: []
-                    });
-                })
-                .catch(() => {
-                    toast.error(t('Please enter all entries!'));
-                })
-                .finally(() => {
-                    setLoader(false);
-                });
-        }
+            })
+            .catch(() => {
+                toast.error(t('Please enter all entries!'));
+            })
+            .finally(() => {
+                setLoader(false);
+            });
     };
 
     useEffect(() => {
@@ -217,15 +190,54 @@ function EditForm() {
     useEffect(() => {
         if (role) {
             GetMediaDetails(router.query.id, lang, role)
-                .then(() => {})
+                .then(res => {
+                    const prerequisites = res.results[0].prerequisites_info.map(item => ({
+                        value: item.id,
+                        label: item.title
+                    }));
+
+                    const quize_and_answer = res.results[0].media_quiezes.map(item => ({
+                        title: item.title,
+                        answers: item.quiz_answers.map(answersData => ({
+                            value: answersData.value,
+                            is_correct: answersData.is_correct
+                        }))
+                    }));
+
+                    setInputValued({
+                        lang: LangList.filter(item => item.value === res.results[0].lang)[0],
+                        title: res.results[0].title,
+                        full_description: res.results[0].full_description,
+                        summary_description: res.results[0].summary_description,
+                        ordering_number: res.results[0].ordering_number,
+                        cover: '',
+                        the_number_of_tests: res.results[0].the_number_of_tests,
+                        the_duration_of_the_test: res.results[0].the_duration_of_the_test,
+                        media_type: res.results[0].media_type,
+                        period_of_time: res.results[0].period_of_time,
+                        prerequisites,
+                        quize_and_answer,
+                        category: selectLists?.category.filter(item => item.value === res.results[0].category)[0],
+                        tags: selectLists.tags.filter(item => res.results[0].tags_name.includes(item.label))
+                    });
+                })
                 .catch(() => {})
                 .finally(() => {});
         }
-    }, [router.query.id, lang, role]);
+    }, [router.query.id, lang, role, selectLists?.category]);
+
+    const removeQuestionHandler = title => {
+        setInputValued({
+            ...inputValues,
+            quize_and_answer: inputValues.quize_and_answer.filter(item => item.title !== title)
+        });
+    };
 
     const questionListProvider = inputValues.quize_and_answer.map((item, index) => (
         <div className='question_card' key={`question_lists_${index}`}>
-            <small>سوال {index + 1}</small>
+            <small>
+                سوال {index + 1} <HighlightOffIcon onClick={() => removeQuestionHandler(item.title)} />
+            </small>
             <h4>{item.title}</h4>
             <RadioGroup className='four_choice'>
                 {item.answers.map((data, count) => (
@@ -252,9 +264,9 @@ function EditForm() {
                         {t('Media Type')}
                     </div>
                     <div className='checkbox_field'>
-                        <RadioGroup row name='media_type' onChange={e => inputValueHandler(e)}>
-                            <FormControlLabel value='pdf' control={<Radio size='small' />} label='PDF' />
-                            <FormControlLabel value='video' control={<Radio size='small' />} label={t('Video')} />
+                        <RadioGroup row name='media_type' value={inputValues.media_type} onChange={e => inputValueHandler(e)}>
+                            <FormControlLabel value='pdf' control={<Radio size='small' disabled />} label='PDF' />
+                            <FormControlLabel value='video' control={<Radio size='small' disabled />} label={t('Video')} />
                         </RadioGroup>
                     </div>
                 </div>
@@ -294,7 +306,7 @@ function EditForm() {
                     <div className='w-50'>
                         <Input
                             valueHandler={inputValueHandler}
-                            value={inputValues.duration}
+                            value={inputValues.period_of_time}
                             name='period_of_time'
                             type='number'
                             placeholder={t('Enter video duration...')}
@@ -345,7 +357,8 @@ function EditForm() {
                                         options={selectLists?.prerequisites}
                                         getOptionLabel={option => option?.label}
                                         renderInput={params => <TextField {...params} placeholder={t('Prerequisites')} />}
-                                        onChange={(e, newValue) => autoCompleteHandler(newValue, 'prerequisites')}
+                                        value={inputValues.prerequisites}
+                                        onChange={(_, newValue) => autoCompleteHandler(newValue, 'prerequisites')}
                                         onKeyDown={addNewMediaHandler}
                                     />
                                 </CacheProvider>
@@ -354,6 +367,7 @@ function EditForm() {
                                     multiple
                                     options={selectLists?.prerequisites}
                                     getOptionLabel={option => option?.label}
+                                    value={inputValues.prerequisites}
                                     renderInput={params => <TextField {...params} placeholder={t('Prerequisites')} />}
                                     onChange={(e, newValue) => autoCompleteHandler(newValue, 'prerequisites')}
                                     onKeyDown={addNewMediaHandler}
@@ -390,8 +404,9 @@ function EditForm() {
                                         options={selectLists?.tags}
                                         getOptionLabel={option => option?.label}
                                         renderInput={params => <TextField {...params} placeholder={t('tags')} />}
-                                        onChange={(e, newValue) => autoCompleteHandler(newValue, 'tags')}
+                                        onChange={(_, newValue) => autoCompleteHandler(newValue, 'tags')}
                                         onKeyDown={addNewMediaHandler}
+                                        value={inputValues.tags}
                                     />
                                 </CacheProvider>
                             ) : (
@@ -402,21 +417,16 @@ function EditForm() {
                                     renderInput={params => <TextField {...params} placeholder={t('tags')} />}
                                     onChange={(e, newValue) => autoCompleteHandler(newValue, 'tags')}
                                     onKeyDown={addNewMediaHandler}
+                                    value={inputValues.tags}
                                 />
                             )}
                         </div>
                     </div>
-                    <div className='w-50'>
+                    <div className='w-100'>
                         <label htmlFor='chose_file_cover' className='upload-file'>
                             {inputValues.cover?.name ?? t('Click to upload media cover')}
                         </label>
                         <input hidden type='file' name='cover' id='chose_file_cover' onChange={e => fileValueHandler(e)} />
-                    </div>
-                    <div className='w-50'>
-                        <label htmlFor='chose_file' className='upload-file'>
-                            {inputValues.file?.name ?? t('Click to upload media or file')}
-                        </label>
-                        <input hidden type='file' name='file' id='chose_file' onChange={e => fileValueHandler(e)} />
                     </div>
                     <div className='w-100'>
                         <div className='quiz-header'>
