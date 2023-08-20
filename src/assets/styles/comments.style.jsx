@@ -126,6 +126,11 @@ export const MainField = styled.div(props => ({
         gap: '10px',
         marginTop: '20px',
 
+        a: {
+            color: '#207db5',
+            fontSize: '0.9rem'
+        },
+
         button: {
             '&.accept': {
                 background: props.theme.mode === 'light' ? '#e0fdd9 !important' : '#243220 !important',
@@ -166,6 +171,18 @@ export const MainField = styled.div(props => ({
 
         '& .comments_container': {
             width: '100%'
+        }
+    },
+
+    '@media(max-width : 600px)': {
+        '& .status_field': {
+            flexWrap: 'wrap',
+
+            a: {
+                fontSize: '0.9rem',
+                display: 'block',
+                width: '100%'
+            }
         }
     },
 

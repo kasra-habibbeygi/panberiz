@@ -21,6 +21,7 @@ import StarIcon from '@mui/icons-material/Star';
 
 // APIs
 import { GetAllComments, UpdateCommentStatus } from '@/api-request/comment';
+import Link from 'next/link';
 
 const CommentsManager = () => {
     const { t } = useTranslation();
@@ -86,6 +87,9 @@ const CommentsManager = () => {
                                             </div>
                                             <p className='comment_text'>{item.comment}</p>
                                             <div className='status_field'>
+                                                <Link href={`/video/details/${item.media_info.id}`}>
+                                                    {t('Video')} : {item.media_info.title}
+                                                </Link>
                                                 <p className={item.status ? 'accept' : 'reject'}>
                                                     {t('Condition')} : {item.status ? t('Accept') : t('Reject')}
                                                 </p>
